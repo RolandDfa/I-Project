@@ -1,0 +1,86 @@
+html,body {
+  height:100%;
+  font-family: "Arial", Times, serif;
+}
+
+p {
+  font-size: 1.3em;
+}
+
+.page-wrapper {
+	padding: 20px;
+  padding-top: 50px;
+}
+
+.border-bottom-light {
+	border-bottom: 1px solid #c2c6cc;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.hoverWhite:hover {
+  color: #FFF !important;
+}
+
+.menuButton {
+  margin-top: -10px;
+  height: 70px;
+}
+
+.nav-item {
+  padding: 6px;
+  padding-left: 20px;
+}
+
+.navbar-nav {
+  margin-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px !important;
+}
+
+#mainNav {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+}
+
+#pagecontent {
+  margin-top: 68px;
+  margin-left: 16.6%;
+  position: absolute;
+}
+
+#navLeft {
+  margin-top: 68px;
+  background-color: rgb(215, 220, 226);
+  position: fixed;
+  height: 100%;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  border-right: 1px solid #c2c6cc;
+  z-index: 2;
+}
+
+/* If screen width get under 770px */
+@media all and (max-width: 770px) {
+
+  #pagecontent {
+    margin-top: 410px;
+    margin-left: 0px;
+    position: absolute;
+  }
+
+  #navLeft {
+    height: auto !important;
+    border-right: 0px;
+    position: absolute;
+  }
+
+  .nav-item {
+    padding: 0px;
+    padding-left: 20px;
+  }
+
+}
