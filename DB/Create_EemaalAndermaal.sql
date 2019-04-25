@@ -9,7 +9,7 @@ USE EenmaalAndermaal
 CREATE TABLE Geheime_Vraag(
 	VraagId					INTEGER			NOT NULL,
 	Vraag					VARCHAR(100)	NOT NULL,
-	CONSTRAINT pk_persoon	PRIMARY KEY (VraagId)	
+	CONSTRAINT pk_Vraag	PRIMARY KEY (VraagId)	
 )
 
 
@@ -37,3 +37,8 @@ CREATE TABLE Persoon(
 	CONSTRAINT pk_persoon	PRIMARY KEY (Id)
 	
 )
+
+ALTER TABLE Persoon
+ADD	CONSTRAINT fk_persoon	FOREIGN KEY (Geheime_Vraag) REFERENCES Geheime_Vraag(VraagId)
+										ON UPDATE CASCADE
+										ON DELETE NO ACTION
