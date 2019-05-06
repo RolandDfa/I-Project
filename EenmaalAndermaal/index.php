@@ -2,20 +2,12 @@
 // Database connection
 // require('connectie.php');
 
-//Get page
-// if (!empty($_GET['page'])) {
-// 	$page = $_GET['page'];
-// 	//If not logged in only home and contact are available
-// 	if ($_SESSION['rechten'] == '') {
-// 		if ($page == 'home' || $page == 'contact') {
-// 			//Nothing
-// 		} else {
-// 			header("Location: index.php?page=home");
-// 		}
-// 	}
-// } else {
-// 	header("Location: index.php?page=home");
-// }
+// Get page
+if (!empty($_GET['page'])) {
+	$page = $_GET['page'];
+} else {
+	header("Location: index.php?page=home");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,6 +18,9 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+		<!-- Icons -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 	  <!-- CSS -->
 	  <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -34,25 +29,51 @@
 	<body>
 
 		<!-- Main menu -->
-		<nav id="mainNav" class="navbar navbar-expand-lg navbar-dark bg-dark shadow" style="padding-bottom: 0px;">
+		<nav id="mainNav" class="navbar border-bottom border-secondary shadow-sm">
 			<?php
 			require('menu/menu.php');
 			?>
 		</nav>
 
-		<div class="row" style="margin-right: 0px; margin-left: 0px;">
-			<!-- Side menu -->
-			<nav id="navLeft" class="navbar-light col-lg-2 col-md-2 col-sm-12">
-				<?php
-				require('menu/sidemenu.php');
-				?>
-			</nav>
-
-			<!-- Page content -->
-			<div id="pagecontent" class="col-lg-10 col-md-10">
-
+		<!-- Categorie menu -->
+		<div id="categorieRow" class="row">
+			<div class="col-lg-2"><!-- White space --></div>
+			<div class="col-lg-8">
+				<nav id="categorieNav" class="navbar border-left border-right border-bottom border-secondary">
+					<?php
+					require('menu/menuCategorien.php');
+					?>
+				</nav>
 			</div>
+			<div class="col-lg-2"><!-- White space --></div>
 		</div>
+
+		<!-- Page content -->
+		<div id="body" class="row">
+			<div class="col-lg-2"><!-- White space --></div>
+			<div id="pagecontent" class="col-lg-8">
+				<?php
+				switch($page) {
+					case 'home':
+				    require('content/home.php');
+						break;
+					case 'inloggen':
+			      require('content/inloggen.php');
+			      break;
+					default:
+				    require('content/home.php');
+				}
+				?>
+			</div>
+			<div class="col-lg-2"><!-- White space --></div>
+		</div>
+
+		<!-- Footer -->
+		<footer>
+			<div>
+		    &copy; 2019 IConcepts
+		  </div>
+		</footer>
 
 	</body>
 </html>
