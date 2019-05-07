@@ -2,7 +2,7 @@
 <div class="col-lg-2"><!-- White space --></div>
 <div class="col-lg-3">
   <a id="logo" href=""><img src="images/EenmaalAndermaalLogo.png" width="140" height="60" alt="Logo"></a>
-  <a class="menuItem" href="">
+  <a class="menuItem" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <div class="row">
       <div>
         <b>Alle veilingen</b>
@@ -12,6 +12,21 @@
       </div>
     </div>
   </a>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+  <!-- <a class="menuItem" href="">
+    <div class="row">
+      <div>
+        <b>Alle veilingen</b>
+      </div>
+      <div class="arrow">
+        <i class="fas fa-caret-right arrowDown"></i>
+      </div>
+    </div>
+  </a> -->
 </div>
 <div class="col-lg-2 searchbar">
   <form class="form-inline" action="" method="post">
@@ -26,7 +41,23 @@
 <div class="col-lg-3">
   <a class="menuItem" href="">Berichten</a>
   <a class="menuItem" href="">Plaats advertentie</a>
-  <a class="menuItem" href="">Inloggen</a>
+  <a class="menuItem" href="
+  <?php
+  if (!isset($_SESSION["username"])) {
+    echo "login.php";
+  }else{
+    echo "logout.php";
+  }
+  ?>
+  ">
+    <?php
+    if (!isset($_SESSION["username"])) {
+      echo "Inloggen";
+    }else{
+      echo "Uitloggen";
+    }
+    ?>
+  </a>
   <a class="menuItem marginLeft" href="">
     <div class="row">
       <div>
