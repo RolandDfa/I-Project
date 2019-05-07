@@ -27,52 +27,53 @@ if (!empty($_GET['page'])) {
 		<title>EenmaalAndermaal</title>
 	</head>
 	<body>
+		<div id="body">
 
-		<!-- Main menu -->
-		<nav id="mainNav" class="navbar border-bottom border-secondary shadow-sm">
-			<?php
-			require('menu/menu.php');
-			?>
-		</nav>
-
-		<!-- Categorie menu -->
-		<div id="categorieRow" class="row">
-			<div class="col-lg-2"><!-- White space --></div>
-			<div class="col-lg-8">
-				<nav id="categorieNav" class="navbar border-left border-right border-bottom border-secondary">
-					<?php
-					require('menu/menuCategorien.php');
-					?>
-				</nav>
-			</div>
-			<div class="col-lg-2"><!-- White space --></div>
-		</div>
-
-		<!-- Page content -->
-		<div id="body" class="row">
-			<div class="col-lg-2"><!-- White space --></div>
-			<div id="pagecontent" class="col-lg-8">
+			<!-- Main menu -->
+			<nav id="mainNav" class="navbar border-bottom border-secondary shadow-sm">
 				<?php
-				switch($page) {
-					case 'home':
-				    require('content/home.php');
-						break;
-					case 'inloggen':
-			      require('content/inloggen.php');
-			      break;
-					default:
-				    require('content/home.php');
-				}
+				require('menu/menu.php');
 				?>
+			</nav>
+
+			<!-- Categorie menu -->
+			<div id="categorieRow" class="row">
+				<div class="col-lg-2"><!-- White space --></div>
+				<div class="col-lg-8">
+					<nav id="categorieNav" class="navbar border-left border-right border-bottom border-secondary">
+						<?php
+						require('menu/menuCategorien.php');
+						?>
+					</nav>
+				</div>
+				<div class="col-lg-2"><!-- White space --></div>
 			</div>
-			<div class="col-lg-2"><!-- White space --></div>
+
+			<!-- Page content -->
+			<div id="pagecontent" class="row">
+				<div class="col-lg-2"><!-- White space --></div>
+				<div class="col-lg-8">
+					<?php
+					switch($page) {
+						case 'home':
+					    require('content/home.php');
+							break;
+						case 'inloggen':
+				      require('content/inloggen.php');
+				      break;
+						default:
+					    require('content/home.php');
+					}
+					?>
+				</div>
+				<div class="col-lg-2"><!-- White space --></div>
+			</div>
+
 		</div>
 
 		<!-- Footer -->
 		<footer>
-			<div>
-		    &copy; 2019 IConcepts
-		  </div>
+	    &copy; 2019 IConcepts
 		</footer>
 
 	</body>
