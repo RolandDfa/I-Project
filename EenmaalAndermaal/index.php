@@ -61,8 +61,11 @@ if (!empty($_GET['page'])) {
 						case 'home':
 					    require('content/home.php');
 							break;
-						case 'inloggen':
-				      require('content/inloggen.php');
+						case 'login':
+				      require('content/login.php');
+				      break;
+						case 'loguit':
+				      require('logout.php');
 				      break;
 						default:
 					    require('content/home.php');
