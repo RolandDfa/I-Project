@@ -34,7 +34,7 @@
   <?php
   if (!isset($_SESSION["username"])) {
     echo "index.php?page=login";
-  }else{
+  } else {
     echo "index.php?page=loguit";
   }
   ?>
@@ -42,7 +42,7 @@
     <?php
     if (!isset($_SESSION["username"])) {
       echo "Inloggen";
-    }else{
+    } else {
       echo "Uitloggen";
     }
     ?>
