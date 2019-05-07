@@ -1,8 +1,8 @@
 <?php session_start(); ?>
 <div class="col-lg-2"><!-- White space --></div>
 <div class="col-lg-3">
-  <a id="logo" href=""><img src="images/EenmaalAndermaalLogo.png" width="140" height="60" alt="Logo"></a>
-  <a class="menuItem" href="" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <a id="logo" href="index.php?page=home"><img src="images/EenmaalAndermaalLogo.png" width="140" height="60" alt="Logo"></a>
+  <a class="menuItem" href="" data-toggle="dropdown">
     <div class="row">
       <div>
         <b>Alle veilingen</b>
@@ -12,21 +12,11 @@
       </div>
     </div>
   </a>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
+  <div id="dropdownAuctions" class="dropdown-menu greeneryBorder">
+    <a class="dropdown-item" href="">Tafels</a>
+    <a class="dropdown-item" href="">Stoelen</a>
+    <a class="dropdown-item" href="">Pannen</a>
   </div>
-  <!-- <a class="menuItem" href="">
-    <div class="row">
-      <div>
-        <b>Alle veilingen</b>
-      </div>
-      <div class="arrow">
-        <i class="fas fa-caret-right arrowDown"></i>
-      </div>
-    </div>
-  </a> -->
 </div>
 <div class="col-lg-2 searchbar">
   <form class="form-inline" action="" method="post">
@@ -44,9 +34,9 @@
   <a class="menuItem" href="
   <?php
   if (!isset($_SESSION["username"])) {
-    echo "login.php";
+    echo "index.php?page=login";
   }else{
-    echo "logout.php";
+    echo "index.php?page=loguit";
   }
   ?>
   ">
@@ -58,7 +48,7 @@
     }
     ?>
   </a>
-  <a class="menuItem marginLeft" href="">
+  <a class="menuItem marginLeft" href="" id="dropdownCountries" data-toggle="dropdown">
     <div class="row">
       <div>
         <b>NL</b>
@@ -68,5 +58,9 @@
       </div>
     </div>
   </a>
+  <div id="dropdownLanguage" class="dropdown-menu greeneryBorder">
+    <a class="dropdown-item" href="">NL</a>
+    <a class="dropdown-item" href="">EN</a>
+  </div>
 </div>
 <div class="col-lg-2"><!-- White space --></div>
