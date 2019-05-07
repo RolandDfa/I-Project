@@ -1,7 +1,7 @@
 <?php session_start(); ?>
-<div class="col-lg-2"><!-- White space --></div>
-<div class="col-lg-3">
-  <a id="logo" href="index.php?page=home"><img src="images/EenmaalAndermaalLogo.png" width="140" height="60" alt="Logo"></a>
+<div class="col-lg-2 col-sm-0"><!-- White space --></div>
+<div class="col-lg-3 col-sm-4">
+  <a id="logo" href="index.php?page=home"><img src="images/EenmaalAndermaalLogo.png" width="120" height="60" alt="Logo"></a>
   <a class="menuItem" href="" data-toggle="dropdown">
     <div class="row">
       <div>
@@ -18,7 +18,7 @@
     <a class="dropdown-item" href="">Pannen</a>
   </div>
 </div>
-<div class="col-lg-2 searchbar">
+<div class="col-lg-2 col-sm-3 searchbar">
   <form class="form-inline" action="" method="post">
     <div class="input-group">
       <input class="form-control greeneryBorder" type="text" placeholder="Zoeken">
@@ -28,8 +28,7 @@
     </div>
   </form>
 </div>
-<div class="col-lg-3 alignRight">
-  <a class="menuItem" href="">Berichten</a>
+<div class="col-lg-3 col-sm-5 alignRight">
   <a class="menuItem" href="">Plaats advertentie</a>
   <a class="menuItem" href="
   <?php
