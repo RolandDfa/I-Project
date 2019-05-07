@@ -1,7 +1,4 @@
 <?php
-
-//test
-
 // Database connection
 // require('connectie.php');
 
