@@ -1,4 +1,4 @@
-<div class="col-lg-2"></div>
+<div class="col-lg-2"><!-- White space --></div>
 <div class="col-lg-3">
   <a id="logo" href=""><img src="images/EenmaalAndermaalLogo.png" width="140" height="60" alt="Logo"></a>
   <a class="menuItem" href="">
@@ -13,19 +13,19 @@
   </a>
 </div>
 <div class="col-lg-2 searchbar">
-  <div class="input-group md-form form-sm form-2 pl-0">
-    <input class="form-control my-0 py-1 lime-border" type="text" placeholder="Zoeken">
-    <div class="input-group-append">
-      <span class="input-group-text lime lighten-2"><i class="fas fa-search text-grey"></i></span>
+  <form class="form-inline" action="" method="post">
+    <div class="input-group">
+      <input class="form-control greeneryBorder" type="text" placeholder="Zoeken">
+      <div class="input-group-append">
+        <span class="input-group-text greeneryBackground greeneryBorder"><i class="fas fa-search"></i></span>
+      </div>
     </div>
-  </div>
+  </form>
 </div>
 <div class="col-lg-3">
   <a class="menuItem" href="">Berichten</a>
   <a class="menuItem" href="">Plaats advertentie</a>
   <a class="menuItem" href="">Inloggen</a>
-</div>
-<div class="col-lg-2">
   <a class="menuItem" href="">
     <div class="row">
       <div>
@@ -37,3 +37,4 @@
     </div>
   </a>
 </div>
+<div class="col-lg-2"><!-- White space --></div>

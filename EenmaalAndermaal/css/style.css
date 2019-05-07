@@ -20,14 +20,19 @@ h5 {
 }
 
 footer {
-  background: #404040;
+  background: #222222;
   color: #ffffff;
   text-align: center;
   padding: 10px;
   font-family: 'Roboto', sans-serif;
+  height: 6%;
 }
 
 #body {
+  min-height: 94%;
+}
+
+#pagecontent {
   margin-right: 0px;
   margin-left: 0px;
 }
@@ -45,27 +50,39 @@ footer {
   text-align: center;
 }
 
-/* MENU main */
-#mainNav {
-  width: 100%;
-  padding-bottom: 0px;
+.greeneryBackground {
   background-color: rgb(136, 176, 75);
 }
 
+.greeneryBorder {
+  border: 1px solid rgb(136, 176, 75);
+}
+
+/* MENU main */
+#menuRow {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+#mainNav {
+  width: 100%;
+  padding-bottom: 0px;
+  background-color: #222222;
+}
+
 #logo {
-  margin-top: -10px;
   margin-right: 1rem;
 }
 
 .menuItem {
   margin-top: -10px;
-  padding-top: 30px !important;
-  height: 80px;
-  font-size: 1em;
+  padding-top: 27px !important;
+  height: 70px;
+  font-size: 0.875rem;
   display: inline-block;
-  margin-right: 0.9rem;
-  margin-left: 0.6rem;
-  color: #000000;
+  margin-right: 3%;
+  margin-left: 3%;
+  color: rgb(136, 176, 75);
 }
 
 .searchbar {
@@ -90,22 +107,24 @@ footer {
 }
 
 #categorieNav {
-  padding-bottom: 0px;
-  background-color: rgb(75, 135, 64);
+  background-color: rgb(136, 176, 75);
 }
 
 .categorieMenuItem {
-  margin-top: -10px;
-  padding-top: 8px;
-  height: 40px;
-  font-size: 0.9em;
+  height: 20px;
+  font-size: 0.8125rem;
   display: inline-block;
-  margin-left: 0.79rem;
-  margin-right: 0.79rem;
-  color: #000000;
+  margin-left: 1.7%;
+  margin-right: 1.7%;
+  color: #FFFFFF;
 }
 
 /* HOME featured auctions */
+.cardItem {
+  width: 23%;
+  margin: 1%;
+}
+
 .card {
   height: 100%;
 }
@@ -134,9 +153,9 @@ footer {
 
 /* HOME popular categories */
 .popularCategoryItem {
-  width: 22%;
+  width: 23%;
   position: relative;
-  margin: 15px;
+  margin: 1%;
   background-color: #000000;
 }
 
@@ -162,4 +181,43 @@ footer {
 
 .opacityHover:hover {
 	opacity: 1;
+}
+
+/* If screen < 960px (Tablets) */
+@media all and (max-width: 1000px) {
+
+  /* HOME featured auctions */
+  .cardItem {
+    width: 48%;
+  }
+
+  .rounded-top {
+    height: 300px;
+  }
+
+  /* HOME popular categories */
+  .popularCategoryItem {
+    height: 140px;
+  }
+
+}
+
+/* If screen < 700px (Phones) */
+@media all and (max-width: 700px) {
+
+  /* HOME image */
+  #natuur {
+    display: none;
+  }
+
+  /* HOME featured auctions */
+  .cardItem {
+    width: 100%;
+  }
+
+  /* HOME popular categories */
+  .popularCategoryItem {
+    width: 48%;
+  }
+
 }

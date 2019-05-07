@@ -1,18 +1,18 @@
 <div class="pageWrapper">
   <div class="row">
-    <img src="images/natuur.jpg" width="100%" height="300" alt="Natuur">
+    <img id="natuur" src="images/natuur.jpg" width="100%" height="300" alt="Natuur">
   </div>&nbsp
 
   <div class="row">
     <h4><b>Uitgelichte veilingen</b></h4>
-  </div>&nbsp
+  </div>
 
   <div class="row contentWrapper">
-    <div class="col-lg-3">
+    <div class="cardItem">
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/stoel.jpg" width="100%" height="250" alt="Stoel">
+            <img class="rounded-top" src="images/stoel.jpg" width="100%" height="200" alt="Stoel">
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
@@ -25,11 +25,11 @@
         </div>
       </a>
     </div>
-    <div class="col-lg-3">
+    <div class="cardItem">
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="250" alt="Fiets">
+            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="200" alt="Fiets">
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
@@ -42,11 +42,11 @@
         </div>
       </a>
     </div>
-    <div class="col-lg-3">
+    <div class="cardItem">
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/klok.jpg" width="100%" height="250" alt="Klok">
+            <img class="rounded-top" src="images/klok.jpg" width="100%" height="200" alt="Klok">
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
@@ -59,11 +59,11 @@
         </div>
       </a>
     </div>
-    <div class="col-lg-3">
+    <div class="cardItem">
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="250" alt="Gitaar"></a>
+            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="200" alt="Gitaar"></a>
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
