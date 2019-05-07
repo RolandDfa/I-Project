@@ -188,7 +188,7 @@ footer {
 }
 
 /* If screen < 1000px (Tablets) */
-@media all and (max-width: 1000px) {
+@media only screen and (max-width: 1000px) {
 
   /* HOME featured auctions */
   .cardItem {
@@ -206,8 +206,8 @@ footer {
 
 }
 
-/* If screen < 800px (Phones) */
-@media all and (max-width: 800px) {
+/* If screen < 726px (Phones) */
+@media only screen and (max-width: 726px) {
 
   /* HOME carousel */
   #carouselExampleIndicators {
