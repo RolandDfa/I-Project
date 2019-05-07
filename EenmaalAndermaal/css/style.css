@@ -62,6 +62,18 @@ footer {
   margin-left: 25px !important;
 }
 
+.alignLeft {
+  text-align: left;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: right;
+}
+
 /* MENU main */
 #mainNav {
   display: flex;
@@ -80,7 +92,7 @@ footer {
 }
 
 #dropdownLanguage {
-  left: 280px;
+  left: 80%;
   margin: 0;
   min-width: 5rem;
 }

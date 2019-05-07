@@ -1,4 +1,4 @@
-<div class="col-lg-12">
+<div class="col-lg-12 alignCenter">
   <a class="categorieMenuItem" href="">Categorie</a>
   <a class="categorieMenuItem" href="">Categorie</a>
   <a class="categorieMenuItem" href="">Categorie</a>
