@@ -28,7 +28,7 @@
     </div>
   </form>
 </div>
-<div class="col-lg-3">
+<div class="col-lg-3 alignRight">
   <a class="menuItem" href="">Berichten</a>
   <a class="menuItem" href="">Plaats advertentie</a>
   <a class="menuItem" href="
