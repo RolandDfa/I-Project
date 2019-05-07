@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <div class="col-lg-2"><!-- White space --></div>
 <div class="col-lg-3">
   <a id="logo" href=""><img src="images/EenmaalAndermaalLogo.png" width="140" height="60" alt="Logo"></a>
@@ -26,7 +27,7 @@
   <a class="menuItem" href="">Berichten</a>
   <a class="menuItem" href="">Plaats advertentie</a>
   <a class="menuItem" href="">Inloggen</a>
-  <a class="menuItem" href="">
+  <a class="menuItem marginLeft" href="">
     <div class="row">
       <div>
         <b>NL</b>

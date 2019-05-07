@@ -58,6 +58,10 @@ footer {
   border: 1px solid rgb(136, 176, 75);
 }
 
+.marginLeft {
+  margin-left: 25px !important;
+}
+
 /* MENU main */
 #menuRow {
   margin-right: 0px;
@@ -80,8 +84,8 @@ footer {
   height: 70px;
   font-size: 0.875rem;
   display: inline-block;
-  margin-right: 3%;
-  margin-left: 3%;
+  margin-right: 2%;
+  margin-left: 2%;
   color: rgb(136, 176, 75);
 }
 
@@ -205,8 +209,8 @@ footer {
 /* If screen < 700px (Phones) */
 @media all and (max-width: 700px) {
 
-  /* HOME image */
-  #natuur {
+  /* HOME carousel */
+  #carouselExampleIndicators {
     display: none;
   }
 
