@@ -59,7 +59,11 @@ footer {
 }
 
 .marginLeft {
-  margin-left: 25px !important;
+  margin-left: 20px !important;
+}
+
+.marginRight {
+  margin-right: 20px !important;
 }
 
 .alignLeft {
@@ -80,6 +84,7 @@ footer {
   width: 100%;
   padding-bottom: 0px;
   background-color: #222222;
+  padding: 0.2rem 0rem;
 }
 
 #logo {
@@ -87,19 +92,17 @@ footer {
 }
 
 #dropdownAuctions {
-  left: 160px;
-  margin: 0;
+  left: 135px;
 }
 
 #dropdownLanguage {
-  left: 80%;
-  margin: 0;
+  left: 78%;
   min-width: 5rem;
 }
 
 .menuItem {
   margin-top: -10px;
-  padding-top: 27px !important;
+  padding-top: 28px !important;
   height: 70px;
   font-size: 0.875rem;
   display: inline-block;
@@ -214,8 +217,26 @@ footer {
 	opacity: 1;
 }
 
-/* If screen < 1000px (Tablets) */
-@media only screen and (max-width: 1000px) {
+/* If screen < 1050px (Tablets) */
+@media only screen and (max-width: 1050px) {
+
+  /* MENU main */
+  .col-sm-4, .col-sm-4 {
+    padding: 0;
+  }
+
+  /* MENU categories */
+  #categorieRow {
+    display: none;
+  }
+
+  #dropdownAuctions {
+    left: 115px;
+  }
+
+  #dropdownLanguage {
+    left: 75%;
+  }
 
   /* HOME featured auctions */
   .cardItem {
