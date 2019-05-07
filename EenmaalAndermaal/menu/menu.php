@@ -26,7 +26,23 @@
 <div class="col-lg-3">
   <a class="menuItem" href="">Berichten</a>
   <a class="menuItem" href="">Plaats advertentie</a>
-  <a class="menuItem" href="">Inloggen</a>
+  <a class="menuItem" href="
+  <?php
+  if (!isset($_SESSION["username"])) {
+    echo "login.php";
+  }else{
+    echo "logout.php";
+  }
+  ?>
+  ">
+    <?php
+    if (!isset($_SESSION["username"])) {
+      echo "Inloggen";
+    }else{
+      echo "Uitloggen";
+    }
+    ?>
+  </a>
   <a class="menuItem marginLeft" href="">
     <div class="row">
       <div>
