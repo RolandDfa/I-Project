@@ -163,6 +163,10 @@ footer {
   height: 100%;
 }
 
+.card img{
+  object-fit: cover;
+}
+
 .cardTitle {
   padding: 0.5rem;
   display: flex;
@@ -191,6 +195,10 @@ footer {
   position: relative;
   margin: 1%;
   background-color: #000000;
+}
+
+.popularCategoryItem img{
+  object-fit: cover;
 }
 
 .popularCategoryBackground {
