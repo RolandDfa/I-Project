@@ -312,7 +312,6 @@ footer {
 .login-form-1 h3 {
     text-align: center;
     margin-bottom: 12%;
-    color: #fff;
 }
 
 .login-form-2 {
@@ -329,7 +328,7 @@ footer {
 
 .btnSubmit {
     font-weight: 600;
-    width: 50%;
+    width: 100%;
     color: #282726;
     background-color: #fff;
     border: none;
