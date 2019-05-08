@@ -49,7 +49,7 @@
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/stoel.jpg" width="100%" height="200" alt="Stoel">
+            <img class="rounded-top" src="images/stoel.jpg" width="100%" height="220" alt="Stoel">
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
@@ -66,7 +66,7 @@
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="200" alt="Fiets">
+            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="220" alt="Fiets">
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
@@ -83,7 +83,7 @@
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/klok.jpg" width="100%" height="200" alt="Klok">
+            <img class="rounded-top" src="images/klok.jpg" width="100%" height="220" alt="Klok">
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
@@ -100,7 +100,7 @@
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="200" alt="Gitaar"></a>
+            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
           </div>
           <div class="cardTitle">
             <div class="cardHeader">

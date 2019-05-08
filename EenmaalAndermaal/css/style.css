@@ -195,7 +195,7 @@ footer {
 
 .popularCategoryBackground {
   position: absolute;
-  height: 100%;
+  height: 110%;
 }
 
 .popularCategoryText {
@@ -221,6 +221,10 @@ footer {
 @media only screen and (max-width: 1050px) {
 
   /* MENU main */
+  #logo {
+    margin-left: 0.2rem;
+  }
+
   .col-sm-4, .col-sm-4 {
     padding: 0;
   }
