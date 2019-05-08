@@ -1,6 +1,6 @@
 <?php session_start(); ?>
 <div class="col-lg-2"><!-- White space --></div>
-<div class="col-lg-3 col-sm-4">
+<div class="col-lg-3 col-sm-4 col-6">
   <a id="logo" href="index.php?page=home"><img src="images/EenmaalAndermaalLogo.png" width="120" height="60" alt="Logo"></a>
   <a class="menuItem" href="" data-toggle="dropdown">
     <div class="row">
@@ -18,7 +18,7 @@
     <a class="dropdown-item" href="">Pannen</a>
   </div>
 </div>
-<div class="col-lg-2 col-sm-4 searchbar">
+<div id="menuSearchbar" class="col-lg-2 col-sm-4">
   <form class="form-inline" action="" method="post">
     <div class="input-group">
       <input class="form-control greeneryBorder" type="text" placeholder="Zoeken">
@@ -28,7 +28,7 @@
     </div>
   </form>
 </div>
-<div class="col-lg-3 col-sm-4 alignRight">
+<div class="col-lg-3 col-sm-4 col-6 alignRight">
   <a class="menuItem" href="">Plaats advertentie</a>
   <a class="menuItem" href="
   <?php
@@ -61,5 +61,25 @@
     <a class="dropdown-item" href="">NL</a>
     <a class="dropdown-item" href="">EN</a>
   </div>
+  <a class="hamburgerMenu" onclick="openNav()"><i class="fa fa-bars hamburgerIcon"></i></a>
 </div>
 <div class="col-lg-2"><!-- White space --></div>
+
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+    <a href="">Alle veilingen</a>
+    <a href="">Plaats advertentie</a>
+    <a href="">Inloggen</a>
+  </div>
+</div>
+
+<script>
+function openNav() {
+  document.getElementById("myNav").style.height = "100%";
+}
+
+function closeNav() {
+  document.getElementById("myNav").style.height = "0%";
+}
+</script>

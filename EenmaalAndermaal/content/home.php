@@ -38,9 +38,9 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-  </div>&nbsp
+  </div>
 
-  <div class="row">
+  <div id="auctions" class="row">
     <h4><b>Uitgelichte veilingen</b></h4>
   </div>
 
@@ -113,7 +113,7 @@
         </div>
       </a>
     </div>
-  </div>&nbsp
+  </div>
 
   <div class="textCenter">
     <h3><b>Populaire categoriën</b></h3>
