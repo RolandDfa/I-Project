@@ -68,9 +68,10 @@
 <div id="myNav" class="overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
+    <a href="index.php?page=home">Home</a>
     <a href="">Alle veilingen</a>
     <a href="">Plaats advertentie</a>
-    <a href="">Inloggen</a>
+    <a href="index.php?page=login">Inloggen</a>
   </div>
 </div>
 
