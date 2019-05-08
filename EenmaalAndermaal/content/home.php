@@ -5,28 +5,24 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="images/natuur.jpg" width="100%" height="300" alt="First slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Title 1</h5>
-            <p>Tekst 1...</p>
-          </div>
+          <img class="d-block w-100" src="images/Reviews/Review1-min.png" width="100%" height= auto alt="First review">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="images/natuur.jpg" width="100%" height="300" alt="Second slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Title 2</h5>
-            <p>Tekst 2...</p>
-          </div>
+          <img class="d-block w-100" src="images/Reviews/Review2-min.png" width="100%" height= auto alt="Second review">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="images/natuur.jpg" width="100%" height="300" alt="Third slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Title 3</h5>
-            <p>Tekst 3...</p>
-          </div>
+          <img class="d-block w-100" src="images/Reviews/Review3-min.png" width="100%" height= auto alt="Third review">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="images/Reviews/Review4-min.png" width="100%" height= auto alt="Fourth review">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="images/Reviews/Review5-min.png" width="100%" height= auto alt="Fifth review">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -38,9 +34,9 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-  </div>&nbsp
+  </div>
 
-  <div class="row">
+  <div id="auctions" class="row">
     <h4><b>Uitgelichte veilingen</b></h4>
   </div>
 
@@ -49,7 +45,7 @@
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/stoel.jpg" width="100%" height="200" alt="Stoel">
+            <img class="rounded-top" src="images/stoel.jpg" width="100%" height="220" alt="Stoel">
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
@@ -66,7 +62,7 @@
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="200" alt="Fiets">
+            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="220" alt="Fiets">
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
@@ -83,7 +79,7 @@
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/klok.jpg" width="100%" height="200" alt="Klok">
+            <img class="rounded-top" src="images/klok.jpg" width="100%" height="220" alt="Klok">
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
@@ -100,7 +96,7 @@
       <a href="">
         <div class="card shadow-sm">
           <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="200" alt="Gitaar"></a>
+            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
           </div>
           <div class="cardTitle">
             <div class="cardHeader">
@@ -113,7 +109,7 @@
         </div>
       </a>
     </div>
-  </div>&nbsp
+  </div>
 
   <div class="textCenter">
     <h3><b>Populaire categoriën</b></h3>

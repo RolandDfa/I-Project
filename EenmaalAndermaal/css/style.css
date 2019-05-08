@@ -95,12 +95,17 @@ footer {
   left: 135px;
 }
 
+#menuSearchbar {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 #dropdownLanguage {
   left: 78%;
   min-width: 5rem;
 }
 
-.menuItem {
+.menuItem, .hamburgerMenu {
   margin-top: -10px;
   padding-top: 28px !important;
   height: 70px;
@@ -108,16 +113,23 @@ footer {
   display: inline-block;
   margin-right: 2%;
   margin-left: 2%;
-  color: rgb(136, 176, 75);
+  color: rgb(136, 176, 75) !important;
 }
 
-.menuItem:hover {
+.menuItem:hover, .hamburgerMenu:hover {
   color: #FFFFFF;
 }
 
-.searchbar {
-  padding-left: 0px;
-  padding-right: 0px;
+.hamburgerMenu {
+  padding: 20px;
+  width: 60px;
+  float: right;
+  display: none;
+}
+
+.hamburgerIcon {
+  font-size: 1.2rem;
+  line-height: 1.4;
 }
 
 .arrow {
@@ -128,6 +140,46 @@ footer {
 .arrowDown {
   transform: rotate(45deg);
   padding-left: 5px;
+}
+
+.overlay {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.overlay a {
+  padding: 8px;
+  padding-top: 0px;
+  text-decoration: none;
+  font-size: 30px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  right: 9px;
+  font-size: 50px;
 }
 
 /* MENU categories */
@@ -154,13 +206,22 @@ footer {
 }
 
 /* HOME featured auctions */
+.carousel {
+  padding-bottom: 1.3em;
+}
+
 .cardItem {
   width: 23%;
   margin: 1%;
+  margin-bottom: 1em;
 }
 
 .card {
   height: 100%;
+}
+
+.card img{
+  object-fit: cover;
 }
 
 .cardTitle {
@@ -193,9 +254,13 @@ footer {
   background-color: #000000;
 }
 
+.popularCategoryItem img{
+  object-fit: cover;
+}
+
 .popularCategoryBackground {
   position: absolute;
-  height: 100%;
+  height: 110%;
 }
 
 .popularCategoryText {
@@ -221,6 +286,10 @@ footer {
 @media only screen and (max-width: 1050px) {
 
   /* MENU main */
+  #logo {
+    margin-left: 0.2rem;
+  }
+
   .col-sm-4, .col-sm-4 {
     padding: 0;
   }
@@ -256,6 +325,19 @@ footer {
 
 /* If screen < 726px (Phones) */
 @media only screen and (max-width: 726px) {
+
+  /* MENU main */
+  #menuSearchbar {
+    display: none;
+  }
+
+  .menuItem {
+    display: none;
+  }
+
+  .hamburgerMenu {
+    display: block;
+  }
 
   /* HOME carousel */
   #carouselExampleIndicators {
