@@ -5,28 +5,24 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="images/natuur.jpg" width="100%" height="300" alt="First slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Title 1</h5>
-            <p>Tekst 1...</p>
-          </div>
+          <img class="d-block w-100" src="images/Reviews/Review1.png" width="100%" height="300" alt="First review">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="images/natuur.jpg" width="100%" height="300" alt="Second slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Title 2</h5>
-            <p>Tekst 2...</p>
-          </div>
+          <img class="d-block w-100" src="images/Reviews/Review2.png" width="100%" height="300" alt="Second review">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="images/natuur.jpg" width="100%" height="300" alt="Third slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Title 3</h5>
-            <p>Tekst 3...</p>
-          </div>
+          <img class="d-block w-100" src="images/Reviews/Review3.png" width="100%" height="300" alt="Third review">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="images/Reviews/Review4.png" width="100%" height="300" alt="Fourth review">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block w-100" src="images/Reviews/Review5.png" width="100%" height="300" alt="Fifth review">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
