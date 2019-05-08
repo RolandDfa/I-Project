@@ -64,6 +64,9 @@ if (!empty($_GET['page'])) {
 						case 'login':
 				      require('content/login.php');
 				      break;
+						case 'registreren':
+				      require('content/registreren.php');
+				      break;
 						case 'loguit':
 				      require('logout.php');
 				      break;
