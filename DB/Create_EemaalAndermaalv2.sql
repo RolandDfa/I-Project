@@ -26,15 +26,15 @@ CREATE TABLE [dbo].[Gebruiker] (
     [adresregel]     VARCHAR (255) NOT NULL,
     [postcode]       VARCHAR (7)   NOT NULL,
     [plaatsnaam]     VARCHAR (25)  NOT NULL,
-    [Land]           VARCHAR (50)  NOT NULL,
+    [land]           VARCHAR (50)  NOT NULL,
 	[kvkNummer]		 INT		   NOT NULL,
-    [GeboorteDag]    DATE          NOT NULL,
-    [Mailbox]        VARCHAR (50)  NOT NULL,
+    [geboorteDag]    DATE          NOT NULL,
+    [mailbox]        VARCHAR (50)  NOT NULL,
     [wachtwoord]     VARCHAR (30)  NOT NULL,
-    [Vraag]          TINYINT       NOT NULL,
-    [antwoordtekst]  VARCHAR (255) NOT NULL,
-    [Verkoper]       BIT           NOT NULL,
-    [Valid]          BIT           NOT NULL,
+    [vraag]          TINYINT       NOT NULL,
+    [antwoordTekst]  VARCHAR (255) NOT NULL,
+    [verkoper]       BIT           NOT NULL,
+    [valid]          BIT           NOT NULL,
     CONSTRAINT [PK_Gebruiker_gebruikersnaam] PRIMARY KEY CLUSTERED ([gebruikersnaam] ASC),
     CONSTRAINT [FK_Gebruiker_Vraag_vraagnummer] FOREIGN KEY ([Vraag]) REFERENCES [dbo].[Vraag] ([vraagnummer]) ON UPDATE CASCADE
 );
@@ -50,11 +50,11 @@ CREATE TABLE [dbo].[Gebruikerstelefoon] (
 
 -- Verkoper tabel
 CREATE TABLE [dbo].[Verkoper] (
-    [Gebruiker]     VARCHAR (50) NOT NULL,
-    [Bank]          VARCHAR (25) NULL,
-    [Bankrekening]  VARCHAR (18) NULL,
-    [ControleOptie] VARCHAR (25) NOT NULL,
-    [Creditcard]    VARCHAR (30) NULL,
+    [gebruiker]     VARCHAR (50) NOT NULL,
+    [bank]          VARCHAR (25) NULL,
+    [bankrekening]  VARCHAR (18) NULL,
+    [controleOptie] VARCHAR (25) NOT NULL,
+    [creditcard]    VARCHAR (30) NULL,
     CONSTRAINT [PK_Verkoper_Gebruiker] PRIMARY KEY CLUSTERED ([Gebruiker] ASC),
     CONSTRAINT [FK_Verkoper_Gebruiker_gebruikersnaam] FOREIGN KEY ([Gebruiker]) REFERENCES [dbo].[Gebruiker] ([gebruikersnaam]),
     CONSTRAINT [CHK_ControlePostOrCreditcard] CHECK ([ControleOptie]='Post' OR [ControleOptie]='Creditcard'),
@@ -95,7 +95,7 @@ CREATE TABLE [dbo].[Rubriek] (
     [rubrieknummer] INT          NOT NULL,
     [rubrieknaam]   VARCHAR (50) NOT NULL,
     [parent]        INT          NULL,
-    [volgnr]        INT          NOT NULL,
+    [volgNr]        INT          NOT NULL,
     CONSTRAINT [PK_Rubriek_rubrieknummer] PRIMARY KEY CLUSTERED ([rubrieknummer] ASC),
     CONSTRAINT [FK_Rubriek_rubriek_rubrieknummer] FOREIGN KEY ([parent]) REFERENCES [dbo].[Rubriek] ([rubrieknummer])
 );
@@ -111,11 +111,11 @@ CREATE TABLE [dbo].[Voorwerp_in_rubriek] (
 
 -- Feedback tabel
 CREATE TABLE [dbo].[Feedback] (
-    [Voorwerp]        NUMERIC (12) NOT NULL,
-    [Soort_Gebruiker] BIT          NOT NULL,
-    [Feedbacksoort]   VARCHAR (10) NOT NULL,
-    [Dag]             DATE         NOT NULL,
-    [Tijdstip]        TIME (7)     NOT NULL,
+    [voorwerp]        NUMERIC (12) NOT NULL,
+    [soort_Gebruiker] BIT          NOT NULL,
+    [feedbackSoort]   VARCHAR (10) NOT NULL,
+    [dag]             DATE         NOT NULL,
+    [tijdstip]        TIME (7)     NOT NULL,
     [commentaar]      VARCHAR (50) NOT NULL,
     CONSTRAINT [PK_Feedback_Voorwerp_Soort_Gebruiker] PRIMARY KEY CLUSTERED ([Voorwerp] ASC, [Soort_Gebruiker] ASC),
     CONSTRAINT [FK_Feedback_voorwerp_voorwerpnummer] FOREIGN KEY ([Voorwerp]) REFERENCES [dbo].[Voorwerp] ([voorwerpnummer]) ON UPDATE CASCADE
@@ -123,11 +123,11 @@ CREATE TABLE [dbo].[Feedback] (
 
 -- Bod tabel
 CREATE TABLE [dbo].[Bod] (
-    [Voorwerp]    NUMERIC (12)   NOT NULL,
-    [Bodbedrag]   NUMERIC (8, 2) NOT NULL,
-    [Gebruiker]   VARCHAR (50)   NOT NULL,
-    [BodDag]      DATE           NOT NULL,
-    [BodTijdstip] TIME (7)       NOT NULL,
+    [voorwerp]    NUMERIC (12)   NOT NULL,
+    [bodbedrag]   NUMERIC (8, 2) NOT NULL,
+    [gebruiker]   VARCHAR (50)   NOT NULL,
+    [bodDag]      DATE           NOT NULL,
+    [bodTijdstip] TIME (7)       NOT NULL,
     CONSTRAINT [PK_Bod_Voorwerp_Bodbedrag] PRIMARY KEY CLUSTERED ([Voorwerp] ASC, [Bodbedrag] ASC),
     CONSTRAINT [FK_Bod_voorwerp_voorwerpnummer] FOREIGN KEY ([Voorwerp]) REFERENCES [dbo].[Voorwerp] ([voorwerpnummer]) ON UPDATE CASCADE,
     CONSTRAINT [FK_Bod_gebruiker_gebruikersnaam] FOREIGN KEY ([Gebruiker]) REFERENCES [dbo].[Gebruiker] ([gebruikersnaam]) ON UPDATE CASCADE
