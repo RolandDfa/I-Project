@@ -10,19 +10,19 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block w-100" src="images/Reviews/Review1.png" width="100%" height= auto alt="First review">
+          <img class="d-block w-100" src="images/Reviews/Review1-min.png" width="100%" height= auto alt="First review">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="images/Reviews/Review2.png" width="100%" height= auto alt="Second review">
+          <img class="d-block w-100" src="images/Reviews/Review2-min.png" width="100%" height= auto alt="Second review">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="images/Reviews/Review3.png" width="100%" height= auto alt="Third review">
+          <img class="d-block w-100" src="images/Reviews/Review3-min.png" width="100%" height= auto alt="Third review">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="images/Reviews/Review4.png" width="100%" height= auto alt="Fourth review">
+          <img class="d-block w-100" src="images/Reviews/Review4-min.png" width="100%" height= auto alt="Fourth review">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src="images/Reviews/Review5.png" width="100%" height= auto alt="Fifth review">
+          <img class="d-block w-100" src="images/Reviews/Review5-min.png" width="100%" height= auto alt="Fifth review">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
