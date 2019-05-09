@@ -3,7 +3,7 @@
 USE MASTER
 GO
 -- DROP DATABASE als het al bestaat
-DROP DATABASE EenmaalAndermaal
+--DROP DATABASE EenmaalAndermaal
 --create database EenmaalAndermaal
 
 CREATE DATABASE EenmaalAndermaal
@@ -13,10 +13,17 @@ GO
 
 -- Vraag tabel
 CREATE TABLE [dbo].[Vraag] (
-    [vraagnummer] TINYINT      NOT NULL,
-    [tekstvraag]  VARCHAR (50) NULL,
+    [vraagnummer] INT IDENTITY(1,1)      NOT NULL,
+    [tekstvraag]  VARCHAR (50) NOT NULL,
     CONSTRAINT [PK_Vraag_vraagnummer] PRIMARY KEY CLUSTERED ([vraagnummer] ASC)
 );
+
+-- GebruikersStatus tabel
+CREATE TABLE [dbo].[Gebruikersstatus] (
+	[gebruikersStatus_id] INT IDENTITY(1,1) NOT NULL,
+	[gebruikersStatus_omschrijving] VARCHAR(255) NOT NULL,
+	CONSTRAINT [PK_GebruikersStatusid] PRIMARY KEY ([gebruikersStatus_id] ASC)
+	);
 
 -- Gebruikers tabel
 CREATE TABLE [dbo].[Gebruiker] (
@@ -24,19 +31,20 @@ CREATE TABLE [dbo].[Gebruiker] (
     [voornaam]       VARCHAR (50)  NOT NULL,
     [achternaam]     VARCHAR (50)  NOT NULL,
     [adresregel]     VARCHAR (255) NOT NULL,
-    [postcode]       VARCHAR (7)   NOT NULL,
-    [plaatsnaam]     VARCHAR (25)  NOT NULL,
-    [land]           VARCHAR (50)  NOT NULL,
+    [postcode]       VARCHAR (6)   NOT NULL,
+    [plaatsnaam]     VARCHAR (30)  NOT NULL,
+    [land]           VARCHAR (10)  NOT NULL,
 	[kvkNummer]		 INT		   NOT NULL,
     [geboorteDag]    DATE          NOT NULL,
     [mailbox]        VARCHAR (50)  NOT NULL,
-    [wachtwoord]     VARCHAR (30)  NOT NULL,
-    [vraag]          TINYINT       NOT NULL,
+    [wachtwoord]     VARCHAR (MAX)  NOT NULL,
+    [vraag]          INT       NOT NULL,
     [antwoordTekst]  VARCHAR (255) NOT NULL,
-    [verkoper]       BIT           NOT NULL,
+    [gebruikersStatus]       INT           NOT NULL,
     [valid]          BIT           NOT NULL,
     CONSTRAINT [PK_Gebruiker_gebruikersnaam] PRIMARY KEY CLUSTERED ([gebruikersnaam] ASC),
-    CONSTRAINT [FK_Gebruiker_Vraag_vraagnummer] FOREIGN KEY ([Vraag]) REFERENCES [dbo].[Vraag] ([vraagnummer]) ON UPDATE CASCADE
+    CONSTRAINT [FK_Gebruiker_Vraag_vraagnummer] FOREIGN KEY ([Vraag]) REFERENCES [dbo].[Vraag] ([vraagnummer]) ON UPDATE CASCADE,
+	CONSTRAINT [FK_Gebruiker_gebruikersStatus_Status_id] FOREIGN KEY ([Gebruikersstatus]) REFERENCES [dbo].[Gebruikersstatus] ([gebruikersStatus_id])
 );
 
 -- Gebruikerstelefoon tabel
