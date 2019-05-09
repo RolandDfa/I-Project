@@ -33,9 +33,9 @@
   <a class="menuItem" href="
   <?php
   if (!isset($_SESSION["username"])) {
-    echo "index.php?page=login";
+    echo "index.php?page=inloggen";
   } else {
-    echo "index.php?page=loguit";
+    echo "logout.php";
   }
   ?>
   ">
@@ -71,7 +71,7 @@
     <a href="index.php?page=home">Home</a>
     <a href="">Alle veilingen</a>
     <a href="">Plaats advertentie</a>
-    <a href="index.php?page=login">Inloggen</a>
+    <a href="index.php?page=inloggen">Inloggen</a>
   </div>
 </div>
 

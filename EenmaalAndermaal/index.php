@@ -1,6 +1,6 @@
 <?php
 // Database connection
-// require('connectie.php');
+require('connectie.php');
 
 // Get page
 if (!empty($_GET['page'])) {
@@ -61,14 +61,11 @@ if (!empty($_GET['page'])) {
 						case 'home':
 					    require('content/home.php');
 							break;
-						case 'login':
-				      require('content/login.php');
+						case 'inloggen':
+				      require('content/inloggen.php');
 				      break;
 						case 'registreren':
 				      require('content/registreren.php');
-				      break;
-						case 'loguit':
-				      require('logout.php');
 				      break;
 						default:
 					    require('content/home.php');
