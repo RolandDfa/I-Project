@@ -3,11 +3,12 @@ session_start();
 
 // Database connection
 require('../connectie.php');
+require('../functions.php');
 
 //Post inloggen
 if(isset($_POST['login'])) {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
+  $username = cleanInput($_POST['username']);
+  $password = cleanInput($_POST['password']);
 
   //Username and password check
   try {
