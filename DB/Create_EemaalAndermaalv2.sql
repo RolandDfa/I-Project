@@ -72,14 +72,14 @@ CREATE TABLE [dbo].[Verkoper] (
 
 -- Voorwerp tabel
 CREATE TABLE [dbo].[Voorwerp] (
-    [voorwerpnummer]        NUMERIC (12)   IDENTITY (1, 1) NOT NULL,
+    [voorwerpnummer]        INT   IDENTITY (1, 1) NOT NULL,
     [titel]                 VARCHAR (200)  NOT NULL,
-    [beschrijving]          VARCHAR (8000) NOT NULL,
+    [beschrijving]          VARCHAR (MAX) NOT NULL,
     [startprijs]            NUMERIC (8, 2) NOT NULL,
     [betalingswijzenaam]    VARCHAR (10)   NOT NULL,
     [betalingsinstructie]   VARCHAR (30)   NULL,
     [plaatsnaam]            VARCHAR (25)   NOT NULL,
-    [landnaam]              VARCHAR (50)   NOT NULL,
+    [land]              VARCHAR (10)   NOT NULL,
     [looptijd]              TINYINT        DEFAULT ((7)) NOT NULL,
     [looptijdbeginDag]      DATE           NOT NULL,
     [looptijdbeginTijdstip] TIME (7)       NOT NULL,
