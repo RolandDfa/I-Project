@@ -3,7 +3,7 @@ session_start();
 
 // Database connection
 require('../connectie.php');
-require('../functions.php');
+require('../functions/functions.php');
 
 //Post inloggen
 if(isset($_POST['login'])) {
@@ -27,12 +27,11 @@ if(isset($_POST['login'])) {
         header("Location: ../index.php?page=home");
       } else {
         // Passwords don't match
-        echo 'De gebruikersnaam of het wachtwoord is onjuist.';
-        header("Location: ../index.php?page=inloggen");
+        header("Location: ../index.php?page=inloggen&error=onjuist");
       }
     } else {
-      echo 'De gebruikersnaam of het wachtwoord is onjuist.';
-      header("Location: ../index.php?page=inloggen");
+      // No user found
+      header("Location: ../index.php?page=inloggen&error=onjuist");
     }
   } catch (PDOExeption $e) {
     die ("Fout met de database: {$e->getMessage()} ");

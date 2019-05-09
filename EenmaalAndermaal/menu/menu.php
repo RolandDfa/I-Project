@@ -1,4 +1,3 @@
-<?php session_start(); ?>
 <div class="col-lg-2"><!-- White space --></div>
 <div class="col-lg-3 col-sm-4 col-6">
   <a id="logo" href="index.php?page=home"><img src="images/EenmaalAndermaalLogo.png" width="120" height="60" alt="Logo"></a>

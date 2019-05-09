@@ -1,6 +1,9 @@
 <?php
+session_start();
+
 // Database connection
 require('connectie.php');
+require('functions/functions.php');
 
 // Get page
 if (!empty($_GET['page'])) {
