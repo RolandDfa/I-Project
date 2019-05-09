@@ -1,9 +1,9 @@
 <?php
 // Database connection
-$hostname = "(local)";
-$dbname = "EenmaalAndermaal";
-$username = "";
-$pw = "";
+$hostname = "mssql.iproject.icasites.nl";
+$dbname = "iproject41";
+$username = "iproject41";
+$pw = "V19UFzEQGJ";
 
 try {
   $dbh = new PDO("sqlsrv:Server=$hostname;Database=$dbname;ConnectionPooling=0", "$username", "$pw");

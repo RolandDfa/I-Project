@@ -71,7 +71,23 @@
     <a href="index.php?page=home">Home</a>
     <a href="">Alle veilingen</a>
     <a href="">Plaats advertentie</a>
-    <a href="index.php?page=inloggen">Inloggen</a>
+    <a class="" href="
+    <?php
+    if (!isset($_SESSION["username"])) {
+      echo "index.php?page=inloggen";
+    } else {
+      echo "logout.php";
+    }
+    ?>
+    ">
+      <?php
+      if (!isset($_SESSION["username"])) {
+        echo "Inloggen";
+      } else {
+        echo "Uitloggen";
+      }
+      ?>
+    </a>
   </div>
 </div>
 
