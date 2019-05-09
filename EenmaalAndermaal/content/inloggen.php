@@ -1,43 +1,8 @@
-<?php
-//Post inloggen
-if(isset($_POST['login'])) {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-
-  //Username and password check
-  try {
-    $sql = "SELECT * FROM Gebruiker WHERE gebruikersnaam = '$username'";
-    $result = $dbh->query($sql);
-
-    if ($row = $result->fetch()) {
-      // Check for rows
-      while ($row = $result->fetch()) {
-        // If passwords match
-        if (password_verify($wachtwoord, $row['wachtwoord'])) {
-          // Create session variables
-          $_SESSION['username'] = $username;
-          $_SESSION['userstate'] = $row['gebruikersStatus'];
-          // Login succesvol
-          header("Location: index.php?page=home");
-        } else {
-          // Passwords don't match
-          echo 'De gebruikersnaam of het wachtwoord is onjuist.';
-        }
-      }
-    } else {
-      echo 'De gebruikersnaam of het wachtwoord is onjuist.';
-    }
-  } catch (PDOExeption $e) {
-    die ("Fout met de database: {$e->getMessage()} ");
-  }
-}
-?>
-
 <div class="container loginContainer">
   <div class="row">
     <div class="col-md-6 loginForm">
       <h3>Inloggen</h3>
-      <form action="" method="post">
+      <form action="content/loginScript.php" method="post">
         <div class="form-group">
           <input type="text" class="form-control" name="username" placeholder="Gebruikersnaam *" required />
         </div>
