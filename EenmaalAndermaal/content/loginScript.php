@@ -27,9 +27,11 @@ if(isset($_POST['login'])) {
       } else {
         // Passwords don't match
         echo 'De gebruikersnaam of het wachtwoord is onjuist.';
+        header("Location: ../index.php?page=inloggen");
       }
     } else {
       echo 'De gebruikersnaam of het wachtwoord is onjuist.';
+      header("Location: ../index.php?page=inloggen");
     }
   } catch (PDOExeption $e) {
     die ("Fout met de database: {$e->getMessage()} ");
