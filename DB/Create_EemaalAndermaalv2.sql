@@ -110,7 +110,7 @@ CREATE TABLE [dbo].[Rubriek] (
 
 --Voorwerp in rubriek tabel
 CREATE TABLE [dbo].[Voorwerp_in_rubriek] (
-    [voorwerpnummer]         NUMERIC (12) NOT NULL,
+    [voorwerpnummer]         INT NOT NULL,
     [RubriekOpLaagsteNiveau] INT          NOT NULL,
     CONSTRAINT [PK_VoorwerpInRubriek_Voorwerp_Rubriek] PRIMARY KEY CLUSTERED ([voorwerpnummer] ASC, [RubriekOpLaagsteNiveau] ASC),
     CONSTRAINT [FK_VoorwerpInRubriek_Voorwerp_voorwerpnummer] FOREIGN KEY ([voorwerpnummer]) REFERENCES [dbo].[Voorwerp] ([voorwerpnummer]) ON UPDATE CASCADE,
@@ -119,7 +119,7 @@ CREATE TABLE [dbo].[Voorwerp_in_rubriek] (
 
 -- Feedback tabel
 CREATE TABLE [dbo].[Feedback] (
-    [voorwerp]        NUMERIC (12) NOT NULL,
+    [voorwerp]        INT	   NOT NULL,
     [soort_Gebruiker] BIT          NOT NULL,
     [feedbackSoort]   VARCHAR (10) NOT NULL,
     [dag]             DATE         NOT NULL,
@@ -131,7 +131,7 @@ CREATE TABLE [dbo].[Feedback] (
 
 -- Bod tabel
 CREATE TABLE [dbo].[Bod] (
-    [voorwerp]    NUMERIC (12)   NOT NULL,
+    [voorwerp]    INT		 NOT NULL,
     [bodbedrag]   NUMERIC (8, 2) NOT NULL,
     [gebruiker]   VARCHAR (50)   NOT NULL,
     [bodDag]      DATE           NOT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE [dbo].[Bod] (
 -- Bestand tabel
 CREATE TABLE [dbo].[Bestand] (
     [filenaam] VARCHAR (50) NOT NULL,
-    [Voorwerp] NUMERIC (12) NOT NULL,
+    [Voorwerp]INT	NOT NULL,
     CONSTRAINT [PK_Bestand_filenaam] PRIMARY KEY CLUSTERED ([filenaam] ASC),
     CONSTRAINT [FK_Bestand_voorwerp_voorwerpnummer] FOREIGN KEY ([Voorwerp]) REFERENCES [dbo].[Voorwerp] ([voorwerpnummer]) ON DELETE CASCADE ON UPDATE CASCADE
 );
