@@ -19,17 +19,8 @@ h5 {
   margin-bottom: 0px;
 }
 
-footer {
-  background: #222222;
-  color: #ffffff;
-  text-align: center;
-  padding: 10px;
-  font-family: 'Roboto', sans-serif;
-  min-height: 6.5vh;
-}
-
 #body {
-  min-height: 93.5vh;
+  min-height: 60vh;
 }
 
 #pagecontent {
@@ -209,6 +200,122 @@ footer {
   color: #000000;
 }
 
+/* FOOTER */
+footer {
+  background: #222222;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  min-height: 6.5vh;
+}
+
+footer h5 {
+  font-weight: 700;
+  line-height: 2;
+}
+
+footer ul {
+  padding: 0;
+}
+
+footer li {
+  list-style-type: none;
+}
+
+.linkFooter {
+  color: #fff;
+  border-bottom: 1px solid rgba(192, 192, 192, 0);
+  -webkit-transition: border 300ms ease;
+  -moz-transition: border 300ms ease;
+  -ms-transition: border 300ms ease;
+  -o-transition: border 300ms ease;
+  transition: border 300ms ease;
+}
+
+.linkFooter:hover {
+  color: #fff;
+  border-bottom: 1px solid rgba(192, 192, 192, 1);
+}
+
+.footerLine {
+  border-top: 1px solid #999;
+  padding: 10px;
+}
+
+.footerBreak {
+  margin: 0 0.5rem;
+}
+
+/* FOOTER social media */
+ul.social-network {
+	list-style: none;
+	display: inline;
+	margin-left: 0 !important;
+	padding: 0;
+}
+
+ul.social-network li {
+	display: inline;
+	margin: 0 5px;
+}
+
+.social-network a.icoFacebook:hover {
+	background-color: #3B5998;
+}
+
+.social-network a.icoTwitter:hover {
+	background-color: #33ccff;
+}
+
+.social-network a.icoYoutube:hover {
+	background-color: #ff0000;
+}
+
+.social-network a.icoPinterest:hover {
+	background-color: #cb2027;
+}
+
+.social-circle li a {
+	display: inline-block;
+	position: relative;
+	margin: 0 auto 0 auto;
+	-moz-border-radius: 50%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	text-align: center;
+	width: 60px;
+	height: 60px;
+	font-size: 25px;
+}
+
+.social-circle li i {
+	margin: 0;
+	line-height: 60px;
+	text-align: center;
+}
+
+.social-circle li a:hover i, .triggeredHover {
+	-moz-transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-ms--transform: rotate(360deg);
+	transform: rotate(360deg);
+	-webkit-transition: all 0.2s;
+	-moz-transition: all 0.2s;
+	-o-transition: all 0.2s;
+	-ms-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+.social-circle i {
+	color: #fff;
+	-webkit-transition: all 0.8s;
+	-moz-transition: all 0.8s;
+	-o-transition: all 0.8s;
+	-ms-transition: all 0.8s;
+	transition: all 0.8s;
+}
+
 /* HOME featured auctions */
 .carousel {
   padding-bottom: 1.3em;
@@ -384,11 +491,6 @@ footer {
 
   .rounded-top {
     height: 300px;
-  }
-
-  /* HOME popular categories */
-  .popularCategoryItem {
-    height: 140px;
   }
 
 }
