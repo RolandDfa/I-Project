@@ -120,13 +120,14 @@ CREATE TABLE [dbo].[Voorwerp_in_rubriek] (
 -- Feedback tabel
 CREATE TABLE [dbo].[Feedback] (
     [voorwerp]        INT	   NOT NULL,
-    [soort_Gebruiker] BIT          NOT NULL,
+    [gebruikersnaam] varchar(50)          NOT NULL,
     [feedbackSoort]   VARCHAR (10) NOT NULL,
     [dag]             DATE         NOT NULL,
     [tijdstip]        TIME (7)     NOT NULL,
-    [commentaar]      VARCHAR (50) NOT NULL,
+    [commentaar]      VARCHAR (255) NOT NULL,
     CONSTRAINT [PK_Feedback_Voorwerp_Soort_Gebruiker] PRIMARY KEY CLUSTERED ([Voorwerp] ASC, [Soort_Gebruiker] ASC),
-    CONSTRAINT [FK_Feedback_voorwerp_voorwerpnummer] FOREIGN KEY ([Voorwerp]) REFERENCES [dbo].[Voorwerp] ([voorwerpnummer]) ON UPDATE CASCADE
+    CONSTRAINT [FK_Feedback_voorwerp_voorwerpnummer] FOREIGN KEY ([Voorwerp]) REFERENCES [dbo].[Voorwerp] ([voorwerpnummer]) ON UPDATE CASCADE,
+    CONSTRAINT [FK_Feedback_gebruiker_gebruikersnaam] FOREIGN KEY ([gebruikersnaam]) REFERENCES [dbo].[Gebruiker] ([Gebruikersnaam]) ON UPDATE CASCADE
 );
 
 -- Bod tabel
@@ -143,7 +144,7 @@ CREATE TABLE [dbo].[Bod] (
 
 -- Bestand tabel
 CREATE TABLE [dbo].[Bestand] (
-    [filenaam] VARCHAR (50) NOT NULL,
+    [bestandsnaam] VARCHAR (50) NOT NULL,
     [Voorwerp]INT	NOT NULL,
     CONSTRAINT [PK_Bestand_filenaam] PRIMARY KEY CLUSTERED ([filenaam] ASC),
     CONSTRAINT [FK_Bestand_voorwerp_voorwerpnummer] FOREIGN KEY ([Voorwerp]) REFERENCES [dbo].[Voorwerp] ([voorwerpnummer]) ON DELETE CASCADE ON UPDATE CASCADE
