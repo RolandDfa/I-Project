@@ -6,7 +6,11 @@ insert into Vraag values('vraag 1'),
 ('vraag 5')
 
 insert into Gebruikersstatus values ('test status')
+--1: wachtwoord: Eric2001 
 INSERT INTO [dbo].[Gebruiker] ([gebruikersnaam], [voornaam], [achternaam], [adresregel], [postcode], [plaatsnaam], [Land], [kvkNummer], [GeboorteDag], [Mailbox], [wachtwoord], [Vraag], [antwoordtekst], [gebruikersStatus], [Valid]) VALUES (N'Drogo', N'Eric', N'Onstenk', N'Oudegracht 164', N'3511AC', N'Utrecht', N'Nederland', 12345, '2005-02-20', N'dra6onkiller@gmail.com', N'811e7b1b41fe185b656b2373a12ab3a48ddfd9190997ea391b9e331dd20be516', 1, N'vakkenvuller', 1, 1)
+--2: wachtwoord: toto1212  
 INSERT INTO [dbo].[Gebruiker] ([gebruikersnaam], [voornaam], [achternaam], [adresregel], [postcode], [plaatsnaam], [Land], [kvkNummer], [GeboorteDag], [Mailbox], [wachtwoord], [Vraag], [antwoordtekst], [gebruikersStatus], [Valid]) VALUES (N'Jack1', N'Jack', N'Septi', N'Papegaaiweg 133', N'7345DK', N'Wenum Wiesel', N'Nederland', 42598456, '2000-09-03', N'jackhiggins28@gmail.com', N'786289ab443f89eaa406c6e135320a0d1a21d273f16a7478e253ea03cf0c9ce3', 4, N'Lasagne', 1, 1)
+--3: wachtwoord: JESUS777  
 INSERT INTO [dbo].[Gebruiker] ([gebruikersnaam], [voornaam], [achternaam], [adresregel], [postcode], [plaatsnaam], [Land], [kvkNummer], [GeboorteDag], [Mailbox], [wachtwoord], [Vraag], [antwoordtekst], [gebruikersStatus], [Valid]) VALUES (N'James', N'Jesus', N'Mina', N'Spuitstraat 167', N'7461CA', N'Rijssen', N'Nederland', 34567890, '2001-11-06', N'gamingguy@rocketmail.com', N'5c5899efdb3c9494e95076395151d60aca37ba786ff08689394b8bb8cc9a4e4f', 3, N'Anita', 1, 1)
+--3: wachtwoord: Dylan2001  
 INSERT INTO [dbo].[Gebruiker] ([gebruikersnaam], [voornaam], [achternaam], [adresregel], [postcode], [plaatsnaam], [Land], [kvkNummer], [GeboorteDag], [Mailbox], [wachtwoord], [Vraag], [antwoordtekst], [gebruikersStatus], [Valid]) VALUES (N'Jones', N'Dylan', N'Nugger', N'Mozartlaan 136', N'2625CX', N'Delft', N'Nederland', 23456, '2010-04-22', N'djoneshots123@gmail.com', N'3822cb0c53621f844f09d6fcc654fac30b95e2941f547ba2b7d4476c6db51709', 2, N'Mickey', 1, 1)
