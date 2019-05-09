@@ -1,5 +1,27 @@
 <?php
-// use PHPmailer;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+
+$name ="";
+$lastname="";
+$birthDate1="";
+$adress="";
+$zipcode="";
+$city="";
+$country="";
+$telnr="";
+$telnr2="";
+$kvknr="";
+$username="";
+$password="";
+$passwordRepeat="";
+$securityQ="";
+$securityA="";
+$_SESSION['verifySucces'] = false;
 
 if(!$_SESSION['verifySucces']) {
 
@@ -21,35 +43,35 @@ if(!$_SESSION['verifySucces']) {
   <div>
      <form class="form" method="post" action="">
          <h2>Account aanmaken</h2>
-
-         <label for="name">Voornaam:*</label><br>
-         <input type="text" name="name" placeholder="Jan" value="uti" id="name"><br>
+         <?php echo
+         '<label for="name">Voornaam:*</label><br>
+         <input type="text" name="name" placeholder="Jan" value="'. $name.'" id="name"><br>
          <label for="lastname">Achternaam:*</label><br>
-         <input type="text" name="lastname" placeholder="Hender" value="<?= $name ?>" id="lastname"><br>
+         <input type="text" name="lastname" placeholder="Harris" value="'. $lastname.'" id="lastname"><br>
          <label for="birthdate">Geboortedatum:*</label><br>
-         <input type="date" name="birthdate" value="<?= $name ?>" id="birthdate"><br>
+         <input type="date" name="birthdate" value="'. $name .'" id="birthdate"><br>
          <label for="adress">Adres:*</label><br>
-         <input type="text" name="adress" placeholder="willemStraat 45" value="<? $lastname ?>" id="adress"><br>
+         <input type="text" name="adress" placeholder="willemStraat 45" value="'.$adress .'" id="adress"><br>
          <label for="zipcode">Postcode:*</label><br>
-         <input type="text" name="zipcode" placeholder="7007HS" value="<? $zipcode ?>" id="zipcode"><br>
+         <input type="text" name="zipcode" placeholder="7007HS" value="'. $zipcode .'" id="zipcode"><br>
          <label for="city">Plaast:*</label><br>
-         <input type="text" name="city" placeholder="Doesburg" value="<? $city ?>" id="city"><br>
+         <input type="text" name="city" placeholder="Doesburg" value="'. $city .'" id="city"><br>
          <label for="country">Land:*</label><br>
-         <input type="text" name="country" placeholder="Nederland" value="<? $country ?>" id="country"><br>
+         <input type="text" name="country" placeholder="Nederland" value="'. $country .'" id="country"><br>
          <label for="telnr">Telefoonnummer:*</label><br>
-         <input type="text" name="telnr" placeholder="0612344455" value="<? $telnr ?>" id="telnr"><br>
+         <input type="text" name="telnr" placeholder="0612344455" value="'. $telnr .'" id="telnr"><br>
          <label for="telnr2">Telefoonnummer 2:</label><br>
-         <input type="text" name="telnr2" placeholder="0314364999" value="<? $telnr2 ?>" id="telnr2"><br>
+         <input type="text" name="telnr2" placeholder="0314364999" value="'. $telnr2 .'" id="telnr2"><br>
          <label for="kvkNummer">KVK Nummer:</label><br>
-         <input type="text" name="kvkNummer" placeholder="12345678" value="<? $kvknr ?>" id="kvkNummer"><br>
+         <input type="text" name="kvkNummer" placeholder="12345678" value="'. $kvknr .'" id="kvkNummer"><br>
          <label for="username">Gebruikersnaam:*</label><br>
-         <input type="text" name="username" value="<? $username ?>" id="username"><br>
+         <input type="text" name="username" value="'. $username .'" id="username"><br>
          <label for="password">Password:*</label>
          <input type="password" name="password" id="password"><br>
          <label for="passwordRepeat">Repeat your password:*</label>
          <input type="password" name="passwordRepeat" id="passwordRepeat"><br>
          <label for="securityQ">Geheime vraag:*</label>
-                      <select id="securityQ">
+                      <select name="securityQ" id="securityQ">
                           <option value="1">Afghanistan</option>
                           <option value="2">Bahamas</option>
                           <option value="3">Cambodia</option>
@@ -60,8 +82,8 @@ if(!$_SESSION['verifySucces']) {
                           <option value="8">Haiti</option>
                       </select>
          <label for="securityA">Andwoord:*</label><br>
-         <input type="text" name="securityA" value="<? $securityA ?>" id="securityA"><br>
-         <input type="submit" name="signUp" value="signUp" id="signUpButton">
+         <input type="text" name="securityA" value="'. $securityA .'" id="securityA"><br>
+         <input type="submit" name="signUp" value="signUp" id="signUpButton">'; ?>
      </form>
   </div>
   <?php
@@ -74,50 +96,71 @@ function cleanInput($data) {
   return $data;
 }
 
-$_SESSION['verifySucces'] = false;
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
 
-$email = "bla";
+
 
 if(isset($_POST['sendCode'])){
 
-  $email = $_POST['email'];
-  $validEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+  $_SESSION['email'] = $_POST['email'];
+  $validEmail = filter_var($_SESSION['email'], FILTER_VALIDATE_EMAIL);
   $errorMes="";
   $returntext="";
 
-  if (empty($email)) {
+  if (empty($_SESSION['email'])) {
     echo("Vul het veld in.");
   } elseif(!$validEmail) {
     echo("$email is geen emailadres.");
   } elseif($validEmail) {
-    echo("Er is een verificatie mail naar $email gestuurd, Vul de code in.");
-    // include_once "PHPmailer/PHPMailer.php";
-    // $mail = new PHPMailer();
-    // $mail -> setForm(address: 'info@EenmaalAndermaal.nl');
-    // $mail ->addAddress($email, $name);
-    // $mail ->Subject = "Verivieër uw email";
-    // $mail ->isHTML(isHtml: true);
-    // $mail ->Body = "bla bla";
-    // if($mail->send()) {
-    //   echo("Er is een verificatie mail naar $email gestuurd, Vul de code in.");
-    // } else{
-    //   echo("u fucked up.");
-    // }
+
+    $_SESSION['code'] = generateRandomString(8);
+
+  $mail = new PHPMailer(true);
+  try {
+      //Server settings
+       //$mail->SMTPDebug = 1;                                        // Enable verbose debug output
+       $mail->isSMTP();                                               // Set mailer to use SMTP
+       $mail->Host       = 'smtp.gmail.com';                          // Specify main and backup SMTP servers
+       $mail->SMTPAuth   = true;                                      // Enable SMTP authentication
+       $mail->Username   = 'info.EenmaalAndermaal41@gmail.com';       // SMTP username
+       $mail->Password   = 'IprojectGroep41';                         // SMTP password
+       $mail->SMTPSecure = 'tls';                                     // Enable TLS encryption, `ssl` also accepted
+       $mail->Port       = 587;                                       // TCP port to connect to
+
+       $mail->setFrom('info.EenmaalAndermaal41@gmail.com');
+       $mail ->addAddress($_SESSION['email']);
+
+       $mail->isHTML(true);
+       $mail->addAttachment('images/EenmaalAndermaalLogo.png');
+       $mail->Subject = '[EenmaalAndermaal] Please verify your email address.';
+       $mail->Body    =
+       "<b>your verify code </b><br>".$_SESSION['code']."<br><br><br><b>Van bedrijven voor bedrijven.</b>";
+
+       //$mail->send();
+       echo "Er is een verificatie mail naar ". $_SESSION['email'] ."gestuurd,".$_SESSION['code']." Vul de code in. ";
+     } catch (Exception $e) {
+         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+     }
   }
 }
 
 if(isset($_POST['verifyCode'])){
 
   $codeInput = $_POST['code'];
-  $validVerify = true;
-  // $validVerify = "$codeInput == $code";
-
   if(empty($codeInput)) {
     echo("Fill in the field");
-  } elseif (!$validVerify) {
+  } elseif ($codeInput != $_SESSION['code']) {
     echo("$codeInput is not a valid code");
-  } elseif ($validVerify) {
-    echo("Your email $email has been verified.");
+  } elseif ($codeInput == $_SESSION['code']) {
+    echo "Your email". $_SESSION['email'] ."has been verified.";
     $_SESSION['verifySucces'] = true;
   }
 }
@@ -167,7 +210,7 @@ if(isset($_POST['signUp'])){
       }
 
       if ($validLastName) {
-          $returntekst = $returntekst . "&LastName=".$Lastname;
+          $returntekst = $returntekst . "&LastName=".$lastname;
       } else {
           $errorMes = $errorMes . "+unvalidLastName";
       }
