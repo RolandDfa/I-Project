@@ -1,8 +1,13 @@
 <?php
+// Start session
 session_start();
-unset($_SESSION['username']);
+
+// Unset session var
+$_SESSION = array();
+
+// Destroy session
 session_destroy();
 
+// Header refresh to home
 header("Location: index.php?page=home");
-exit;
 ?>
