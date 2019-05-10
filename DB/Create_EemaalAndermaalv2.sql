@@ -193,6 +193,16 @@ INSERT INTO Voorwerp(titel,beschrijving,startprijs,betalingswijzenaam,plaatsnaam
  ('Bank groen','Afgelopen winter is mijn huis gekropen en nu past de bank niet meer.',9.99,'Bank/Giro','Venlo','Nederland',10,convert(date,getdate()),convert(time,getdate()),'Drogo','12:00:00.000',0),
  ('Bank geel','Last van geelzucht',9.99,'Bank/Giro','Arnhem','Nederland',10,convert(date,getdate()),convert(time,getdate()),'Drogo','12:00:00.000',0),
  ('Bank donkerwit (a.k.a. zwart)','Het is de schuld van de Rabobank!!!!!!!!!!!',9.99,'Bank/Giro','Boxmeer','Nederland',10,convert(date,getdate()),convert(time,getdate()),'Drogo','12:00:00.000',0)
+--Bod tabel
+INSERT INTO Bod VALUES
+(1,1.99,'James','2016-05-13','09:05:16.123'),
+(1,2.99,'Jones','2016-05-13','09:19:45.452'),
+(1,5.99,'James','2016-05-13','09:31:22.332'),
+(1,7.99,'Jones','2016-05-13','09:40:54.775'),
+(2,8.99,'Jones','2016-05-13','09:40:54.775'),
+(2,11.99,'James','2016-05-13','09:40:54.775'),
+(1,13.99,'Jones','2016-05-13','09:40:54.775'),
+(2,15.99,'James','2016-05-13','09:54:12.788')
 -- Rubrieken tabel
  INSERT INTO Rubriek VALUES(1, 'Overige', NULL, 1),
 							(2, 'Mulitmedia', NULL, 2),
@@ -310,7 +320,7 @@ INSERT INTO Voorwerp(titel,beschrijving,startprijs,betalingswijzenaam,plaatsnaam
 							(114, 'Tractoren en toebehore', 6, 114),
 							(115, 'Veeteelt', 6, 115);
 
-
+								
 
 
 
