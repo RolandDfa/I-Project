@@ -8,6 +8,13 @@
         </div>
         <div class="form-group">
           <input type="password" class="form-control" name="password" placeholder="Wachtwoord *" required />
+          <div style="color: red;">
+            <?php
+            if (!empty($_GET['error'])) {
+              echo 'De gebruikersnaam of wachtwoord is onjuist.';
+            }
+            ?>
+          </div>
         </div>
         <div class="form-group">
           <input type="checkbox" name="blijfingelogd" value="ja"> Ingelogd blijven

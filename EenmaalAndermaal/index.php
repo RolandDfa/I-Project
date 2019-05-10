@@ -1,6 +1,9 @@
 <?php
+session_start();
+
 // Database connection
 require('connectie.php');
+require('functions/functions.php');
 
 // Get page
 if (!empty($_GET['page'])) {
@@ -79,7 +82,42 @@ if (!empty($_GET['page'])) {
 
 		<!-- Footer -->
 		<footer>
-	    &copy; 2019 IConcepts
+			<div class="row marginLeft marginRight">
+				<div class="col-lg-2"><!-- White space --></div>
+				<div class="col-lg-8">
+					<div class="row">
+						<div class="col-lg-4">
+							<h5>Veilingen</h5>
+							<ul>
+								<li><a class="linkFooter" href="index.php?page=home">Alle veilingen</a></li>
+								<li><a class="linkFooter" href="index.php?page=home">Populair</a></li>
+								<li><a class="linkFooter" href="index.php?page=home">Zoeken</a></li>
+							</ul>
+						</div>
+						<div class="col-lg-4">
+							<h5>Social media</h5>
+							<ul class="social-network social-circle">
+                <li><a href="" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="" class="icoYoutube" title="Youtube"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="" class="icoPinterest" title="Pinterest"><i class="fab fa-pinterest-p"></i></a></li>
+            	</ul>
+						</div>
+						<div class="col-lg-4">
+							<h5>Mijn EenmaalAndermaal</h5>
+							<ul>
+								<li><a class="linkFooter" href="index.php?page=inloggen">Inloggen</a></li>
+								<li><a class="linkFooter" href="index.php?page=registreren">Gratis registreren</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-lg-12 footerLine"><!-- Footer line --></div>
+				</div>
+				<div class="col-lg-2"><!-- White space --></div>
+			</div>
+			<div class="col-lg-12">
+				<a class="linkFooter" href="">Gebruikersvoorwaarden</a> <span class="footerBreak">|</span> <a  class="linkFooter" href="">Privacybeleid</a> <span class="footerBreak">|</span> &copy; 2019 IConcepts
+			</div>
 		</footer>
 
 	</body>
