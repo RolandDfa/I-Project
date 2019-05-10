@@ -29,7 +29,7 @@ h5 {
 }
 
 .pageWrapper {
-	padding: 20px;
+  padding: 20px;
 }
 
 .contentWrapper {
@@ -249,71 +249,71 @@ footer li {
 
 /* FOOTER social media */
 ul.social-network {
-	list-style: none;
-	display: inline;
-	margin-left: 0 !important;
-	padding: 0;
+  list-style: none;
+  display: inline;
+  margin-left: 0 !important;
+  padding: 0;
 }
 
 ul.social-network li {
-	display: inline;
-	margin: 0 5px;
+  display: inline;
+  margin: 0 5px;
 }
 
 .social-network a.icoFacebook:hover {
-	background-color: #3B5998;
+  background-color: #3B5998;
 }
 
 .social-network a.icoTwitter:hover {
-	background-color: #33ccff;
+  background-color: #33ccff;
 }
 
 .social-network a.icoYoutube:hover {
-	background-color: #ff0000;
+  background-color: #ff0000;
 }
 
 .social-network a.icoPinterest:hover {
-	background-color: #cb2027;
+  background-color: #cb2027;
 }
 
 .social-circle li a {
-	display: inline-block;
-	position: relative;
-	margin: 0 auto 0 auto;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	border-radius: 50%;
-	text-align: center;
-	width: 60px;
-	height: 60px;
-	font-size: 25px;
+  display: inline-block;
+  position: relative;
+  margin: 0 auto 0 auto;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  font-size: 25px;
 }
 
 .social-circle li i {
-	margin: 0;
-	line-height: 60px;
-	text-align: center;
+  margin: 0;
+  line-height: 60px;
+  text-align: center;
 }
 
 .social-circle li a:hover i, .triggeredHover {
-	-moz-transform: rotate(360deg);
-	-webkit-transform: rotate(360deg);
-	-ms--transform: rotate(360deg);
-	transform: rotate(360deg);
-	-webkit-transition: all 0.2s;
-	-moz-transition: all 0.2s;
-	-o-transition: all 0.2s;
-	-ms-transition: all 0.2s;
-	transition: all 0.2s;
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -ms--transform: rotate(360deg);
+  transform: rotate(360deg);
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 .social-circle i {
-	color: #fff;
-	-webkit-transition: all 0.8s;
-	-moz-transition: all 0.8s;
-	-o-transition: all 0.8s;
-	-ms-transition: all 0.8s;
-	transition: all 0.8s;
+  color: #fff;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+  -o-transition: all 0.8s;
+  -ms-transition: all 0.8s;
+  transition: all 0.8s;
 }
 
 /* HOME featured auctions */
@@ -385,78 +385,78 @@ ul.social-network li {
 }
 
 .opacityHover {
-	opacity: 0.7;
-	-webkit-transition: 0.2s ease-in-out;
-	transition: 0.2s ease-in-out;
+  opacity: 0.7;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .opacityHover:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 /* LOGIN page */
 .loginContainer {
-    margin-top: 5%;
-    margin-bottom: 5%;
-    color: #fff;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  color: #fff;
 }
 
 .loginLogo {
-    position: relative;
-    margin-left: -62%;
-    font-size: 3em;
+  position: relative;
+  margin-left: -62%;
+  font-size: 3em;
 }
 
 .loginLogo i {
-    position: absolute;
-    margin-top: 22%;
-    background: #222222;
-    border-radius: 4.5rem;
-    padding: 5%;
+  position: absolute;
+  margin-top: 22%;
+  background: #222222;
+  border-radius: 4.5rem;
+  padding: 5%;
 }
 
 .loginForm {
-    padding: 12%;
-    background: #222222;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  padding: 12%;
+  background: #222222;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
 .loginForm h3 {
-    text-align: center;
-    margin-bottom: 12%;
+  text-align: center;
+  margin-bottom: 12%;
 }
 
 .registerenContainer {
-    padding: 12%;
-    background: rgb(136, 176, 75);
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  padding: 12%;
+  background: rgb(136, 176, 75);
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
 .registerenContainer h3 {
-    text-align: center;
-    margin-bottom: 12%;
-    color: #fff;
+  text-align: center;
+  margin-bottom: 12%;
+  color: #fff;
 }
 
 .btnSubmit {
-    font-weight: 600;
-    width: 100%;
-    color: #282726;
-    background-color: #fff;
-    border: none;
-    border-radius: 1.5rem;
-    padding: 2%;
+  font-weight: 600;
+  width: 100%;
+  color: #282726;
+  background-color: #fff;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 2%;
 }
 
 .btnForgetPwd {
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .btnForgetPwd:hover {
-    text-decoration: none;
-    color: rgb(136, 176, 75);
+  text-decoration: none;
+  color: rgb(136, 176, 75);
 }
 
 /* If screen < 1050px (Tablets) */

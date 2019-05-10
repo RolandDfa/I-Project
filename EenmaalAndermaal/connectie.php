@@ -1,6 +1,4 @@
 <?php
-
-
 // Database connection
 $hostname = "mssql.iproject.icasites.nl";
 $dbname = "iproject41";
