@@ -26,7 +26,6 @@ if (!empty($_GET['page'])) {
 
 	<!-- Icons -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-	<link rel="shortcut icon" type="image/png" href="images/EenmaalAndermaalLogo.png">
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
@@ -117,7 +116,20 @@ if (!empty($_GET['page'])) {
 					<div class="col-lg-4">
 						<h5>Mijn EenmaalAndermaal</h5>
 						<ul>
-							<li><a class="linkFooter" href="index.php?page=inloggen">Inloggen</a></li>
+
+							<li><a class="linkFooter" href="							<?php
+							if (!isset($_SESSION["username"])) {
+								echo "index.php?page=inloggen";
+							} else {
+								echo "logout.php";
+							}
+							?>">							<?php
+							if (!isset($_SESSION["username"])) {
+								echo "Inloggen";
+							} else {
+								echo "Uitloggen";
+							}
+							?></a></li>
 							<li><a class="linkFooter" href="index.php?page=registreren">Gratis registreren</a></li>
 						</ul>
 					</div>
