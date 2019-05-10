@@ -6,22 +6,8 @@ require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 
-$name ="";
-$lastname="";
-$birthDate1="";
-$adress="";
-$zipcode="";
-$city="";
-$country="";
-$telnr="";
-$telnr2="";
-$kvknr="";
-$username="";
-$password="";
-$passwordRepeat="";
-$securityQ="";
-$securityA="";
-$_SESSION['verifySucces'] = false;
+
+
 
 if(!$_SESSION['verifySucces']) {
 
@@ -200,7 +186,7 @@ if(isset($_POST['signUp'])){
 
   /*leeg*/
   if(empty($name) || empty($lastname) || empty($birthDate) || empty($adress) || empty($zipcode) || empty($city) || empty($telnr) || empty($kvknr) || empty($username) || empty($password) || empty($passwordRepeat) || empty($securityA)){
-      echo("Vul alle velden met * volledig in");
+      echo("Vul alle velden met * volledig in $securityQ ");
   }
   else if (!$allValid) {
       if ($validName) {
@@ -270,22 +256,22 @@ if(isset($_POST['signUp'])){
       }
 
       echo("Foute waarden ingevoerd [$errorMes]");
-      header("location: ../registreren.php?error=" . $errorMes . $returntekst);
-      exit();
+      // header("location: ../registreren.php?error=" . $errorMes . $returntekst);
+      // exit();
   }
   else if($password !== $passwordRepeat){
       echo("wachtwoord en herhaalwachtwoord komen niet overeen.");
       exit();
   }
   else{
-      $sql = "SELECT gebruikersnaam FROM Gebruikers WHERE gebruikersnaam = :id";
+      $sql = "SELECT gebruikersnaam FROM Gebruikers WHERE gebruikersnaam = $username";
       $query = $dbh->prepare($sql);
       if(!$query) {
+
           header("location: ../registreren.php?error=" . "DB Fucked up");
           exit();
       }
       else {
-          $query->execute(array(':id' => $username));
           $data = $query->fetchAll(PDO::FETCH_BOTH);
           $usernameExist = count($data) > 0;
 
@@ -294,21 +280,21 @@ if(isset($_POST['signUp'])){
               header("location: ../registreren.php?error=" . "usernameExist" . "&Email=".$email . "&Username=".$username);
               exit();
           } else {
-              $sqlInsert = "INSERT INTO Gebruikers(gebruikersnaam,voornaam,achternaam,adresregel,postcode,plaatsnaam,land,kvkNummer,geboorteDag,mailBox,wachtwoord,vraag,antwoordTekst) VALUES(:username,:name,:lastname,:adress,:zipcode,:city,:country,:kvk,:birthDate,:email,:password,:securityQ,:securityA)";
+            $hashedWW = password_hash($password, PASSWORD_DEFAULT);
+              $sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam,voornaam,achternaam,adresregel,postcode,plaatsnaam,land,kvkNummer,geboorteDag,mailbox,wachtwoord,vraag,antwoordTekst) VALUES(:username,:name,:lastname,:adress,:zipcode,:city,:country,:kvk,:birthDate ,:email,:password,:securityQ ,:securityA)";
               $queryInsert = $dbh->prepare($sqlInsert);
               if (!$query) {
                   header("location: ../registreren.php?error=" . "DB error");
                   exit();
               } else {
-                  $hashedWW = password_hash($password, PASSWORD_DEFAULT);
-
-                  $query->execute(array(':username' => $username,':name' => $name,':lastname' => $lastname,':adress' => $adress,':zipcode' => $zipcode,':city' => $city,':country' => $country,':kvk' => $kvknr,':birthDate' => $birthDate,':email' => $email,
-                  ':password' => $hashedWW,':securityQ' => $securityQ ,':securityA' => $securityA));
+                  $query->execute(array(':username' => $username,':name' => $name,':lastname' => $lastname,':adress' => $adress,':zipcode' => $zipcode,':city' => $city,':country' => $country,':kvk' => $kvknr,':birthDate' => $birthDate,
+                  ':email' => $_SESSION['email'],':password' => $hashedWW,':securityQ' => $securityQ ,':securityA' => $securityA));
 
 
                   header("Location: ../index.php?signup=success");
                   exit();
               }
+
           }
         }
   }

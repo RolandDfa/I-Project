@@ -82,7 +82,7 @@ if (!empty($_GET['page'])) {
 
 		<!-- Footer -->
 		<footer>
-			<div class="row">
+			<div class="row marginLeft marginRight">
 				<div class="col-lg-2"><!-- White space --></div>
 				<div class="col-lg-8">
 					<div class="row">
