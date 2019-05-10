@@ -1,12 +1,14 @@
 <div class="col-lg-12 alignCenter">
-  <a class="categorieMenuItem" href="">Categorie</a>
-  <a class="categorieMenuItem" href="">Categorie</a>
-  <a class="categorieMenuItem" href="">Categorie</a>
-  <a class="categorieMenuItem" href="">Categorie</a>
-  <a class="categorieMenuItem" href="">Categorie</a>
-  <a class="categorieMenuItem" href="">Categorie</a>
-  <a class="categorieMenuItem" href="">Categorie</a>
-  <a class="categorieMenuItem" href="">Categorie</a>
-  <a class="categorieMenuItem" href="">Categorie</a>
-  <a class="categorieMenuItem" href="">Categorie</a>
+  <?php
+  //Haal data uit database voor dropdown menu van rubrieken
+    try{
+      $data = $dbh->query("SELECT TOP 10 rubrieknaam FROM Rubriek WHERE parent is null ORDER BY rubrieknaam asc");
+      while($row = $data->fetch()){
+        echo '<a class="categorieMenuItem" href="">'.$row['rubrieknaam'].'</a>';
+      }
+    }
+    catch (PDOException $e){
+      echo "Kan rubrieken niet laden".$e->getMessage();
+    }
+   ?>
 </div>
