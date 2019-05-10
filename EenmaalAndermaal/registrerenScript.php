@@ -135,26 +135,26 @@ if(isset($_POST['signUp'])){
 		if (($row = $result->fetch()) > 0) {
 			$errorUsername = true;
 		} else {
-			// $hashedWW = hash('sha256', $password);
-			// $hashedSecurityA = hash('sha256', $securityA);
-			// try {
-			// 	$sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox, wachtwoord, vraag, antwoordTekst, gebruikersStatus, valid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-			// 	$queryInsert = $dbh->prepare($sqlInsert);
-			//
-			// 	$queryInsert->execute(array($username, $name, $lastname, $address, $zipcode, $city, $country, $kvknr, $birthDate, $_SESSION['email'], $hashedWW, $securityQ, $hashedSecurityA, 1, 1));
-			//
-			// 	// Unset session var
-			// 	$_SESSION = array();
-			//
-			// 	// Destroy session
-			// 	session_destroy();
-			//
-			// 	// Header to login page
-			// 	header("Location: index.php?page=inloggen");
-			//
-			// } catch (PDOException $e) {
-			// 	echo "Fout met de database: {$e->getMessage()} ";
-			// }
+			$hashedWW = hash('sha256', $password);
+			$hashedSecurityA = hash('sha256', $securityA);
+			try {
+				$sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox, wachtwoord, vraag, antwoordTekst, gebruikersStatus, valid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				$queryInsert = $dbh->prepare($sqlInsert);
+
+				$queryInsert->execute(array($username, $name, $lastname, $address, $zipcode, $city, $country, $kvknr, $birthDate, $_SESSION['email'], $hashedWW, $securityQ, $hashedSecurityA, 1, 1));
+
+				// Unset session var
+				$_SESSION = array();
+
+				// Destroy session
+				session_destroy();
+
+				// Header to login page
+				header("Location: index.php?page=inloggen");
+
+			} catch (PDOException $e) {
+				echo "Fout met de database: {$e->getMessage()} ";
+			}
 		}
 
 	}
