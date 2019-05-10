@@ -253,22 +253,6 @@ if(isset($_POST['signUp'])){
           if (!$queryInsert) {
             echo"db fucked up 666";
           } else {
-            // echo  "$name<br>
-            // $lastname<br>
-            // $birthDate<br>
-            // $adress <br>
-            // $zipcode <br>
-            // $city <br>
-            // $country <br>
-            // $telnr <br>
-            // $telnr2  <br>
-            // $kvknr <br>
-            // $username<br>
-            // $password<br>
-            // $passwordRepeat <br>
-            // $securityQ<br>
-            // $securityA<br>
-            // $hashedWW<br>";
             $queryInsert->execute(array($username,$name,$lastname, $adress, $zipcode, $city, $country,$kvknr,$birthDate,$_SESSION['email'], $hashedWW, $securityQ , $securityA,1,1));
           }
         }
@@ -279,6 +263,4 @@ if(isset($_POST['signUp'])){
       }
     }
   }
-} else {
-  echo"asdfghjkl";
 }
