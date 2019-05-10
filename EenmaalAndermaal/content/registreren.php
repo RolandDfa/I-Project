@@ -270,6 +270,11 @@ if(isset($_POST['signUp'])){
             // $securityA<br>
             // $hashedWW<br>";
             $queryInsert->execute(array($username,$name,$lastname, $adress, $zipcode, $city, $country,$kvknr,$birthDate,$_SESSION['email'], $hashedWW, $securityQ , $securityA,1,1));
+            $_SESSION['email']="";
+            $_SESSION['code']="";
+            echo "Uw bent sucsesvol geregistreerd.";
+            header("Location: ../index.php?page=home");
+            $_SESSION['verifySucces']= false;
           }
         }
         catch (PDOException $e) {
@@ -280,5 +285,5 @@ if(isset($_POST['signUp'])){
     }
   }
 } else {
-  echo"asdfghjkl";
+  echo"";
 }
