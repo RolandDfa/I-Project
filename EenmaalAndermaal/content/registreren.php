@@ -55,7 +55,17 @@ if(!$_SESSION['verifySucces']) {
       <input type="password" name="passwordRepeat" id="passwordRepeat" required><br>
       <label for="securityQ">Geheime vraag:*</label>
       <select name="securityQ" id="securityQ" required>
-        <option value="1">Afghanistan</option>
+        <?php
+        try{
+          $data = $dbh->query("SELECT vraagnummer, tekstvraag FROM Vraag");
+          while($row = $data->fetch()){
+            echo '<option value="'.$row['vraagnummer'].'">'.$row['tekstvraag'].'</option>';
+          }
+        }
+        catch (PDOException $e){
+          echo "Kan rubrieken niet laden".$e->getMessage();
+        }
+        ?>
       </select>
       <label for="securityA">Andwoord:*</label><br>
       <input type="text" name="securityA" value="" id="securityA" required><br>
