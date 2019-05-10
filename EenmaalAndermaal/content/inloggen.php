@@ -11,7 +11,7 @@
           <div style="color: red;">
             <?php
             if (!empty($_GET['error'])) {
-              echo 'De gebruikersnaam of wachtwoord is onjuist.';
+              echo 'Gebruikersnaam of wachtwoord is onjuist.';
             }
             ?>
           </div>
