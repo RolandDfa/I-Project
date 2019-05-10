@@ -79,8 +79,7 @@ if(isset($_POST['sendCode'])){
 
   $_SESSION['email'] = $_POST['email'];
   $validEmail = filter_var($_SESSION['email'], FILTER_VALIDATE_EMAIL);
-  $errorMes="";
-  $returntext="";
+
 
   if (empty($_SESSION['email'])) {
     echo("Vul het veld in.");
@@ -132,6 +131,9 @@ if(isset($_POST['verifyCode'])){
   }
 }
 
+$errorMes="";
+$returntekst="";
+
 if(isset($_POST['signUp'])){
 
   $name = cleanInput($_POST['name']);
@@ -149,7 +151,6 @@ if(isset($_POST['signUp'])){
   $passwordRepeat = cleanInput($_POST['passwordRepeat']);
   $securityQ = $_POST['securityQ'];
   $securityA = cleanInput($_POST['securityA']);
-
 
 
   $validName = !preg_match("/^[a-zA-Z]$/",$name);
