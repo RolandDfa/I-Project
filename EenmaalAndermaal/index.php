@@ -83,6 +83,9 @@ if (!empty($_GET['page'])) {
 					case 'gebruikersvoorwaarden':
 					require('content/gebruikersvoorwaarden.php');
 					break;
+					case 'privacybeleid':
+					require('content/privacybeleid.php');
+					break;
 					default:
 					require('content/home.php');
 				}
@@ -142,7 +145,7 @@ if (!empty($_GET['page'])) {
 			<div class="col-lg-2"><!-- White space --></div>
 		</div>
 		<div class="col-lg-12">
-			<a class="linkFooter" href="index.php?page=gebruikersvoorwaarden">Gebruikersvoorwaarden</a> <span class="footerBreak">|</span> <a  class="linkFooter" href="">Privacybeleid</a> <span class="footerBreak">|</span> &copy; 2019 IConcepts
+			<a class="linkFooter" href="index.php?page=gebruikersvoorwaarden">Gebruikersvoorwaarden</a> <span class="footerBreak">|</span> <a  class="linkFooter" href="index.php?page=privacybeleid"">Privacybeleid</a> <span class="footerBreak">|</span> &copy; 2019 IConcepts
 		</div>
 	</footer>
 
