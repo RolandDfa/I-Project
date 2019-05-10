@@ -12,9 +12,18 @@
     </div>
   </a>
   <div id="dropdownAuctions" class="dropdown-menu greeneryBorder">
-    <a class="dropdown-item" href="">Tafels</a>
-    <a class="dropdown-item" href="">Stoelen</a>
-    <a class="dropdown-item" href="">Pannen</a>
+    <?php
+    //Haal data uit database voor dropdown menu van rubrieken
+    try{
+      $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent is null ORDER BY rubrieknaam asc");
+      while($row = $data->fetch()){
+        echo '<a class="dropdown-item" href="">'.$row['rubrieknaam'].'</a>';
+      }
+    }
+    catch (PDOException $e){
+      echo "Kan rubrieken niet laden".$e->getMessage();
+    }
+    ?>
   </div>
 </div>
 <div id="menuSearchbar" class="col-lg-2 col-sm-4">
@@ -38,29 +47,29 @@
   }
   ?>
   ">
-    <?php
-    if (!isset($_SESSION["username"])) {
-      echo "Inloggen";
-    } else {
-      echo "Uitloggen";
-    }
-    ?>
-  </a>
-  <a class="menuItem marginLeft marginRight" href="" id="dropdownCountries" data-toggle="dropdown">
-    <div class="row">
-      <div>
-        <b>NL</b>
-      </div>
-      <div class="arrow">
-        <i class="fas fa-caret-right arrowDown"></i>
-      </div>
+  <?php
+  if (!isset($_SESSION["username"])) {
+    echo "Inloggen";
+  } else {
+    echo "Uitloggen";
+  }
+  ?>
+</a>
+<a class="menuItem marginLeft marginRight" href="" id="dropdownCountries" data-toggle="dropdown">
+  <div class="row">
+    <div>
+      <b>NL</b>
     </div>
-  </a>
-  <div id="dropdownLanguage" class="dropdown-menu greeneryBorder">
-    <a class="dropdown-item" href="">NL</a>
-    <a class="dropdown-item" href="">EN</a>
+    <div class="arrow">
+      <i class="fas fa-caret-right arrowDown"></i>
+    </div>
   </div>
-  <a class="hamburgerMenu" onclick="openNav()"><i class="fa fa-bars hamburgerIcon"></i></a>
+</a>
+<div id="dropdownLanguage" class="dropdown-menu greeneryBorder">
+  <a class="dropdown-item" href="">NL</a>
+  <a class="dropdown-item" href="">EN</a>
+</div>
+<a class="hamburgerMenu" onclick="openNav()"><i class="fa fa-bars hamburgerIcon"></i></a>
 </div>
 <div class="col-lg-2"><!-- White space --></div>
 
@@ -79,15 +88,15 @@
     }
     ?>
     ">
-      <?php
-      if (!isset($_SESSION["username"])) {
-        echo "Inloggen";
-      } else {
-        echo "Uitloggen";
-      }
-      ?>
-    </a>
-  </div>
+    <?php
+    if (!isset($_SESSION["username"])) {
+      echo "Inloggen";
+    } else {
+      echo "Uitloggen";
+    }
+    ?>
+  </a>
+</div>
 </div>
 
 <script>
