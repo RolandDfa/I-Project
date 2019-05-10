@@ -28,33 +28,33 @@ if(!$_SESSION['verifySucces']) {
     <form class="form" method="post" action="">
       <h2>Account aanmaken</h2>
       <label for="name">Voornaam:*</label><br>
-      <input type="text" name="name" placeholder="Jan" value="" id="name"><br>
+      <input type="text" name="name" placeholder="Jan" value="" id="name" required><br>
       <label for="lastname">Achternaam:*</label><br>
-      <input type="text" name="lastname" placeholder="Harris" value="" id="lastname"><br>
+      <input type="text" name="lastname" placeholder="Harris" value="" id="lastname" required><br>
       <label for="birthdate">Geboortedatum:*</label><br>
-      <input type="date" name="birthdate" value="" id="birthdate"><br>
+      <input type="date" name="birthdate" value="" id="birthdate" required><br>
       <label for="adress">Adres:*</label><br>
-      <input type="text" name="adress" placeholder="willemStraat 45" value="" id="adress"><br>
+      <input type="text" name="adress" placeholder="willemStraat 45" value="" id="adress" required><br>
       <label for="zipcode">Postcode:*</label><br>
-      <input type="text" name="zipcode" placeholder="7007HS" value="" id="zipcode"><br>
+      <input type="text" name="zipcode" placeholder="7007HS" value="" id="zipcode required"><br>
       <label for="city">Plaast:*</label><br>
-      <input type="text" name="city" placeholder="Doesburg" value="" id="city"><br>
+      <input type="text" name="city" placeholder="Doesburg" value="" id="city" required><br>
       <label for="country">Land:*</label><br>
-      <input type="text" name="country" placeholder="Nederland" value="" id="country"><br>
+      <input type="text" name="country" placeholder="Nederland" value="" id="country" required><br>
       <label for="telnr">Telefoonnummer:*</label><br>
-      <input type="text" name="telnr" placeholder="0612344455" value="" id="telnr"><br>
+      <input type="text" name="telnr" placeholder="0612344455" value="" id="telnr" required><br>
       <label for="telnr2">Telefoonnummer 2:</label><br>
       <input type="text" name="telnr2" placeholder="0314364999" value="" id="telnr2"><br>
       <label for="kvkNummer">KVK Nummer:</label><br>
-      <input type="text" name="kvkNummer" placeholder="12345678" value="" id="kvkNummer"><br>
+      <input type="text" name="kvkNummer" placeholder="12345678" value="" id="kvkNummer" required><br>
       <label for="username">Gebruikersnaam:*</label><br>
-      <input type="text" name="username" value="" id="username"><br>
+      <input type="text" name="username" value="" id="username" required><br>
       <label for="password">Password:*</label>
-      <input type="password" name="password" id="password"><br>
+      <input type="password" name="password" id="password" required><br>
       <label for="passwordRepeat">Repeat your password:*</label>
-      <input type="password" name="passwordRepeat" id="passwordRepeat"><br>
+      <input type="password" name="passwordRepeat" id="passwordRepeat" required><br>
       <label for="securityQ">Geheime vraag:*</label>
-      <select name="securityQ" id="securityQ">
+      <select name="securityQ" id="securityQ" required>
         <option value="1">Afghanistan</option>
         <option value="2">Bahamas</option>
         <option value="3">Cambodia</option>
@@ -65,7 +65,7 @@ if(!$_SESSION['verifySucces']) {
         <option value="8">Haiti</option>
       </select>
       <label for="securityA">Andwoord:*</label><br>
-      <input type="text" name="securityA" value="" id="securityA"><br>
+      <input type="text" name="securityA" value="" id="securityA" required><br>
       <input type="submit" name="signUp" value="signUp" id="signUpButton">
     </form>
   </div>
