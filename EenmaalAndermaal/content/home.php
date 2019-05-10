@@ -119,21 +119,21 @@
 
     <?php
     //Haal data uit database voor dropdown menu van rubrieken
-      try{
-        $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent is null ORDER BY rubrieknaam asc");
-        while($row = $data->fetch()){
-          echo '  <div class="popularCategoryItem">
-              <a class="opacityHover" href="">
-                <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
-                <div class="popularCategoryText">'.$row['rubrieknaam'].'</div>
-              </a>
-            </div>';
-        }
+    try{
+      $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent is null ORDER BY rubrieknaam asc");
+      while($row = $data->fetch()){
+        echo '  <div class="popularCategoryItem">
+        <a class="opacityHover" href="">
+        <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
+        <div class="popularCategoryText">'.$row['rubrieknaam'].'</div>
+        </a>
+        </div>';
       }
-      catch (PDOException $e){
-        echo "Kan rubrieken niet laden".$e->getMessage();
-      }
-     ?>
+    }
+    catch (PDOException $e){
+      echo "Kan rubrieken niet laden".$e->getMessage();
+    }
+    ?>
     <div class="popularCategoryItem">
       <a class="opacityHover" href="">
         <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
@@ -145,7 +145,7 @@
         <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
         <div class="popularCategoryText">Oldtimers</div>
       </a>
-    </div>
     </div>
   </div>
+</div>
 </div>
