@@ -258,13 +258,14 @@ if(isset($_POST['signUp'])){
         echo("Deze gebruikersnaam is al in gebruik, kies een andere.");
       } else {
         $hashedWW = hash('sha256', $password);
+        $hashedSA = hash('sha256', $securityA);
         try{
           $sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam,voornaam,achternaam,adresregel,postcode,plaatsnaam,land,kvkNummer,geboorteDag,mailbox,wachtwoord,vraag,antwoordTekst,gebruikersStatus,valid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
           $queryInsert = $dbh->prepare($sqlInsert);
           if (!$queryInsert) {
             echo"db fucked up 666";
           } else {
-            $queryInsert->execute(array($username,$name,$lastname, $adress, $zipcode, $city, $country,$kvknr,$birthDate,$_SESSION['email'], $hashedWW, $securityQ , $securityA,1,1));
+            $queryInsert->execute(array($username,$name,$lastname, $adress, $zipcode, $city, $country,$kvknr,$birthDate,$_SESSION['email'], $hashedWW, $securityQ , $hashedSA,1,1));
             $_SESSION['email']="";
             $_SESSION['code']="";
             echo "Uw bent sucsesvol geregistreerd.";
