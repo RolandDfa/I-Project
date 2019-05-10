@@ -73,6 +73,15 @@ h5 {
   color: #222222;
 }
 
+.redText {
+  color: red;
+}
+
+.marginZero {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* MENU main */
 #mainNav {
   display: flex;
@@ -473,13 +482,29 @@ ul.social-network li {
   border-radius: 0.3em;
 }
 
-.registerForm h2 {
+.registerForm h2, .registerForm h4 {
   font-weight: 600;
   color: #000000;
-  margin-top: 5%;
+  margin-top: 1%;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+
+.registerLine {
+  border-top: 1px solid #ced4da;
+  padding: 10px;
+}
+
+.control-label {
+  padding: .375rem .75rem;
+  text-align: right;
+}
+
+.btnGreenery {
+  color: #fff;
+  background-color: rgb(136, 176, 75);
+  border-color: rgb(136, 176, 75);
 }
 
 /* If screen < 1050px (Tablets) */
@@ -514,6 +539,15 @@ ul.social-network li {
 
   .rounded-top {
     height: 300px;
+  }
+
+  /* REGISTER page */
+  .control-label {
+    text-align: center;
+  }
+
+  .form-control {
+    text-align: center;
   }
 
 }

@@ -119,21 +119,14 @@ if (!empty($_GET['page'])) {
 					<div class="col-lg-4">
 						<h5>Mijn EenmaalAndermaal</h5>
 						<ul>
-
-							<li><a class="linkFooter" href="							<?php
+							<?php
 							if (!isset($_SESSION["username"])) {
-								echo "index.php?page=inloggen";
+								echo '<li><a class="linkFooter" href="index.php?page=inloggen">Inloggen</a></li>
+								<li><a class="linkFooter" href="index.php?page=registreren">Gratis registreren</a></li>';
 							} else {
-								echo "logout.php";
+								echo '<li><a class="linkFooter" href="logout.php">Uitloggen</a></li>';
 							}
-							?>">							<?php
-							if (!isset($_SESSION["username"])) {
-								echo "Inloggen";
-							} else {
-								echo "Uitloggen";
-							}
-							?></a></li>
-							<li><a class="linkFooter" href="index.php?page=registreren">Gratis registreren</a></li>
+							?>
 						</ul>
 					</div>
 				</div>
@@ -142,7 +135,7 @@ if (!empty($_GET['page'])) {
 			<div class="col-lg-2"><!-- White space --></div>
 		</div>
 		<div class="col-lg-12">
-			<a class="linkFooter" href="index.php?page=gebruikersvoorwaarden">Gebruikersvoorwaarden</a> <span class="footerBreak">|</span> <a  class="linkFooter" href="index.php?page=privacybeleid"">Privacybeleid</a> <span class="footerBreak">|</span> &copy; 2019 IConcepts
+			<a class="linkFooter" href="index.php?page=gebruikersvoorwaarden">Gebruikersvoorwaarden</a> <span class="footerBreak">|</span> <a  class="linkFooter" href="index.php?page=privacybeleid">Privacybeleid</a> <span class="footerBreak">|</span> &copy; 2019 iConcepts
 		</div>
 	</footer>
 

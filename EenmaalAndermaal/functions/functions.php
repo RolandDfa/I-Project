@@ -6,7 +6,6 @@ function cleanInput($data){
   return $data;
 }
 
-
 function generateRandomString($length = 10) {
   $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   $charactersLength = strlen($characters);
