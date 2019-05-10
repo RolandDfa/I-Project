@@ -12,9 +12,18 @@
     </div>
   </a>
   <div id="dropdownAuctions" class="dropdown-menu greeneryBorder">
-    <a class="dropdown-item" href="">Tafels</a>
-    <a class="dropdown-item" href="">Stoelen</a>
-    <a class="dropdown-item" href="">Pannen</a>
+    <?php
+    //Haal data uit database voor dropdown menu van rubrieken
+      try{
+        $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent is null ORDER BY rubrieknaam asc");
+        while($row = $data->fetch()){
+          echo '<a class="dropdown-item" href="">'.$row['rubrieknaam'].'</a>';
+        }
+      }
+      catch (PDOException $e){
+        echo "Kan rubrieken niet laden".$e->getMessage();
+      }
+     ?>
   </div>
 </div>
 <div id="menuSearchbar" class="col-lg-2 col-sm-4">
