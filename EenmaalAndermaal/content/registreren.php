@@ -56,13 +56,6 @@ if(!$_SESSION['verifySucces']) {
       <label for="securityQ">Geheime vraag:*</label>
       <select name="securityQ" id="securityQ" required>
         <option value="1">Afghanistan</option>
-        <option value="2">Bahamas</option>
-        <option value="3">Cambodia</option>
-        <option value="4">Denmark</option>
-        <option value="5">Ecuador</option>
-        <option value="6">Fiji</option>
-        <option value="7">Gabon</option>
-        <option value="8">Haiti</option>
       </select>
       <label for="securityA">Andwoord:*</label><br>
       <input type="text" name="securityA" value="" id="securityA" required><br>
@@ -108,8 +101,8 @@ if(isset($_POST['sendCode'])){
       $mail->Body    =
       "<b>your verify code </b><br>".$_SESSION['code']."<br><br><br><b>Van bedrijven voor bedrijven.</b>";
 
-      //$mail->send();
-      echo "Er is een verificatie mail naar ". $_SESSION['email'] ."gestuurd,".$_SESSION['code']." Vul de code in. ";
+      $mail->send();
+      echo "Er is een verificatie mail naar ". $_SESSION['email'] ."gestuurd, Vul de code in. ";
     } catch (Exception $e) {
       echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
@@ -235,8 +228,6 @@ if(isset($_POST['signUp'])){
     }
 
     echo("Foute waarden ingevoerd [$errorMes]");
-    // header("location: ../registreren.php?error=" . $errorMes . $returntekst);
-    // exit();
   }
   else if($password !== $passwordRepeat){
     echo("wachtwoord en herhaalwachtwoord komen niet overeen.");
@@ -246,9 +237,7 @@ if(isset($_POST['signUp'])){
     $sql = "SELECT gebruikersnaam FROM Gebruikers WHERE gebruikersnaam = $username";
     $query = $dbh->prepare($sql);
     if(!$query) {
-
-      header("location: ../registreren.php?error=" . "DB Fucked up");
-      exit();
+      echo"db fucked up 666";
     }
     else {
       $data = $query->fetchAll(PDO::FETCH_BOTH);
@@ -256,35 +245,31 @@ if(isset($_POST['signUp'])){
 
       if ($usernameExist) {
         echo("Deze gebruikersnaam is al in gebruik, kies een andere.");
-        header("location: ../registreren.php?error=" . "usernameExist" . "&Email=".$email . "&Username=".$username);
-        exit();
       } else {
         $hashedWW = password_hash($password, PASSWORD_DEFAULT);
         try{
           $sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam,voornaam,achternaam,adresregel,postcode,plaatsnaam,land,kvkNummer,geboorteDag,mailbox,wachtwoord,vraag,antwoordTekst,verkoper,valid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
           $queryInsert = $dbh->prepare($sqlInsert);
           if (!$queryInsert) {
-            header("location: ../registreren.php?error=" . "DB error");
-            exit();
+            echo"db fucked up 666";
           } else {
-            echo  "$name<br>
-            $lastname<br>
-            $birthDate<br>
-            $adress <br>
-            $zipcode <br>
-            $city <br>
-            $country <br>
-            $telnr <br>
-            $telnr2  <br>
-            $kvknr <br>
-            $username<br>
-            $password<br>
-            $passwordRepeat <br>
-            $securityQ<br>
-            $securityA<br>
-            $hashedWW<br>";
-            $queryInsert->execute(array($username,$name,$lastname, $adress, $zipcode, $city, $country,$kvknr,$birthDate,$_SESSION['email'], $password, $securityQ , $securityA,1,1));
-            exit();
+            // echo  "$name<br>
+            // $lastname<br>
+            // $birthDate<br>
+            // $adress <br>
+            // $zipcode <br>
+            // $city <br>
+            // $country <br>
+            // $telnr <br>
+            // $telnr2  <br>
+            // $kvknr <br>
+            // $username<br>
+            // $password<br>
+            // $passwordRepeat <br>
+            // $securityQ<br>
+            // $securityA<br>
+            // $hashedWW<br>";
+            $queryInsert->execute(array($username,$name,$lastname, $adress, $zipcode, $city, $country,$kvknr,$birthDate,$_SESSION['email'], $hashedWW, $securityQ , $securityA,1,1));
           }
         }
         catch (PDOException $e) {
@@ -295,5 +280,5 @@ if(isset($_POST['signUp'])){
     }
   }
 } else {
-  // header("Locaction: ../index.php");
+  echo"asdfghjkl";
 }

@@ -1,19 +1,4 @@
 <?php
-// $name ="";
-// $lastname="";
-// $birthDate1="";
-// $adress="";
-// $zipcode="";
-// $city="";
-// $country="";
-// $telnr="";
-// $telnr2="";
-// $kvknr="";
-// $username="";
-// $password="";
-// $passwordRepeat="";
-// $securityQ="";
-// $securityA="";
 
 
 // // Database connection
