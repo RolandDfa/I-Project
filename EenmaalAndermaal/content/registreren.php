@@ -246,9 +246,9 @@ if(isset($_POST['signUp'])){
       if ($usernameExist) {
         echo("Deze gebruikersnaam is al in gebruik, kies een andere.");
       } else {
-        $hashedWW = password_hash($password, PASSWORD_DEFAULT);
+        $hashedWW = hash('sha256', $password);
         try{
-          $sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam,voornaam,achternaam,adresregel,postcode,plaatsnaam,land,kvkNummer,geboorteDag,mailbox,wachtwoord,vraag,antwoordTekst,verkoper,valid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+          $sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam,voornaam,achternaam,adresregel,postcode,plaatsnaam,land,kvkNummer,geboorteDag,mailbox,wachtwoord,vraag,antwoordTekst,gebruikersStatus,valid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
           $queryInsert = $dbh->prepare($sqlInsert);
           if (!$queryInsert) {
             echo"db fucked up 666";
