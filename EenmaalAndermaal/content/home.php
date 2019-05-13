@@ -1,4 +1,9 @@
 <div class="pageWrapper">
+
+  <div id="auctions" class="row">
+    <h4><b>Reviews</b></h4>
+  </div>
+
   <div class="row">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -37,7 +42,7 @@
   </div>
 
   <div id="auctions" class="row">
-    <h4><b>Uitgelichte veilingen</b></h4>
+    <h4><b>Meest recente veilingen</b></h4>
   </div>
 
   <div class="row contentWrapper">
@@ -112,7 +117,7 @@
   </div>
 
   <div class="textCenter">
-    <h3><b>Populaire categoriën</b></h3>
+    <h3><b>Populaire categorieën</b></h3>
   </div>
 
   <div class="row contentWrapper">
