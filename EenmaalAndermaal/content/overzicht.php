@@ -1,216 +1,91 @@
+
 <?php
-  if(isset($_POST['searchText'])){
-    $searchText = cleanInput($_POST['searchText']);
-  }
-  echo "Ingevoerde tekst: "."'".$searchText."'";
+if(isset($_POST['searchText'])){
+  $searchText = cleanInput($_POST['searchText']);
+}else{
+  $searchText = "";
+}
+$gekozenCategorie;
+// switch($categorie) {
+//   case 'home':
+//   require('content/home.php');
+//   break;
+//   default:
+//   require('content/home.php');
+// }
+
 ?>
-
-
 <div class="pageWrapper">
+  <?php
+  if(!isset($searchText)){
+    echo "<p>Gevonden resultaten voor: $searchText</p>";
+  }
+  ?>
   <div class="row contentWrapper">
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/stoel.jpg" width="100%" height="220" alt="Stoel">
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Goeie Stoel (grondig getest)
+
+    <?php
+    if(isset($searchText)){
+      try{
+        $data = $dbh->query("SELECT titel, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and titel like '%$searchText%'");
+        while($row = $data->fetch()){
+          if($row['titel']==""){
+            echo "Geen resultaten voor de zoekopdracht: ".$searchText;
+          }else{
+            echo '<div class="cardItem">
+            <a href="">
+            <div class="card shadow-sm">
+            <div class="cardImage">
+            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="220" alt="'.$row['titel'].'">
+            </div>
+            <div class="cardTitle">
+            <div class="cardHeader">'.
+            $row['titel'].'
             </div>
             <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
+            Sluit '.$row['looptijdeindeDag'].' om '.$row['looptijdeindeTijdstip'].'
             </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="220" alt="Fiets">
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Nieuwe fiets (bijna nieuw)
             </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
             </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/klok.jpg" width="100%" height="220" alt="Klok">
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Antieke klok (originele bel)
+            </a>
+            </div>';
+          }
+        }
+      }
+      catch (PDOException $e){
+        echo "Er gaat iets fout met het ophalen van de artikelen: ".$e->getMessage();
+      }
+    }
+    else{
+      try{
+        $data = $dbh->query("SELECT titel, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0");
+        while($row = $data->fetch()){
+          if($row['titel']==""){
+            echo "Geen resultaten voor de zoekopdracht: ".$searchText;
+          }else{
+            echo '<div class="cardItem">
+            <a href="">
+            <div class="card shadow-sm">
+            <div class="cardImage">
+            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="220" alt="'.$row['titel'].'">
+            </div>
+            <div class="cardTitle">
+            <div class="cardHeader">'.
+            $row['titel'].'
             </div>
             <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
+            Sluit zaterdag vanaf 20:00
             </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Akoestische gitaar (incl. snaren)
             </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
             </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Akoestische gitaar (incl. snaren)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Akoestische gitaar (incl. snaren)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Akoestische gitaar (incl. snaren)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Akoestische gitaar (incl. snaren)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Akoestische gitaar (incl. snaren)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Akoestische gitaar (incl. snaren)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Akoestische gitaar (incl. snaren)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Akoestische gitaar (incl. snaren)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
+            </a>
+            </div>';
+          }
+        }
+      }
+      catch (PDOException $e){
+        echo "Er gaat iets fout met het ophalen van de artikelen: ".$e->getMessage();
+      }
+    }
+    ?>
   </div>
 </div>
