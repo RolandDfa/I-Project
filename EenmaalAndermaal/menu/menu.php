@@ -4,7 +4,7 @@
   <a class="menuItem" href="" data-toggle="dropdown">
     <div class="row">
       <div>
-        <b>Alle veilingen</b>
+        <b>Alle categorieën</b>
       </div>
       <div class="arrow">
         <i class="fas fa-caret-right arrowDown"></i>
