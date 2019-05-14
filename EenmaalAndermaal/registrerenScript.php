@@ -154,7 +154,7 @@ if(isset($_POST['signUp'])){
 				if (!empty($telnr2)) {
 					$sqlInsertTellnr2 = "INSERT INTO Gebruikerstelefoon(gebruikersnaam, Telefoon) VALUES(?,?)";
 					$queryInsertTellnr2 = $dbh->prepare($sqlInsertTellnr2);
-					
+
 					$queryInsertTellnr2->execute(array($username, $telnr2));
 				}
 
@@ -166,7 +166,7 @@ if(isset($_POST['signUp'])){
 				session_destroy();
 
 				// Header to login page
-				header("Location: index.php?page=inloggen");
+				header("Location: index.php?page=registrerenSucces");
 
 			} catch (PDOException $e) {
 				echo "Fout met de database: {$e->getMessage()} ";

@@ -90,6 +90,9 @@ if (!empty($_GET['page'])) {
 					case 'overzicht':
 					require('content/overzicht.php');
 					break;
+					case 'registrerenSucces':
+					require('content/registrerenSucces.php');
+					break;
 					default:
 					require('content/home.php');
 				}
