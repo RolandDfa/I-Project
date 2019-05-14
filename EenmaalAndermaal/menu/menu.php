@@ -52,7 +52,11 @@
     </div>
   </div>
   <a class="phoneButton" onclick="openNav()"><i class="fa fa-bars phoneIcon"></i></a>
-  <a class="phoneButton" href="index.php?page=account"><i class="fas fa-user-tie phoneIcon"></i></a>
+  <?php
+  if (isset($_SESSION["username"])) {
+    echo '<a class="phoneButton" href="index.php?page=account"><i class="fas fa-user-tie phoneIcon"></i></a>';
+  }
+  ?>
 
 </div>
 <div class="col-lg-2"><!-- White space --></div>
@@ -64,7 +68,9 @@
     <a href="">Alle veilingen</a>
     <a href="">Plaats advertentie</a>
     <?php
-    if (isset($_SESSION["username"])) {
+    if (!isset($_SESSION["username"])) {
+      echo '<a href="index.php?page=inloggen">Inloggen</a>';
+    } else {
       echo '<a href="logout.php">Uitloggen</a>';
     }
     ?>
