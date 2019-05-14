@@ -6,7 +6,7 @@ $username = "iproject41";
 $pw = "V19UFzEQGJ";
 
 // $hostname = "localhost";
-// $dbname = "EenmaalAndermaal";
+// $dbname = "EenmaalAndermaal1";
 // $username = "";
 // $pw = "";
 

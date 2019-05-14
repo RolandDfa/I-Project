@@ -1,6 +1,5 @@
 html, body {
   height: 100%;
-  font-family: "Arial", Times, serif;
 }
 
 body {
@@ -97,21 +96,16 @@ h5 {
   margin-right: 1rem;
 }
 
-#dropdownAuctions {
-  left: 135px;
-}
-
 #menuSearchbar {
   padding-left: 0px;
   padding-right: 0px;
 }
 
 #dropdownLanguage {
-  left: 78%;
-  min-width: 5rem;
+  min-width: 20px;
 }
 
-.menuItem, .hamburgerMenu {
+.menuItem, .phoneButton {
   margin-top: -10px;
   padding-top: 28px !important;
   height: 70px;
@@ -122,18 +116,17 @@ h5 {
   color: rgb(136, 176, 75) !important;
 }
 
-.menuItem:hover, .hamburgerMenu:hover {
+.menuItem:hover, .phoneButton:hover {
   color: #FFFFFF;
 }
 
-.hamburgerMenu {
-  padding: 20px;
-  width: 60px;
+.phoneButton {
+  padding: 18px;
   float: right;
   display: none;
 }
 
-.hamburgerIcon {
+.phoneIcon {
   font-size: 1.2rem;
   line-height: 1.4;
 }
@@ -518,6 +511,10 @@ ul.social-network li {
     margin-left: 0.2rem;
   }
 
+  #menuSearchbar {
+    display: none;
+  }
+
   .col-sm-4, .col-sm-4 {
     padding: 0;
   }
@@ -525,14 +522,6 @@ ul.social-network li {
   /* MENU categories */
   #categorieRow {
     display: none;
-  }
-
-  #dropdownAuctions {
-    left: 115px;
-  }
-
-  #dropdownLanguage {
-    left: 75%;
   }
 
   /* HOME featured auctions */
@@ -559,19 +548,24 @@ ul.social-network li {
 @media only screen and (max-width: 726px) {
 
   /* MENU main */
-  #menuSearchbar {
-    display: none;
-  }
-
   .menuItem {
     display: none;
   }
 
-  .hamburgerMenu {
+  .phoneButton {
     display: block;
   }
 
+  .col-6 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   /* HOME carousel */
+  #reviews {
+    display: none;
+  }
+
   #carouselExampleIndicators {
     display: none;
   }
