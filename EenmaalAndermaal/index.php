@@ -90,6 +90,9 @@ if (!empty($_GET['page'])) {
 					case 'overzicht':
 					require('content/overzicht.php');
 					break;
+					case 'registrerenSucces':
+					require('content/registrerenSucces.php');
+					break;
 					default:
 					require('content/home.php');
 				}
@@ -109,7 +112,7 @@ if (!empty($_GET['page'])) {
 					<div class="col-lg-4">
 						<h5>Veilingen</h5>
 						<ul>
-							<li><a class="linkFooter" href="index.php?page=home">Alle veilingen</a></li>
+							<li><a class="linkFooter" href="index.php?page=overzicht">Alle veilingen</a></li>
 							<li><a class="linkFooter" href="index.php?page=home">Populair</a></li>
 							<li><a class="linkFooter" href="index.php?page=home">Zoeken</a></li>
 						</ul>

@@ -5,50 +5,41 @@ if(isset($_POST['searchText'])){
 }else{
   $searchText = "";
 }
-$gekozenCategorie;
-// switch($categorie) {
-//   case 'home':
-//   require('content/home.php');
-//   break;
-//   default:
-//   require('content/home.php');
-// }
 
 ?>
 <div class="pageWrapper">
-  <?php
-  if(!isset($searchText)){
-    echo "<p>Gevonden resultaten voor: $searchText</p>";
-  }
-  ?>
-  <div class="row contentWrapper">
+
+
 
     <?php
-    if(isset($searchText)){
+    if($searchText != ""){
       try{
-        $data = $dbh->query("SELECT titel, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and titel like '%$searchText%'");
-        while($row = $data->fetch()){
-          if($row['titel']==""){
-            echo "Geen resultaten voor de zoekopdracht: ".$searchText;
-          }else{
+        $data = $dbh->query("SELECT titel, bestandsnaam, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp inner join Bestand on Voorwerp.voorwerpnummer = Bestand.Voorwerp WHERE veilingGesloten = 0 and titel like '%$searchText%'");
+        if($data->rowCount()){
+          echo '
+          <h4><b>Gevonden resultaten voor: "'.$searchText.'"</b></h4><br>
+          <div class="row contentWrapper">';
+          while($row = $data->fetch()){
             echo '<div class="cardItem">
             <a href="">
             <div class="card shadow-sm">
             <div class="cardImage">
-            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="220" alt="'.$row['titel'].'">
+            <img class="rounded-top" src="uploaded_content/'.$row['bestandsnaam'].'" width="100%" height="220" alt="'.$row['titel'].'">
             </div>
             <div class="cardTitle">
             <div class="cardHeader">'.
             $row['titel'].'
             </div>
             <div class="cardFooter">
-            Sluit '.$row['looptijdeindeDag'].' om '.$row['looptijdeindeTijdstip'].'
+            Sluit '.$row['looptijdeindeDag'].' om '.date('H:i.s',strtotime($row['looptijdeindeTijdstip'])).'
             </div>
             </div>
             </div>
             </a>
             </div>';
           }
+        }else{
+          echo '<h4><b>Geen resultaten voor: "'.$searchText.'"</b></h4>';
         }
       }
       catch (PDOException $e){
@@ -58,28 +49,27 @@ $gekozenCategorie;
     else{
       try{
         $data = $dbh->query("SELECT titel, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0");
+        echo '
+        <h4><b>Alle veilingen</b></h4><br>
+        <div class="row contentWrapper">';
         while($row = $data->fetch()){
-          if($row['titel']==""){
-            echo "Geen resultaten voor de zoekopdracht: ".$searchText;
-          }else{
-            echo '<div class="cardItem">
-            <a href="">
-            <div class="card shadow-sm">
-            <div class="cardImage">
-            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="220" alt="'.$row['titel'].'">
-            </div>
-            <div class="cardTitle">
-            <div class="cardHeader">'.
-            $row['titel'].'
-            </div>
-            <div class="cardFooter">
-            Sluit zaterdag vanaf 20:00
-            </div>
-            </div>
-            </div>
-            </a>
-            </div>';
-          }
+          echo '<div class="cardItem">
+          <a href="">
+          <div class="card shadow-sm">
+          <div class="cardImage">
+          <img class="rounded-top" src="images/fiets.jpg" width="100%" height="220" alt="'.$row['titel'].'">
+          </div>
+          <div class="cardTitle">
+          <div class="cardHeader">'.
+          $row['titel'].'
+          </div>
+          <div class="cardFooter">
+          Sluit '.$row['looptijdeindeDag'].' om '.date('H:i.s',strtotime($row['looptijdeindeTijdstip'])).'
+          </div>
+          </div>
+          </div>
+          </a>
+          </div>';
         }
       }
       catch (PDOException $e){
