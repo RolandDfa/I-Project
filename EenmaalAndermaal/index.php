@@ -128,7 +128,8 @@ if (!empty($_GET['page'])) {
 								echo '<li><a class="linkFooter" href="index.php?page=inloggen">Inloggen</a></li>
 								<li><a class="linkFooter" href="index.php?page=registreren">Gratis registreren</a></li>';
 							} else {
-								echo '<li><a class="linkFooter" href="logout.php">Uitloggen</a></li>';
+								echo '<li><a class="linkFooter" href="index.php?page=account">Mijn account</a></li>
+											<li><a class="linkFooter" href="logout.php">Uitloggen</a></li>';
 							}
 							?>
 						</ul>

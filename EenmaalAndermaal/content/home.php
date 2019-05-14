@@ -1,6 +1,6 @@
 <div class="pageWrapper">
 
-  <div id="auctions" class="row">
+  <div id="reviews" class="row">
     <h4><b>Reviews</b></h4>
   </div>
 
