@@ -19,12 +19,12 @@
     </div>
   </div>
 </div>
-<div id="menuSearchbar" class="col-lg-2">
-  <form class="form-inline" action="" method="post">
+<div id="menuSearchbar" class="col-lg-2 col-sm-4">
+  <form class="form-inline" action="index.php?page=overzicht" method="post">
     <div class="input-group">
-      <input class="form-control greeneryBorder" type="text" placeholder="Zoeken">
+      <input class="form-control greeneryBorder" type="text" placeholder="Zoeken" required minlength="2" name="searchText">
       <div class="input-group-append">
-        <span class="input-group-text greeneryBackground greeneryBorder"><i class="fas fa-search"></i></span>
+        <button type="submit" class="input-group-text greeneryBackground greeneryBorder"><i class="fa fa-search"></i></button>
       </div>
     </div>
   </form>

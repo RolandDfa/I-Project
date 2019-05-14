@@ -87,6 +87,9 @@ if (!empty($_GET['page'])) {
 					case 'privacybeleid':
 					require('content/privacybeleid.php');
 					break;
+					case 'overzicht':
+					require('content/overzicht.php');
+					break;
 					default:
 					require('content/home.php');
 				}

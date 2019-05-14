@@ -12,6 +12,7 @@ $errorEmail = "";
 $errorPHPmailer = "";
 $emailSucces = "";
 
+
 if (isset($_POST['sendCode'])) {
 
   $email = $_POST['email'];
@@ -61,7 +62,6 @@ if (isset($_POST['sendCode'])) {
   <form class="registerForm" method="post" action="">
     <h2>Registreren</h2>
     <div class="row form-group"></div>
-
     <div class="row form-group">
       <label for="email" class="col-lg-4 control-label">Emailadres *</label>
       <div class="col-lg-8">
