@@ -1,4 +1,9 @@
 <div class="pageWrapper">
+
+  <div id="reviews" class="row">
+    <h4><b>Reviews</b></h4>
+  </div>
+
   <div class="row">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -37,7 +42,7 @@
   </div>
 
   <div id="auctions" class="row">
-    <h4><b>Uitgelichte veilingen</b></h4>
+    <h4><b>Meest recente veilingen</b></h4>
   </div>
 
   <div class="row contentWrapper">
@@ -112,46 +117,28 @@
   </div>
 
   <div class="textCenter">
-    <h3><b>Populaire categoriën</b></h3>
+    <h3><b>Populaire categorieën</b></h3>
   </div>
 
   <div class="row contentWrapper">
-    <div class="popularCategoryItem">
-      <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
-        <div class="popularCategoryText">Oldtimers</div>
-      </a>
-    </div>
-    <div class="popularCategoryItem">
-      <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
-        <div class="popularCategoryText">Oldtimers</div>
-      </a>
-    </div>
-    <div class="popularCategoryItem">
-      <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
-        <div class="popularCategoryText">Oldtimers</div>
-      </a>
-    </div>
-    <div class="popularCategoryItem">
-      <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
-        <div class="popularCategoryText">Oldtimers</div>
-      </a>
-    </div>
-    <div class="popularCategoryItem">
-      <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
-        <div class="popularCategoryText">Oldtimers</div>
-      </a>
-    </div>
-    <div class="popularCategoryItem">
-      <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
-        <div class="popularCategoryText">Oldtimers</div>
-      </a>
-    </div>
+
+    <?php
+    //Haal data uit database voor dropdown menu van rubrieken
+    try{
+      $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent is null ORDER BY rubrieknaam asc");
+      while($row = $data->fetch()){
+        echo '  <div class="popularCategoryItem">
+        <a class="opacityHover" href="">
+        <div class="popularCategoryBackground"><img src="images/Category/'.$row['rubrieknaam'].'.jpg" width="100%" height="100%" alt="Oldtimers"></div>
+        <div class="popularCategoryText">'.$row['rubrieknaam'].'</div>
+        </a>
+        </div>';
+      }
+    }
+    catch (PDOException $e){
+      echo "Kan rubrieken niet laden".$e->getMessage();
+    }
+    ?>
     <div class="popularCategoryItem">
       <a class="opacityHover" href="">
         <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
@@ -165,4 +152,5 @@
       </a>
     </div>
   </div>
+</div>
 </div>

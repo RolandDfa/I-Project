@@ -1,6 +1,5 @@
 html, body {
   height: 100%;
-  font-family: "Arial", Times, serif;
 }
 
 body {
@@ -19,26 +18,18 @@ h5 {
   margin-bottom: 0px;
 }
 
-footer {
-  background: #222222;
-  color: #ffffff;
-  text-align: center;
-  padding: 10px;
-  font-family: 'Roboto', sans-serif;
-  min-height: 6.5vh;
-}
-
 #body {
-  min-height: 93.5vh;
+  min-height: 85vh;
 }
 
 #pagecontent {
   margin-right: 0px;
   margin-left: 0px;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
 }
 
 .pageWrapper {
-	padding: 20px;
+  padding: 20px;
 }
 
 .contentWrapper {
@@ -59,11 +50,11 @@ footer {
 }
 
 .marginLeft {
-  margin-left: 20px !important;
+  margin-left: 15px !important;
 }
 
 .marginRight {
-  margin-right: 20px !important;
+  margin-right: 15px !important;
 }
 
 .alignLeft {
@@ -82,11 +73,21 @@ footer {
   color: #222222;
 }
 
+.redText {
+  color: red;
+}
+
+.marginZero {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* MENU main */
 #mainNav {
   display: flex;
   width: 100%;
   padding-bottom: 0px;
+  font-family: 'Montserrat', sans-serif;
   background-color: #222222;
   padding: 0.2rem 0rem;
 }
@@ -95,43 +96,37 @@ footer {
   margin-right: 1rem;
 }
 
-#dropdownAuctions {
-  left: 135px;
-}
-
 #menuSearchbar {
   padding-left: 0px;
   padding-right: 0px;
 }
 
 #dropdownLanguage {
-  left: 78%;
-  min-width: 5rem;
+  min-width: 20px;
 }
 
-.menuItem, .hamburgerMenu {
+.menuItem, .phoneButton {
   margin-top: -10px;
   padding-top: 28px !important;
   height: 70px;
-  font-size: 0.875rem;
+  font-size: 1rem;
   display: inline-block;
   margin-right: 2%;
   margin-left: 2%;
   color: rgb(136, 176, 75) !important;
 }
 
-.menuItem:hover, .hamburgerMenu:hover {
+.menuItem:hover, .phoneButton:hover {
   color: #FFFFFF;
 }
 
-.hamburgerMenu {
-  padding: 20px;
-  width: 60px;
+.phoneButton {
+  padding: 18px;
   float: right;
   display: none;
 }
 
-.hamburgerIcon {
+.phoneIcon {
   font-size: 1.2rem;
   line-height: 1.4;
 }
@@ -190,6 +185,7 @@ footer {
 #categorieRow {
   margin-right: 0px;
   margin-left: 0px;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #categorieNav {
@@ -198,7 +194,7 @@ footer {
 
 .categorieMenuItem {
   height: 20px;
-  font-size: 0.8125rem;
+  font-size: 0.9rem;
   display: inline-block;
   margin-left: 1.7%;
   margin-right: 1.7%;
@@ -207,6 +203,122 @@ footer {
 
 .categorieMenuItem:hover {
   color: #000000;
+}
+
+/* FOOTER */
+footer {
+  background: #222222;
+  color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  font-family: 'Roboto', sans-serif;
+  min-height: 6.5vh;
+}
+
+footer h5 {
+  font-weight: 700;
+  line-height: 2;
+}
+
+footer ul {
+  padding: 0;
+}
+
+footer li {
+  list-style-type: none;
+}
+
+.linkFooter {
+  color: #fff;
+  border-bottom: 1px solid rgba(192, 192, 192, 0);
+  -webkit-transition: border 300ms ease;
+  -moz-transition: border 300ms ease;
+  -ms-transition: border 300ms ease;
+  -o-transition: border 300ms ease;
+  transition: border 300ms ease;
+}
+
+.linkFooter:hover {
+  color: #fff;
+  border-bottom: 1px solid rgba(192, 192, 192, 1);
+}
+
+.footerLine {
+  border-top: 1px solid #999;
+  padding: 10px;
+}
+
+.footerBreak {
+  margin: 0 0.5rem;
+}
+
+/* FOOTER social media */
+ul.social-network {
+  list-style: none;
+  display: inline;
+  margin-left: 0 !important;
+  padding: 0;
+}
+
+ul.social-network li {
+  display: inline;
+  margin: 0 5px;
+}
+
+.social-network a.icoFacebook:hover {
+  background-color: #3B5998;
+}
+
+.social-network a.icoTwitter:hover {
+  background-color: #33ccff;
+}
+
+.social-network a.icoYoutube:hover {
+  background-color: #ff0000;
+}
+
+.social-network a.icoPinterest:hover {
+  background-color: #cb2027;
+}
+
+.social-circle li a {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto 0 auto;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  font-size: 25px;
+}
+
+.social-circle li i {
+  margin: 0;
+  line-height: 60px;
+  text-align: center;
+}
+
+.social-circle li a:hover i, .triggeredHover {
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -ms--transform: rotate(360deg);
+  transform: rotate(360deg);
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.social-circle i {
+  color: #fff;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+  -o-transition: all 0.8s;
+  -ms-transition: all 0.8s;
+  transition: all 0.8s;
 }
 
 /* HOME featured auctions */
@@ -278,78 +390,117 @@ footer {
 }
 
 .opacityHover {
-	opacity: 0.7;
-	-webkit-transition: 0.2s ease-in-out;
-	transition: 0.2s ease-in-out;
+  opacity: 0.7;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .opacityHover:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 /* LOGIN page */
 .loginContainer {
-    margin-top: 5%;
-    margin-bottom: 5%;
-    color: #fff;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  color: #fff;
 }
 
 .loginLogo {
-    position: relative;
-    margin-left: -62%;
-    font-size: 3em;
+  position: relative;
+  margin-left: -62%;
+  font-size: 3em;
 }
 
 .loginLogo i {
-    position: absolute;
-    margin-top: 22%;
-    background: #222222;
-    border-radius: 4.5rem;
-    padding: 5%;
+  position: absolute;
+  margin-top: 22%;
+  background: #222222;
+  border-radius: 4.5rem;
+  padding: 5%;
 }
 
 .loginForm {
-    padding: 12%;
-    background: #222222;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  padding: 12%;
+  background: #222222;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
 .loginForm h3 {
-    text-align: center;
-    margin-bottom: 12%;
+  text-align: center;
+  margin-bottom: 12%;
 }
 
 .registerenContainer {
-    padding: 12%;
-    background: rgb(136, 176, 75);
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  padding: 12%;
+  background: rgb(136, 176, 75);
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
 .registerenContainer h3 {
-    text-align: center;
-    margin-bottom: 12%;
-    color: #fff;
+  text-align: center;
+  margin-bottom: 12%;
+  color: #fff;
 }
 
 .btnSubmit {
-    font-weight: 600;
-    width: 100%;
-    color: #282726;
-    background-color: #fff;
-    border: none;
-    border-radius: 1.5rem;
-    padding: 2%;
+  font-weight: 600;
+  width: 100%;
+  color: #282726;
+  background-color: #fff;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 2%;
 }
 
 .btnForgetPwd {
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .btnForgetPwd:hover {
-    text-decoration: none;
-    color: rgb(136, 176, 75);
+  text-decoration: none;
+  color: rgb(136, 176, 75);
+}
+
+/* REGISTER page */
+.container {
+  padding: 0;
+  min-height: 60vh;
+  background-color: #ffffff;
+}
+
+.registerForm {
+  width: 100%;
+  padding: 15px;
+  margin: 0 auto;
+  border-radius: 0.3em;
+}
+
+.registerForm h2, .registerForm h4 {
+  font-weight: 600;
+  color: #000000;
+  margin-top: 1%;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.registerLine {
+  border-top: 1px solid #ced4da;
+  padding: 10px;
+}
+
+.control-label {
+  padding: .375rem .75rem;
+  text-align: right;
+}
+
+.btnGreenery {
+  color: #fff;
+  background-color: rgb(136, 176, 75);
+  border-color: rgb(136, 176, 75);
 }
 
 /* If screen < 1050px (Tablets) */
@@ -358,6 +509,10 @@ footer {
   /* MENU main */
   #logo {
     margin-left: 0.2rem;
+  }
+
+  #menuSearchbar {
+    display: none;
   }
 
   .col-sm-4, .col-sm-4 {
@@ -369,14 +524,6 @@ footer {
     display: none;
   }
 
-  #dropdownAuctions {
-    left: 115px;
-  }
-
-  #dropdownLanguage {
-    left: 75%;
-  }
-
   /* HOME featured auctions */
   .cardItem {
     width: 48%;
@@ -386,9 +533,13 @@ footer {
     height: 300px;
   }
 
-  /* HOME popular categories */
-  .popularCategoryItem {
-    height: 140px;
+  /* REGISTER page */
+  .control-label {
+    text-align: center;
+  }
+
+  .form-control {
+    text-align: center;
   }
 
 }
@@ -397,19 +548,24 @@ footer {
 @media only screen and (max-width: 726px) {
 
   /* MENU main */
-  #menuSearchbar {
-    display: none;
-  }
-
   .menuItem {
     display: none;
   }
 
-  .hamburgerMenu {
+  .phoneButton {
     display: block;
   }
 
+  .col-6 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   /* HOME carousel */
+  #reviews {
+    display: none;
+  }
+
   #carouselExampleIndicators {
     display: none;
   }

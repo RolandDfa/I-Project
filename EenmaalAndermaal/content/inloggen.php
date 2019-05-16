@@ -1,5 +1,5 @@
 <div class="container loginContainer">
-  <div class="row">
+  <div class="row marginZero">
     <div class="col-md-6 loginForm">
       <h3>Inloggen</h3>
       <form action="content/loginScript.php" method="post">
@@ -8,6 +8,13 @@
         </div>
         <div class="form-group">
           <input type="password" class="form-control" name="password" placeholder="Wachtwoord *" required />
+          <div class="redText">
+            <?php
+            if (!empty($_GET['error'])) {
+              echo 'Gebruikersnaam of wachtwoord is onjuist.';
+            }
+            ?>
+          </div>
         </div>
         <div class="form-group">
           <input type="checkbox" name="blijfingelogd" value="ja"> Ingelogd blijven
