@@ -1,8 +1,3 @@
-<!doctype html>
-<html class="no-js" lang="en" dir="ltr">
-
-
-
 <body>
     <br/>
     <div class="row">
@@ -53,7 +48,7 @@
                                             $result2 =  $dbh->query($sql2);
                                             $row2=$data->fetch($dbh,$sql2);
                                             
-                                            $result3 = sqlsrv_query($db, $sql3);
+                                            $result3 = $dbh->query($sql3);
                                             $row3=$data->fetch();
                                             echo 'Beoordeling van de aanbieder:';
                                             echo '<div class="stars">';
@@ -65,30 +60,30 @@
                                             {
                                                 for ($i=0; $i<3; $i++)
                                                 {
-                                                    echo '<img src="Images\star_empty.png" alt="Star Empty">';
+                                                    echo '<img src="images\star_empty.png" alt="Star Empty">';
                                                 }
                                             }
                                             else if ($totalscore>0&&$totalscore<=1.5)
                                             {
-                                                echo '<img src="Images\star.png" alt="Star">';
+                                                echo '<img src="images\star.png" alt="Star">';
                                                 for ($i=0; $i<2; $i++)
                                                 {
-                                                    echo '<img src="Images\star_empty.png" alt="Star Empty">';
+                                                    echo '<img src="images\star_empty.png" alt="Star Empty">';
                                                 }
                                             }
                                             else if ($totalscore>1.5&&$totalscore<=2.5)
                                             {
                                                 for ($i=0; $i<2; $i++)
                                                 {
-                                                    echo '<img src="Images\star.png" alt="Star">';
+                                                    echo '<img src="images\star.png" alt="Star">';
                                                 }
-                                                echo '<img src="Images\star_empty.png" alt="Star Empty">';
+                                                echo '<img src="images\star_empty.png" alt="Star Empty">';
                                             }
                                             else if ($totalscore>2.5&&$totalscore<=3)
                                             {
                                                 for ($i=0; $i<3; $i++)
                                                 {
-                                                    echo '<img src="Images\star.png" alt="Star">';
+                                                    echo '<img src="images\star.png" alt="Star">';
                                                 }
                                             }
                                             echo '</div>';
@@ -120,7 +115,7 @@
                                         $result = $dbh->query($sql);
                                         $i=0;
                                         echo '<table>';
-                                        while($row=sqlsrv_fetch_array($result))
+                                        while($row=$data->fetch($result))
                                         {
                                            echo '<tr>';
                                             echo '<td>';
@@ -129,13 +124,13 @@
                                             $_POST['id'] = $row['voorwerpnummer'];
                                             
                                             $img = "SELECT TOP 1 * FROM Bestand WHERE Voorwerp =".$row['voorwerpnummer'];
-                                            $plaatje = sqlsrv_query($db, $img);
+                                            $plaatje = $dbh->query($db, $img);
                                             $afbeelding=sqlsrv_fetch_array($plaatje);
                                             if($afbeelding==true){
                                                 echo '<img src="'.$afbeelding['filenaam'].'" alt="'.$row['titel'].'" class="prdimg">'."<br>";
                                             }
                                             else {
-                                                echo '<img src="Images/placeholder_product.png" alt="'.$row['titel'].'" class="prdimg">'."<br>";   
+                                                echo '<img src="images/placeholder_product.png" alt="'.$row['titel'].'" class="prdimg">'."<br>";   
                                             }
                                             echo '<b>'.$row['titel'].'</b>';
                                             echo '<br/>';
@@ -159,17 +154,19 @@
                                 <div class="large-4 columns">
                                     <?php
                                     echo "<h3>Mijn aankopen</h3>";
-                                        $sql = "SELECT titel,voorwerpnummer, max(Bodbedrag)as maxbedrag, COUNT(Bodbedrag)as geboden,looptijd, looptijdeindeDag,looptijdeindeTijdstip, Soort_gebruiker, Feedbacksoort, Dag, Tijdstip, commentaar 
+                                        $sql = "SELECT titel,voorwerpnummer, max(Bodbedrag)as maxbedrag, COUNT(Bodbedrag)as geboden,looptijd, looptijdeindeDag,looptijdeindeTijdstip, gebruikersnaam, Feedbacksoort, Dag, Tijdstip, commentaar 
                                         FROM (Voorwerp LEFT OUTER JOIN Bod 
                                         ON Voorwerp.voorwerpnummer=bod.Voorwerp)
                                         LEFT OUTER JOIN Feedback ON Voorwerp.voorwerpnummer = Feedback.Voorwerp
                                         WHERE kopernaam ='$id' 
-                                        GROUP BY titel,voorwerpnummer, looptijd, looptijdeindeDag,looptijdeindeTijdstip, Soort_gebruiker, Feedbacksoort, Dag, Tijdstip, commentaar";
-                                        $result = sqlsrv_query($db, $sql);
+                                        GROUP BY titel,voorwerpnummer, looptijd, looptijdeindeDag,looptijdeindeTijdstip, gebruikersnaam, Feedbacksoort, Dag, Tijdstip, commentaar";
+                                        var_dump($sql);
+                                        $result = $dbh->query($sql);
 
                                         $i=0;
                                         echo '<table>';
-                                        while($row=sqlsrv_fetch_array($result))
+                                        while($row = $data->fetch($result))
+                                        //while($row=sqlsrv_fetch_array())
                                         {
                                             echo '<tr>';
                                             echo '<td>';
@@ -183,7 +180,7 @@
                                                 echo '<img src="'.$afbeelding['filenaam'].'" alt="'.$row['titel'].'" class="prdimg">'."<br>";
                                             }
                                             else {
-                                                echo '<img src="Images/placeholder_product.png" alt="'.$row['titel'].'" class="prdimg">'."<br>";   
+                                                echo '<img src="images/placeholder_product.png" alt="'.$row['titel'].'" class="prdimg">'."<br>";   
                                             }
                                             echo '<b>'.$row['titel'].'</b>';
                                             echo '<br/>';
@@ -215,11 +212,11 @@
                                     <?php
                                     echo "<h3>Mijn aangeboden artikelen</h3>";
                                         $sql = "SELECT titel,voorwerpnummer, max(Bodbedrag)as maxbedrag, COUNT(Bodbedrag)as geboden,looptijd, looptijdeindeDag,looptijdeindeTijdstip FROM Voorwerp LEFT OUTER JOIN Bod ON Voorwerp.voorwerpnummer=bod.Voorwerp WHERE verkopernaam ='$id' GROUP BY titel,voorwerpnummer, looptijd, looptijdeindeDag,looptijdeindeTijdstip";
-                                        $result = sqlsrv_query($db, $sql);
-
+                                        $result = $dbh->query($sql);
                                         $i=0;
                                         echo '<table>';
-                                        while($row=sqlsrv_fetch_array($result))
+                                        while($row = $data->fetch($result))
+                                       // while($row=sqlsrv_fetch_array($result))
                                         {
                                             echo '<tr>';
                                             echo '<td>';
@@ -233,7 +230,7 @@
                                                 echo '<img src="'.$afbeelding['filenaam'].'" alt="'.$row['titel'].'" class="prdimg">'."<br>";
                                             }
                                             else {
-                                                echo '<img src="Images/placeholder_product.png" alt="'.$row['titel'].'" class="prdimg">'."<br>";   
+                                                echo '<img src="images/placeholder_product.png" alt="'.$row['titel'].'" class="prdimg">'."<br>";   
                                             }
                                             echo '<b>'.$row['titel'].'</b>';
                                             echo '<br/>';
@@ -258,7 +255,7 @@
                     </div>
     </div>
 
-    <?php include 'includes/footer.php';?>
+   <!--
         <script src="js/vendor/jquery.js"></script>
         <script src="js/vendor/what-input.js"></script>
         <script src="js/vendor/foundation.js"></script>
@@ -278,7 +275,6 @@
 
             });
 
-        </script>
+        </script> -->
 </body>
 
-</html>
