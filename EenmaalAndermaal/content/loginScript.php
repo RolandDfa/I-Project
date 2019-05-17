@@ -12,24 +12,28 @@ if(isset($_POST['login'])) {
 
   //Username and password check
   try {
-    $sql = "SELECT * FROM Gebruiker WHERE gebruikersnaam = '$username'";
-    $result = $dbh->query($sql);
-
-    // If record ^
-    if (($row = $result->fetch()) > 0) {
-      $password = hash('sha256', $password);
-      // If passwords match
-      if ($password == $row['wachtwoord']) {
-        // Create session variables
-        $_SESSION['username'] = $username;
-        $_SESSION['userstate'] = $row['gebruikersStatus'];
-        // Login succesvol
-        header("Location: ../index.php?page=home");
-      } else {
-        // Passwords don't match
-        header("Location: ../index.php?page=inloggen&error=onjuist");
+    $loginquery = "SELECT * FROM Gebruiker WHERE gebruikersnaam = :username";
+    $loginStmt = $dbh->prepare($loginquery);
+    $loginStmt->bindParam(':username', $username);
+    $loginStmt->execute();
+    if($loginStmt->rowCount()!=0){
+      $usernames = $loginStmt->fetchAll();
+      foreach ($usernames as $users) {
+        $password = hash('sha256', $password);
+        // If passwords match
+        if ($password == $users['wachtwoord']) {
+          // Create session variables
+          $_SESSION['username'] = $username;
+          $_SESSION['userstate'] = $users['gebruikersStatus'];
+          // Login succesvol
+          header("Location: ../index.php?page=home");
+        } else {
+          // Passwords don't match
+          header("Location: ../index.php?page=inloggen&error=onjuist");
+        }
       }
-    } else {
+    }
+    else {
       // No user found
       header("Location: ../index.php?page=inloggen&error=onjuist");
     }
