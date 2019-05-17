@@ -81,6 +81,9 @@ if (!empty($_GET['page'])) {
 					case 'registreren':
 					require('content/registreren.php');
 					break;
+					case 'accountInformatie':
+					require('content/accountInformatie.php');
+					break;
 					case 'gebruikersvoorwaarden':
 					require('content/gebruikersvoorwaarden.php');
 					break;
