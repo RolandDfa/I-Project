@@ -50,12 +50,12 @@
   <div class="row contentWrapper">
     <?php
     try{
-      $data = $dbh->query("SELECT TOP 8 titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 ORDER BY looptijdbeginDag, looptijdbeginTijdstip");
+      $data = $dbh->query("SELECT TOP 4 titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 ORDER BY looptijdbeginDag DESC, looptijdbeginTijdstip DESC");
       if($data->rowCount()){
         while($row = $data->fetch()){
           $voorwerpnummer = $row['voorwerpnummer'];
           echo '<div class="cardItem">
-          <a href="index.php?page=overzicht&id='.hash('sha256', $row['voorwerpnummer']).'">
+          <a href="index.php?page=veiling&id='.hash('sha256', $row['voorwerpnummer']).'">
           <div class="card shadow-sm">
           <div class="cardImage">';
           $imageData = $dbh->query("SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = $voorwerpnummer");
