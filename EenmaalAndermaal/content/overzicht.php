@@ -37,6 +37,16 @@ if(isset($_POST['searchText'])){
         <div class="cardHeader">'.
         $row['titel'].'
         </div>
+        <div class="cardPrice">';
+        $biedingen = $dbh->query("SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = $voorwerpnummer ORDER BY bodbedrag ASC");
+        if($biedingen->rowCount()){
+          while($bod = $biedingen->fetch()){
+            echo '&euro; '.$bod['bodbedrag'];
+          }
+        }else{
+          echo 'Nog geen bod';
+        }
+        echo '</div>
         <div class="cardFooter">
         Sluit '.$row['looptijdeindeDag'].' om '.date('H:i.s',strtotime($row['looptijdeindeTijdstip'])).'
         </div>
