@@ -96,18 +96,6 @@ if (!empty($_GET['page'])) {
 					case 'privacybeleid':
 					require('content/privacybeleid.php');
 					break;
-<<<<<<< HEAD
-					case 'overzicht':
-					require('content/overzicht.php');
-					break;
-					case 'registrerenSucces':
-					require('content/registrerenSucces.php');
-					break;
-					case 'veiling':
-					require('content/veiling.php');
-					break;
-=======
->>>>>>> deb32fd14009b243349c14596900ca2c5cbf632b
 					default:
 					require('content/home.php');
 				}
