@@ -1,5 +1,5 @@
 <div class="col-lg-2"><!-- White space --></div>
-<div class="col-lg-3 col-sm-6 col-6">
+<div class="col-lg-3 col-md-6 col-sm-6 col-6">
   <a id="logo" href="index.php?page=home"><img src="images/EenmaalAndermaalLogo.png" width="120" height="60" alt="Logo"></a>
   <div class="btn-group">
     <a class="menuItem dropdown-toggle" href="" data-toggle="dropdown"><b>Alle categorieën</b></a>
@@ -29,7 +29,8 @@
     </div>
   </form>
 </div>
-<div class="col-lg-3 col-sm-6 col-6 alignRight">
+<div class="col-lg-3 col-md-6 col-sm-6 col-6 alignRight">
+  <a id="ipadSearch" class="phoneButton search-form-tigger" data-toggle="search-form"><i class="fa fa-search phoneIcon"></i></a>
   <a class="menuItem" href="">Plaats advertentie</a>
   <?php
   if (!isset($_SESSION["username"])) {
@@ -57,6 +58,7 @@
     echo '<a class="phoneButton" href="index.php?page=account"><i class="fas fa-user-tie phoneIcon"></i></a>';
   }
   ?>
+  <a class="phoneButton search-form-tigger" data-toggle="search-form"><i class="fa fa-search phoneIcon"></i></a>
 
 </div>
 <div class="col-lg-2"><!-- White space --></div>
@@ -77,6 +79,17 @@
   </div>
 </div>
 
+<div id="dropSearch" class="search-form-wrapper">
+  <form class="search-form" action="index.php?page=overzicht" method="post">
+    <div class="input-group">
+      <input class="form-control greeneryBorder" type="text" placeholder="Zoeken" required minlength="2" name="searchText">
+      <div class="input-group-append">
+        <button type="submit" class="input-group-text greeneryBackground greeneryBorder"><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </form>
+</div>
+
 <script>
 function openNav() {
   document.getElementById("myNav").style.height = "100%";
@@ -85,4 +98,22 @@ function openNav() {
 function closeNav() {
   document.getElementById("myNav").style.height = "0%";
 }
+
+$( document ).ready(function() {
+  $('[data-toggle=search-form]').click(function() {
+    $('.search-form-wrapper').toggleClass('open');
+    $('.search-form-wrapper .search').focus();
+    $('html').toggleClass('search-form-open');
+  });
+
+  $('[data-toggle=search-form-close]').click(function() {
+    $('.search-form-wrapper').removeClass('open');
+    $('html').removeClass('search-form-open');
+  });
+
+  $('.search-close').click(function(event) {
+    $('.search-form-wrapper').removeClass('open');
+    $('html').removeClass('search-form-open');
+  });
+});
 </script>
