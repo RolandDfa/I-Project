@@ -50,42 +50,69 @@
   <div class="row contentWrapper">
     <?php
     try{
-      $data = $dbh->query("SELECT TOP 4 titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 ORDER BY looptijdbeginDag DESC, looptijdbeginTijdstip DESC");
-      if($data->rowCount()){
-        while($row = $data->fetch()){
-          $voorwerpnummer = $row['voorwerpnummer'];
+      $overzichtquery = "SELECT TOP 4 titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 ORDER BY looptijdbeginDag DESC, looptijdbeginTijdstip DESC";
+      $stmt = $dbh->prepare($overzichtquery);
+      $stmt->execute();
+      if ($stmt->rowCount() != 0) {
+        $results = $stmt->fetchAll();
+        foreach( $results as $result ) {
+          $voorwerpnummer = $result['voorwerpnummer'];
           echo '<div class="cardItem">
           <a href="index.php?page=veiling&id='.hash('sha256', $row['voorwerpnummer']).'">
           <div class="card shadow-sm">
           <div class="cardImage">';
-          $imageData = $dbh->query("SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = $voorwerpnummer");
-          if($imageData->rowCount()){
-            while($image = $imageData->fetch()){
-              echo '<img class="rounded-top" src="uploaded_content/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$row['titel'].'">';
+
+          $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = :voorwerpnummer";
+          $imagesStmt = $dbh->prepare($imagesquery);
+          $imagesStmt->bindParam(':voorwerpnummer', $voorwerpnummer);
+          $imagesStmt->execute();
+          if($imagesStmt->rowCount()!=0){
+            $images = $imagesStmt->fetchAll();
+            foreach ($images as $image) {
+              echo '<img class="rounded-top" src="uploaded_content/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
             }
           }else{
-            echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$row['titel'].'">';
+            echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
           }
           echo '</div>
           <div class="cardTitle">
           <div class="cardHeader">'.
-          $row['titel'].'
+          $result['titel'].'
           </div>
+          <div class="cardPrice">';
+
+          $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = :voorwerpnummerPrijs ORDER BY bodbedrag ASC";
+          $priceStmt = $dbh->prepare($pricequery);
+          $priceStmt->bindParam(':voorwerpnummerPrijs', $voorwerpnummer);
+          $priceStmt->execute();
+          if($priceStmt->rowCount()!=0){
+            $prices = $priceStmt->fetchAll();
+            foreach ($prices as $price) {
+              echo '&euro; '.$price['bodbedrag'];
+            }
+          }
+          else{
+            echo 'Nog geen bod';
+          }
+          echo '</div>
           <div class="cardFooter">
-          Sluit '.$row['looptijdeindeDag'].' om '.date('H:i.s',strtotime($row['looptijdeindeTijdstip'])).'
-          </div>
+          Sluit '.$result['looptijdeindeDag'].' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).'
+          </div>';
+
+          echo '
           </div>
           </div>
           </a>
           </div>';
         }
-      }else{
-        echo '<h4><b>Geen resultaten voor: "'.$searchText.'"</b></h4>';
       }
     }
     catch (PDOException $e){
       echo "Er gaat iets fout met het ophalen van de artikelen: ".$e->getMessage();
     }
+
+
+
     ?>
   </div>
 
