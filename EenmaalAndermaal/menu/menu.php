@@ -37,12 +37,12 @@
     echo '<a class="menuItem" href="index.php?page=inloggen">Inloggen</a>';
   } else {
     echo '<div class="btn-group">
-            <a class="menuItem marginLeft marginRight dropdown-toggle" href="" data-toggle="dropdown">'.$_SESSION["username"].'</a>
-            <div class="dropdown-menu greeneryBorder dropdown-menu-right">
-              <a class="dropdown-item" href="index.php?page=account">Mijn account</a>
-              <a class="dropdown-item" href="logout.php">Uitloggen</a>
-            </div>
-          </div>';
+    <a class="menuItem marginLeft marginRight dropdown-toggle" href="" data-toggle="dropdown">'.$_SESSION["username"].'</a>
+    <div class="dropdown-menu greeneryBorder dropdown-menu-right">
+    <a class="dropdown-item" href="index.php?page=account">Mijn account</a>
+    <a class="dropdown-item" href="logout.php">Uitloggen</a>
+    </div>
+    </div>';
   }
   ?>
   <div class="btn-group">
