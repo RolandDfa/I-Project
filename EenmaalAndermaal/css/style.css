@@ -397,7 +397,19 @@ ul.social-network li {
   flex: 1 0 auto;
 }
 
+<<<<<<< HEAD
 .footerText {
+=======
+.cardPrice {
+  font-size: 0.9rem;
+  line-height: 1.125;
+  font-weight: 700;
+  color: #222222;
+  flex: 1 0 auto;
+}
+
+.cardFooter {
+>>>>>>> e3d2d08def34cbb68a2929ee1162676f51553797
   font-size: 0.75rem;
   line-height: 1.167;
   color: #727272;
