@@ -12,11 +12,6 @@ if(isset($_POST['login'])) {
 
   //Username and password check
   try {
-    $sql = "SELECT * FROM Gebruiker WHERE gebruikersnaam = '$username'";
-    $result = $dbh->query($sql);
-
-
-
     $loginquery = "SELECT * FROM Gebruiker WHERE gebruikersnaam = :username";
     $loginStmt = $dbh->prepare($loginquery);
     $loginStmt->bindParam(':username', $username);
