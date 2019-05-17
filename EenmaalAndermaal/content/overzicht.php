@@ -8,9 +8,6 @@ if(isset($_POST['searchText'])){
 
 ?>
 <div class="pageWrapper">
-
-
-
   <?php
   try{
     $data = $dbh->query("SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and titel like '%$searchText%'");
