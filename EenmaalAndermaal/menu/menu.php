@@ -29,14 +29,9 @@
     </div>
   </form>
 </div>
-<<<<<<< HEAD
-<div class="col-lg-3 col-sm-6 col-6 alignRight">
-  <a class="menuItem" href="">Plaats veiling</a>
-=======
 <div class="col-lg-3 col-md-6 col-sm-6 col-6 alignRight">
   <a id="ipadSearch" class="phoneButton search-form-tigger" data-toggle="search-form"><i class="fa fa-search phoneIcon"></i></a>
-  <a class="menuItem" href="">Plaats advertentie</a>
->>>>>>> af17822b2ddc443141a09343be6f70ef832d83ee
+  <a class="menuItem" href="">Plaats veiling</a>
   <?php
   if (!isset($_SESSION["username"])) {
     echo '<a class="menuItem" href="index.php?page=inloggen">Inloggen</a>';
