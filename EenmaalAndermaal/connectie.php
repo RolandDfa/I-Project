@@ -2,7 +2,7 @@
 // Database connection
 $hostname = "mssql.iproject.icasites.nl";
 $dbname = "iproject41";
-$username = "iproject41";
+$usernameDB = "iproject41";
 $pw = "V19UFzEQGJ";
 
 // $hostname = "localhost";
@@ -11,7 +11,7 @@ $pw = "V19UFzEQGJ";
 // $pw = "";
 
 try {
-  $dbh = new PDO("sqlsrv:Server=$hostname;Database=$dbname;ConnectionPooling=0", "$username", "$pw");
+  $dbh = new PDO("sqlsrv:Server=$hostname;Database=$dbname;ConnectionPooling=0", "$usernameDB", "$pw");
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
   die ("Fout met de database: {$e->getMessage()} ");

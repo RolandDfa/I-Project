@@ -141,22 +141,22 @@ if(isset($_POST['signUp'])){
 			$hashedWW = hash('sha256', $password);
 			$hashedSecurityA = hash('sha256', $securityA);
 			try {
-				$sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox, wachtwoord, vraag, antwoordTekst, gebruikersStatus, valid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-				$queryInsert = $dbh->prepare($sqlInsert);
-
-				$queryInsert->execute(array($username, $name, $lastname, $address, $zipcode, $city, $country, $kvknr, $birthDate, $_SESSION['email'], $hashedWW, $securityQ, $hashedSecurityA, 1, 1));
-
-				$sqlInsertTellnr = "INSERT INTO Gebruikerstelefoon(gebruikersnaam, Telefoon) VALUES(?,?)";
-				$queryInsertTellnr = $dbh->prepare($sqlInsertTellnr);
-
-				$queryInsertTellnr->execute(array($username, $telnr));
-
-				if (!empty($telnr2)) {
-					$sqlInsertTellnr2 = "INSERT INTO Gebruikerstelefoon(gebruikersnaam, Telefoon) VALUES(?,?)";
-					$queryInsertTellnr2 = $dbh->prepare($sqlInsertTellnr2);
-
-					$queryInsertTellnr2->execute(array($username, $telnr2));
-				}
+				// $sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox, wachtwoord, vraag, antwoordTekst, gebruikersStatus, valid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				// $queryInsert = $dbh->prepare($sqlInsert);
+				//
+				// $queryInsert->execute(array($username, $name, $lastname, $address, $zipcode, $city, $country, $kvknr, $birthDate, $_SESSION['email'], $hashedWW, $securityQ, $hashedSecurityA, 1, 1));
+				//
+				// $sqlInsertTellnr = "INSERT INTO Gebruikerstelefoon(gebruikersnaam, Telefoon) VALUES(?,?)";
+				// $queryInsertTellnr = $dbh->prepare($sqlInsertTellnr);
+				//
+				// $queryInsertTellnr->execute(array($username, $telnr));
+				//
+				// if (!empty($telnr2)) {
+				// 	$sqlInsertTellnr2 = "INSERT INTO Gebruikerstelefoon(gebruikersnaam, Telefoon) VALUES(?,?)";
+				// 	$queryInsertTellnr2 = $dbh->prepare($sqlInsertTellnr2);
+				//
+				// 	$queryInsertTellnr2->execute(array($username, $telnr2));
+				// }
 
 
 				// Unset session var
