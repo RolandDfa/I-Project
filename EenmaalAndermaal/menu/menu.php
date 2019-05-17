@@ -30,7 +30,7 @@
   </form>
 </div>
 <div class="col-lg-3 col-sm-6 col-6 alignRight">
-  <a class="menuItem" href="">Plaats advertentie</a>
+  <a class="menuItem" href="">Plaats veiling</a>
   <?php
   if (!isset($_SESSION["username"])) {
     echo '<a class="menuItem" href="index.php?page=inloggen">Inloggen</a>';

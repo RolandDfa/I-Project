@@ -33,7 +33,7 @@ if(isset($_POST['searchText'])){
               echo '<img class="rounded-top" src="uploaded_content/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$row['titel'].'">';
             }
           }else{
-            echo '<img class="rounded-top" src="uploaded_content/image_placeholder.png" width="100%" height="220" alt="'.$row['titel'].'">';
+            echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$row['titel'].'">';
           }
           echo '</div>
           <div class="cardTitle">
