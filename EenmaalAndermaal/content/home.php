@@ -45,75 +45,48 @@
     <h4><b>Meest recente veilingen</b></h4>
   </div>
 
+
+
   <div class="row contentWrapper">
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/stoel.jpg" width="100%" height="220" alt="Stoel">
-          </div>
+    <?php
+    try{
+      $data = $dbh->query("SELECT TOP 4 titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 ORDER BY looptijdbeginDag DESC, looptijdbeginTijdstip DESC");
+      if($data->rowCount()){
+        while($row = $data->fetch()){
+          $voorwerpnummer = $row['voorwerpnummer'];
+          echo '<div class="cardItem">
+          <a href="index.php?page=veiling&id='.hash('sha256', $row['voorwerpnummer']).'">
+          <div class="card shadow-sm">
+          <div class="cardImage">';
+          $imageData = $dbh->query("SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = $voorwerpnummer");
+          if($imageData->rowCount()){
+            while($image = $imageData->fetch()){
+              echo '<img class="rounded-top" src="uploaded_content/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$row['titel'].'">';
+            }
+          }else{
+            echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$row['titel'].'">';
+          }
+          echo '</div>
           <div class="cardTitle">
-            <div class="cardHeader">
-              Goeie Stoel (grondig getest)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
+          <div class="cardHeader">'.
+          $row['titel'].'
           </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/fiets.jpg" width="100%" height="220" alt="Fiets">
+          <div class="cardFooter">
+          Sluit '.$row['looptijdeindeDag'].' om '.date('H:i.s',strtotime($row['looptijdeindeTijdstip'])).'
           </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Nieuwe fiets (bijna nieuw)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
           </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/klok.jpg" width="100%" height="220" alt="Klok">
           </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Antieke klok (originele bel)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    <div class="cardItem">
-      <a href="">
-        <div class="card shadow-sm">
-          <div class="cardImage">
-            <img class="rounded-top" src="images/gitaar.jpg" width="100%" height="220" alt="Gitaar"></a>
-          </div>
-          <div class="cardTitle">
-            <div class="cardHeader">
-              Akoestische gitaar (incl. snaren)
-            </div>
-            <div class="cardFooter">
-              Sluit zaterdag vanaf 20:00
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
+          </a>
+          </div>';
+        }
+      }else{
+        echo '<h4><b>Geen resultaten voor: "'.$searchText.'"</b></h4>';
+      }
+    }
+    catch (PDOException $e){
+      echo "Er gaat iets fout met het ophalen van de artikelen: ".$e->getMessage();
+    }
+    ?>
   </div>
 
   <div class="textCenter">
