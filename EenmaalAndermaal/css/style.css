@@ -82,25 +82,6 @@ h5 {
   margin-right: 0;
 }
 
-
-
-#dropSearch {
-  width: 100%;
-}
-
-.search-form-wrapper {
-    display: none;
-    position: static;
-    padding: 10px;
-    background-color: #222222;
-}
-.search-form-wrapper.open {
-    display: block;
-}
-
-
-
-
 /* MENU main */
 #mainNav {
   display: flex;
@@ -122,6 +103,20 @@ h5 {
 
 #dropdownLanguage {
   min-width: 20px;
+}
+
+#dropSearch {
+  width: 100%;
+}
+
+.search-form-wrapper {
+    display: none;
+    position: static;
+    padding: 10px;
+    background-color: #222222;
+}
+.search-form-wrapper.open {
+    display: block;
 }
 
 .menuItem, .phoneButton {
@@ -524,6 +519,14 @@ ul.social-network li {
 
 /* If screen < 1050px (Tablets) */
 @media only screen and (max-width: 1050px) {
+
+  .marginLeft {
+    margin-left: 5px !important;
+  }
+
+  .marginRight {
+    margin-right: 5px !important;
+  }
 
   /* MENU main */
   #logo {

@@ -6,13 +6,12 @@
     <div class="dropdown-menu greeneryBorder">
       <?php
       // Get the headings from the database
-      try{
+      try {
         $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent is null ORDER BY rubrieknaam asc");
-        while($row = $data->fetch()){
+        while ($row = $data->fetch()) {
           echo '<a class="dropdown-item" href="">'.$row['rubrieknaam'].'</a>';
         }
-      }
-      catch (PDOException $e){
+      } catch (PDOException $e) {
         echo "Kan rubrieken niet laden".$e->getMessage();
       }
       ?>
