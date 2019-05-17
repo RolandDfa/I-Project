@@ -24,7 +24,7 @@ if(isset($_POST['searchText'])){
         while($row = $data->fetch()){
           $voorwerpnummer = $row['voorwerpnummer'];
           echo '<div class="cardItem">
-          <a href="">
+          <a href="index.php?page=overzicht&id='.hash('sha256', $row['voorwerpnummer']).'">
           <div class="card shadow-sm">
           <div class="cardImage">';
           $imageData = $dbh->query("SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = $voorwerpnummer");
