@@ -1,4 +1,4 @@
-<div class="pageWrapper">
+<div class="homeContainer">
 
   <div id="reviews" class="row">
     <h4><b>Reviews</b></h4>
@@ -71,7 +71,7 @@
           <div class="cardHeader">'.
           $row['titel'].'
           </div>
-          <div class="cardFooter">
+          <div class="footerText">
           Sluit '.$row['looptijdeindeDag'].' om '.date('H:i.s',strtotime($row['looptijdeindeTijdstip'])).'
           </div>
           </div>
@@ -125,5 +125,4 @@
       </a>
     </div>
   </div>
-</div>
 </div>

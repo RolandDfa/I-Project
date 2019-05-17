@@ -28,8 +28,14 @@ h5 {
   font-family: Tahoma, Verdana, Segoe, sans-serif;
 }
 
-.pageWrapper {
+.homeContainer {
   padding: 20px;
+}
+
+.pageWrapper {
+  padding: 15px;
+  min-height: 60vh;
+  background-color: #fff;
 }
 
 .contentWrapper {
@@ -39,6 +45,10 @@ h5 {
 
 .textCenter {
   text-align: center;
+}
+
+.greeneryText {
+  color: rgb(136, 176, 75);
 }
 
 .greeneryBackground {
@@ -80,6 +90,24 @@ h5 {
 .marginZero {
   margin-left: 0;
   margin-right: 0;
+}
+
+.bottomline {
+  border-bottom: 1px solid #b9b9b9;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.bottomlineWhite {
+  border-bottom: 1px solid #ffffff;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.bigtext {
+  font-size: 1.2em;
 }
 
 /* MENU main */
@@ -369,7 +397,7 @@ ul.social-network li {
   flex: 1 0 auto;
 }
 
-.cardFooter {
+.footerText {
   font-size: 0.75rem;
   line-height: 1.167;
   color: #727272;
@@ -479,12 +507,6 @@ ul.social-network li {
 }
 
 /* REGISTER page */
-.container {
-  padding: 0;
-  min-height: 60vh;
-  background-color: #ffffff;
-}
-
 .registerForm {
   width: 100%;
   padding: 15px;
@@ -515,6 +537,31 @@ ul.social-network li {
   color: #fff;
   background-color: rgb(136, 176, 75);
   border-color: rgb(136, 176, 75);
+}
+
+/* AUCTION page */
+#auctionImage img {
+  border: 1px solid #222222;
+  object-fit: cover;
+}
+
+.titleMarginBottom {
+  margin-bottom: 8px;
+}
+
+.imageMarginBottom {
+  margin-bottom: 20px;
+}
+
+.auctionCardTop {
+  background-color: rgb(136, 176, 75);
+  color: #fff;
+  padding: 15px;
+}
+
+.auctionCardBottom {
+  background-color: #f6f6f6;
+  padding: 20px;
 }
 
 /* If screen < 1050px (Tablets) */

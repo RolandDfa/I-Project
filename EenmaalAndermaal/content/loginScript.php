@@ -5,12 +5,12 @@ session_start();
 require('../connectie.php');
 require('../functions/functions.php');
 
-//Post inloggen
+// Post inloggen
 if(isset($_POST['login'])) {
   $username = cleanInput($_POST['username']);
   $password = cleanInput($_POST['password']);
 
-  //Username and password check
+  // Username and password check
   try {
     $sql = "SELECT * FROM Gebruiker WHERE gebruikersnaam = '$username'";
     $result = $dbh->query($sql);

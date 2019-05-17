@@ -40,7 +40,7 @@ if(isset($_POST['searchText'])){
         <div class="cardHeader">'.
         $row['titel'].'
         </div>
-        <div class="cardFooter">
+        <div class="footerText">
         Sluit '.$row['looptijdeindeDag'].' om '.date('H:i.s',strtotime($row['looptijdeindeTijdstip'])).'
         </div>
         </div>

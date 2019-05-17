@@ -58,7 +58,7 @@ if (isset($_POST['sendCode'])) {
 }
 
 ?>
-<div class="container">
+<div class="pageWrapper">
   <form class="registerForm" method="post" action="">
     <h2>Registreren</h2>
     <div class="row form-group"></div>
