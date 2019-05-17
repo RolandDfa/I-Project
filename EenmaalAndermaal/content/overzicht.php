@@ -14,18 +14,26 @@ if(isset($_POST['searchText'])){
     <?php
     if($searchText != ""){
       try{
-        $data = $dbh->query("SELECT titel, bestandsnaam, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp inner join Bestand on Voorwerp.voorwerpnummer = Bestand.Voorwerp WHERE veilingGesloten = 0 and titel like '%$searchText%'");
+        $data = $dbh->query("SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and titel like '%$searchText%'");
         if($data->rowCount()){
           echo '
           <h4><b>Gevonden resultaten voor: "'.$searchText.'"</b></h4><br>
           <div class="row contentWrapper">';
           while($row = $data->fetch()){
+            $voorwerpnummer = $row['voorwerpnummer'];
             echo '<div class="cardItem">
             <a href="">
             <div class="card shadow-sm">
-            <div class="cardImage">
-            <img class="rounded-top" src="uploaded_content/'.$row['bestandsnaam'].'" width="100%" height="220" alt="'.$row['titel'].'">
-            </div>
+            <div class="cardImage">';
+
+
+
+            //<img class="rounded-top" src="uploaded_content/" width="100%" height="220" alt="'.$row['titel'].'">
+
+
+
+
+            echo '</div>
             <div class="cardTitle">
             <div class="cardHeader">'.
             $row['titel'].'
