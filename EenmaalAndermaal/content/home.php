@@ -58,7 +58,7 @@
         foreach( $results as $result ) {
           $voorwerpnummer = $result['voorwerpnummer'];
           echo '<div class="cardItem">
-          <a href="index.php?page=veiling&id='.hash('sha256', $row['voorwerpnummer']).'">
+          <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">
           <div class="card shadow-sm">
           <div class="cardImage">';
 
