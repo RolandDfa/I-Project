@@ -76,7 +76,7 @@
           }
           echo '</div>
           <div class="cardTitle">
-          <div class="cardHeader">'.
+          <div class="cardHeader titleMarginBottom">'.
           $result['titel'].'
           </div>
           <div class="cardPrice">';

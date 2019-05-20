@@ -1,14 +1,14 @@
 <?php
 // Database connection
-// $hostname = "mssql.iproject.icasites.nl";
-// $dbname = "iproject41";
-// $usernameDB = "iproject41";
-// $pw = "V19UFzEQGJ";
+$hostname = "mssql.iproject.icasites.nl";
+$dbname = "iproject41";
+$usernameDB = "iproject41";
+$pw = "V19UFzEQGJ";
 
-$hostname = "localhost";
-$dbname = "EenmaalAndermaal1";
-$usernameDB = "";
-$pw = "";
+// $hostname = "localhost";
+// $dbname = "EenmaalAndermaal";
+// $usernameDB = "";
+// $pw = "";
 
 try {
   $dbh = new PDO("sqlsrv:Server=$hostname;Database=$dbname;ConnectionPooling=0", "$usernameDB", "$pw");

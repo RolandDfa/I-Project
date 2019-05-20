@@ -378,7 +378,7 @@ ul.social-network li {
   height: 100%;
 }
 
-.card img{
+.card img {
   object-fit: cover;
 }
 
@@ -397,9 +397,6 @@ ul.social-network li {
   flex: 1 0 auto;
 }
 
-<<<<<<< HEAD
-.footerText {
-=======
 .cardPrice {
   font-size: 0.9rem;
   line-height: 1.125;
@@ -409,7 +406,6 @@ ul.social-network li {
 }
 
 .cardFooter {
->>>>>>> e3d2d08def34cbb68a2929ee1162676f51553797
   font-size: 0.75rem;
   line-height: 1.167;
   color: #727272;
@@ -563,6 +559,14 @@ ul.social-network li {
 
 .imageMarginBottom {
   margin-bottom: 20px;
+}
+
+.scrollmenu {
+  display: flex;
+  overflow: auto;
+  white-space: nowrap;
+  margin-right: -15px;
+  margin-left: -15px;
 }
 
 .auctionCardTop {

@@ -1,11 +1,5 @@
 <div class="pageWrapper">
 
-  <!-- <div class="row">
-    <div class="col-lg-12">
-
-    </div>
-  </div> -->
-
   <div class="row">
     <div class="col-lg-3">
       <h4><b>Naam artikel</b></h4>
@@ -34,17 +28,25 @@
 
     <div id="auctionImage" class="col-lg-5">
       <div class="imageMarginBottom">
-        <img src="images/image_placeholder.jpg" width="100%" height="300" alt="Placeholder">
+        <iframe frameborder="0" scrolling="no" width="100%" height="300" src="images/oldtimers.png" name="imgbox" id="imgbox"><p>iframes are not supported by your browser.</p></iframe>
+        <!-- <img src="images/image_placeholder.jpg" width="100%" height="300" alt="Placeholder"> -->
       </div>
 
-      <div class="row">
-        <div class="col-lg-4 imageMarginBottom">
+      <div class="scrollmenu imageMarginBottom">
+        <div class="col-lg-4">
+          <a href="images/oldtimers.png" target="imgbox">
+            <img src="images/oldtimers.png" width="100%" height="80%" alt="Placeholder">
+          </a>
+        </div>
+        <div class="col-lg-4">
+          <a href="images/fiets.jpg" target="imgbox">
+            <img src="images/fiets.jpg" width="100%" height="80%" alt="Placeholder">
+          </a>
+        </div>
+        <div class="col-lg-4">
           <img src="images/image_placeholder.jpg" width="100%" height="80%" alt="Placeholder">
         </div>
-        <div class="col-lg-4 imageMarginBottom">
-          <img src="images/image_placeholder.jpg" width="100%" height="80%" alt="Placeholder">
-        </div>
-        <div class="col-lg-4 imageMarginBottom">
+        <div class="col-lg-4">
           <img src="images/image_placeholder.jpg" width="100%" height="80%" alt="Placeholder">
         </div>
       </div>
