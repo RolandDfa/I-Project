@@ -286,8 +286,9 @@ footer li {
 }
 
 .footerLine {
-  border-top: 1px solid #999;
+  border-top: 1px solid rgb(136, 176, 75);
   padding: 10px;
+  color: 136, 176, 75;
 }
 
 .footerBreak {
@@ -376,6 +377,7 @@ ul.social-network li {
 
 .cardItem:hover{
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+  transition: 0.3s;
 }
 
 .card {
