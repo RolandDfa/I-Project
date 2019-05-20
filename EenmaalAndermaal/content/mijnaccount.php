@@ -81,6 +81,7 @@ if ($countTell) {
 else {
   $tel1 = $data2[0];
   $telnr = $tel1['Telefoon'];
+  $tel1Volgnr = $tel1['volgnr'];
 }
 ?>
 
@@ -215,14 +216,19 @@ if (isset($_POST['submitInfo'])) {
       $queryInsert = $dbh->prepare($sqlUpdate);
       $queryInsert->execute(array($address, $zipcode, $city, $country, $username));
 
-      $sqlUpdateTellnr = "UPDATE Gebruikerstelefoon SET Telefoon=? WHERE volgnr=$tel1Volgnr";
+      $sqlUpdateTellnr = "UPDATE Gebruikerstelefoon SET Telefoon=? WHERE volgnr = $tel1Volgnr";
       $queryInsertTellnr = $dbh->prepare($sqlUpdateTellnr);
       $queryInsertTellnr->execute(array($telnr));
 
+      if (empty($tel2Volgnr)) {
+        $sqlInsertTellnr2 = "INSERT INTO Gebruikerstelefoon(gebruikersnaam, Telefoon) VALUES(?,?)";
+        $queryInsertTellnr2 = $dbh->prepare($sqlInsertTellnr2);
+        $queryInsertTellnr2->execute(array($username, $telnr2));
+      }else{
       $sqlUpdateTellnr2 = "UPDATE Gebruikerstelefoon SET Telefoon=? WHERE volgnr=$tel2Volgnr";
       $queryInsertTellnr2 = $dbh->prepare($sqlUpdateTellnr2);
       $queryInsertTellnr2->execute(array($telnr2));
-
+      }
     } catch (PDOException $e) {
       echo "Fout met de database: {$e->getMessage()} ";
     }
