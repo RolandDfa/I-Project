@@ -88,7 +88,7 @@
           if($priceStmt->rowCount()!=0){
             $prices = $priceStmt->fetchAll();
             foreach ($prices as $price) {
-              echo '&euro; '.$price['bodbedrag'];
+              echo '&euro; '.str_replace('.', ',', $price['bodbedrag']);
             }
           }
           else{
@@ -96,7 +96,7 @@
           }
           echo '</div>
           <div class="cardFooter">
-          Sluit '.$result['looptijdeindeDag'].' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).'
+          Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).'
           </div>';
 
           echo '

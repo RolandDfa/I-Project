@@ -12,10 +12,9 @@ if(isset($_POST['login'])) {
 
   // Username and password check
   try {
-    $loginquery = "SELECT * FROM Gebruiker WHERE gebruikersnaam = :username";
+    $loginquery = "SELECT * FROM Gebruiker WHERE gebruikersnaam = ?";
     $loginStmt = $dbh->prepare($loginquery);
-    $loginStmt->bindParam(':username', $username);
-    $loginStmt->execute();
+    $loginStmt->execute(array($username));
     if($loginStmt->rowCount()!=0){
       $usernames = $loginStmt->fetchAll();
       foreach ($usernames as $users) {
