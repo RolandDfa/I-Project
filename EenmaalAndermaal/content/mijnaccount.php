@@ -11,25 +11,11 @@ try{
     $query->execute(array(':id' => $_SESSION['username']));
     $data = $query->fetchAll(PDO::FETCH_BOTH);
   }
-  // var_dump($data);
+  //var_dump($data);
 } catch (PDOException $e) {
   echo "Fout met de database: {$e->getMessage()} ";
 }
-try{
-  $sql2 = "SELECT Telefoon FROM Gebruikerstelefoon WHERE gebruikersnaam = :id";
-  $query2 = $dbh->prepare($sql2);
-  if(!$query2) {
-    echo "oops error 2";
-    exit();
-  }
-  else {
-    $query2->execute(array(':id' => $_SESSION['username']));
-    $data2 = $query2->fetchAll(PDO::FETCH_BOTH);
-  }
-  var_dump($data2);
-} catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
-}
+
 for ($i = 0; $i < sizeof($data); $i++) {
   foreach ($data[$i] as $key => $value) {
     switch ($key) {
@@ -68,7 +54,25 @@ for ($i = 0; $i < sizeof($data); $i++) {
     }
   }
 }
+try{
+  $sql2 = "SELECT Telefoon FROM Gebruikerstelefoon WHERE gebruikersnaam = :id ORDER BY volgnr ASC";
+  $query2 = $dbh->prepare($sql2);
+  if(!$query2) {
+    echo "oops error 2";
+  }
+  else {
+    $query2->execute(array(':id' => $username));
+    $data2 = $query2->fetchAll(PDO::FETCH_BOTH);
+  }
+  var_dump($data2);
+} catch (PDOException $e) {
+  echo "Fout met de database: {$e->getMessage()} ";
+}
 
+$countTell = count($data2) > 1;
+if ($countTell) {
+
+}
 ?>
 
 <H2>Account informatie</H2>
