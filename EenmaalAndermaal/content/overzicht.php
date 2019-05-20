@@ -4,16 +4,16 @@ if(isset($_POST['searchText'])){
 }else{
   $searchText = "";
 }
+
 ?>
 
 <div class="pageWrapper">
 
   <?php
   try{
-    $overzichtquery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and titel like :search";
+    $overzichtquery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and titel like ?";
     $stmt = $dbh->prepare($overzichtquery);
-    $stmt->bindValue(':search', '%' . $searchText . '%', PDO::PARAM_INT);
-    $stmt->execute();
+    $stmt->execute(array('%'.$searchText.'%'));
     if ($stmt->rowCount() != 0) {
       if($searchText != ""){
         echo '<h4><b>Gevonden resultaten voor: "'.$searchText.'"</b></h4><br><div class="row contentWrapper">';
@@ -29,10 +29,9 @@ if(isset($_POST['searchText'])){
         <div class="card shadow-sm">
         <div class="cardImage">';
 
-        $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = :voorwerpnummer";
+        $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = ?";
         $imagesStmt = $dbh->prepare($imagesquery);
-        $imagesStmt->bindParam(':voorwerpnummer', $voorwerpnummer);
-        $imagesStmt->execute();
+        $imagesStmt->execute(array($voorwerpnummer));
         if($imagesStmt->rowCount()!=0){
           $images = $imagesStmt->fetchAll();
           foreach ($images as $image) {
@@ -48,14 +47,13 @@ if(isset($_POST['searchText'])){
         </div>
         <div class="cardPrice">';
 
-        $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = :voorwerpnummerPrijs ORDER BY bodbedrag ASC";
+        $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag ASC";
         $priceStmt = $dbh->prepare($pricequery);
-        $priceStmt->bindParam(':voorwerpnummerPrijs', $voorwerpnummer);
-        $priceStmt->execute();
+        $priceStmt->execute(array($voorwerpnummer));
         if($priceStmt->rowCount()!=0){
           $prices = $priceStmt->fetchAll();
           foreach ($prices as $price) {
-            echo '&euro; '.$price['bodbedrag'];
+            echo 'Hoogste bod: &euro; '.str_replace('.', ',', $price['bodbedrag']);
           }
         }
         else{
@@ -63,7 +61,7 @@ if(isset($_POST['searchText'])){
         }
         echo '</div>
         <div class="cardFooter">
-        Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).'
+        Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).' uur
         </div>';
 
         echo '

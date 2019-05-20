@@ -58,7 +58,7 @@
         foreach( $results as $result ) {
           $voorwerpnummer = $result['voorwerpnummer'];
           echo '<div class="cardItem">
-          <a href="index.php?page=veiling&id='.hash('sha256', $row['voorwerpnummer']).'">
+          <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">
           <div class="card shadow-sm">
           <div class="cardImage">';
 
@@ -88,7 +88,7 @@
           if($priceStmt->rowCount()!=0){
             $prices = $priceStmt->fetchAll();
             foreach ($prices as $price) {
-              echo '&euro; '.$price['bodbedrag'];
+              echo '&euro; '.str_replace('.', ',', $price['bodbedrag']);
             }
           }
           else{
@@ -129,7 +129,7 @@
       while($row = $data->fetch()){
         echo '  <div class="popularCategoryItem">
         <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/Category/'.$row['rubrieknaam'].'.jpg" width="100%" height="100%" alt="Oldtimers"></div>
+        <div class="popularCategoryBackground"><img src="images/Category/'.$row['rubrieknaam'].'.jpg" width="100%" height="100%" alt="Topic"></div>
         <div class="popularCategoryText">'.$row['rubrieknaam'].'</div>
         </a>
         </div>';

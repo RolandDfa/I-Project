@@ -1,54 +1,94 @@
+<?php
+// Get Artikelnummer
+if (!empty($_GET['id'])) {
+	$id = $_GET['id'];
+} else {
+	header("Location: index.php?page=home");
+}
+
+date_default_timezone_set('UTC');
+
+try {
+  $artikelquery = "SELECT * FROM Voorwerp WHERE voorwerpnummer like :search";
+  $stmt = $dbh->prepare($artikelquery);
+  $stmt->bindValue(':search', '%' . $id . '%', PDO::PARAM_INT);
+  $stmt->execute();
+  if ($stmt->rowCount() != 0) {
+    $results = $stmt->fetchAll();
+    foreach( $results as $result ) {
+      $titel = $result['titel'];
+      $verkoper = $result['verkopernaam'];
+      $plaatsnaam = $result['plaatsnaam'];
+      $verzendkosten = $result['verzendkosten'];
+      $einddatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
+      $prijs = str_replace(".",",",$result['startprijs']);
+      $beschrijving = $result['beschrijving'];
+    }
+  }
+} catch (PDOException $e) {
+  echo "Er gaat iets fout met het ophalen van het artikel: ".$e->getMessage();
+}
+
+try {
+  $afbeeldingen = array();
+  $afbeeldingquery = "SELECT * FROM Bestand WHERE voorwerp like :search";
+  $stmt = $dbh->prepare($afbeeldingquery);
+  $stmt->bindValue(':search', '%' . $id . '%', PDO::PARAM_INT);
+  $stmt->execute();
+  if ($stmt->rowCount() != 0) {
+    $results = $stmt->fetchAll();
+    foreach( $results as $result ) {
+      $afbeeldingen[] = $result['bestandsnaam'];
+    }
+  }
+} catch (PDOException $e) {
+  echo "Er gaat iets fout met het ophalen van de afbeeldingen: ".$e->getMessage();
+}
+?>
+
 <div class="pageWrapper">
 
   <div class="row">
     <div class="col-lg-3">
-      <h4><b>Naam artikel</b></h4>
-      <div class="footerText">
-        Artikelnummer
+      <h4><b><?=$titel?></b></h4>
+      <div class="cardFooter">
+        <?=$id?>
       </div>
       <div class="bottomline"><!-- Line --></div>
       <div class="titleMarginBottom">
         <b>Verkoper</b>
       </div>
       <div>
-        Naam verkoper
+        <?=$verkoper?>
       </div>
       <div>
-        Woonplaats verkoper
+        <?=$plaatsnaam?>
       </div>
       <div class="bottomline"><!-- Line --></div>
       <div class="titleMarginBottom">
         <b>Verzendkosten</b>
       </div>
       <div>
-        &euro; 6,75 (Nederland)
+        &euro; <?=$verzendkosten?> (Nederland)
       </div>
       <div class="bottomline"><!-- Line --></div>
     </div>
 
     <div id="auctionImage" class="col-lg-5">
       <div class="imageMarginBottom">
-        <iframe frameborder="0" scrolling="no" width="100%" height="300" src="images/oldtimers.png" name="imgbox" id="imgbox"><p>iframes are not supported by your browser.</p></iframe>
-        <!-- <img src="images/image_placeholder.jpg" width="100%" height="300" alt="Placeholder"> -->
+        <iframe frameborder="0" scrolling="no" width="100%" height="300" src="uploaded_content/<?=$afbeeldingen[0]?>" name="imgbox" id="imgbox"><p>iframes are not supported by your browser.</p></iframe>
       </div>
 
       <div class="scrollmenu imageMarginBottom">
-        <div class="col-lg-4">
-          <a href="images/oldtimers.png" target="imgbox">
-            <img src="images/oldtimers.png" width="100%" height="80%" alt="Placeholder">
-          </a>
-        </div>
-        <div class="col-lg-4">
-          <a href="images/fiets.jpg" target="imgbox">
-            <img src="images/fiets.jpg" width="100%" height="80%" alt="Placeholder">
-          </a>
-        </div>
-        <div class="col-lg-4">
-          <img src="images/image_placeholder.jpg" width="100%" height="80%" alt="Placeholder">
-        </div>
-        <div class="col-lg-4">
-          <img src="images/image_placeholder.jpg" width="100%" height="80%" alt="Placeholder">
-        </div>
+        <?php
+        foreach( $afbeeldingen as $afbeelding ) {
+          echo '<div class="col-lg-4">
+                  <a href="uploaded_content/'.$afbeelding.'" target="imgbox">
+                    <img src="uploaded_content/'.$afbeelding.'" width="100%" height="80%" alt="Placeholder">
+                  </a>
+                </div>';
+        }
+        ?>
       </div>
     </div>
 
@@ -58,7 +98,7 @@
           Veiling sluit in:
         </div>
         <div class="bigtext">
-          <b>5u 55m 06s</b>
+          <b id='time'>0d 0h 0m 0s</b>
         </div>
         <div class="bottomlineWhite"><!-- Line --></div>
         <div>
@@ -73,7 +113,7 @@
             </div>
           </div>
           <div class="col-lg-6 bigtext greeneryText">
-            <b>&euro; 22</b>
+            <b>&euro; <?=$prijs?></b>
           </div>
         </div>
         <div class="greeneryText">
@@ -90,9 +130,38 @@
   </div>
 
   <div style="padding: 20px;">
-    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.</p>
-
-    <p>Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Fusce vulputate eleifend sapien. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Nullam accumsan lorem in dui. Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.</p>
+    <p><?=$beschrijving?></p>
   </div>
 
 </div>
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("<?php echo $einddatum; ?>").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Output the result in an element with id="time"
+  document.getElementById("time").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is over, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("time").innerHTML = "VEILING GESLOTEN";
+  }
+}, 100);
+</script>
