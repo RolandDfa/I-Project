@@ -88,7 +88,7 @@
           if($priceStmt->rowCount()!=0){
             $prices = $priceStmt->fetchAll();
             foreach ($prices as $price) {
-              echo '&euro; '.$price['bodbedrag'];
+              echo '&euro; '.str_replace('.', ',', $price['bodbedrag']);
             }
           }
           else{
