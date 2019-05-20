@@ -55,7 +55,7 @@ for ($i = 0; $i < sizeof($data); $i++) {
   }
 }
 try{
-  $sql2 = "SELECT Telefoon FROM Gebruikerstelefoon WHERE gebruikersnaam = :id ORDER BY volgnr ASC";
+  $sql2 = "SELECT volgnr, Telefoon FROM Gebruikerstelefoon WHERE gebruikersnaam = :id ORDER BY volgnr ASC";
   $query2 = $dbh->prepare($sql2);
   if(!$query2) {
     echo "oops error 2";
@@ -64,14 +64,23 @@ try{
     $query2->execute(array(':id' => $username));
     $data2 = $query2->fetchAll(PDO::FETCH_BOTH);
   }
-  var_dump($data2);
+  // var_dump($data2);
 } catch (PDOException $e) {
   echo "Fout met de database: {$e->getMessage()} ";
 }
 
 $countTell = count($data2) > 1;
 if ($countTell) {
-
+  $tel1 = $data2[0];
+  $telnr = $tel1['Telefoon'];
+  $tel1Volgnr = $tel1['volgnr'];
+  $tel2 = $data2[1];
+  $telnr2 = $tel2['Telefoon'];
+  $tel2Volgnr = $tel2['volgnr'];
+}
+else {
+  $tel1 = $data2[0];
+  $telnr = $tel1['Telefoon'];
 }
 ?>
 
@@ -100,12 +109,14 @@ if ($countTell) {
       <p>Overige gegevens</p>
       <p>Gebruikersnaam: <?php echo $username ?></p>
       <p>Email: <?php echo $email; ?></p>
+      <p>Telefoonnummer: <?php echo $telnr ?></p>
+      <p>2e Telefoonnummer: <?php echo $telnr2 ?></p>
       <p>Kvkummer: <?php echo $kvknr; ?></p>
       <div class="registerLine"><!-- Line --></div>
-      <?php if (!isset($_POST['changeInfo1']))
+      <?php if (!isset($_POST['changeInfo']))
       { ?>
         <form class="changeButton" method="post" action="">
-          <button type="submit" name="changeInfo1" class="btn btnGreenery btn-block">Gegevens aanpassen/Updaten</button>
+          <button type="submit" name="changeInfo" class="btn btnGreenery btn-block">Naar gegevens aanpassen/Updaten</button>
         </form>
       <?php } ?>
     </div>
@@ -114,7 +125,7 @@ if ($countTell) {
 </div>
 
 <?php
-if (isset($_POST['changeInfo1'])) {
+if (isset($_POST['changeInfo'])) {
   ?>
   <div id="pagecontent" class="row">
     <div class="col-lg-2"><!-- White space --></div>
@@ -169,7 +180,7 @@ if (isset($_POST['changeInfo1'])) {
               <input type="text" id="telnr2" class="form-control" name="telnr2" pattern="[0-9]{1,15}" title="2e Telefoonnummer" value="<?php echo $telnr2;  ?>">
             </div>
           </div>
-          <button type="submit" name="changeInfo" class="btn btnGreenery btn-block">Gegevens aanpassen/Updaten</button>
+          <button type="submit" name="submitInfo" class="btn btnGreenery btn-block">Gegevens aanpassen/Updaten</button>
         </form>
       </div>
     </div>
@@ -177,6 +188,47 @@ if (isset($_POST['changeInfo1'])) {
   </div>
   <div class="registerLine"><!-- Line --></div>
   <?php
+}
+
+if (isset($_POST['submitInfo'])) {
+  $address = cleanInput($_POST['address']);
+  $zipcode = cleanInput($_POST['zipcode']);
+  $city  = cleanInput($_POST['city']);
+  $country  = cleanInput($_POST['country']);
+  $telnr  = cleanInput($_POST['telnr']);
+  $telnr2  = cleanInput($_POST['telnr2']);
+
+  $validAddress = !preg_match("/^[a-zA-Z0-9]$/",$address);
+  $validZipcode = !preg_match("/^[A-Z0-9]$/",$zipcode);
+  $validCity = !preg_match("/^[a-zA-Z]$/",$city);
+  $validCountry = !preg_match("/^[a-zA-Z]$/",$country);
+  $validTelnr = !preg_match("/^[0-9]$/",$telnr);
+  $validTelnr2 = !preg_match("/^[0-9]$/",$telnr2);
+
+  $allValid = $validAddress && $validZipcode && $validCity && $validTelnr && $validTelnr2;
+
+  if (!$allValid) {
+    echo "Vul geldige waarden in";
+  } else {
+    try {
+      $sqlUpdate = "UPDATE Gebruiker SET adresregel=?, postcode=?, plaatsnaam=?, land=? WHERE gebruikersnaam=?";
+      $queryInsert = $dbh->prepare($sqlUpdate);
+      $queryInsert->execute(array($address, $zipcode, $city, $country, $username));
+
+      $sqlUpdateTellnr = "UPDATE Gebruikerstelefoon SET Telefoon=? WHERE volgnr=$tel1Volgnr";
+      $queryInsertTellnr = $dbh->prepare($sqlUpdateTellnr);
+      $queryInsertTellnr->execute(array($telnr));
+
+      $sqlUpdateTellnr2 = "UPDATE Gebruikerstelefoon SET Telefoon=? WHERE volgnr=$tel2Volgnr";
+      $queryInsertTellnr2 = $dbh->prepare($sqlUpdateTellnr2);
+      $queryInsertTellnr2->execute(array($telnr2));
+
+    } catch (PDOException $e) {
+      echo "Fout met de database: {$e->getMessage()} ";
+    }
+  }
+} else {
+
 }
 
 
