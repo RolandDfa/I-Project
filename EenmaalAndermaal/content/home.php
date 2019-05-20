@@ -129,7 +129,7 @@
       while($row = $data->fetch()){
         echo '  <div class="popularCategoryItem">
         <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/Category/'.$row['rubrieknaam'].'.jpg" width="100%" height="100%" alt="Oldtimers"></div>
+        <div class="popularCategoryBackground"><img src="images/Category/'.$row['rubrieknaam'].'.jpg" width="100%" height="100%" alt="Topic"></div>
         <div class="popularCategoryText">'.$row['rubrieknaam'].'</div>
         </a>
         </div>';
