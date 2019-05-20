@@ -374,6 +374,10 @@ ul.social-network li {
   margin-bottom: 1em;
 }
 
+.cardItem:hover{
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
 .card {
   height: 100%;
 }
