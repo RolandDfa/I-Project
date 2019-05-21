@@ -7,7 +7,7 @@
       <?php
       // Get the headings from the database
       try {
-        $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent is null ORDER BY rubrieknaam asc");
+        $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
         while ($row = $data->fetch()) {
           echo '<a class="dropdown-item" href="">'.$row['rubrieknaam'].'</a>';
         }
