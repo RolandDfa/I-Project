@@ -7,9 +7,9 @@
   EenmaalAndermaal verwerkt persoonsgegevens van gebruikers die ons online platform bezoeken en gebruik maken van onze dienst. In deze Privacy Policy informeren wij u graag over welke gegevens wij verwerken en waarom. EenmaalAndermaal is de verantwoordelijke met betrekking tot de verwerking van uw persoonsgegevens. Lees deze informatie aandachtig door zodat u begrijpt hoe wij gegevens verwerken en wat uw rechten daarbij zijn.
   </p>
   <br>
-  <h4 class="greeneryText"><b>
+  <h5 class="greeneryText"><b>
     Wanneer geldt het recht op vergetelheid?
-    </b></h4><br><br>
+    </b></h5><br><br>
   <p><b>
     Informatie die u ons geeft.
     </b></p><br>
@@ -31,9 +31,9 @@
   <p><b><i>Gebruiksinformatie. </i></b> We houden interesseprofielen, kwalificaties en kenmerken van gebruikers bij, zodat we weten wat voor soort gebruiker u bent, uw locatie en welke kavels u leuk vindt. Dergelijke informatie stelt ons in staat om te ontdekken wat u interesseert en om onze dienst voor u te personaliseren. 
   </p><br><br>
   
-  <h4 class="greeneryText"><b>
+  <h5 class="greeneryText"><b>
     Voor welke doeleinden gebruikt EenmaalAndermaal deze informatie?
-    </b></h4><br>
+    </b></h5><br>
   <p> Hieronder kunt u lezen voor welke doeleinden de verzamelde informatie wordt gebruikt.
   </p><br><br>
   <p><b><i>De levering van onze diensten. </i></b></p><br>
@@ -71,18 +71,18 @@
     </li>
   </ul><br><br>
   
-  <h4 class="greeneryText"><b>
+  <h5 class="greeneryText"><b>
     Wanneer wordt uw informatie door derden verstrekt?
-    </b></h4><br>
-  <p>Hieronder kunt u lezen met welke redenen uw informatie wordt gedeeld met derden.</p><br>
+    </b></h5><br>
+  <p>Hieronder kunt u lezen met welke redenen uw informatie wordt gedeeld met derden.</p><br><br>
   <p><b> Wanneer u kavels koopt en verkoopt. </b></p><br>
   <p>Wanneer u kavels op het online platform koopt of verkoopt, kunnen andere gebruikers toegang krijgen tot gegevens zoals uw naam, adres, e-mailadres en telefoonnummer, omdat dit noodzakelijk kan zijn voor het afronden of uitvoeren van de transactie (inclusief aflevering en ophaling). Als u bijvoorbeeld een koopcontract sluit met een andere gebruiker, worden uw adres, e-mailadres en telefoonnummer verstrekt voor communicatiedoeleinden en voor het regelen van het ophalen of verzenden van kavels. Het verstrekken van contactinformatie kan ook nodig zijn voordat een transactie wordt afgerond, bijvoorbeeld om gebruikers in staat te stellen rechtstreeks het object bij andere gebruikers te laten bekijken. In het geval van problemen tussen u en een andere gebruiker, kunnen we u ook informatie verstrekken die relevant is voor de andere gebruiker om het probleem rechtstreeks met u op te lossen.
   </p><br><br>
   <p><b>Met uw toestemming</b></p><br>
   <p> We kunnen uw gegevens ook aan anderen verstrekken als u daarmee heeft ingestemd. Bijvoorbeeld wanneer een andere gebruiker u direct terug wilt betalen. In die situaties vragen we om uw toestemming om uw financiële gegevens met die gebruiker te delen.
-  </p><br>
+  </p><br><br>
   <p><b>Wanneer we (wettelijk) verplicht zijn of voor de handhaving van onze algemene voorwaarden.</b></p><br>
-  <p>We kunnen uw gegevens ook bekendmaken aan derden:</P><br>
+  <p>We kunnen uw gegevens ook bekendmaken aan derden:</P><br><br>
   <ul>
     <li>
       Als wij ons daartoe verplicht voelen, bijvoorbeeld in geval van geschillen of als uw Gebruikersmateriaal kennelijk onrechtmatig is.
@@ -98,20 +98,20 @@
     </li>
   </ul><br><br>
   
-  <h4 class="greeneryText"><b>
+  <h5 class="greeneryText"><b>
     Hoe beveiligen we uw informatie en hoe lang bewaren we de informatie?
-  </b></h4><br>
+  </b></h5><br>
   <p> We nemen beveiliging van uw gegevens serieus en hebben beveiligingsprocedures en technische beperkingen om uw gegevens te beschermen tegen ongeoorloofde toegang, vernietiging of wijziging. Naast de beveiligingsmaatregelen aan onze kant, zoals de versleuteling van uw gegevens, raden we u aan om zorgvuldig een wachtwoord te selecteren en ervoor te zorgen dat uw inloggegevens geheim blijven. We bewaren uw persoonsgegevens voor zo lang deze nodig zijn voor het doel waarvoor ze zijn verzameld of gebruikt worden, tenzij een langere bewaartermijn vereist of toegestaan is volgens de wet. Na de betreffende periode, zullen wij uw informatie verwijderen of anonimiseren.
-  </p>
-  <h4 class="greeneryText"><b>
+  </p><br>
+  <h5 class="greeneryText"><b>
      Hoe kunt u uw informatie beheren?
-  </b></h4><br>
+  </b></h5><br>
     <p>U kunt de informatie die aan uw account is gekoppeld, aanpassen door naar uw accountinstellingen te gaan. Deze instellingen zijn te vinden op de accountinformatiepagina. Wanneer u ons toestemming heeft gegeven voor bepaald gebruik van uw gegevens door ons, bijvoorbeeld voor het verzenden van marketing e-mails, kunt u eenvoudig uw toestemming intrekken. U kunt dit doen via de accountinformatiepagina of door op 'afmelden' in een e-mail te klikken.
-    </p>
-   <h4 class="greeneryText"><b>
+    </p><br>
+   <h5 class="greeneryText"><b>
        Wat moet u doen in het geval van privacyschending?
-   </b></h4><br>
-   <p>
+   </b></h5><br>
+   <p><br>
      Als u denkt dat we uw rechten hebben geschonden, verzoeken wij u om ons hiervan op de hoogte te stellen door een e-mail te sturen naar privacy@eenmaalandermaal.nl. Dit stelt ons in staat om de situatie zo snel mogelijk te onderzoeken. U kunt ook een klacht indienen bij de relevante nationale toezichthoudende autoriteit.
    </p>
 </div>
