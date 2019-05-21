@@ -189,7 +189,7 @@ try {
   </div>
 
   <div style="padding: 20px;">
-    <p><?=$beschrijving?></p>
+    <p><?=strip_html_tags(replaceWhitespace(($beschrijving)))?></p>
   </div>
 
 </div>
