@@ -80,7 +80,7 @@
   </p><br><br>
   <p><b>Met uw toestemming</b></p><br>
   <p> We kunnen uw gegevens ook aan anderen verstrekken als u daarmee heeft ingestemd. Bijvoorbeeld wanneer een andere gebruiker u direct terug wilt betalen. In die situaties vragen we om uw toestemming om uw financiële gegevens met die gebruiker te delen.
-  </p><br<br>
+  </p><br>
   <p><b>Wanneer we (wettelijk) verplicht zijn of voor de handhaving van onze algemene voorwaarden.</b></p><br>
   <p>We kunnen uw gegevens ook bekendmaken aan derden:</P><br>
   <ul>
