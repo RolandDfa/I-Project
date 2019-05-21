@@ -50,7 +50,9 @@ try {
 
   <div class="row">
     <div class="col-lg-3">
-      <h4><b><?=$titel?></b></h4>
+    <!-- <p><?=cleanInput(strip_html_tags(replaceWhitespace(($beschrijving)))) ?></p> -->
+
+      <h4><b><?=cleanInput(strip_html_tags(replaceWhitespace(($titel)))) ?></b></h4>
       <div class="cardFooter">
         <?=$id?>
       </div>
@@ -189,7 +191,7 @@ try {
   </div>
 
   <div style="padding: 20px;">
-    <p><?=strip_html_tags(replaceWhitespace(($beschrijving)))?></p>
+    <p><?=cleanInput(strip_html_tags(replaceWhitespace(($beschrijving)))) ?></p>
   </div>
 
 </div>
