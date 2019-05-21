@@ -66,7 +66,7 @@
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
     <a href="index.php?page=home">Home</a>
-    <a href="">Alle veilingen</a>
+    <a href="index.php?page=overzicht">Alle veilingen</a>
     <a href="">Plaats advertentie</a>
     <?php
     if (!isset($_SESSION["username"])) {
