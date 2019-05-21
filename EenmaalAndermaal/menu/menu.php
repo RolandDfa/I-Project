@@ -54,7 +54,7 @@
   <a class="phoneButton" onclick="openNav()"><i class="fa fa-bars phoneIcon"></i></a>
   <?php
   if (isset($_SESSION["username"])) {
-    echo '<a class="phoneButton" href="index.php?page=account"><i class="fas fa-user-tie phoneIcon"></i></a>';
+    echo '<a class="phoneButton" href="index.php?page=mijnaccount"><i class="fas fa-user-tie phoneIcon"></i></a>';
   }
   ?>
   <a class="phoneButton search-form-tigger" data-toggle="search-form"><i class="fa fa-search phoneIcon"></i></a>
