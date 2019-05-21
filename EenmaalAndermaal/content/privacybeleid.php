@@ -1,22 +1,31 @@
 <div class="pageWrapper">
-  <h2 class="textCenter" class="greeneryText">
+  <h3 class="textCenter" class="greeneryText">
    EENMAALANDERMAAL  PRIVACYVERKLARING  
-  </h2>
+  </h3>
   <br>
   <p>
   EenmaalAndermaal verwerkt persoonsgegevens van gebruikers die ons online platform bezoeken en gebruik maken van onze dienst. In deze Privacy Policy informeren wij u graag over welke gegevens wij verwerken en waarom. EenmaalAndermaal is de verantwoordelijke met betrekking tot de verwerking van uw persoonsgegevens. Lees deze informatie aandachtig door zodat u begrijpt hoe wij gegevens verwerken en wat uw rechten daarbij zijn.
   </p>
   <br>
-  <h3 class="greeneryText"><b>
+  <h4 class="greeneryText"><b>
     Wanneer geldt het recht op vergetelheid?
-    </b></h3><br><br>
+    </b></h4><br><br>
   <p><b>
     Informatie die u ons geeft.
     </b></p><br>
   <p>
     We gebruiken en verwerken de gegevens die we van u ontvangen. Bijvoorbeeld als een gebruiker zich registreert of als een gebruiker contact opneemt met onze klantenservice.
-  </p>
-
+  </p><br>
+  <p><b>Account informatie. </b> Zodra u gebruik wilt maken van ons online platform (verkopen en kopen), dient u een account aan te maken. Dit doet u door een wachtwoord te kiezen en uw e-mailadres in te voeren. U kunt deze gegevens beheren via de accountinformatiepagina.
+  </p><br>
+  <p><b>Profiel informatie. </b> Om het mogelijk te maken voor ons om onze diensten aan te bieden en voor u om gebruik te maken van onze diensten, zullen wij u vragen om bepaalde informatie te verstrekken, zoals uw volledige naam, e-mailadres, telefoonnummer, adres, geboortedatum en het Kamer van Koophandel nummer van uw bedrijf.
+  </p><br>
+  <p><b>Communicatie informatie. </b> Wanneer u contact opneemt met onze klantenservice of wanneer zij met u contact opnemen, verzamelen wij informatie over de reden van dit contact en alle informatie die u aan ons verstrekt via de telefoon of e-mail. Dit omvat ook alle meldingen die we van anderen ontvangen over u of de door u aangeboden of gekochte kavels. Via ons online platform kunt u ook communiceren met andere gebruikers. We kunnen dergelijke communicatie beoordelen, scannen of analyseren voor fraudepreventie, risicobeoordeling, onderzoek en klantenservice doeleinden.
+  </p><br><br>
+  
+  
+  
+  
   <ul>
     <li>
       <i>Niet meer nodig</i><br>
