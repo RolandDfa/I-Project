@@ -9,10 +9,9 @@ if (!empty($_GET['id'])) {
 date_default_timezone_set('UTC');
 
 try {
-  $artikelquery = "SELECT * FROM Voorwerp WHERE voorwerpnummer like :search";
+  $artikelquery = "SELECT * FROM Voorwerp WHERE voorwerpnummer = ?";
   $stmt = $dbh->prepare($artikelquery);
-  $stmt->bindValue(':search', '%' . $id . '%', PDO::PARAM_INT);
-  $stmt->execute();
+  $stmt->execute(array($id));
   if ($stmt->rowCount() != 0) {
     $results = $stmt->fetchAll();
     foreach( $results as $result ) {
