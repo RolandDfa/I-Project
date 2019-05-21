@@ -9,9 +9,9 @@ if (!empty($_GET['id'])) {
 date_default_timezone_set('UTC');
 
 try {
-  $artikelquery = "SELECT * FROM Voorwerp WHERE voorwerpnummer like :search";
+  $artikelquery = "SELECT * FROM Voorwerp WHERE voorwerpnummer = :search";
   $stmt = $dbh->prepare($artikelquery);
-  $stmt->bindValue(':search', '%' . $id . '%', PDO::PARAM_INT);
+  $stmt->bindValue(':search', $id, PDO::PARAM_INT);
   $stmt->execute();
   if ($stmt->rowCount() != 0) {
     $results = $stmt->fetchAll();
@@ -191,7 +191,7 @@ try {
   </div>
 
   <div style="padding: 20px;">
-    <p><?=cleanInput(strip_html_tags(replaceWhitespace(($beschrijving)))) ?></p>
+    <p><?=$beschrijving ?></p>
   </div>
 
 </div>
