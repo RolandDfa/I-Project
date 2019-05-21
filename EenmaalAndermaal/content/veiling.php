@@ -75,30 +75,36 @@ try {
     </div>
 
     <div id="auctionImage" class="col-lg-5">
-      <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails" data-ride="carousel">
+      <div id="carousel-image" class="carousel slide carousel-fade carousel-imagenails" data-ride="carousel">
         <!--Slides-->
-        <div class="carousel-inner" role="listbox">
+        <div class="carousel-inner auctionImageBlock" role="listbox">
           <?php
-          $slide = 0;
-          foreach( $afbeeldingen as $afbeelding ) {
-            if ($slide == 0) {
-              echo '<div class="carousel-item active">
-                      <img class="d-block w-100" src="uploaded_content/'.$afbeelding.'" alt="'.$afbeelding.'">
-                    </div>';
-            } else {
-              echo '<div class="carousel-item">
-                      <img class="d-block w-100" src="uploaded_content/'.$afbeelding.'" alt="'.$afbeelding.'">
-                    </div>';
+          if (!empty($afbeeldingen)) {
+            $slide = 0;
+            foreach($afbeeldingen as $afbeelding) {
+              if ($slide == 0) {
+                echo '<div class="carousel-item auctionImageBlock active">
+                        <img class="d-block w-100 auctionImageBlock" src="uploaded_content/'.$afbeelding.'" alt="'.$afbeelding.'">
+                      </div>';
+              } else {
+                echo '<div class="carousel-item auctionImageBlock">
+                        <img class="d-block w-100 auctionImageBlock" src="uploaded_content/'.$afbeelding.'" alt="'.$afbeelding.'">
+                      </div>';
+              }
+              $slide++;
             }
-            $slide++;
+          } else {
+            echo '<div class="carousel-item auctionImageBlock active">
+                    <img class="d-block w-100 auctionImageBlock" src="images/image_placeholder.jpg" alt="noImage">
+                  </div>';
           }
           ?>
           <!--Controls-->
-          <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+          <a class="carousel-control-prev" href="#carousel-image" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+          <a class="carousel-control-next" href="#carousel-image" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
@@ -107,18 +113,24 @@ try {
         <!--/Slides-->
         <ol class="carousel-indicators">
           <?php
-          $slide = 0;
-          foreach( $afbeeldingen as $afbeelding ) {
-            if ($slide == 0) {
-              echo '<li data-target="#carousel-thumb" data-slide-to="'.$slide.'" class="active">
-                      <img src="uploaded_content/'.$afbeelding.'" width="100">
-                    </li>';
-            } else {
-              echo '<li data-target="#carousel-thumb" data-slide-to="'.$slide.'">
-                      <img src="uploaded_content/'.$afbeelding.'" width="100">
-                    </li>';
+          if (!empty($afbeeldingen)) {
+            $slide = 0;
+            foreach($afbeeldingen as $afbeelding) {
+              if ($slide == 0) {
+                echo '<li data-target="#carousel-image" data-slide-to="'.$slide.'" class="active">
+                        <img src="uploaded_content/'.$afbeelding.'" width="100">
+                      </li>';
+              } else {
+                echo '<li data-target="#carousel-image" data-slide-to="'.$slide.'">
+                        <img src="uploaded_content/'.$afbeelding.'" width="100">
+                      </li>';
+              }
+              $slide++;
             }
-            $slide++;
+          } else {
+            echo '<li data-target="#carousel-image" data-slide-to="0" class="active">
+                    <img src="images/image_placeholder.jpg" width="100">
+                  </li>';
           }
           ?>
         </ol>
