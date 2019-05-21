@@ -5,31 +5,34 @@ session_start();
 require('../connectie.php');
 require('../functions/functions.php');
 
-//Post inloggen
+// Post inloggen
 if(isset($_POST['login'])) {
   $username = cleanInput($_POST['username']);
   $password = cleanInput($_POST['password']);
 
-  //Username and password check
+  // Username and password check
   try {
-    $sql = "SELECT * FROM Gebruiker WHERE gebruikersnaam = '$username'";
-    $result = $dbh->query($sql);
-
-    // If record ^
-    if (($row = $result->fetch()) > 0) {
-      $password = hash('sha256', $password);
-      // If passwords match
-      if ($password == $row['wachtwoord']) {
-        // Create session variables
-        $_SESSION['username'] = $username;
-        $_SESSION['userstate'] = $row['gebruikersStatus'];
-        // Login succesvol
-        header("Location: ../index.php?page=home");
-      } else {
-        // Passwords don't match
-        header("Location: ../index.php?page=inloggen&error=onjuist");
+    $loginquery = "SELECT * FROM Gebruiker WHERE gebruikersnaam = ?";
+    $loginStmt = $dbh->prepare($loginquery);
+    $loginStmt->execute(array($username));
+    if($loginStmt->rowCount()!=0){
+      $usernames = $loginStmt->fetchAll();
+      foreach ($usernames as $users) {
+        $password = hash('sha256', $password);
+        // If passwords match
+        if ($password == $users['wachtwoord']) {
+          // Create session variables
+          $_SESSION['username'] = $username;
+          $_SESSION['userstate'] = $users['gebruikersStatus'];
+          // Login succesvol
+          header("Location: ../index.php?page=home");
+        } else {
+          // Passwords don't match
+          header("Location: ../index.php?page=inloggen&error=onjuist");
+        }
       }
-    } else {
+    }
+    else {
       // No user found
       header("Location: ../index.php?page=inloggen&error=onjuist");
     }

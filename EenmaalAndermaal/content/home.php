@@ -1,4 +1,4 @@
-<div class="pageWrapper">
+<div class="homeContainer">
 
   <div id="reviews" class="row">
     <h4><b>Reviews</b></h4>
@@ -50,42 +50,69 @@
   <div class="row contentWrapper">
     <?php
     try{
-      $data = $dbh->query("SELECT TOP 4 titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 ORDER BY looptijdbeginDag DESC, looptijdbeginTijdstip DESC");
-      if($data->rowCount()){
-        while($row = $data->fetch()){
-          $voorwerpnummer = $row['voorwerpnummer'];
+      $overzichtquery = "SELECT TOP 4 titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 ORDER BY looptijdbeginDag DESC, looptijdbeginTijdstip DESC";
+      $stmt = $dbh->prepare($overzichtquery);
+      $stmt->execute();
+      if ($stmt->rowCount() != 0) {
+        $results = $stmt->fetchAll();
+        foreach( $results as $result ) {
+          $voorwerpnummer = $result['voorwerpnummer'];
           echo '<div class="cardItem">
-          <a href="index.php?page=veiling&id='.hash('sha256', $row['voorwerpnummer']).'">
+          <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">
           <div class="card shadow-sm">
           <div class="cardImage">';
-          $imageData = $dbh->query("SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = $voorwerpnummer");
-          if($imageData->rowCount()){
-            while($image = $imageData->fetch()){
-              echo '<img class="rounded-top" src="uploaded_content/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$row['titel'].'">';
+
+          $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = :voorwerpnummer";
+          $imagesStmt = $dbh->prepare($imagesquery);
+          $imagesStmt->bindParam(':voorwerpnummer', $voorwerpnummer);
+          $imagesStmt->execute();
+          if($imagesStmt->rowCount()!=0){
+            $images = $imagesStmt->fetchAll();
+            foreach ($images as $image) {
+              echo '<img class="rounded-top" src="uploaded_content/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
             }
           }else{
-            echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$row['titel'].'">';
+            echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
           }
           echo '</div>
           <div class="cardTitle">
-          <div class="cardHeader">'.
-          $row['titel'].'
+          <div class="cardHeader titleMarginBottom">'.
+          $result['titel'].'
           </div>
+          <div class="cardPrice">';
+
+          $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = :voorwerpnummerPrijs ORDER BY bodbedrag ASC";
+          $priceStmt = $dbh->prepare($pricequery);
+          $priceStmt->bindParam(':voorwerpnummerPrijs', $voorwerpnummer);
+          $priceStmt->execute();
+          if($priceStmt->rowCount()!=0){
+            $prices = $priceStmt->fetchAll();
+            foreach ($prices as $price) {
+              echo '&euro; '.str_replace('.', ',', $price['bodbedrag']);
+            }
+          }
+          else{
+            echo 'Nog geen bod';
+          }
+          echo '</div>
           <div class="cardFooter">
-          Sluit '.$row['looptijdeindeDag'].' om '.date('H:i.s',strtotime($row['looptijdeindeTijdstip'])).'
-          </div>
+          Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).'
+          </div>';
+
+          echo '
           </div>
           </div>
           </a>
           </div>';
         }
-      }else{
-        echo '<h4><b>Geen resultaten voor: "'.$searchText.'"</b></h4>';
       }
     }
     catch (PDOException $e){
       echo "Er gaat iets fout met het ophalen van de artikelen: ".$e->getMessage();
     }
+
+
+
     ?>
   </div>
 
@@ -98,11 +125,11 @@
     <?php
     //Haal data uit database voor dropdown menu van rubrieken
     try{
-      $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent is null ORDER BY rubrieknaam asc");
+      $data = $dbh->query("SELECT TOP 8 rubrieknaam FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
       while($row = $data->fetch()){
         echo '  <div class="popularCategoryItem">
         <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/Category/'.$row['rubrieknaam'].'.jpg" width="100%" height="100%" alt="Oldtimers"></div>
+        <div class="popularCategoryBackground"><img src="images/Category/'.$row['rubrieknaam'].'.jpg" width="100%" height="100%" alt="Topic"></div>
         <div class="popularCategoryText">'.$row['rubrieknaam'].'</div>
         </a>
         </div>';
@@ -112,18 +139,5 @@
       echo "Kan rubrieken niet laden".$e->getMessage();
     }
     ?>
-    <div class="popularCategoryItem">
-      <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
-        <div class="popularCategoryText">Oldtimers</div>
-      </a>
-    </div>
-    <div class="popularCategoryItem">
-      <a class="opacityHover" href="">
-        <div class="popularCategoryBackground"><img src="images/oldtimers.png" width="100%" height="100%" alt="Oldtimers"></div>
-        <div class="popularCategoryText">Oldtimers</div>
-      </a>
-    </div>
   </div>
-</div>
 </div>
