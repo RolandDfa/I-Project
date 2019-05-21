@@ -11,7 +11,8 @@ if($dirtyStmt->rowCount()!=0){
     $cleanDataQuery = "UPDATE voorwerp SET titel = ?, beschrijving = ? where voorwerpnummer = ?";
     $cleanStmt = $dbh->prepare($cleanDataQuery);
     $cleanStmt->execute(array(cleanInput(strip_html_tags(replaceWhitespace($dirtyRow['titel']))), cleanInput(strip_html_tags(replaceWhitespace($dirtyRow['beschrijving']))), $dirtyRow['voorwerpnummer']));
-    echo $dirtyRow['titel'];
+    echo '<h1>'.$dirtyRow['titel'].'</h2>';
+    echo '<p>'.$dirtyRow['beschrijving'].'</p>';
   }
 }
 ?>
