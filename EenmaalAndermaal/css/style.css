@@ -575,9 +575,21 @@ ul.social-network li {
   padding: 15px;
 }
 
-.auctionCardBottom {
+#auctionImage .auctionCardBottom {
   background-color: #f6f6f6;
   padding: 20px;
+}
+
+#auctionImage .carousel-indicators {
+  position: static;
+  margin-bottom: 60px;
+}
+
+#auctionImage .carousel-indicators li {
+  text-indent: 0px;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: 200px;
 }
 
 /* If screen < 1050px (Tablets) */

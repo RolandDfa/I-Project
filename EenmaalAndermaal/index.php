@@ -93,9 +93,6 @@ if (!empty($_GET['page'])) {
 					case 'gebruikersvoorwaarden':
 					require('content/gebruikersvoorwaarden.php');
 					break;
-					case 'account':
-					require('content/mijnaccount.php');
-					break;
 					case 'privacybeleid':
 					require('content/privacybeleid.php');
 					break;
