@@ -282,7 +282,7 @@ footer li {
 
 .linkFooter:hover {
   color: #fff;
-  border-bottom: 1px solid rgba(192, 192, 192, 1);
+  border-bottom: 1px solid rgba(135, 176, 75, 1);
 }
 
 .footerLine {
@@ -581,9 +581,21 @@ ul.social-network li {
   padding: 15px;
 }
 
-.auctionCardBottom {
+#auctionImage .auctionCardBottom {
   background-color: #f6f6f6;
   padding: 20px;
+}
+
+#auctionImage .carousel-indicators {
+  position: static;
+  margin-bottom: 60px;
+}
+
+#auctionImage .carousel-indicators li {
+  text-indent: 0px;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: 200px;
 }
 
 /* If screen < 1050px (Tablets) */

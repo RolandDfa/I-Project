@@ -93,7 +93,7 @@ if (!empty($_GET['page'])) {
 					case 'gebruikersvoorwaarden':
 					require('content/gebruikersvoorwaarden.php');
 					break;
-					case 'account':
+					case 'mijnaccount':
 					require('content/mijnaccount.php');
 					break;
 					case 'privacybeleid':
@@ -140,7 +140,7 @@ if (!empty($_GET['page'])) {
 								echo '<li><a class="linkFooter" href="index.php?page=inloggen">Inloggen</a></li>
 								<li><a class="linkFooter" href="index.php?page=registreren">Gratis registreren</a></li>';
 							} else {
-								echo '<li><a class="linkFooter" href="index.php?page=account">Mijn account</a></li>
+								echo '<li><a class="linkFooter" href="index.php?page=mijnaccount">Mijn account</a></li>
 											<li><a class="linkFooter" href="logout.php">Uitloggen</a></li>';
 							}
 							?>
