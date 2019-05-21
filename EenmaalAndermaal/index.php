@@ -96,6 +96,9 @@ if (!empty($_GET['page'])) {
 					case 'privacybeleid':
 					require('content/privacybeleid.php');
 					break;
+					case 'mijnaccount':
+					require('content/mijnaccount.php');
+					break;
 					default:
 					require('content/home.php');
 				}
