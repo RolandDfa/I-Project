@@ -36,7 +36,7 @@
     </b></h5><br>
   <p> Hieronder kunt u lezen voor welke doeleinden de verzamelde informatie wordt gebruikt.
   </p><br><br>
-  <p><b><i>De levering van onze diensten. </i></b></p><br>
+  <p><b>De levering van onze diensten. </b></p><br>
   <p> Wij gebruiken uw gegevens ten eerste om aan onze contractuele verplichtingen tegenover u te voldoen en om ervoor te zorgen dat onze dienst op de best mogelijke manier aan u wordt geboden. In dit verband gebruiken we uw gegevens om:
   </p><br>
   <ul>
@@ -53,7 +53,7 @@
       Onze interne administratie op orde te houden.
     </li>
   </ul><br>
-   <p><b><i>Een vertrouwd en veilig online platform bieden en onderhouden.</i></b></p><br>
+   <p><b>Een vertrouwd en veilig online platform bieden en onderhouden.</b></p><br>
     <p>Uiteraard is het ook in ons gerechtvaardigd belang om een vertrouwd en veilig online platform te bieden en te onderhouden. We kunnen uw gegevens ook verwerken en opslaan om te voldoen aan wettelijke verplichtingen. Om deze redenen verwerken wij persoonsgegevens voor het: 
     </p> 
   <ul>
@@ -113,5 +113,5 @@
    </b></h5><br>
    <p><br>
      Als u denkt dat we uw rechten hebben geschonden, verzoeken wij u om ons hiervan op de hoogte te stellen door een e-mail te sturen naar privacy@eenmaalandermaal.nl. Dit stelt ons in staat om de situatie zo snel mogelijk te onderzoeken. U kunt ook een klacht indienen bij de relevante nationale toezichthoudende autoriteit.
-   </p>
+   </p><br><br>
 </div>
