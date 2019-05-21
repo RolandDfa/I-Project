@@ -56,4 +56,9 @@ function replaceWhitespace($str) {
   }
   return $str !== $result ? replaceWhitespace($result) : $result;
 }
+
+function stripHTMLEntity($text){
+  $Content = preg_replace("/&#?[a-z0-9]{2,8};/i","",$text);
+  return $Content;
+}
 ?>
