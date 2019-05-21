@@ -1,16 +1,22 @@
 <div class="pageWrapper">
-  <h1>
-    Recht op vergetelheid
-  </h1>
-  <p>
-    In de Algemene verordening gegevensbescherming (AVG) is het recht op vergetelheid opgenomen. Dit recht houdt in dat een organisatie in een aantal gevallen iemands persoonsgegevens moet wissen. Mensen kunnen aan organisaties vragen om hun gegevens te wissen met een beroep op hun recht op vergetelheid.
-  </p>
-  <h2>
-    Wanneer geldt het recht op vergetelheid?
+  <h2 class="textCenter" class="greeneryText">
+   EENMAALANDERMAAL  PRIVACYVERKLARING  
   </h2>
+  <br>
   <p>
-    In de volgende situaties moet een organisatie iemand persoonsgegevens wissen:
+  EenmaalAndermaal verwerkt persoonsgegevens van gebruikers die ons online platform bezoeken en gebruik maken van onze dienst. In deze Privacy Policy informeren wij u graag over welke gegevens wij verwerken en waarom. EenmaalAndermaal is de verantwoordelijke met betrekking tot de verwerking van uw persoonsgegevens. Lees deze informatie aandachtig door zodat u begrijpt hoe wij gegevens verwerken en wat uw rechten daarbij zijn.
   </p>
+  <br>
+  <h3 class="greeneryText"><b>
+    Wanneer geldt het recht op vergetelheid?
+    </b></h3><br><br>
+  <p><b>
+    Informatie die u ons geeft.
+    </b></p><br>
+  <p>
+    We gebruiken en verwerken de gegevens die we van u ontvangen. Bijvoorbeeld als een gebruiker zich registreert of als een gebruiker contact opneemt met onze klantenservice.
+  </p>
+
   <ul>
     <li>
       <i>Niet meer nodig</i><br>
