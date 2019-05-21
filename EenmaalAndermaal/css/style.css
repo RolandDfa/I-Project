@@ -187,7 +187,7 @@ h5 {
   height: 0;
   width: 100%;
   position: fixed;
-  z-index: 1;
+  z-index: 999;
   top: 0;
   left: 0;
   background-color: rgba(0,0,0, 0.9);
@@ -576,6 +576,12 @@ ul.social-network li {
   padding: 15px;
 }
 
+.auctionCardBottom {
+  background-color: #f6f6f6;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
 .auctionImageBlock {
   width: 100%;
   height: 320px;
@@ -708,6 +714,19 @@ ul.social-network li {
   /* HOME popular categories */
   .popularCategoryItem {
     width: 48%;
+  }
+
+  /* AUCTION page */
+  .auctionImageBlock {
+    height: 250px;
+  }
+
+  #auctionImage .carousel-indicators li {
+    width: 70px;
+  }
+
+  #auctionImage .carousel-indicators li img {
+    width: 70px;
   }
 
 }
