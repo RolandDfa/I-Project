@@ -2,6 +2,7 @@
 // Get Artikelnummer
 if (!empty($_GET['id'])) {
 	$id = $_GET['id'];
+	$id = (float) $id;
 } else {
 	header("Location: index.php?page=home");
 }
@@ -9,11 +10,11 @@ if (!empty($_GET['id'])) {
 date_default_timezone_set('UTC');
 
 try {
-  $artikelquery = "SELECT * FROM Voorwerp WHERE voorwerpnummer like :search";
+  $artikelquery = "SELECT * FROM Voorwerp WHERE voorwerpnummer = ?";
   $stmt = $dbh->prepare($artikelquery);
-  $stmt->bindValue(':search', '%' . $id . '%', PDO::PARAM_INT);
-  $stmt->execute();
+  $stmt->execute(array($id));
   if ($stmt->rowCount() != 0) {
+		$auctionExists = true;
     $results = $stmt->fetchAll();
     foreach( $results as $result ) {
       $titel = $result['titel'];
@@ -24,7 +25,10 @@ try {
       $prijs = str_replace(".",",",$result['startprijs']);
       $beschrijving = $result['beschrijving'];
     }
-  }
+  }else{
+		echo "<style>.auction{display: none;}</style>";
+		$auctionExists = false;
+	}
 } catch (PDOException $e) {
   echo "Er gaat iets fout met het ophalen van het artikel: ".$e->getMessage();
 }
@@ -47,10 +51,11 @@ try {
 ?>
 
 <div class="pageWrapper">
-
+	<?php if(!$auctionExists){echo'Kan veiling niet vinden. Klik <a href="index.php?page=overzicht">hier</a> om naar het veilingenoverzicht te gaan. Of klik <a href="index.php?page=home">hier</a> om naar de homepagina te gaan.';} ?>
+	<div class="auction">
   <div class="row">
     <div class="col-lg-3">
-      <h4><b><?=$titel?></b></h4>
+      <h4><b><?=$titel ?></b></h4>
       <div class="cardFooter">
         <?=$id?>
       </div>
@@ -177,7 +182,7 @@ try {
   <div class="paddingTop">
     <p><?=$beschrijving?></p>
   </div>
-
+</div>
 </div>
 
 <script>

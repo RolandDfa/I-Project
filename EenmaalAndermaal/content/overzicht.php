@@ -11,9 +11,9 @@ if(isset($_POST['searchText'])){
 
   <?php
   try{
-    $overzichtquery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and titel like ?";
+    $overzichtquery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and (titel like ? or beschrijving like ?)";
     $stmt = $dbh->prepare($overzichtquery);
-    $stmt->execute(array('%'.$searchText.'%'));
+    $stmt->execute(array('%'.$searchText.'%', '%'.$searchText.'%'));
     if ($stmt->rowCount() != 0) {
       if($searchText != ""){
         echo '<h4><b>Gevonden resultaten voor: "'.$searchText.'"</b></h4><br><div class="row contentWrapper">';
