@@ -149,6 +149,13 @@ CREATE TABLE [dbo].[Bestand] (
     CONSTRAINT [PK_Bestand_filenaam] PRIMARY KEY CLUSTERED ([bestandsnaam] ASC),
     CONSTRAINT [FK_Bestand_voorwerp_voorwerpnummer] FOREIGN KEY ([Voorwerp]) REFERENCES [dbo].[Voorwerp] ([voorwerpnummer]) ON DELETE CASCADE ON UPDATE CASCADE
 );
+CREATE TABLE [dbo].[Email_validatie] (
+    [gebruikersnaam]    VARCHAR (50) NOT NULL,
+    [code]     VARCHAR (50) NOT NULL,
+    [valid_until] DATE         NOT NULL,
+    CONSTRAINT [PK_Email_validatie] PRIMARY KEY CLUSTERED ([gebruikersnaam] ASC, [code] ASC, [valid_until] ASC),
+    CONSTRAINT [FK_Validatie_gebruikersnaam] FOREIGN KEY ([gebruikersnaam]) REFERENCES [dbo].[Verkoper] ([gebruiker])
+);
 
 ---------------------------------------------------------------------
 -- INSERT DATA TO DATABASE
