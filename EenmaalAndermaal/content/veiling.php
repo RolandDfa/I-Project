@@ -2,6 +2,7 @@
 // Get Artikelnummer
 if (!empty($_GET['id'])) {
 	$id = $_GET['id'];
+	$id = (float) $id;
 } else {
 	header("Location: index.php?page=home");
 }
@@ -13,6 +14,7 @@ try {
   $stmt = $dbh->prepare($artikelquery);
   $stmt->execute(array($id));
   if ($stmt->rowCount() != 0) {
+		$auctionExists = true;
     $results = $stmt->fetchAll();
     foreach( $results as $result ) {
       $titel = $result['titel'];
@@ -24,13 +26,8 @@ try {
       $beschrijving = $result['beschrijving'];
     }
   }else{
-		$titel = 'Kan titel niet laden';
-		$verkoper = 'Kan verkoper niet laden';
-		$plaatsnaam = 'Kan plaatsnaam niet laden';
-		$verzendkosten = 'Kan verzendkosten niet laden';
-		$einddatum = date("m-d-Y H:i:s");
-		$prijs = 'Kan prijs niet laden';
-		$beschrijving = 'Kan beschrijving niet laden';
+		echo "<style>.auction{display: none;}</style>";
+		$auctionExists = false;
 	}
 } catch (PDOException $e) {
   echo "Er gaat iets fout met het ophalen van het artikel: ".$e->getMessage();
@@ -54,6 +51,8 @@ try {
 ?>
 
 <div class="pageWrapper">
+	<?php if(!$auctionExists){echo'Kan veiling niet vinden. Klik <a href="index.php?page=overzicht">hier</a> om naar het veilingenoverzicht te gaan. Of klik <a href="index.php?page=home">hier</a> om naar de homepagina te gaan.';} ?>
+	<div class="auction">
   <div class="row">
     <div class="col-lg-3">
       <h4><b><?=$titel ?></b></h4>
@@ -197,7 +196,7 @@ try {
   <div style="padding: 20px;">
     <p><?=$beschrijving ?></p>
   </div>
-
+</div>
 </div>
 
 <script>
