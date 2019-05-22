@@ -135,20 +135,6 @@ try {
           ?>
         </ol>
       </div>
-
-      <!-- <div class="imageMarginBottom">
-        <iframe frameborder="0" scrolling="no" width="100%" height="300" src="uploaded_content/$afbeeldingen[0]" name="imgbox" id="imgbox"><p>iframes are not supported by your browser.</p></iframe>
-      </div>
-
-      <div class="scrollmenu imageMarginBottom">
-        // foreach( $afbeeldingen as $afbeelding ) {
-        //   echo '<div class="col-lg-4">
-        //           <a href="uploaded_content/'.$afbeelding.'" target="imgbox">
-        //             <img src="uploaded_content/'.$afbeelding.'" width="100%" height="80%" alt="Placeholder">
-        //           </a>
-        //         </div>';
-        }
-      </div> -->
     </div>
 
     <div class="col-lg-4">
@@ -165,7 +151,7 @@ try {
         </div>
       </div>
       <div class="auctionCardBottom marginLeft marginRight">
-        <div class="row imageMarginBottom" style="line-height: 2em;">
+        <div class="row imageMarginBottom">
           <div class="col-lg-6">
             <div class="titleMarginBottom">
               Huidig bod:
@@ -183,12 +169,12 @@ try {
   </div>
 
   <div class="row">
-    <div class="col-lg-12" style="background-color: #222222; color: #ffffff; padding: 15px;">
-      <h5 style="margin-bottom: 0;"><b>Artikelbeschrijving</b></h5>
+    <div class="col-lg-12 auctionHeader">
+      <h5><b>Artikelbeschrijving</b></h5>
     </div>
   </div>
 
-  <div style="padding: 20px;">
+  <div class="paddingTop">
     <p><?=$beschrijving?></p>
   </div>
 

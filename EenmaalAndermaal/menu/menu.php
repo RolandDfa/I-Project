@@ -30,7 +30,7 @@
 </div>
 <div class="col-lg-3 col-md-6 col-sm-6 col-6 alignRight">
   <a id="ipadSearch" class="phoneButton search-form-tigger" data-toggle="search-form"><i class="fa fa-search phoneIcon"></i></a>
-  <a class="menuItem" href="">Plaats veiling</a>
+  <a class="menuItem" href="index.php?page=plaatsVeiling">Plaats veiling</a>
   <?php
   if (!isset($_SESSION["username"])) {
     echo '<a class="menuItem" href="index.php?page=inloggen">Inloggen</a>';
@@ -66,8 +66,8 @@
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
     <a href="index.php?page=home">Home</a>
-    <a href="">Alle veilingen</a>
-    <a href="">Plaats advertentie</a>
+    <a href="index.php?page=overzicht">Alle veilingen</a>
+    <a href="index.php?page=plaatsVeiling">Plaats advertentie</a>
     <?php
     if (!isset($_SESSION["username"])) {
       echo '<a href="index.php?page=inloggen">Inloggen</a>';

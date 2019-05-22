@@ -67,6 +67,10 @@ h5 {
   margin-right: 15px !important;
 }
 
+.paddingTop {
+  padding-top: 20px;
+}
+
 .alignLeft {
   text-align: left;
 }
@@ -553,6 +557,117 @@ ul.social-network li {
   border-color: rgb(136, 176, 75);
 }
 
+/* START AUCTION page */
+#regForm {
+  background-color: #fff;
+  margin: 0px auto;
+  padding: 40px;
+  width: 100%;
+  min-width: 600px;
+}
+
+#regForm h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Mark input boxes that get errors during validation: */
+#regForm input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+#regForm button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+#regForm button:hover {
+  opacity: 0.8;
+}
+
+#regForm #prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Step marker: Place in the form. */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.7;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: rgb(136, 176, 75);
+}
+
+.textFinish {
+  color: rgb(136, 176, 75);
+}
+
+.progressbarFinish {
+  background-color: rgb(136, 176, 75) !important;
+  color: #ffffff;
+}
+
+#progressbar {
+  margin-top: 20px;
+  width: 100%;
+  overflow: hidden;
+}
+
+#progressbar li {
+  text-align: center;
+  list-style-type: none;
+  color: #99a2a8;
+  width: calc(100%/4);
+  float: left;
+  position: relative;
+}
+
+#progressbar li .active {
+  color: green;
+}
+
+.before {
+  font-size: 1.3em;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  display: block;
+  background: #e3e3e3;
+  border-radius: 50%;
+  margin: 0 auto 10px auto;
+}
+
+.after {
+  width: 115%;
+  height: 10px;
+  background: #e3e3e3;
+  position: absolute;
+  left: -15%;
+  top: 21px;
+  z-index: -1;
+}
+
 /* AUCTION page */
 .titleMarginBottom {
   margin-bottom: 8px;
@@ -560,6 +675,7 @@ ul.social-network li {
 
 .imageMarginBottom {
   margin-bottom: 20px;
+  line-height: 2em;
 }
 
 .scrollmenu {
@@ -584,7 +700,13 @@ ul.social-network li {
 
 .auctionImageBlock {
   width: 100%;
-  height: 320px;
+  height: 350px;
+}
+
+.auctionHeader {
+  background-color: #222222;
+  color: #ffffff;
+  padding: 15px;
 }
 
 #auctionImage img {

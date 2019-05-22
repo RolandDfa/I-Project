@@ -17,9 +17,6 @@
           </div>
         </div>
         <div class="form-group">
-          <input type="checkbox" name="blijfingelogd" value="ja"> Ingelogd blijven
-        </div>
-        <div class="form-group">
           <input type="submit" class="btnSubmit" name="login" value="Log in" />
         </div>
       </form>
