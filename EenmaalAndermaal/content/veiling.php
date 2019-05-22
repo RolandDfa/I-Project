@@ -23,7 +23,15 @@ try {
       $prijs = str_replace(".",",",$result['startprijs']);
       $beschrijving = $result['beschrijving'];
     }
-  }
+  }else{
+		$titel = 'Kan titel niet laden';
+		$verkoper = 'Kan verkoper niet laden';
+		$plaatsnaam = 'Kan plaatsnaam niet laden';
+		$verzendkosten = 'Kan verzendkosten niet laden';
+		$einddatum = date("m-d-Y H:i:s");
+		$prijs = 'Kan prijs niet laden';
+		$beschrijving = 'Kan beschrijving niet laden';
+	}
 } catch (PDOException $e) {
   echo "Er gaat iets fout met het ophalen van het artikel: ".$e->getMessage();
 }
@@ -46,12 +54,9 @@ try {
 ?>
 
 <div class="pageWrapper">
-
   <div class="row">
     <div class="col-lg-3">
-    <!-- <p><?=cleanInput(strip_html_tags(replaceWhitespace(($beschrijving)))) ?></p> -->
-
-      <h4><b><?=cleanInput(strip_html_tags(replaceWhitespace(($titel)))) ?></b></h4>
+      <h4><b><?=$titel ?></b></h4>
       <div class="cardFooter">
         <?=$id?>
       </div>
