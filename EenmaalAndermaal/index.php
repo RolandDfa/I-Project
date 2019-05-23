@@ -99,6 +99,9 @@ if (!empty($_GET['page'])) {
 					case 'mijnaccount':
 					require('content/mijnaccount.php');
 					break;
+					case 'wachtwoordVergeten':
+					require('content/wachtwoordVergeten.php');
+					break;
 					default:
 					require('content/home.php');
 				}

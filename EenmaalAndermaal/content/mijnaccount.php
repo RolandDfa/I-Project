@@ -1,4 +1,5 @@
 <?php
+if (isset($_SESSION['username'])) {
 $telnr2 ="";
 try{
   $sql = "SELECT gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox FROM Gebruiker WHERE gebruikersnaam = :id";
@@ -236,7 +237,10 @@ if (isset($_POST['submitInfo'])) {
 } else {
 
 }
-
+}
+else {
+  echo '<p>Klik <a href="index.php?page=inloggen"><b>hier</b></a> om in te loggen<p>';
+}
 
 
 
