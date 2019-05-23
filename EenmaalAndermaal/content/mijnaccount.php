@@ -53,6 +53,7 @@ for ($i = 0; $i < sizeof($data); $i++) {
       break;
       case 'gebruikersStatus':
       $_SESSION['userstate'] = $value;
+      $statusGebruiker = $value;
       break;
       case 'gebruikersStatus_omschrijving':
       $status = $value;
@@ -91,7 +92,7 @@ else {
   $telnr = $tel1['Telefoon'];
   $tel1Volgnr = $tel1['volgnr'];
 }
-if($_SESSION['userstate'] != 3){
+if($statusGebruiker != 3){
   try{
     $userstateQuery = "SELECT Verkoper.valid, Email_validatie.code, Email_validatie.valid_until FROM Verkoper inner join Email_validatie on Verkoper.gebruiker = Email_validatie.gebruikersnaam WHERE controleOptie = 'Post' and valid = 0 and gebruiker = ?";
     $userstateStmt = $dbh->prepare($userstateQuery);
