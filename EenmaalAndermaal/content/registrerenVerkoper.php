@@ -106,8 +106,8 @@ if(isset($_POST['submitSellerCreditcard'])){
     $seller = "UPDATE Gebruiker set gebruikersStatus = 3 where gebruikersnaam = ? and valid = 1";
     $queryInsert = $dbh->prepare($seller);
     $queryInsert->execute(array($_SESSION['username']));
+    $_SESSION["userstate"] = 3;
     $registrerenVerkoperSucces = true;
-    $_SESSION['userstate'] = 3;
   }
   catch (PDOException $e) {
     echo "Fout met de database: {$e->getMessage()} ";
@@ -120,11 +120,6 @@ if(isset($_POST['submitSellerPost'])){
     $seller = "INSERT INTO Verkoper (gebruiker, bank, bankrekening, controleOptie, valid) VALUES (?,?,?,?,?)";
     $queryInsert = $dbh->prepare($seller);
     $queryInsert->execute(array($_SESSION['username'], cleanInput($_POST['bank']), cleanInput($_POST['rekeningnummer']), 'Post', 0));
-
-
-    $seller = "UPDATE Gebruiker set gebruikersStatus = 3 where gebruikersnaam = ? and valid = 1";
-    $queryInsert = $dbh->prepare($seller);
-    $queryInsert->execute(array($_SESSION['username']));
 
     $seller = "INSERT INTO Email_validatie VALUES (?,?,?)";
     $queryInsert = $dbh->prepare($seller);

@@ -1,7 +1,9 @@
 <?php
+  $hasToValidate = false;
+
 $telnr2 ="";
 try{
-  $sql = "SELECT gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox FROM Gebruiker WHERE gebruikersnaam = :id";
+  $sql = "SELECT gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox, gebruikersStatus_omschrijving, gebruikersStatus FROM Gebruiker inner join Gebruikersstatus on Gebruiker.gebruikersStatus = Gebruikersstatus.gebruikersStatus_id WHERE gebruikersnaam = :id";
   $query = $dbh->prepare($sql);
   if(!$query) {
     echo "oops error";
@@ -49,6 +51,12 @@ for ($i = 0; $i < sizeof($data); $i++) {
       case 'mailbox':
       $email = $value;
       break;
+      case 'gebruikersStatus':
+      $_SESSION['userstate'] = $value;
+      break;
+      case 'gebruikersStatus_omschrijving':
+      $status = $value;
+      break;
       default:
       break;
     }
@@ -83,6 +91,25 @@ else {
   $telnr = $tel1['Telefoon'];
   $tel1Volgnr = $tel1['volgnr'];
 }
+if($_SESSION['userstate'] != 3){
+  try{
+    $userstateQuery = "SELECT Verkoper.valid, Email_validatie.code, Email_validatie.valid_until FROM Verkoper inner join Email_validatie on Verkoper.gebruiker = Email_validatie.gebruikersnaam WHERE controleOptie = 'Post' and valid = 0 and gebruiker = ?";
+    $userstateStmt = $dbh->prepare($userstateQuery);
+    $userstateStmt->execute(array($_SESSION['username']));
+    if($userstateStmt->rowCount()!=0){
+      $userstate = $userstateStmt->fetchAll();
+      foreach ($userstate as $states) {
+        $einddatumValid = $states['valid_until'];
+        $validateCode = $states['code'];
+        $hasToValidate = true;
+      }
+    }else{
+      $hasToValidate = false;
+    }
+  }catch (PDOException $e) {
+    echo "Fout met de database: {$e->getMessage()} ";
+  }
+}
 ?>
 
 <H2>Account informatie</H2>
@@ -113,7 +140,63 @@ else {
       <p>Telefoonnummer: <?php echo $telnr ?></p>
       <p>2e Telefoonnummer: <?php echo $telnr2 ?></p>
       <p>Kvkummer: <?php echo $kvknr; ?></p>
+      <br>
+      <p>Gebruikersstatus: <?=$status ?></p>
       <div class="registerLine"><!-- Line --></div>
+
+
+
+<?php
+if(isset($_POST['verifieren'])){
+  if($validateCode == $_POST['code']){
+    if($einddatumValid >= date('Y-m-d')){
+
+    $codeGoedOfFout = 'Code komt overeen. U bent nu een verkoper.';
+    $_SESSION['userstate'] = 3;
+    try{
+      $seller = "UPDATE Gebruiker SET gebruikersStatus = 3 where gebruikersnaam = ?";
+      $queryInsert = $dbh->prepare($seller);
+      $queryInsert->execute(array($_SESSION['username']));
+
+      $seller = "UPDATE Verkoper SET Valid = 1";
+      $queryInsert = $dbh->prepare($seller);
+      $queryInsert->execute();
+
+      $registrerenVerkoperSucces = true;
+    }
+    catch (PDOException $e) {
+      echo "Fout met de database: {$e->getMessage()} ";
+      $registrerenVerkoperSucces = false;
+    }
+
+  }else{
+    $codeGoedOfFout = 'Code is verlopen, vraag een nieuwe aan.';
+  }
+  }else{
+    $codeGoedOfFout = 'Code komt niet overeen. Probeer het opnieuw.';
+  }
+}else{
+  $codeGoedOfFout = '';
+}
+if($hasToValidate){
+  ?>
+        <h3>Verkoopaccount verifiëren door middel van verstuurde code</h3>
+        <p>U heeft kortgeleden uw account geverifieerd als Verkoopaccount. Als laatste stap dient u nog een code in te vullen die verstuurt is met de post. Vul de code hier onder in:</p>
+        <form action="" method="post">
+          <div class="form-group">
+            <input type="text" class="form-control" name="code" placeholder="AbCd1234" required />
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btnSubmit" name="verifieren" value="Verifieer" />
+          </div>
+        </form>
+        <br>
+<?php
+echo $codeGoedOfFout;
+}
+?>
+
+
       <?php if (!isset($_POST['changeInfo']))
       { ?>
         <form class="changeButton" method="post" action="">
@@ -123,6 +206,7 @@ else {
     </div>
   </div>
   <div class="col-lg-2"><!-- White space --></div>
+
 </div>
 
 <?php
@@ -225,9 +309,9 @@ if (isset($_POST['submitInfo'])) {
         $queryInsertTellnr2 = $dbh->prepare($sqlInsertTellnr2);
         $queryInsertTellnr2->execute(array($username, $telnr2));
       }else{
-      $sqlUpdateTellnr2 = "UPDATE Gebruikerstelefoon SET Telefoon=? WHERE volgnr=$tel2Volgnr";
-      $queryInsertTellnr2 = $dbh->prepare($sqlUpdateTellnr2);
-      $queryInsertTellnr2->execute(array($telnr2));
+        $sqlUpdateTellnr2 = "UPDATE Gebruikerstelefoon SET Telefoon=? WHERE volgnr=$tel2Volgnr";
+        $queryInsertTellnr2 = $dbh->prepare($sqlUpdateTellnr2);
+        $queryInsertTellnr2->execute(array($telnr2));
       }
     } catch (PDOException $e) {
       echo "Fout met de database: {$e->getMessage()} ";
@@ -236,7 +320,6 @@ if (isset($_POST['submitInfo'])) {
 } else {
 
 }
-
 
 
 
