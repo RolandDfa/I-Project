@@ -33,7 +33,7 @@ try{
   if($userAdressStmt->rowCount()!=0){
     $users = $userAdressStmt->fetchAll();
     foreach ($users as $user) {
-      $melding = 'U moet eerst uw code invullen op de mijn account pagina. Deze code is met de post naar u verzonden.';
+      $melding = 'U moet eerst uw code invullen op de mijn account pagina. Deze code is met de post naar u verzonden. Klik <a href="index.php?page=mijnaccount">hier</a> om naar de mijn account pagina te gaan.';
       $registrerenVerkoperSucces = true;
     }
   }
@@ -54,7 +54,7 @@ if(isset($_POST['submitSellerCreditcard'])){
     $queryInsert->execute(array($_SESSION['username']));
     $_SESSION["userstate"] = 3;
     $registrerenVerkoperSucces = true;
-    $melding = 'Registreren gelukt!';
+    $melding = 'Registreren gelukt! Klik <a href="index.php?page=mijnaccount">hier</a> om naar de mijn account pagina te gaan.';
   }
   catch (PDOException $e) {
     echo "Fout met de database: {$e->getMessage()} ";
@@ -72,7 +72,7 @@ if(isset($_POST['submitSellerPost'])){
     $queryInsert = $dbh->prepare($seller);
     $queryInsert->execute(array($_SESSION['username'], generateRandomString(8), date('Y-m-d', strtotime("+7 day"))));
     $registrerenVerkoperSucces = true;
-    $melding = 'Registreren gelukt. Vul uw code in op de mijn account pagina';
+    $melding = 'Registreren gelukt. Vul uw code in op de mijn account pagina Klik <a href="index.php?page=mijnaccount">hier</a> om naar de mijn account pagina te gaan.';
   }
   catch (PDOException $e) {
     echo "Fout met de database: {$e->getMessage()} ";

@@ -195,12 +195,15 @@ if($hasToValidate){
 <?php
 echo $codeGoedOfFout;
 }
+
+if($_SESSION['userstate']!=3){
 ?>
 
 <form class="registerSeller" method="post" action="index.php?page=plaatsVeiling">
   <button type="submit" name="registerSeller" class="btn btnGreenery btn-block">Klik hier om te registreren als verkoper</button>
 </form>
 
+<?php } ?>
 <br>
       <?php if (!isset($_POST['changeInfo']))
       { ?>
