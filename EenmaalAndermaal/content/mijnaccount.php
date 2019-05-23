@@ -279,8 +279,7 @@ if($_SESSION['userstate'] != 3){
         <?php
       }
       ?>
-      <br>
-      <h2>Mijn veilingen</h2>
+
 
       <?php
       try{
@@ -288,7 +287,8 @@ if($_SESSION['userstate'] != 3){
         $userAdressStmt = $dbh->prepare($userAdressQuery);
         $userAdressStmt->execute(array($_SESSION['username']));
         if($userAdressStmt->rowCount()!=0){
-          echo '<div class="row contentWrapper">';
+          echo '<br>
+          <h2>Mijn veilingen</h2><div class="row contentWrapper">';
           $users = $userAdressStmt->fetchAll();
           foreach ($users as $result) {
             $voorwerpnummer = $result['voorwerpnummer'];
@@ -360,7 +360,8 @@ if($_SESSION['userstate'] != 3){
         $userAdressStmt = $dbh->prepare($userAdressQuery);
         $userAdressStmt->execute(array($_SESSION['username']));
         if($userAdressStmt->rowCount()!=0){
-          echo '<div class="row contentWrapper">';
+          echo '<br>
+          <h2>Mijn Biedingen</h2><div class="row contentWrapper">';
           $users = $userAdressStmt->fetchAll();
           foreach ($users as $result) {
             $voorwerpnummer = $result['voorwerpnummer'];
