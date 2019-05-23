@@ -352,8 +352,7 @@ if($_SESSION['userstate'] != 3){
         echo "Fout met de database: {$e->getMessage()} ";
       }
       ?>
-      <br>
-      <h2>Mijn Biedingen</h2>
+
       <?php
       try{
         $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer IN (SELECT distinct voorwerp from Bod where gebruiker = ?)";
@@ -438,6 +437,77 @@ if($_SESSION['userstate'] != 3){
       }catch (PDOException $e) {
         echo "Fout met de database: {$e->getMessage()} ";
       }
+
+      try{
+        $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE kopernaam = ?";
+        $userAdressStmt = $dbh->prepare($userAdressQuery);
+        $userAdressStmt->execute(array($_SESSION['username']));
+        if($userAdressStmt->rowCount()!=0){
+          echo '<br>
+          <h2>Mijn gewonnen veilingen</h2><div class="row contentWrapper">';
+          $users = $userAdressStmt->fetchAll();
+          foreach ($users as $result) {
+            $voorwerpnummer = $result['voorwerpnummer'];
+            echo '<div class="cardItem">
+            <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">
+            <div class="card shadow-sm">
+            <div class="cardImage">';
+
+
+            $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = ?";
+            $imagesStmt = $dbh->prepare($imagesquery);
+            $imagesStmt->execute(array($voorwerpnummer));
+            if($imagesStmt->rowCount()!=0){
+              $images = $imagesStmt->fetchAll();
+              foreach ($images as $image) {
+                echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+              }
+            }else{
+              echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
+            }
+
+
+            echo '</div>
+            <div class="cardTitle">
+            <div class="cardHeader">'.
+            $result['titel'].'
+            </div>
+            <div class="cardPrice">';
+
+
+
+            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag ASC";
+            $priceStmt = $dbh->prepare($pricequery);
+            $priceStmt->execute(array($voorwerpnummer));
+            if($priceStmt->rowCount()!=0){
+              $prices = $priceStmt->fetchAll();
+              foreach ($prices as $price) {
+                echo 'Hoogste bod: &euro; '.str_replace('.', ',', $price['bodbedrag']);
+              }
+            }
+            else{
+              echo 'Nog geen bod';
+            }
+
+
+            echo '</div>
+            <div class="cardFooter">
+            Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).' uur
+            </div>';
+
+            echo '
+            </div>
+            </div>
+            </a>
+            </div>';
+
+          }
+          echo '</div>';
+        }
+      }catch (PDOException $e) {
+        echo "Fout met de database: {$e->getMessage()} ";
+      }
+
        ?>
     </div>
   </div>
