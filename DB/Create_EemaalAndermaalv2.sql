@@ -167,6 +167,13 @@ CREATE TABLE [dbo].[Email_validatie] (
     CONSTRAINT [PK_Email_validatie] PRIMARY KEY CLUSTERED ([gebruikersnaam] ASC, [code] ASC, [valid_until] ASC),
     CONSTRAINT [FK_Validatie_gebruikersnaam] FOREIGN KEY ([gebruikersnaam]) REFERENCES [dbo].[Verkoper] ([gebruiker])
 );
+CREATE TABLE [dbo].[Email_validatie] (
+    [gebruikersnaam]    VARCHAR (50) NOT NULL,
+    [code]     VARCHAR (50) NOT NULL,
+    [valid_until] DATE         NOT NULL,
+    CONSTRAINT [PK_Email_validatie] PRIMARY KEY CLUSTERED ([gebruikersnaam] ASC, [code] ASC, [valid_until] ASC),
+    CONSTRAINT [FK_Validatie_gebruikersnaam] FOREIGN KEY ([gebruikersnaam]) REFERENCES [dbo].[Verkoper] ([gebruiker])
+);
 
 
 ---------------------------------------------------------------------
