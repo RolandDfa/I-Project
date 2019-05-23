@@ -22,8 +22,23 @@ try {
       $plaatsnaam = $result['plaatsnaam'];
       $verzendkosten = $result['verzendkosten'];
       $einddatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
-      $prijs = str_replace(".",",",$result['startprijs']);
+      //$prijs = str_replace(".",",",$result['startprijs']);
       $beschrijving = $result['beschrijving'];
+
+
+
+			$pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
+			$priceStmt = $dbh->prepare($pricequery);
+			$priceStmt->execute(array($id));
+			if($priceStmt->rowCount()!=0){
+				$prices = $priceStmt->fetchAll();
+				foreach ($prices as $price) {
+				$prijs = str_replace('.', ',', $price['bodbedrag']);
+				}
+			}
+			else{
+				$prijs = 'Nog geen bod';
+			}
     }
   }else{
 		echo "<style>.auction{display: none;}</style>";
