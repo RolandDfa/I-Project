@@ -92,7 +92,7 @@ else {
   $telnr = $tel1['Telefoon'];
   $tel1Volgnr = $tel1['volgnr'];
 }
-if($statusGebruiker != 3){
+if($_SESSION['userstate'] != 3){
   try{
     $userstateQuery = "SELECT Verkoper.valid, Email_validatie.code, Email_validatie.valid_until FROM Verkoper inner join Email_validatie on Verkoper.gebruiker = Email_validatie.gebruikersnaam WHERE controleOptie = 'Post' and valid = 0 and gebruiker = ?";
     $userstateStmt = $dbh->prepare($userstateQuery);
@@ -197,7 +197,11 @@ echo $codeGoedOfFout;
 }
 ?>
 
+<form class="registerSeller" method="post" action="index.php?page=plaatsVeiling">
+  <button type="submit" name="registerSeller" class="btn btnGreenery btn-block">Klik hier om te registreren als verkoper</button>
+</form>
 
+<br>
       <?php if (!isset($_POST['changeInfo']))
       { ?>
         <form class="changeButton" method="post" action="">
