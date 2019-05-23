@@ -11,7 +11,29 @@
 <form id="regForm" action="">
   <div class="tab">
     <h2><b>Categorie kiezen</b></h2>
-    <p><input placeholder="Categorie..." name="categorie"></p>
+    <div class="row">
+      <div class="col-lg-6">
+        <!-- Categorie -->
+        <div class="form-group">
+          <label for="categorie"><h4><b>Categorie</b></h4></label>
+          <p><select id="categorie" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="categorie" required>
+            <option value="">- - -</option>
+            <?php
+            // Get the headings from the database
+            try {
+              $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
+              while ($row = $data->fetch()) {
+                echo '<option value="'.$row['rubrieknaam'].'">'.$row['rubrieknaam'].'</option>';
+              }
+            } catch (PDOException $e) {
+              echo "Kan rubrieken niet laden".$e->getMessage();
+            }
+            ?>
+          </select></p>
+        </div>
+      </div>
+      <div class="col-lg-6"></div>
+    </div>
   </div>
   <div class="tab">
     <h2><b>Titel en beschrijving</b></h2>
@@ -20,24 +42,67 @@
         <!-- Titel -->
         <div class="form-group">
           <label for="title"><h4><b>Titel</b></h4></label>
-          <p><input type="text" id="title" class="form-control greeneryBorder col-lg-10" name="title" placeholder="Titel van de veiling" required></p>
+          <p><input type="text" id="title" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="title" placeholder="Titel van de veiling" required></p>
         </div>
         <!-- Beschrijving -->
         <div class="form-group">
           <label for="discription"><h4><b>Beschrijving</b></h4></label>
-          <p><textarea id="discription" class="form-control greeneryBorder col-lg-10" name="discription" rows="8" cols="80" placeholder="Beschrijving van het product" required></textarea></p>
+          <p><textarea id="discription" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="discription" rows="8" cols="80" placeholder="Beschrijving van het product"></textarea></p>
+        </div>
+        <!-- Looptijd -->
+        <div class="form-group">
+          <label for="days"><h4><b>Looptijd</b></h4></label>
+          <p><select id="days" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="days" required>
+            <option value="">- - -</option>
+            <option value="1">1</option>
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="7">7</option>
+            <option value="10">10</option>
+          </select></p>
         </div>
       </div>
       <div class="col-lg-6">
-
+        <!-- Betalingswijze -->
+        <div class="form-group">
+          <label for="paymethod"><h4><b>Betalingswijze</b></h4></label>
+          <p><select id="paymethod" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="paymethod" required>
+            <option value="">- - -</option>
+            <option value="Back/Giro">Back/Giro</option>
+            <option value="Contant">Contant</option>
+            <option value="Anders">Anders</option>
+          </select></p>
+        </div>
+        <!-- Betalingsinstructie -->
+        <div id="anders" class="form-group">
+          <label for="payinstruction"><h4><b>Betalingsinstructie</b></h4></label>
+          <p><input type="text" id="payinstruction" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="payinstruction" placeholder=""></p>
+        </div>
+        <!-- Start prijs -->
+        <div class="form-group">
+          <label for="price"><h4><b>Start prijs</b></h4></label>
+          <p><input type="number" id="price" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="price" placeholder="€" required></p>
+        </div>
+        <!-- Verzendkosten -->
+        <div class="form-group">
+          <label for="sendcost"><h4><b>Verzendkosten</b></h4></label>
+          <p><input type="number" id="sendcost" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="sendcost" placeholder="€" required></p>
+        </div>
       </div>
     </div>
   </div>
   <div class="tab">
     <h2><b>Foto's uploaden</b></h2>
-    <p><input placeholder="dd" oninput="this.className = ''" name="dd"></p>
-    <p><input placeholder="mm" oninput="this.className = ''" name="nn"></p>
-    <p><input placeholder="yyyy" oninput="this.className = ''" name="yyyy"></p>
+    <div class="avatar-upload">
+        <div class="avatar-edit">
+            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+            <label for="imageUpload"></label>
+        </div>
+        <div class="avatar-preview">
+            <div id="imagePreview">
+            </div>
+        </div>
+    </div>
   </div>
   <div class="tab">
     <h2><b>Controleren</b></h2>
@@ -115,15 +180,39 @@ function nextPrev(n) {
 
 function validateForm() {
   // This function deals with validation of the form fields
-  var x, y, i, valid = true;
+  var x, y, t, i, valid = true;
   x = document.getElementsByClassName("tab");
   y = x[currentTab].getElementsByTagName("input");
+  t = x[currentTab].getElementsByTagName("textarea");
+  s = x[currentTab].getElementsByTagName("select");
   // A loop that checks every input field in the current tab:
   for (i = 0; i < y.length; i++) {
+    if (y[i].required == true) {
+      // If a field is empty...
+      if (y[i].value == "") {
+        // add an "invalid" class to the field:
+        y[i].className += " invalid";
+        // and set the current valid status to false
+        valid = false;
+      }
+    }
+  }
+  // A loop that checks every textarea field in the current tab:
+  for (i = 0; i < t.length; i++) {
     // If a field is empty...
-    if (y[i].value == "") {
+    if (t[i].value == "") {
       // add an "invalid" class to the field:
-      y[i].className += " invalid";
+      t[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // A loop that checks every select field in the current tab:
+  for (i = 0; i < s.length; i++) {
+    // If a field is empty...
+    if (s[i].value == "") {
+      // add an "invalid" class to the field:
+      s[i].className += " invalid";
       // and set the current valid status to false
       valid = false;
     }
@@ -147,4 +236,30 @@ function fixStepIndicator(n) {
   //... and adds the "active" class on the current step:
   x[n].className += " active";
 }
+
+$('#paymethod').on('change', function() {
+  if(this.value == "Anders") {
+    $('#anders').show();
+    $("#payinstruction").prop('required',true);
+  } else {
+    $('#anders').hide();
+    $("#payinstruction").prop('required',false);
+  }
+});
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+            $('#imagePreview').hide();
+            $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#imageUpload").change(function() {
+    readURL(this);
+});
 </script>
