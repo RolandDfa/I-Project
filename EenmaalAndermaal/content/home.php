@@ -81,7 +81,7 @@
           </div>
           <div class="cardPrice">';
 
-          $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = :voorwerpnummerPrijs ORDER BY bodbedrag ASC";
+          $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = :voorwerpnummerPrijs ORDER BY bodbedrag DESC";
           $priceStmt = $dbh->prepare($pricequery);
           $priceStmt->bindParam(':voorwerpnummerPrijs', $voorwerpnummer);
           $priceStmt->execute();

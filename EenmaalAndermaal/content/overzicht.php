@@ -47,7 +47,7 @@ if(isset($_POST['searchText'])){
         </div>
         <div class="cardPrice">';
 
-        $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag ASC";
+        $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
         $priceStmt = $dbh->prepare($pricequery);
         $priceStmt->execute(array($voorwerpnummer));
         if($priceStmt->rowCount()!=0){
