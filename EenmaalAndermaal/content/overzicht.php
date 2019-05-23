@@ -35,7 +35,7 @@ if(isset($_POST['searchText'])){
         if($imagesStmt->rowCount()!=0){
           $images = $imagesStmt->fetchAll();
           foreach ($images as $image) {
-            echo '<img class="rounded-top" src="uploaded_content/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+            echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
           }
         }else{
           echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
@@ -47,7 +47,7 @@ if(isset($_POST['searchText'])){
         </div>
         <div class="cardPrice">';
 
-        $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag ASC";
+        $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
         $priceStmt = $dbh->prepare($pricequery);
         $priceStmt->execute(array($voorwerpnummer));
         if($priceStmt->rowCount()!=0){

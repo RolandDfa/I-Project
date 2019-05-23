@@ -2,6 +2,7 @@
 // Get Artikelnummer
 if (!empty($_GET['id'])) {
 	$id = $_GET['id'];
+	$id = (float) $id;
 } else {
 	header("Location: index.php?page=home");
 }
@@ -13,6 +14,7 @@ try {
   $stmt = $dbh->prepare($artikelquery);
   $stmt->execute(array($id));
   if ($stmt->rowCount() != 0) {
+		$auctionExists = true;
     $results = $stmt->fetchAll();
     foreach( $results as $result ) {
       $titel = $result['titel'];
@@ -24,13 +26,8 @@ try {
       $beschrijving = $result['beschrijving'];
     }
   }else{
-		$titel = 'Kan titel niet laden';
-		$verkoper = 'Kan verkoper niet laden';
-		$plaatsnaam = 'Kan plaatsnaam niet laden';
-		$verzendkosten = 'Kan verzendkosten niet laden';
-		$einddatum = date("m-d-Y H:i:s");
-		$prijs = 'Kan prijs niet laden';
-		$beschrijving = 'Kan beschrijving niet laden';
+		echo "<style>.auction{display: none;}</style>";
+		$auctionExists = false;
 	}
 } catch (PDOException $e) {
   echo "Er gaat iets fout met het ophalen van het artikel: ".$e->getMessage();
@@ -38,10 +35,9 @@ try {
 
 try {
   $afbeeldingen = array();
-  $afbeeldingquery = "SELECT * FROM Bestand WHERE voorwerp like :search";
+  $afbeeldingquery = "SELECT * FROM Bestand WHERE voorwerp = ?";
   $stmt = $dbh->prepare($afbeeldingquery);
-  $stmt->bindValue(':search', '%' . $id . '%', PDO::PARAM_INT);
-  $stmt->execute();
+  $stmt->execute(array($id));
   if ($stmt->rowCount() != 0) {
     $results = $stmt->fetchAll();
     foreach( $results as $result ) {
@@ -54,6 +50,8 @@ try {
 ?>
 
 <div class="pageWrapper">
+	<?php if(!$auctionExists){echo'Kan veiling niet vinden. Klik <a href="index.php?page=overzicht">hier</a> om naar het veilingenoverzicht te gaan. Of klik <a href="index.php?page=home">hier</a> om naar de homepagina te gaan.';} ?>
+	<div class="auction">
   <div class="row">
     <div class="col-lg-3">
       <h4><b><?=$titel ?></b></h4>
@@ -90,11 +88,11 @@ try {
             foreach($afbeeldingen as $afbeelding) {
               if ($slide == 0) {
                 echo '<div class="carousel-item auctionImageBlock active">
-                        <img class="d-block w-100 auctionImageBlock" src="uploaded_content/'.$afbeelding.'" alt="'.$afbeelding.'">
+                        <img class="d-block w-100 auctionImageBlock" src="../pics/'.$afbeelding.'" alt="'.$afbeelding.'">
                       </div>';
               } else {
                 echo '<div class="carousel-item auctionImageBlock">
-                        <img class="d-block w-100 auctionImageBlock" src="uploaded_content/'.$afbeelding.'" alt="'.$afbeelding.'">
+                        <img class="d-block w-100 auctionImageBlock" src="../pics/'.$afbeelding.'" alt="'.$afbeelding.'">
                       </div>';
               }
               $slide++;
@@ -124,11 +122,11 @@ try {
             foreach($afbeeldingen as $afbeelding) {
               if ($slide == 0) {
                 echo '<li data-target="#carousel-image" data-slide-to="'.$slide.'" class="active">
-                        <img src="uploaded_content/'.$afbeelding.'" width="100">
+                        <img src="../pics/'.$afbeelding.'" width="100">
                       </li>';
               } else {
                 echo '<li data-target="#carousel-image" data-slide-to="'.$slide.'">
-                        <img src="uploaded_content/'.$afbeelding.'" width="100">
+                        <img src="../pics/'.$afbeelding.'" width="100">
                       </li>';
               }
               $slide++;
@@ -141,20 +139,6 @@ try {
           ?>
         </ol>
       </div>
-
-      <!-- <div class="imageMarginBottom">
-        <iframe frameborder="0" scrolling="no" width="100%" height="300" src="uploaded_content/$afbeeldingen[0]" name="imgbox" id="imgbox"><p>iframes are not supported by your browser.</p></iframe>
-      </div>
-
-      <div class="scrollmenu imageMarginBottom">
-        // foreach( $afbeeldingen as $afbeelding ) {
-        //   echo '<div class="col-lg-4">
-        //           <a href="uploaded_content/'.$afbeelding.'" target="imgbox">
-        //             <img src="uploaded_content/'.$afbeelding.'" width="100%" height="80%" alt="Placeholder">
-        //           </a>
-        //         </div>';
-        }
-      </div> -->
     </div>
 
     <div class="col-lg-4">
@@ -171,7 +155,7 @@ try {
         </div>
       </div>
       <div class="auctionCardBottom marginLeft marginRight">
-        <div class="row imageMarginBottom" style="line-height: 2em;">
+        <div class="row imageMarginBottom">
           <div class="col-lg-6">
             <div class="titleMarginBottom">
               Huidig bod:
@@ -189,15 +173,15 @@ try {
   </div>
 
   <div class="row">
-    <div class="col-lg-12" style="background-color: #222222; color: #ffffff; padding: 15px;">
-      <h5 style="margin-bottom: 0;"><b>Artikelbeschrijving</b></h5>
+    <div class="col-lg-12 auctionHeader">
+      <h5><b>Artikelbeschrijving</b></h5>
     </div>
   </div>
 
-  <div style="padding: 20px;">
-    <p><?=$beschrijving ?></p>
+  <div class="paddingTop">
+    <p><?=$beschrijving?></p>
   </div>
-
+</div>
 </div>
 
 <script>
