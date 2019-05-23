@@ -1,5 +1,5 @@
 <?php
-  $hasToValidate = false;
+$hasToValidate = false;
 
 $telnr2 ="";
 try{
@@ -147,40 +147,40 @@ if($_SESSION['userstate'] != 3){
 
 
 
-<?php
-if(isset($_POST['verifieren'])){
-  if($validateCode == $_POST['code']){
-    if($einddatumValid >= date('Y-m-d')){
+      <?php
+      if(isset($_POST['verifieren'])){
+        if($validateCode == $_POST['code']){
+          if($einddatumValid >= date('Y-m-d')){
 
-    $codeGoedOfFout = 'Code komt overeen. U bent nu een verkoper.';
-    $_SESSION['userstate'] = 3;
-    try{
-      $seller = "UPDATE Gebruiker SET gebruikersStatus = 3 where gebruikersnaam = ?";
-      $queryInsert = $dbh->prepare($seller);
-      $queryInsert->execute(array($_SESSION['username']));
+            $codeGoedOfFout = 'Code komt overeen. U bent nu een verkoper.';
+            $_SESSION['userstate'] = 3;
+            try{
+              $seller = "UPDATE Gebruiker SET gebruikersStatus = 3 where gebruikersnaam = ?";
+              $queryInsert = $dbh->prepare($seller);
+              $queryInsert->execute(array($_SESSION['username']));
 
-      $seller = "UPDATE Verkoper SET Valid = 1";
-      $queryInsert = $dbh->prepare($seller);
-      $queryInsert->execute();
+              $seller = "UPDATE Verkoper SET Valid = 1";
+              $queryInsert = $dbh->prepare($seller);
+              $queryInsert->execute();
 
-      $registrerenVerkoperSucces = true;
-    }
-    catch (PDOException $e) {
-      echo "Fout met de database: {$e->getMessage()} ";
-      $registrerenVerkoperSucces = false;
-    }
+              $registrerenVerkoperSucces = true;
+            }
+            catch (PDOException $e) {
+              echo "Fout met de database: {$e->getMessage()} ";
+              $registrerenVerkoperSucces = false;
+            }
 
-  }else{
-    $codeGoedOfFout = 'Code is verlopen, vraag een nieuwe aan.';
-  }
-  }else{
-    $codeGoedOfFout = 'Code komt niet overeen. Probeer het opnieuw.';
-  }
-}else{
-  $codeGoedOfFout = '';
-}
-if($hasToValidate){
-  ?>
+          }else{
+            $codeGoedOfFout = 'Code is verlopen, vraag een nieuwe aan.';
+          }
+        }else{
+          $codeGoedOfFout = 'Code komt niet overeen. Probeer het opnieuw.';
+        }
+      }else{
+        $codeGoedOfFout = '';
+      }
+      if($hasToValidate){
+        ?>
         <h3>Verkoopaccount verifiëren door middel van verstuurde code</h3>
         <p>U heeft kortgeleden uw account geverifieerd als Verkoopaccount. Als laatste stap dient u nog een code in te vullen die verstuurt is met de post. Vul de code hier onder in:</p>
         <form action="" method="post">
@@ -192,19 +192,19 @@ if($hasToValidate){
           </div>
         </form>
         <br>
-<?php
-echo $codeGoedOfFout;
-}
+        <?php
+        echo $codeGoedOfFout;
+      }
 
-if($_SESSION['userstate']!=3){
-?>
+      if($_SESSION['userstate']!=3){
+        ?>
 
-<form class="registerSeller" method="post" action="index.php?page=plaatsVeiling">
-  <button type="submit" name="registerSeller" class="btn btnGreenery btn-block">Klik hier om te registreren als verkoper</button>
-</form>
+        <form class="registerSeller" method="post" action="index.php?page=plaatsVeiling">
+          <button type="submit" name="registerSeller" class="btn btnGreenery btn-block">Klik hier om te registreren als verkoper</button>
+        </form>
 
-<?php } ?>
-<br>
+      <?php } ?>
+      <br>
       <?php if (!isset($_POST['changeInfo']))
       { ?>
         <form class="changeButton" method="post" action="">
@@ -217,14 +217,15 @@ if($_SESSION['userstate']!=3){
 
 </div>
 
-<?php
-if (isset($_POST['changeInfo'])) {
-  ?>
-  <div id="pagecontent" class="row">
-    <div class="col-lg-2"><!-- White space --></div>
-    <div class="col-lg-8">
 
-      <div class="container">
+<div id="pagecontent" class="row">
+  <div class="col-lg-2"><!-- White space --></div>
+  <div class="col-lg-8">
+
+    <div class="container">
+      <?php
+      if (isset($_POST['changeInfo'])) {
+        ?>
         <form class="registerForm" method="post" action="">
           <h2>Gegevens aanpassen</h2>
           <div class="row form-group"></div>
@@ -275,14 +276,34 @@ if (isset($_POST['changeInfo'])) {
           </div>
           <button type="submit" name="submitInfo" class="btn btnGreenery btn-block">Gegevens aanpassen/Updaten</button>
         </form>
-      </div>
-    </div>
-    <div class="col-lg-2"><!-- White space --></div>
-  </div>
-  <div class="registerLine"><!-- Line --></div>
-  <?php
-}
+        <?php
+      }
+      ?>
+      <br>
+      <h2>Mijn veilingen</h2>
 
+      <?php
+      try{
+        $userAdressQuery = "SELECT voorwerpnummer, titel FROM Voorwerp WHERE verkopernaam = ?";
+        $userAdressStmt = $dbh->prepare($userAdressQuery);
+        $userAdressStmt->execute(array($_SESSION['username']));
+        if($userAdressStmt->rowCount()!=0){
+          $users = $userAdressStmt->fetchAll();
+          foreach ($users as $user) {
+            echo '<div class="row"><a href="index.php?page=veiling&id='.$user['voorwerpnummer'].'">'.$user['titel'].'</a></div>';
+          }
+        }
+      }catch (PDOException $e) {
+        echo "Fout met de database: {$e->getMessage()} ";
+      }
+
+      ?>
+    </div>
+  </div>
+  <div class="col-lg-2"><!-- White space --></div>
+</div>
+
+<?php
 if (isset($_POST['submitInfo'])) {
   $address = cleanInput($_POST['address']);
   $zipcode = cleanInput($_POST['zipcode']);
