@@ -69,7 +69,7 @@
           if($imagesStmt->rowCount()!=0){
             $images = $imagesStmt->fetchAll();
             foreach ($images as $image) {
-              echo '<img class="rounded-top" src="uploaded_content/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+              echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
             }
           }else{
             echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';

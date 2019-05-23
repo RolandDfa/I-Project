@@ -35,10 +35,9 @@ try {
 
 try {
   $afbeeldingen = array();
-  $afbeeldingquery = "SELECT * FROM Bestand WHERE voorwerp like :search";
+  $afbeeldingquery = "SELECT * FROM Bestand WHERE voorwerp = ?";
   $stmt = $dbh->prepare($afbeeldingquery);
-  $stmt->bindValue(':search', '%' . $id . '%', PDO::PARAM_INT);
-  $stmt->execute();
+  $stmt->execute(array($id));
   if ($stmt->rowCount() != 0) {
     $results = $stmt->fetchAll();
     foreach( $results as $result ) {
@@ -89,11 +88,11 @@ try {
             foreach($afbeeldingen as $afbeelding) {
               if ($slide == 0) {
                 echo '<div class="carousel-item auctionImageBlock active">
-                        <img class="d-block w-100 auctionImageBlock" src="uploaded_content/'.$afbeelding.'" alt="'.$afbeelding.'">
+                        <img class="d-block w-100 auctionImageBlock" src="../pics/'.$afbeelding.'" alt="'.$afbeelding.'">
                       </div>';
               } else {
                 echo '<div class="carousel-item auctionImageBlock">
-                        <img class="d-block w-100 auctionImageBlock" src="uploaded_content/'.$afbeelding.'" alt="'.$afbeelding.'">
+                        <img class="d-block w-100 auctionImageBlock" src="../pics/'.$afbeelding.'" alt="'.$afbeelding.'">
                       </div>';
               }
               $slide++;
@@ -123,11 +122,11 @@ try {
             foreach($afbeeldingen as $afbeelding) {
               if ($slide == 0) {
                 echo '<li data-target="#carousel-image" data-slide-to="'.$slide.'" class="active">
-                        <img src="uploaded_content/'.$afbeelding.'" width="100">
+                        <img src="../pics/'.$afbeelding.'" width="100">
                       </li>';
               } else {
                 echo '<li data-target="#carousel-image" data-slide-to="'.$slide.'">
-                        <img src="uploaded_content/'.$afbeelding.'" width="100">
+                        <img src="../pics/'.$afbeelding.'" width="100">
                       </li>';
               }
               $slide++;

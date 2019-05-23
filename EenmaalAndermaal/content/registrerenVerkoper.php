@@ -107,6 +107,7 @@ if(isset($_POST['submitSellerCreditcard'])){
     $queryInsert = $dbh->prepare($seller);
     $queryInsert->execute(array($_SESSION['username']));
     $registrerenVerkoperSucces = true;
+    $_SESSION['userstate'] = 3;
   }
   catch (PDOException $e) {
     echo "Fout met de database: {$e->getMessage()} ";
