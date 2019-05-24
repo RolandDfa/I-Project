@@ -1,4 +1,7 @@
 <?php
+if (isset($_SESSION['username'])) {
+
+
 $hasToValidate = false;
 
 $telnr2 ="";
@@ -560,7 +563,8 @@ if (isset($_POST['submitInfo'])) {
 } else {
 
 }
-
+}else {
+}
 
 
 
