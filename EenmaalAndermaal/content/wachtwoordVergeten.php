@@ -107,36 +107,36 @@ $securitynr = "";
             <input type="password" class="form-control" name="newPassRepeat" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}" title="vul minimaal een kleine letter, een cijfer en een hoofd letter in. het wachtwoord moet tussen 8 en 15 lang zijn." required >
           </div>
         </div>
-        <button type="submit" name="newPass" class="btn btnGreenery btn-block" >Verander wachtwoord</button>
+        <button type="submit" name="newPassButton" class="btn btnGreenery btn-block" >Verander wachtwoord</button>
       </form>
     </div>
     <?php
-    if (isset($_POST['newPass'])) {
-      $passwordNew = cleanInput($_POST['newPass']);
-      $passwordRepeat = cleanInput($_POST['newPassRepeat']);
-      if ($passwordNew != $passwordRepeat) {
-        echo '<div class="redText"><p>Wachtwoord en herhaal komen niet overeen.</p></div>';;
+  }
+}
+if (isset($_POST['newPassButton'])) {
+  $passwordNew = cleanInput($_POST['newPass']);
+  $passwordRepeat = cleanInput($_POST['newPassRepeat']);
+  if ($passwordNew != $passwordRepeat) {
+    echo '<div class="redText"><p>Wachtwoord en herhaal komen niet overeen.</p></div>';;
+  }
+  else {
+    $hashedWW = hash('sha256', $passwordNew);
+    try{
+      $sqlUpdate = "UPDATE Gebruiker SET wachtwoord=? WHERE gebruikersnaam=?";
+      $queryInsert = $dbh->prepare($sqlUpdate);
+      if(!$queryInsert) {
+        echo "oops error";
+        exit();
       }
       else {
-        $hashedWW = hash('sha256', $passwordNew);
-        try{
-        $sqlUpdate = "UPDATE Gebruiker SET wachtwoord=? WHERE gebruikersnaam=?";
-        $queryInsert = $dbh->prepare($sqlUpdate);
-        if(!$query2) {
-          echo "oops error";
-          exit();
-        }
-        else {
-          $aaaa = "ola";
         $queryInsert->execute(array($hashedWW,$_SESSION['securityLogin']));
       }
     } catch (PDOException $e) {
       echo "Fout met de database: {$e->getMessage()} ";
     }
-    }
-  }
-  else {
   }
 }
+else {
+  echo "asdfg";
 }
 ?>
