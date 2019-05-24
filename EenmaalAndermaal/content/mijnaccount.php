@@ -1,4 +1,7 @@
 <?php
+if (isset($_SESSION['username'])) {
+
+
 $hasToValidate = false;
 
 $telnr2 ="";
@@ -508,7 +511,7 @@ if($_SESSION['userstate'] != 3){
         echo "Fout met de database: {$e->getMessage()} ";
       }
 
-       ?>
+      ?>
     </div>
   </div>
   <div class="col-lg-2"><!-- White space --></div>
@@ -560,8 +563,8 @@ if (isset($_POST['submitInfo'])) {
 } else {
 
 }
-
-
+}else {
+}
 
 
 
