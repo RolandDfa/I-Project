@@ -1,63 +1,117 @@
 <div class="pageWrapper">
-  <h1>
-    Recht op vergetelheid
-  </h1>
+  <br><h3 class="textCenter greeneryText">
+   EENMAALANDERMAAL  PRIVACYVERKLARING  
+  </h3>
+  <br>
   <p>
-    In de Algemene verordening gegevensbescherming (AVG) is het recht op vergetelheid opgenomen. Dit recht houdt in dat een organisatie in een aantal gevallen iemands persoonsgegevens moet wissen. Mensen kunnen aan organisaties vragen om hun gegevens te wissen met een beroep op hun recht op vergetelheid.
+  EenmaalAndermaal verwerkt persoonsgegevens van gebruikers die ons online platform bezoeken en gebruik maken van onze dienst. In deze Privacy Policy informeren wij u graag over welke gegevens wij verwerken en waarom. EenmaalAndermaal is de verantwoordelijke met betrekking tot de verwerking van uw persoonsgegevens. Lees deze informatie aandachtig door zodat u begrijpt hoe wij gegevens verwerken en wat uw rechten daarbij zijn.
   </p>
-  <h2>
+  <br>
+  <h5 class="greeneryText"><b>
     Wanneer geldt het recht op vergetelheid?
-  </h2>
+    </b></h5><br><br>
+  <p><b>
+    Informatie die u ons geeft.
+    </b></p><br>
   <p>
-    In de volgende situaties moet een organisatie iemand persoonsgegevens wissen:
-  </p>
+    We gebruiken en verwerken de gegevens die we van u ontvangen. Bijvoorbeeld als een gebruiker zich registreert of als een gebruiker contact opneemt met onze klantenservice.
+  </p><br>
+  <p><b><i>Account informatie. </i></b> Zodra u gebruik wilt maken van ons online platform (verkopen en kopen), dient u een account aan te maken. Dit doet u door een wachtwoord te kiezen en uw e-mailadres in te voeren. U kunt deze gegevens beheren via de accountinformatiepagina.
+  </p><br>
+  <p><b><i>Profiel informatie. </i></b> Om het mogelijk te maken voor ons om onze diensten aan te bieden en voor u om gebruik te maken van onze diensten, zullen wij u vragen om bepaalde informatie te verstrekken, zoals uw volledige naam, e-mailadres, telefoonnummer, adres, geboortedatum en het Kamer van Koophandel nummer van uw bedrijf.
+  </p><br>
+  <p><b><i>Communicatie informatie. </i></b> Wanneer u contact opneemt met onze klantenservice of wanneer zij met u contact opnemen, verzamelen wij informatie over de reden van dit contact en alle informatie die u aan ons verstrekt via de telefoon of e-mail. Dit omvat ook alle meldingen die we van anderen ontvangen over u of de door u aangeboden of gekochte kavels. Via ons online platform kunt u ook communiceren met andere gebruikers. We kunnen dergelijke communicatie beoordelen, scannen of analyseren voor fraudepreventie, risicobeoordeling, onderzoek en klantenservice doeleinden.
+  </p><br><br>
+  <p><b>
+    Informatie die we automatisch verzamelen.
+    </b></p><br>
+  <p>
+    Wanneer u van ons Online Platform gebruikmaakt, verzamelen we informatie over uw activiteiten, zoals uw klikgedrag, geplaatste biedingen en informatie over uw apparaat om u de best mogelijke service te bieden.
+  </p><br>
+  <p><b><i>Gebruiksinformatie. </i></b> We houden interesseprofielen, kwalificaties en kenmerken van gebruikers bij, zodat we weten wat voor soort gebruiker u bent, uw locatie en welke kavels u leuk vindt. Dergelijke informatie stelt ons in staat om te ontdekken wat u interesseert en om onze dienst voor u te personaliseren. 
+  </p><br><br>
+  
+  <h5 class="greeneryText"><b>
+    Voor welke doeleinden gebruikt EenmaalAndermaal deze informatie?
+    </b></h5><br>
+  <p> Hieronder kunt u lezen voor welke doeleinden de verzamelde informatie wordt gebruikt.
+  </p><br><br>
+  <p><b>De levering van onze diensten. </b></p><br>
+  <p> Wij gebruiken uw gegevens ten eerste om aan onze contractuele verplichtingen tegenover u te voldoen en om ervoor te zorgen dat onze dienst op de best mogelijke manier aan u wordt geboden. In dit verband gebruiken we uw gegevens om:
+  </p><br>
   <ul>
     <li>
-      <i>Niet meer nodig</i><br>
-      De organisatie heeft de persoonsgegevens niet meer nodig voor de doeleinden waarvoor de organisatie ze heeft verzameld of waarvoor de organisatie ze verwerkt.
+      U in staat te stellen om van ons Online Platform gebruik te maken.
     </li>
     <li>
-      <i>Toestemming ingetrokken</i><br>
-      <p>
-        De betrokkene heeft eerder (uitdrukkelijke) toestemming gegeven aan de organisatie voor het gebruik van zijn gegevens, maar trekt die toestemming nu in.
-      </p>
+      Het Online Platform in een formaat te tonen dat overeenkomt met uw internetbrowser en het apparaat dat u gebruikt.
     </li>
     <li>
-      <i>Bezwaar</i><br>
-      <p>
-        De betrokkene maakt bezwaar tegen de verwerking. Er geldt op grond van artikel 21 van de AVG een absoluut recht van bezwaar tegen direct marketing. En een relatief recht van bezwaar als de rechten van de betrokkene zwaarder wegen dan het belang van de organisatie om de persoonsgegevens te verwerken.
-      </p>
+        Klantenservice te bieden via verschillende kanalen, zoals e-mail en telefoon.
     </li>
     <li>
-      <i>Onrechtmatige verwerking</i><br>
-      <p>
-        De organisatie verwerkt de persoonsgegevens onrechtmatig. Bijvoorbeeld omdat er geen wettelijke grondslag is voor de verwerking.
-      </p>
+      Onze interne administratie op orde te houden.
+    </li>
+  </ul><br>
+   <p><b>Een vertrouwd en veilig online platform bieden en onderhouden.</b></p><br>
+    <p>Uiteraard is het ook in ons gerechtvaardigd belang om een vertrouwd en veilig online platform te bieden en te onderhouden. We kunnen uw gegevens ook verwerken en opslaan om te voldoen aan wettelijke verplichtingen. Om deze redenen verwerken wij persoonsgegevens voor het: 
+    </p> 
+  <ul>
+    <li>
+      Voorkomen, opsporen en tegengaan van fraude of anderszins onrechtmatig gebruik van ons online platform of dienst.
     </li>
     <li>
-      <i>Wettelijk bepaalde bewaartermijn verlopen</i><br>
-      <p>
-        De organisatie is wettelijk verplicht om de gegevens na bepaalde tijd te wissen.
-      </p>
+      Registreren, bemiddelen en oplossen van mogelijke geschillen of onregelmatigheden.
     </li>
     <li>
-      <i>Apps en websites bij kinderen</i><br>
-      <p>
-        De betrokkene is jonger dan 16 jaar en de persoonsgegevens zijn verzameld via een app of website (‘dienst van de informatiemaatschappij’).
-      </p>
+      Voldoen aan onze wettelijke verplichtingen, zoals het bijhouden van gegevens en het naleven van regels in het kader van strafrechtelijke of andere onderzoeken door bevoegde autoriteiten..
     </li>
-  </ul>
-  <h2>
-    Wanneer geldt het recht op vergetelheid niet?
-  </h2>
-  <p>
-    Er is een aantal uitzonderingen op het recht op vergetelheid. Bijvoorbeeld als een organisatie wettelijk verplicht is om bepaalde gegevens te verwerken. Dan kan de organisatie deze gegevens niet op verzoek wissen.<br>
-    Het recht op vergetelheid kunt u in principe niet namens iemand anders uitoefenen. Tenzij u daar bijvoorbeeld een volmacht voor heeft.
-  </p>
-  <h2>
-    Wetgeving
-  </h2>
-  <p>
-    Het recht op vergetelheid is geregeld in artikel 17 van de AVG.
-  </p>
+    <li>
+      Handhaven van onze Algemene Voorwaarden en ander beleidslijnen.
+    </li>
+  </ul><br><br>
+  
+  <h5 class="greeneryText"><b>
+    Wanneer wordt uw informatie door derden verstrekt?
+    </b></h5><br>
+  <p>Hieronder kunt u lezen met welke redenen uw informatie wordt gedeeld met derden.</p><br><br>
+  <p><b> Wanneer u kavels koopt en verkoopt. </b></p><br>
+  <p>Wanneer u kavels op het online platform koopt of verkoopt, kunnen andere gebruikers toegang krijgen tot gegevens zoals uw naam, adres, e-mailadres en telefoonnummer, omdat dit noodzakelijk kan zijn voor het afronden of uitvoeren van de transactie (inclusief aflevering en ophaling). Als u bijvoorbeeld een koopcontract sluit met een andere gebruiker, worden uw adres, e-mailadres en telefoonnummer verstrekt voor communicatiedoeleinden en voor het regelen van het ophalen of verzenden van kavels. Het verstrekken van contactinformatie kan ook nodig zijn voordat een transactie wordt afgerond, bijvoorbeeld om gebruikers in staat te stellen rechtstreeks het object bij andere gebruikers te laten bekijken. In het geval van problemen tussen u en een andere gebruiker, kunnen we u ook informatie verstrekken die relevant is voor de andere gebruiker om het probleem rechtstreeks met u op te lossen.
+  </p><br><br>
+  <p><b>Met uw toestemming</b></p><br>
+  <p> We kunnen uw gegevens ook aan anderen verstrekken als u daarmee heeft ingestemd. Bijvoorbeeld wanneer een andere gebruiker u direct terug wilt betalen. In die situaties vragen we om uw toestemming om uw financiële gegevens met die gebruiker te delen.
+  </p><br><br>
+  <p><b>Wanneer we (wettelijk) verplicht zijn of voor de handhaving van onze algemene voorwaarden.</b></p><br>
+  <p>We kunnen uw gegevens ook bekendmaken aan derden:</P><br><br>
+  <ul>
+    <li>
+      Als wij ons daartoe verplicht voelen, bijvoorbeeld in geval van geschillen of als uw Gebruikersmateriaal kennelijk onrechtmatig is.
+    </li>
+    <li>
+      Om te voldoen aan wettelijke verplichtingen, zoals gerechtelijke bevelen.
+    </li>
+    <li>
+      Om samen te werken met autoriteiten zoals de politie of belastingautoriteiten.
+    </li>
+    <li>
+      Om de Algemene Voorwaarden van EenmaalAndermaal te handhaven.
+    </li>
+  </ul><br><br>
+  
+  <h5 class="greeneryText"><b>
+    Hoe beveiligen we uw informatie en hoe lang bewaren we de informatie?
+  </b></h5><br>
+  <p> We nemen beveiliging van uw gegevens serieus en hebben beveiligingsprocedures en technische beperkingen om uw gegevens te beschermen tegen ongeoorloofde toegang, vernietiging of wijziging. Naast de beveiligingsmaatregelen aan onze kant, zoals de versleuteling van uw gegevens, raden we u aan om zorgvuldig een wachtwoord te selecteren en ervoor te zorgen dat uw inloggegevens geheim blijven. We bewaren uw persoonsgegevens voor zo lang deze nodig zijn voor het doel waarvoor ze zijn verzameld of gebruikt worden, tenzij een langere bewaartermijn vereist of toegestaan is volgens de wet. Na de betreffende periode, zullen wij uw informatie verwijderen of anonimiseren.
+  </p><br>
+  <h5 class="greeneryText"><b>
+     Hoe kunt u uw informatie beheren?
+  </b></h5><br>
+    <p>U kunt de informatie die aan uw account is gekoppeld, aanpassen door naar uw accountinstellingen te gaan. Deze instellingen zijn te vinden op de accountinformatiepagina. Wanneer u ons toestemming heeft gegeven voor bepaald gebruik van uw gegevens door ons, bijvoorbeeld voor het verzenden van marketing e-mails, kunt u eenvoudig uw toestemming intrekken. U kunt dit doen via de accountinformatiepagina of door op 'afmelden' in een e-mail te klikken.
+    </p><br>
+   <h5 class="greeneryText"><b>
+       Wat moet u doen in het geval van privacyschending?
+   </b></h5><br>
+   <p><br>
+     Als u denkt dat we uw rechten hebben geschonden, verzoeken wij u om ons hiervan op de hoogte te stellen door een e-mail te sturen naar privacy@eenmaalandermaal.nl. Dit stelt ons in staat om de situatie zo snel mogelijk te onderzoeken. U kunt ook een klacht indienen bij de relevante nationale toezichthoudende autoriteit.
+   </p><br><br>
 </div>

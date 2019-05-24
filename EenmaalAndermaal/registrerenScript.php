@@ -144,7 +144,7 @@ if(isset($_POST['signUp'])){
 				$sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox, wachtwoord, vraag, antwoordTekst, gebruikersStatus, valid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				$queryInsert = $dbh->prepare($sqlInsert);
 
-				$queryInsert->execute(array($username, $name, $lastname, $address, $zipcode, $city, $country, $kvknr, $birthDate, $_SESSION['email'], $hashedWW, $securityQ, $hashedSecurityA, 1, 1));
+				$queryInsert->execute(array($username, $name, $lastname, $address, $zipcode, $city, $country, $kvknr, $birthDate, $_SESSION['email'], $hashedWW, $securityQ, $hashedSecurityA, 2, 1));
 
 				$sqlInsertTellnr = "INSERT INTO Gebruikerstelefoon(gebruikersnaam, Telefoon) VALUES(?,?)";
 				$queryInsertTellnr = $dbh->prepare($sqlInsertTellnr);
