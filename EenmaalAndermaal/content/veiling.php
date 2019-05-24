@@ -200,34 +200,34 @@ try {
 						<p>Klik op een bedrag om uw bod te plaatsen:</p>
 						<?php
 						if($prijs<50 || !isset($prijs)){
-							echo '<form action="" method="post">';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+0.50).'">&euro; '.((int)$prijs+0.50).'</button>';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+1).'">&euro; '.((int)$prijs+0.50).'</button>';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+5).'">&euro; '.((int)$prijs+0.50).'</button>';
+							echo '<form action="" method="post" class="bidButtons">';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+0.50).'">&euro; '.((float)$prijs+0.50).'</button>';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+1).'">&euro; '.((float)$prijs+1).'</button>';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+5).'">&euro; '.((float)$prijs+5).'</button>';
 							echo '</form>';
 						}else if($prijs<500){
-							echo '<form action="" method="post">';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+1).'">&euro; '.((int)$prijs+1).'</button>';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+5).'">&euro; '.((int)$prijs+5).'</button>';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+10).'">&euro; '.((int)$prijs+10).'</button>';
+							echo '<form action="" method="post" class="bidButtons">';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+1).'">&euro; '.((float)$prijs+1).'</button>';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+5).'">&euro; '.((float)$prijs+5).'</button>';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+10).'">&euro; '.((float)$prijs+10).'</button>';
 							echo '</form>';
-						}else if($hoogsteBod<500){
-							echo '<form action="" method="post">';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+5).'">&euro; '.((int)$prijs+5).'</button>';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+10).'">&euro; '.((int)$prijs+10).'</button>';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+20).'">&euro; '.((int)$prijs+20).'</button>';
+						}else if($prijs<500){
+							echo '<form action="" method="post" class="bidButtons">';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+5).'">&euro; '.((float)$prijs+5).'</button>';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+10).'">&euro; '.((float)$prijs+10).'</button>';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+20).'">&euro; '.((float)$prijs+20).'</button>';
 							echo '</form>';
-						}else if($hoogsteBod<5000){
-							echo '<form action="" method="post">';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+10).'">&euro; '.((int)$prijs+10).'</button>';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+20).'">&euro; '.((int)$prijs+20).'</button>';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+50).'">&euro; '.((int)$prijs+50).'</button>';
+						}else if($prijs<5000){
+							echo '<form action="" method="post" class="bidButtons">';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+10).'">&euro; '.((float)$prijs+10).'</button>';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+20).'">&euro; '.((float)$prijs+20).'</button>';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+50).'">&euro; '.((float)$prijs+50).'</button>';
 							echo '</form>';
 						}else{
-							echo '<form action="" method="post">';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+50).'">&euro; '.((int)$prijs+50).'</button>';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+100).'">&euro; '.((int)$prijs+100).'</button>';
-							echo '<button name="bod" type="submit" value="'.((int)$prijs+150).'">&euro; '.((int)$prijs+150).'</button>';
+							echo '<form action="" method="post" class="bidButtons">';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+50).'">&euro; '.((float)$prijs+50).'</button>';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+100).'">&euro; '.((float)$prijs+100).'</button>';
+							echo '<button name="bod" type="submit" value="'.((float)$prijs+150).'">&euro; '.((float)$prijs+150).'</button>';
 							echo '</form>';
 						}
 						?>
@@ -275,34 +275,34 @@ try {
 											$hoogsteBod = $price['bodbedrag'];
 										}
 										if($hoogsteBod<50 || !isset($hoogsteBod)){
-											echo '<form action="" method="post">';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+0.50).'">&euro; '.((int)$hoogsteBod+0.50).'</button>';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+1).'">&euro; '.((int)$hoogsteBod+0.50).'</button>';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+5).'">&euro; '.((int)$hoogsteBod+0.50).'</button>';
+											echo '<form action="" method="post" class="bidButtons">';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+0.50).'">&euro; '.((float)$hoogsteBod+0.50).'</button>';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+1.00).'">&euro; '.((float)$hoogsteBod+1.00).'</button>';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+5.00).'">&euro; '.((float)$hoogsteBod+5.00).'</button>';
 											echo '</form>';
 										}else if($hoogsteBod<500){
-											echo '<form action="" method="post">';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+1).'">&euro; '.((int)$hoogsteBod+1).'</button>';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+5).'">&euro; '.((int)$hoogsteBod+5).'</button>';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+10).'">&euro; '.((int)$hoogsteBod+10).'</button>';
+											echo '<form action="" method="post" class="bidButtons">';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+1.00).'">&euro; '.((float)$hoogsteBod+1.00).'</button>';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+5.00).'">&euro; '.((float)$hoogsteBod+5.00).'</button>';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+10.00).'">&euro; '.((float)$hoogsteBod+10.00).'</button>';
 											echo '</form>';
 										}else if($hoogsteBod<500){
-											echo '<form action="" method="post">';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+5).'">&euro; '.((int)$hoogsteBod+5).'</button>';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+10).'">&euro; '.((int)$hoogsteBod+10).'</button>';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+20).'">&euro; '.((int)$hoogsteBod+20).'</button>';
+											echo '<form action="" method="post" class="bidButtons">';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+5.00).'">&euro; '.((float)$hoogsteBod+5.00).'</button>';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+10.00).'">&euro; '.((float)$hoogsteBod+10.00).'</button>';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+20.00).'">&euro; '.((float)$hoogsteBod+20.00).'</button>';
 											echo '</form>';
 										}else if($hoogsteBod<5000){
-											echo '<form action="" method="post">';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+10).'">&euro; '.((int)$hoogsteBod+10).'</button>';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+20).'">&euro; '.((int)$hoogsteBod+20).'</button>';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+50).'">&euro; '.((int)$hoogsteBod+50).'</button>';
+											echo '<form action="" method="post" class="bidButtons">';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+10.00).'">&euro; '.((float)$hoogsteBod+10.00).'</button>';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+20.00).'">&euro; '.((float)$hoogsteBod+20.00).'</button>';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+50.00).'">&euro; '.((float)$hoogsteBod+50.00).'</button>';
 											echo '</form>';
 										}else{
-											echo '<form action="" method="post">';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+50).'">&euro; '.((int)$hoogsteBod+50).'</button>';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+100).'">&euro; '.((int)$hoogsteBod+100).'</button>';
-											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+150).'">&euro; '.((int)$hoogsteBod+150).'</button>';
+											echo '<form action="" method="post" class="bidButtons">';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+50.00).'">&euro; '.((float)$hoogsteBod+50.00).'</button>';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+100.00).'">&euro; '.((float)$hoogsteBod+100.00).'</button>';
+											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+150.00).'">&euro; '.((float)$hoogsteBod+150.00).'</button>';
 											echo '</form>';
 										}
 										?>
