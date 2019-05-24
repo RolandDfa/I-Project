@@ -194,9 +194,10 @@ try {
 					</div>
 
 					<?php
-					if(isset($_SESSION['username'])){
+					if(isset($_SESSION['username'])&& $einddatum>date('m-d-Y H:i:s')){
 						?>
 						<b>Snel bieden</b>
+						<p>Klik op een bedrag om uw bod te plaatsen:</p>
 						<?php
 						if($prijs<50 || !isset($prijs)){
 							echo '<form action="" method="post">';
@@ -245,14 +246,14 @@ try {
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 									</div>
 									<div class="modal-body">
-										<ol>
+
 
 											<?php
 											$pricequery = "SELECT TOP 3 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
 											$priceStmt = $dbh->prepare($pricequery);
 											$priceStmt->execute(array($id));
 											if($priceStmt->rowCount()!=0){
-												echo '<h5>Biedingen:</h5><br>';
+												echo '<h5>Biedingen:</h5><br><ol>';
 												$prices = $priceStmt->fetchAll();
 												foreach ($prices as $price) {
 													echo  '<li>'.str_replace('.', ',', $price['bodbedrag']).'</li>';
@@ -298,9 +299,6 @@ try {
 											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+50).'">&euro; '.((int)$hoogsteBod+50).'</button>';
 											echo '</form>';
 										}else{
-											echo '<button>&euro; '.((int)$hoogsteBod+50).'</button>';
-											echo '<button>&euro; '.((int)$hoogsteBod+100).'</button>';
-											echo '<button>&euro; '.((int)$hoogsteBod+150).'</button>';
 											echo '<form action="" method="post">';
 											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+50).'">&euro; '.((int)$hoogsteBod+50).'</button>';
 											echo '<button name="bod" type="submit" value="'.((int)$hoogsteBod+100).'">&euro; '.((int)$hoogsteBod+100).'</button>';
@@ -308,6 +306,12 @@ try {
 											echo '</form>';
 										}
 										?>
+										<br>
+										<form action="" method="post">
+											<h5><label for="bod">Plaats handmatig uw bod</label></h5>
+											<input type="text" id="bod" name="bod" placeholder="bijv. 12">
+											<input type="submit" value="Bied">
+										</form>
 									</div>
 									<div class="modal-footer">
 										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
