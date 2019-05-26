@@ -146,7 +146,7 @@ if($_SESSION['userstate'] != 3){
       <p>Email: <?php echo $email; ?></p>
       <p>Telefoonnummer: <?php echo $telnr ?></p>
       <p>2e Telefoonnummer: <?php echo $telnr2 ?></p>
-      <p>Kvkummer: <?php echo $kvknr; ?></p>
+      <p>Kvknummer: <?php echo $kvknr; ?></p>
       <br>
       <p>Gebruikersstatus: <?=$status ?></p>
       <div class="registerLine"><!-- Line --></div>
@@ -326,7 +326,7 @@ if($_SESSION['userstate'] != 3){
 
 
 
-            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag ASC";
+            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
             $priceStmt = $dbh->prepare($pricequery);
             $priceStmt->execute(array($voorwerpnummer));
             if($priceStmt->rowCount()!=0){
