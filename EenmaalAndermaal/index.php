@@ -113,6 +113,9 @@ if (!empty($_GET['page'])) {
 					case 'wachtwoordVergeten':
 					require('content/wachtwoordVergeten.php');
 					break;
+					case 'wachtwoordAanpassen':
+					require('content/wachtwoordAanpassen.php');
+					break;
 					default:
 					require('content/home.php');
 				}

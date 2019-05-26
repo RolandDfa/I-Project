@@ -122,6 +122,9 @@ if($_SESSION['userstate'] != 3){
   <li><b>Account</b></li>
   <li><a href="index.php?page=home">Betalingen</a></li>
   <li><a href="index.php?page=home">Berichten</a></li>
+  <form class="changeButton" method="post" action="index.php?page=wachtwoordAanpassen">
+    <button type="submit" name="changePassword">Naar wachtwoord aanpassen</button>
+  </form>
 </div>
 
 <div id="pagecontent" class="row">
