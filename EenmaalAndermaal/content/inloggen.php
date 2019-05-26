@@ -21,7 +21,7 @@
         </div>
       </form>
       <div class="form-group">
-        <a href="index.php?page=wachtwoordVergetenAanpassen" class="btnForgetPwd">Wachtwoord vergeten?</a>
+        <a href="index.php?page=wachtwoordVergeten" class="btnForgetPwd">Wachtwoord vergeten?</a>
       </div>
     </div>
     <div class="col-md-6 registerenContainer">

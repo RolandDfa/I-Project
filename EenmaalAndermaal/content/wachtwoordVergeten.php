@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 $security = "";
 $securitynr = "";
 ?>
@@ -137,4 +137,4 @@ if (isset($_POST['newPassButton'])) {
 }
 else {
 }
-?> -->
+?>
