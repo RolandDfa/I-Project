@@ -252,7 +252,7 @@ if(isset($_POST['signUp'])){
 						<div class="row form-group">
 							<label for="lastname" class="col-lg-4 alignRight control-label">Achternaam *</label>
 							<div class="col-lg-8">
-								<input type="text" id="lastname" class="form-control" name="lastname" pattern="[A-Za-z]{1,50}" title="Uw achternaam" value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : '' ?>" placeholder="Harris" required>
+								<input type="text" id="lastname" class="form-control" name="lastname" pattern="[A-Za-z ]{1,50}" title="Uw achternaam" value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : '' ?>" placeholder="Harris" required>
 							</div>
 						</div>
 						<!-- BirthDate -->

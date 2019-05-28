@@ -1,4 +1,7 @@
 <?php
+if (isset($_SESSION['username'])) {
+
+
 $hasToValidate = false;
 
 $telnr2 ="";
@@ -119,6 +122,9 @@ if($_SESSION['userstate'] != 3){
   <li><b>Account</b></li>
   <li><a href="index.php?page=home">Betalingen</a></li>
   <li><a href="index.php?page=home">Berichten</a></li>
+  <form class="changeButton" method="post" action="index.php?page=wachtwoordAanpassen">
+    <button type="submit" name="changePassword">Naar wachtwoord aanpassen</button>
+  </form>
 </div>
 
 <div id="pagecontent" class="row">
@@ -130,7 +136,7 @@ if($_SESSION['userstate'] != 3){
       <p>Persoons gegevens</p>
       <p>Voornaam: <?php echo $firstname; ?></p>
       <p>Achternaam: <?php echo $lastname; ?></p>
-      <p>Geboortedatum: <?php echo $birthDate; ?></p>
+      <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
       <p>Adres: <?php echo $address; ?></p>
       <p>Postcode: <?php echo $zipcode; ?></p>
       <p>Plaatsnaam: <?php echo $city; ?></p>
@@ -140,7 +146,7 @@ if($_SESSION['userstate'] != 3){
       <p>Email: <?php echo $email; ?></p>
       <p>Telefoonnummer: <?php echo $telnr ?></p>
       <p>2e Telefoonnummer: <?php echo $telnr2 ?></p>
-      <p>Kvkummer: <?php echo $kvknr; ?></p>
+      <p>Kvknummer: <?php echo $kvknr; ?></p>
       <br>
       <p>Gebruikersstatus: <?=$status ?></p>
       <div class="registerLine"><!-- Line --></div>
@@ -232,7 +238,7 @@ if($_SESSION['userstate'] != 3){
           <p>Persoons gegevens</p>
           <p>Voornaam: <?php echo $firstname; ?></p>
           <p>Achternaam: <?php echo $lastname; ?></p>
-          <p>Geboortedatum: <?php echo $birthDate; ?></p>
+          <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
           <div class="row form-group">
             <label for="address" class="col-lg-4 alignRight control-label">Adres *</label>
             <div class="col-lg-8">
@@ -279,8 +285,7 @@ if($_SESSION['userstate'] != 3){
         <?php
       }
       ?>
-      <br>
-      <h2>Mijn veilingen</h2>
+
 
       <?php
       try{
@@ -288,7 +293,8 @@ if($_SESSION['userstate'] != 3){
         $userAdressStmt = $dbh->prepare($userAdressQuery);
         $userAdressStmt->execute(array($_SESSION['username']));
         if($userAdressStmt->rowCount()!=0){
-          echo '<div class="row contentWrapper">';
+          echo '<br>
+          <h2>Mijn veilingen</h2><div class="row contentWrapper">';
           $users = $userAdressStmt->fetchAll();
           foreach ($users as $result) {
             $voorwerpnummer = $result['voorwerpnummer'];
@@ -320,7 +326,7 @@ if($_SESSION['userstate'] != 3){
 
 
 
-            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag ASC";
+            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
             $priceStmt = $dbh->prepare($pricequery);
             $priceStmt->execute(array($voorwerpnummer));
             if($priceStmt->rowCount()!=0){
@@ -352,15 +358,15 @@ if($_SESSION['userstate'] != 3){
         echo "Fout met de database: {$e->getMessage()} ";
       }
       ?>
-      <br>
-      <h2>Mijn Biedingen</h2>
+
       <?php
       try{
         $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer IN (SELECT distinct voorwerp from Bod where gebruiker = ?)";
         $userAdressStmt = $dbh->prepare($userAdressQuery);
         $userAdressStmt->execute(array($_SESSION['username']));
         if($userAdressStmt->rowCount()!=0){
-          echo '<div class="row contentWrapper">';
+          echo '<br>
+          <h2>Mijn Biedingen</h2><div class="row contentWrapper">';
           $users = $userAdressStmt->fetchAll();
           foreach ($users as $result) {
             $voorwerpnummer = $result['voorwerpnummer'];
@@ -437,7 +443,78 @@ if($_SESSION['userstate'] != 3){
       }catch (PDOException $e) {
         echo "Fout met de database: {$e->getMessage()} ";
       }
-       ?>
+
+      try{
+        $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE kopernaam = ?";
+        $userAdressStmt = $dbh->prepare($userAdressQuery);
+        $userAdressStmt->execute(array($_SESSION['username']));
+        if($userAdressStmt->rowCount()!=0){
+          echo '<br>
+          <h2>Mijn gewonnen veilingen</h2><div class="row contentWrapper">';
+          $users = $userAdressStmt->fetchAll();
+          foreach ($users as $result) {
+            $voorwerpnummer = $result['voorwerpnummer'];
+            echo '<div class="cardItem">
+            <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">
+            <div class="card shadow-sm">
+            <div class="cardImage">';
+
+
+            $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = ?";
+            $imagesStmt = $dbh->prepare($imagesquery);
+            $imagesStmt->execute(array($voorwerpnummer));
+            if($imagesStmt->rowCount()!=0){
+              $images = $imagesStmt->fetchAll();
+              foreach ($images as $image) {
+                echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+              }
+            }else{
+              echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
+            }
+
+
+            echo '</div>
+            <div class="cardTitle">
+            <div class="cardHeader">'.
+            $result['titel'].'
+            </div>
+            <div class="cardPrice">';
+
+
+
+            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
+            $priceStmt = $dbh->prepare($pricequery);
+            $priceStmt->execute(array($voorwerpnummer));
+            if($priceStmt->rowCount()!=0){
+              $prices = $priceStmt->fetchAll();
+              foreach ($prices as $price) {
+                echo 'Hoogste bod: &euro; '.str_replace('.', ',', $price['bodbedrag']);
+              }
+            }
+            else{
+              echo 'Nog geen bod';
+            }
+
+
+            echo '</div>
+            <div class="cardFooter">
+            Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).' uur
+            </div>';
+
+            echo '
+            </div>
+            </div>
+            </a>
+            </div>';
+
+          }
+          echo '</div>';
+        }
+      }catch (PDOException $e) {
+        echo "Fout met de database: {$e->getMessage()} ";
+      }
+
+      ?>
     </div>
   </div>
   <div class="col-lg-2"><!-- White space --></div>
@@ -489,8 +566,8 @@ if (isset($_POST['submitInfo'])) {
 } else {
 
 }
-
-
+}else {
+}
 
 
 
