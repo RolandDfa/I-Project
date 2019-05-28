@@ -67,9 +67,20 @@
           $imagesStmt->bindParam(':voorwerpnummer', $voorwerpnummer);
           $imagesStmt->execute();
           if($imagesStmt->rowCount()!=0){
+            $foundImage = false;
             $images = $imagesStmt->fetchAll();
             foreach ($images as $image) {
-              echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+              $imagesFromUpload = scandir("./upload");
+              foreach ($imagesFromUpload as $uploadImage) {
+                if($image['bestandsnaam'] == $uploadImage){
+                  $foundImage = true;
+                }
+              }
+              if($foundImage){
+                echo '<img class="rounded-top" src="./upload/'.$uploadImage.'" width="100%" height="220" alt="'.$result['titel'].'">';
+              }else{
+                echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+              }
             }
           }else{
             echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
