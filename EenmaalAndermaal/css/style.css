@@ -558,7 +558,7 @@ ul.social-network li {
 }
 
 /* START AUCTION page */
-#regForm {
+#auctionForm {
   background-color: #fff;
   margin: 0px auto;
   padding: 40px;
@@ -566,12 +566,12 @@ ul.social-network li {
   min-width: 600px;
 }
 
-#regForm h2 {
+#auctionForm h2 {
   text-align: center;
   margin-bottom: 30px;
 }
 
-#regForm .invalid {
+#auctionForm .invalid {
   background-color: #ffdddd;
 }
 
@@ -579,8 +579,10 @@ ul.social-network li {
   display: none;
 }
 
-#regForm button {
-  background-color: #4CAF50;
+#auctionForm button {
+  background-color: rgb(136, 176, 75);
+  border-radius: 1.5rem;
+  width: 200px;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -588,16 +590,12 @@ ul.social-network li {
   cursor: pointer;
 }
 
-#regForm button:hover {
+#auctionForm button:hover {
   opacity: 0.8;
 }
 
-#regForm #prevBtn {
+#auctionForm #prevBtn {
   background-color: #bbbbbb;
-}
-
-#anders {
-    display: none;
 }
 
 .step {
@@ -669,48 +667,43 @@ ul.social-network li {
 }
 
 .avatar-upload {
-    position: relative;
-    max-width: 205px;
-    margin: 50px auto;
+  position: relative;
+  max-width: 200px;
+  margin: 20px auto;
+}
+
+.avatar-upload-first {
+  position: relative;
+  max-width: 350px;
+  margin: 20px auto;
 }
 
 .avatar-edit {
-    position: absolute;
-    right: 12px;
-    z-index: 1;
-    top: 10px;
+  position: absolute;
+  right: 10px;
+  z-index: 1;
+  top: 10px;
 }
 
 .avatar-edit input {
-    display: none;
+  display: none;
 }
 
 .avatar-edit label {
-    display: inline-block;
-    width: 34px;
-    height: 34px;
-    margin-bottom: 0;
-    border-radius: 100%;
-    background: #FFFFFF;
-    border: 1px solid transparent;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
-    cursor: pointer;
-    font-weight: normal;
-    transition: all .2s ease-in-out;
-    &:hover {
-        background: #f1f1f1;
-        border-color: #d6d6d6;
-    }
-    &:after {
-        content: "\f040";
-        color: #757575;
-        position: absolute;
-        top: 10px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        margin: auto;
-    }
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #FFFFFF;
+  color: #444444;
+  line-height: 30px;
+  padding-left: 8px;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all .2s ease-in-out;
 }
 
 .avatar-edit label:hover {
@@ -718,20 +711,51 @@ ul.social-network li {
   border-color: #d6d6d6;
 }
 
+.avatar-preview-first {
+  width: 350px;
+  height: 350px;
+  position: relative;
+  border: 6px solid #d6d6d6;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-preview-first div {
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/image_placeholder.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .avatar-preview {
-    width: 192px;
-    height: 192px;
-    position: relative;
-    border: 6px solid #F8F8F8;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border: 6px solid #d6d6d6;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
 .avatar-preview div {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/image_placeholder.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#bulletList {
+  text-align: center;
+  margin-top: 40px;
+}
+
+#buttonListDiv {
+  overflow: auto;
+}
+
+#buttonList {
+  float: right;
 }
 
 /* AUCTION page */

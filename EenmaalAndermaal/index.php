@@ -167,5 +167,10 @@ if (!empty($_GET['page'])) {
 		</div>
 	</footer>
 
+	<?php
+	// Javascript functions
+	require('functions/javascriptFunctions.php');
+	?>
+
 </body>
 </html>

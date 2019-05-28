@@ -16,7 +16,7 @@ $errorUsername = "";
 if(isset($_POST['verifyCode'])){
 	$codeInput = $_POST['code'];
 	if ($codeInput != $_SESSION['code']) {
-		header("Location: index.php?page=registreren&error=blabla");
+		header("Location: index.php?page=registreren&error=code");
 	} elseif ($codeInput == $_SESSION['code']) {
 		$_SESSION['verifySucces'] = true;
 	}
@@ -41,7 +41,6 @@ if(isset($_POST['signUp'])){
 	$securityQ = $_POST['securityQ'];
 	$securityA = cleanInput($_POST['securityA']);
 
-
 	$validName = !preg_match("/^[a-zA-Z]$/",$name);
 	$validLastName = !preg_match("/^[a-zA-Z]$/",$lastname);
 	$validBirthDate = !preg_match("/^[0-9]$/",$birthDate);
@@ -56,13 +55,9 @@ if(isset($_POST['signUp'])){
 	$validSecurityA = !preg_match("/^[a-zA-Z0-9]$/",$securityA);
 	$allValid = $validName && $validLastName && $validBirthDate && $validAddress && $validZipcode && $validCity && $validTelnr && $validTelnr2 && $validKvknr && $validUsername && $validSecurityA;
 
-
-
-
 	if (!$allValid) {
 		if ($validName) {
 			$returntekst = $returntekst . "&Name=".$name;
-			echo "$validName $validLastName $validBirthDate $validAddress $validZipcode $validCity $validCountry $validTelnr $validTelnr2 $validKvknr $validUsername $validSecurityA";
 		} else {
 			$errorMes = $errorMes . "+unvalidName";
 		}
@@ -157,7 +152,6 @@ if(isset($_POST['signUp'])){
 
 					$queryInsertTellnr2->execute(array($username, $telnr2));
 				}
-
 
 				// Unset session var
 				$_SESSION = array();
