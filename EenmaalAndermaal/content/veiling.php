@@ -44,7 +44,7 @@ try {
 			$plaatsnaam = $result['plaatsnaam'];
 			$verzendkosten = $result['verzendkosten'];
 			$einddatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
-			//$prijs = str_replace(".",",",$result['startprijs']);
+			$startprijs = str_replace(",",".",$result['startprijs']);
 			$beschrijving = $result['beschrijving'];
 
 
@@ -56,10 +56,12 @@ try {
 				$prices = $priceStmt->fetchAll();
 				foreach ($prices as $price) {
 					$prijs = str_replace('.', ',', $price['bodbedrag']);
+					$geboden = true;
 				}
 			}
 			else{
-				$prijs = 'Nog geen bod';
+				$prijs = $startprijs;
+				$geboden = false;
 			}
 		}
 	}else{
@@ -202,7 +204,15 @@ try {
 							</div>
 						</div>
 						<div class="col-lg-6 bigtext greeneryText">
-							<b>&euro; <?=$prijs?></b>
+							<?php
+								if($geboden){
+									echo "<b>&euro; $prijs</b>";
+								}else{
+									echo "<b>Nog geen bod geplaatst</b>";
+									echo "<br>Startprijs: $startprijs";
+								}
+							 ?>
+
 						</div>
 					</div>
 
@@ -212,7 +222,7 @@ try {
 						<b>Snel bieden</b>
 						<p>Klik op een bedrag om uw bod te plaatsen:</p>
 						<?php
-						$hoogsteBod = str_replace(',', '.', $prijs);
+						$hoogsteBod = str_replace(',','.',$prijs);
 						if($hoogsteBod<50 || !isset($hoogsteBod)){
 							echo '<form action="" method="post" class="bidButtons">';
 							echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+0.50).'">&euro; '.str_replace('.', ',', ((float)$hoogsteBod+0.50)).'</button>';
@@ -263,6 +273,7 @@ try {
 
 
 											<?php
+											try{
 											$pricequery = "SELECT TOP 3 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
 											$priceStmt = $dbh->prepare($pricequery);
 											$priceStmt->execute(array($id));
@@ -276,18 +287,28 @@ try {
 											else{
 												echo 'Nog geen bod';
 											}
+										}catch (PDOException $e) {
+											echo "Kan bodbedragen niet ophalen. Laad pagina opnieuw.";
+										}
 											?>
 										</ol>
 										<h5>Plaats snel een bod:</h5>
 										<?php
+										try{
 										$pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
 										$priceStmt = $dbh->prepare($pricequery);
 										$priceStmt->execute(array($id));
-										$prices = $priceStmt->fetchAll();
-										$hoogsteBod = '';
-										foreach ($prices as $price) {
-											$hoogsteBod = $price['bodbedrag'];
+										if($priceStmt->rowCount()!=0){
+											$prices = $priceStmt->fetchAll();
+											$hoogsteBod = '';
+											foreach ($prices as $price) {
+												$hoogsteBod = $price['bodbedrag'];
+											}
 										}
+									}
+									catch (PDOException $e) {
+										echo "Kan hoogste bod niet ophalen. Laad pagina opnieuw.";
+									}
 										if($hoogsteBod<50 || !isset($hoogsteBod)){
 											echo '<form action="" method="post" class="bidButtons">';
 											echo '<button name="bod" type="submit" value="'.((float)$hoogsteBod+0.50).'">&euro; '.((float)$hoogsteBod+0.50).'</button>';
