@@ -136,7 +136,7 @@ if($_SESSION['userstate'] != 3){
       <p>Persoons gegevens</p>
       <p>Voornaam: <?php echo $firstname; ?></p>
       <p>Achternaam: <?php echo $lastname; ?></p>
-      <p>Geboortedatum: <?php echo $birthDate; ?></p>
+      <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
       <p>Adres: <?php echo $address; ?></p>
       <p>Postcode: <?php echo $zipcode; ?></p>
       <p>Plaatsnaam: <?php echo $city; ?></p>
@@ -238,7 +238,7 @@ if($_SESSION['userstate'] != 3){
           <p>Persoons gegevens</p>
           <p>Voornaam: <?php echo $firstname; ?></p>
           <p>Achternaam: <?php echo $lastname; ?></p>
-          <p>Geboortedatum: <?php echo $birthDate; ?></p>
+          <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
           <div class="row form-group">
             <label for="address" class="col-lg-4 alignRight control-label">Adres *</label>
             <div class="col-lg-8">

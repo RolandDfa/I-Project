@@ -52,7 +52,7 @@ $securitynr = "";
                   }
                   else {
                     echo '<div class="redText">
-                    <p>Gebruikersnaam bestaad niet</p></div>';
+                    <p>Gebruikersnaam bestaat niet</p></div>';
                   }
                 }
               } catch (PDOException $e) {

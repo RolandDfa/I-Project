@@ -177,9 +177,7 @@ try {
 						<b id='time'>0d 0h 0m 0s</b>
 					</div>
 					<div class="bottomlineWhite"><!-- Line --></div>
-					<div>
-						U heeft nog niet geboden op dit artikel
-					</div>
+					
 				</div>
 				<div class="auctionCardBottom marginLeft marginRight">
 					<div class="row imageMarginBottom">
