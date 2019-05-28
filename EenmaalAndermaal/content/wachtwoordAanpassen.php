@@ -77,6 +77,8 @@ if (isset($_POST['newPassButton'])) {
       }
       else {
         $queryInsert->execute(array($hashedWW,$_SESSION['username']));
+        session_destroy();
+        echo "string";
       }
     } catch (PDOException $e) {
       echo "Fout met de database: {$e->getMessage()} ";

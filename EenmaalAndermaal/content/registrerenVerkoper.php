@@ -102,19 +102,19 @@ if(isset($_POST['submitSellerPost'])){
         <div class="row form-group">
           <label for="bank" class="col-lg-4 alignRight control-label">Bank *</label>
           <div class="col-lg-8">
-            <input type="text" id="bank" class="form-control" name="bank"  title="Uw bank" value="" placeholder="bijv. Rabobank" required>
+            <input type="text" id="bank" class="form-control" name="bank"  title="Uw bank" pattern="[a-zA-Z]{1,25}" value="" placeholder="bijv. Rabobank" required>
           </div>
         </div>
         <div class="row form-group">
           <label for="rekeningnummer" class="col-lg-4 alignRight control-label">Rekeningnummer *</label>
           <div class="col-lg-8">
-            <input type="text" id="rekeningnummer" class="form-control" name="rekeningnummer" title="Uw rekeningnummer" value="" placeholder="bijv. NL12BANK0123456789" required>
+            <input type="text" id="rekeningnummer" class="form-control" name="rekeningnummer" title="Uw rekeningnummer" pattern="[A-Z]{2}[0-9]{2}[A-Z]{4}[0-9]{10}" value="" placeholder="bijv. NL12BANK0123456789" required>
           </div>
         </div>
         <div class="row form-group">
           <label for="creditcardnummer" class="col-lg-4 alignRight control-label">Creditcardnummer *</label>
           <div class="col-lg-8">
-            <input type="text" id="creditcardnummer" class="form-control" name="creditcardnummer"  title="Creditcardnummer" value="" placeholder="bijv. 1234-5678-8765-4321" required>
+            <input type="text" id="creditcardnummer" class="form-control" name="creditcardnummer"  title="Creditcardnummer" pattern="[0-9]{4} *[0-9]{4} *[0-9]{4} *[0-9]{4}" value="" placeholder="bijv. 1234 5678 8765 4321" required>
           </div>
         </div>
         <button type="submit" name="submitSellerCreditcard" class="btn btnGreenery btn-block">Verifiëren</button>
