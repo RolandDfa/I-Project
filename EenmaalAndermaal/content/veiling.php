@@ -207,7 +207,7 @@ try {
 					</div>
 
 					<?php
-					if(isset($_SESSION['username'])&& $einddatum>date('m-d-Y H:i:s')){
+					if(isset($_SESSION['username'])&& $einddatum>date('m-d-Y H:i:s')&&$_SESSION['username']!=$verkoper){
 						?>
 						<b>Snel bieden</b>
 						<p>Klik op een bedrag om uw bod te plaatsen:</p>
