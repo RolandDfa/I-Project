@@ -67,9 +67,20 @@
           $imagesStmt->bindParam(':voorwerpnummer', $voorwerpnummer);
           $imagesStmt->execute();
           if($imagesStmt->rowCount()!=0){
+            $foundImage = false;
             $images = $imagesStmt->fetchAll();
             foreach ($images as $image) {
-              echo '<img class="rounded-top" src="uploaded_content/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+              $imagesFromUpload = scandir("./upload");
+              foreach ($imagesFromUpload as $uploadImage) {
+                if($image['bestandsnaam'] == $uploadImage){
+                  $foundImage = true;
+                }
+              }
+              if($foundImage){
+                echo '<img class="rounded-top" src="./upload/'.$uploadImage.'" width="100%" height="220" alt="'.$result['titel'].'">';
+              }else{
+                echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+              }
             }
           }else{
             echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
@@ -81,7 +92,7 @@
           </div>
           <div class="cardPrice">';
 
-          $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = :voorwerpnummerPrijs ORDER BY bodbedrag ASC";
+          $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = :voorwerpnummerPrijs ORDER BY bodbedrag DESC";
           $priceStmt = $dbh->prepare($pricequery);
           $priceStmt->bindParam(':voorwerpnummerPrijs', $voorwerpnummer);
           $priceStmt->execute();

@@ -73,45 +73,59 @@ if (!empty($_GET['page'])) {
 				<?php
 				switch($page) {
 					case 'home':
-						require('content/home.php');
-						break;
+					require('content/home.php');
+					break;
 					case 'inloggen':
-						require('content/inloggen.php');
-						break;
+					require('content/inloggen.php');
+					break;
 					case 'registreren':
-						require('content/registreren.php');
-						break;
+					require('content/registreren.php');
+					break;
 					case 'registrerenSucces':
-						require('content/registrerenSucces.php');
-						break;
+					require('content/registrerenSucces.php');
+					break;
 					case 'overzicht':
-						require('content/overzicht.php');
-						break;
+					require('content/overzicht.php');
+					break;
 					case 'plaatsVeiling':
-						if (!isset($_SESSION["username"])) {
-							require('content/inloggen.php');
+					if (!isset($_SESSION["username"])) {
+						require('content/inloggen.php');
+					} else {
+						if ($_SESSION["userstate"] == 3) {
+							require('content/plaatsVeiling.php');
 						} else {
-							if ($_SESSION["userstate"] == 3) {
-								require('content/plaatsVeiling.php');
-							} else {
-								require('content/registrerenVerkoper.php');
-							}
+							require('content/registrerenVerkoper.php');
 						}
-						break;
+					}
+					break;
 					case 'veiling':
-						require('content/veiling.php');
-						break;
+					require('content/veiling.php');
+					break;
 					case 'gebruikersvoorwaarden':
-						require('content/gebruikersvoorwaarden.php');
-						break;
+					require('content/gebruikersvoorwaarden.php');
+					break;
 					case 'privacybeleid':
-						require('content/privacybeleid.php');
-						break;
+					require('content/privacybeleid.php');
+					break;
 					case 'mijnaccount':
+					if (!isset($_SESSION["username"])) {
+						require('content/inloggen.php');
+					} else {
 						require('content/mijnaccount.php');
-						break;
+					}
+					break;
+					case 'wachtwoordVergeten':
+					require('content/wachtwoordVergeten.php');
+					break;
+					case 'wachtwoordAanpassen':
+					if (!isset($_SESSION["username"])) {
+						require('content/inloggen.php');
+					} else {
+						require('content/wachtwoordAanpassen.php');
+					}
+					break;
 					default:
-						require('content/home.php');
+					require('content/home.php');
 				}
 				?>
 			</div>
@@ -152,7 +166,7 @@ if (!empty($_GET['page'])) {
 								<li><a class="linkFooter" href="index.php?page=registreren">Gratis registreren</a></li>';
 							} else {
 								echo '<li><a class="linkFooter" href="index.php?page=mijnaccount">Mijn account</a></li>
-											<li><a class="linkFooter" href="logout.php">Uitloggen</a></li>';
+								<li><a class="linkFooter" href="logout.php">Uitloggen</a></li>';
 							}
 							?>
 						</ul>

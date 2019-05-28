@@ -1,7 +1,12 @@
 <?php
+if (isset($_SESSION['username'])) {
+
+
+$hasToValidate = false;
+
 $telnr2 ="";
 try{
-  $sql = "SELECT gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox FROM Gebruiker WHERE gebruikersnaam = :id";
+  $sql = "SELECT gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox, gebruikersStatus_omschrijving, gebruikersStatus FROM Gebruiker inner join Gebruikersstatus on Gebruiker.gebruikersStatus = Gebruikersstatus.gebruikersStatus_id WHERE gebruikersnaam = :id";
   $query = $dbh->prepare($sql);
   if(!$query) {
     echo "oops error";
@@ -49,6 +54,13 @@ for ($i = 0; $i < sizeof($data); $i++) {
       case 'mailbox':
       $email = $value;
       break;
+      case 'gebruikersStatus':
+      $_SESSION['userstate'] = $value;
+      $statusGebruiker = $value;
+      break;
+      case 'gebruikersStatus_omschrijving':
+      $status = $value;
+      break;
       default:
       break;
     }
@@ -83,6 +95,25 @@ else {
   $telnr = $tel1['Telefoon'];
   $tel1Volgnr = $tel1['volgnr'];
 }
+if($_SESSION['userstate'] != 3){
+  try{
+    $userstateQuery = "SELECT Verkoper.valid, Email_validatie.code, Email_validatie.valid_until FROM Verkoper inner join Email_validatie on Verkoper.gebruiker = Email_validatie.gebruikersnaam WHERE controleOptie = 'Post' and valid = 0 and gebruiker = ?";
+    $userstateStmt = $dbh->prepare($userstateQuery);
+    $userstateStmt->execute(array($_SESSION['username']));
+    if($userstateStmt->rowCount()!=0){
+      $userstate = $userstateStmt->fetchAll();
+      foreach ($userstate as $states) {
+        $einddatumValid = $states['valid_until'];
+        $validateCode = $states['code'];
+        $hasToValidate = true;
+      }
+    }else{
+      $hasToValidate = false;
+    }
+  }catch (PDOException $e) {
+    echo "Fout met de database: {$e->getMessage()} ";
+  }
+}
 ?>
 
 <H2>Account informatie</H2>
@@ -91,6 +122,9 @@ else {
   <li><b>Account</b></li>
   <li><a href="index.php?page=home">Betalingen</a></li>
   <li><a href="index.php?page=home">Berichten</a></li>
+  <form class="changeButton" method="post" action="index.php?page=wachtwoordAanpassen">
+    <button type="submit" name="changePassword">Naar wachtwoord aanpassen</button>
+  </form>
 </div>
 
 <div id="pagecontent" class="row">
@@ -102,7 +136,7 @@ else {
       <p>Persoons gegevens</p>
       <p>Voornaam: <?php echo $firstname; ?></p>
       <p>Achternaam: <?php echo $lastname; ?></p>
-      <p>Geboortedatum: <?php echo $birthDate; ?></p>
+      <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
       <p>Adres: <?php echo $address; ?></p>
       <p>Postcode: <?php echo $zipcode; ?></p>
       <p>Plaatsnaam: <?php echo $city; ?></p>
@@ -112,8 +146,71 @@ else {
       <p>Email: <?php echo $email; ?></p>
       <p>Telefoonnummer: <?php echo $telnr ?></p>
       <p>2e Telefoonnummer: <?php echo $telnr2 ?></p>
-      <p>Kvkummer: <?php echo $kvknr; ?></p>
+      <p>Kvknummer: <?php echo $kvknr; ?></p>
+      <br>
+      <p>Gebruikersstatus: <?=$status ?></p>
       <div class="registerLine"><!-- Line --></div>
+
+
+
+      <?php
+      if(isset($_POST['verifieren'])){
+        if($validateCode == $_POST['code']){
+          if($einddatumValid >= date('Y-m-d')){
+
+            $codeGoedOfFout = 'Code komt overeen. U bent nu een verkoper.';
+            $_SESSION['userstate'] = 3;
+            try{
+              $seller = "UPDATE Gebruiker SET gebruikersStatus = 3 where gebruikersnaam = ?";
+              $queryInsert = $dbh->prepare($seller);
+              $queryInsert->execute(array($_SESSION['username']));
+
+              $seller = "UPDATE Verkoper SET Valid = 1";
+              $queryInsert = $dbh->prepare($seller);
+              $queryInsert->execute();
+
+              $registrerenVerkoperSucces = true;
+            }
+            catch (PDOException $e) {
+              echo "Fout met de database: {$e->getMessage()} ";
+              $registrerenVerkoperSucces = false;
+            }
+
+          }else{
+            $codeGoedOfFout = 'Code is verlopen, vraag een nieuwe aan.';
+          }
+        }else{
+          $codeGoedOfFout = 'Code komt niet overeen. Probeer het opnieuw.';
+        }
+      }else{
+        $codeGoedOfFout = '';
+      }
+      if($hasToValidate){
+        ?>
+        <h3>Verkoopaccount verifiëren door middel van verstuurde code</h3>
+        <p>U heeft kortgeleden uw account geverifieerd als Verkoopaccount. Als laatste stap dient u nog een code in te vullen die verstuurt is met de post. Vul de code hier onder in:</p>
+        <form action="" method="post">
+          <div class="form-group">
+            <input type="text" class="form-control" name="code" placeholder="AbCd1234" required />
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btnSubmit" name="verifieren" value="Verifieer" />
+          </div>
+        </form>
+        <br>
+        <?php
+        echo $codeGoedOfFout;
+      }
+
+      if($_SESSION['userstate']!=3){
+        ?>
+
+        <form class="registerSeller" method="post" action="index.php?page=plaatsVeiling">
+          <button type="submit" name="registerSeller" class="btn btnGreenery btn-block">Klik hier om te registreren als verkoper</button>
+        </form>
+
+      <?php } ?>
+      <br>
       <?php if (!isset($_POST['changeInfo']))
       { ?>
         <form class="changeButton" method="post" action="">
@@ -123,23 +220,25 @@ else {
     </div>
   </div>
   <div class="col-lg-2"><!-- White space --></div>
+
 </div>
 
-<?php
-if (isset($_POST['changeInfo'])) {
-  ?>
-  <div id="pagecontent" class="row">
-    <div class="col-lg-2"><!-- White space --></div>
-    <div class="col-lg-8">
 
-      <div class="container">
+<div id="pagecontent" class="row">
+  <div class="col-lg-2"><!-- White space --></div>
+  <div class="col-lg-8">
+
+    <div class="container">
+      <?php
+      if (isset($_POST['changeInfo'])) {
+        ?>
         <form class="registerForm" method="post" action="">
           <h2>Gegevens aanpassen</h2>
           <div class="row form-group"></div>
           <p>Persoons gegevens</p>
           <p>Voornaam: <?php echo $firstname; ?></p>
           <p>Achternaam: <?php echo $lastname; ?></p>
-          <p>Geboortedatum: <?php echo $birthDate; ?></p>
+          <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
           <div class="row form-group">
             <label for="address" class="col-lg-4 alignRight control-label">Adres *</label>
             <div class="col-lg-8">
@@ -183,14 +282,245 @@ if (isset($_POST['changeInfo'])) {
           </div>
           <button type="submit" name="submitInfo" class="btn btnGreenery btn-block">Gegevens aanpassen/Updaten</button>
         </form>
-      </div>
-    </div>
-    <div class="col-lg-2"><!-- White space --></div>
-  </div>
-  <div class="registerLine"><!-- Line --></div>
-  <?php
-}
+        <?php
+      }
+      ?>
 
+
+      <?php
+      try{
+        $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE verkopernaam = ?";
+        $userAdressStmt = $dbh->prepare($userAdressQuery);
+        $userAdressStmt->execute(array($_SESSION['username']));
+        if($userAdressStmt->rowCount()!=0){
+          echo '<br>
+          <h2>Mijn veilingen</h2><div class="row contentWrapper">';
+          $users = $userAdressStmt->fetchAll();
+          foreach ($users as $result) {
+            $voorwerpnummer = $result['voorwerpnummer'];
+            echo '<div class="cardItem">
+            <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">
+            <div class="card shadow-sm">
+            <div class="cardImage">';
+
+
+            $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = ?";
+            $imagesStmt = $dbh->prepare($imagesquery);
+            $imagesStmt->execute(array($voorwerpnummer));
+            if($imagesStmt->rowCount()!=0){
+              $images = $imagesStmt->fetchAll();
+              foreach ($images as $image) {
+                echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+              }
+            }else{
+              echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
+            }
+
+
+            echo '</div>
+            <div class="cardTitle">
+            <div class="cardHeader">'.
+            $result['titel'].'
+            </div>
+            <div class="cardPrice">';
+
+
+
+            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
+            $priceStmt = $dbh->prepare($pricequery);
+            $priceStmt->execute(array($voorwerpnummer));
+            if($priceStmt->rowCount()!=0){
+              $prices = $priceStmt->fetchAll();
+              foreach ($prices as $price) {
+                echo 'Hoogste bod: &euro; '.str_replace('.', ',', $price['bodbedrag']);
+              }
+            }
+            else{
+              echo 'Nog geen bod';
+            }
+
+
+            echo '</div>
+            <div class="cardFooter">
+            Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).' uur
+            </div>';
+
+            echo '
+            </div>
+            </div>
+            </a>
+            </div>';
+
+          }
+          echo '</div>';
+        }
+      }catch (PDOException $e) {
+        echo "Fout met de database: {$e->getMessage()} ";
+      }
+      ?>
+
+      <?php
+      try{
+        $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer IN (SELECT distinct voorwerp from Bod where gebruiker = ?)";
+        $userAdressStmt = $dbh->prepare($userAdressQuery);
+        $userAdressStmt->execute(array($_SESSION['username']));
+        if($userAdressStmt->rowCount()!=0){
+          echo '<br>
+          <h2>Mijn Biedingen</h2><div class="row contentWrapper">';
+          $users = $userAdressStmt->fetchAll();
+          foreach ($users as $result) {
+            $voorwerpnummer = $result['voorwerpnummer'];
+            echo '<div class="cardItem">
+            <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">
+            <div class="card shadow-sm">
+            <div class="cardImage">';
+
+
+            $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = ?";
+            $imagesStmt = $dbh->prepare($imagesquery);
+            $imagesStmt->execute(array($voorwerpnummer));
+            if($imagesStmt->rowCount()!=0){
+              $images = $imagesStmt->fetchAll();
+              foreach ($images as $image) {
+                echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+              }
+            }else{
+              echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
+            }
+
+
+            echo '</div>
+            <div class="cardTitle">
+            <div class="cardHeader">'.
+            $result['titel'].'
+            </div>
+            <div class="cardPrice">';
+
+
+
+            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
+            $priceStmt = $dbh->prepare($pricequery);
+            $priceStmt->execute(array($voorwerpnummer));
+            if($priceStmt->rowCount()!=0){
+              $prices = $priceStmt->fetchAll();
+              foreach ($prices as $price) {
+                echo 'Hoogste bod: &euro; '.str_replace('.', ',', $price['bodbedrag']).'<br>';
+              }
+            }
+            else{
+              echo 'Nog geen bod';
+            }
+
+
+            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? and gebruiker = ? ORDER BY bodbedrag DESC ";
+            $priceStmt = $dbh->prepare($pricequery);
+            $priceStmt->execute(array($voorwerpnummer, $_SESSION['username']));
+            if($priceStmt->rowCount()!=0){
+              $prices = $priceStmt->fetchAll();
+              foreach ($prices as $price) {
+                echo 'Mijn bod: &euro; '.str_replace('.', ',', $price['bodbedrag']);
+              }
+            }
+            else{
+              echo 'Nog geen bod';
+            }
+
+
+            echo '</div>
+            <div class="cardFooter">
+            Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).' uur
+            </div>';
+
+            echo '
+            </div>
+            </div>
+            </a>
+            </div>';
+
+          }
+          echo '</div>';
+        }
+      }catch (PDOException $e) {
+        echo "Fout met de database: {$e->getMessage()} ";
+      }
+
+      try{
+        $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE kopernaam = ?";
+        $userAdressStmt = $dbh->prepare($userAdressQuery);
+        $userAdressStmt->execute(array($_SESSION['username']));
+        if($userAdressStmt->rowCount()!=0){
+          echo '<br>
+          <h2>Mijn gewonnen veilingen</h2><div class="row contentWrapper">';
+          $users = $userAdressStmt->fetchAll();
+          foreach ($users as $result) {
+            $voorwerpnummer = $result['voorwerpnummer'];
+            echo '<div class="cardItem">
+            <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">
+            <div class="card shadow-sm">
+            <div class="cardImage">';
+
+
+            $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = ?";
+            $imagesStmt = $dbh->prepare($imagesquery);
+            $imagesStmt->execute(array($voorwerpnummer));
+            if($imagesStmt->rowCount()!=0){
+              $images = $imagesStmt->fetchAll();
+              foreach ($images as $image) {
+                echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+              }
+            }else{
+              echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
+            }
+
+
+            echo '</div>
+            <div class="cardTitle">
+            <div class="cardHeader">'.
+            $result['titel'].'
+            </div>
+            <div class="cardPrice">';
+
+
+
+            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
+            $priceStmt = $dbh->prepare($pricequery);
+            $priceStmt->execute(array($voorwerpnummer));
+            if($priceStmt->rowCount()!=0){
+              $prices = $priceStmt->fetchAll();
+              foreach ($prices as $price) {
+                echo 'Hoogste bod: &euro; '.str_replace('.', ',', $price['bodbedrag']);
+              }
+            }
+            else{
+              echo 'Nog geen bod';
+            }
+
+
+            echo '</div>
+            <div class="cardFooter">
+            Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).' uur
+            </div>';
+
+            echo '
+            </div>
+            </div>
+            </a>
+            </div>';
+
+          }
+          echo '</div>';
+        }
+      }catch (PDOException $e) {
+        echo "Fout met de database: {$e->getMessage()} ";
+      }
+
+      ?>
+    </div>
+  </div>
+  <div class="col-lg-2"><!-- White space --></div>
+</div>
+
+<?php
 if (isset($_POST['submitInfo'])) {
   $address = cleanInput($_POST['address']);
   $zipcode = cleanInput($_POST['zipcode']);
@@ -225,9 +555,9 @@ if (isset($_POST['submitInfo'])) {
         $queryInsertTellnr2 = $dbh->prepare($sqlInsertTellnr2);
         $queryInsertTellnr2->execute(array($username, $telnr2));
       }else{
-      $sqlUpdateTellnr2 = "UPDATE Gebruikerstelefoon SET Telefoon=? WHERE volgnr=$tel2Volgnr";
-      $queryInsertTellnr2 = $dbh->prepare($sqlUpdateTellnr2);
-      $queryInsertTellnr2->execute(array($telnr2));
+        $sqlUpdateTellnr2 = "UPDATE Gebruikerstelefoon SET Telefoon=? WHERE volgnr=$tel2Volgnr";
+        $queryInsertTellnr2 = $dbh->prepare($sqlUpdateTellnr2);
+        $queryInsertTellnr2->execute(array($telnr2));
       }
     } catch (PDOException $e) {
       echo "Fout met de database: {$e->getMessage()} ";
@@ -236,9 +566,8 @@ if (isset($_POST['submitInfo'])) {
 } else {
 
 }
-
-
-
+}else {
+}
 
 
 

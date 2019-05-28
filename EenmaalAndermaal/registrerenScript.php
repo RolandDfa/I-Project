@@ -139,7 +139,7 @@ if(isset($_POST['signUp'])){
 				$sqlInsert = "INSERT INTO Gebruiker(gebruikersnaam, voornaam, achternaam, adresregel, postcode, plaatsnaam, land, kvkNummer, geboorteDag, mailbox, wachtwoord, vraag, antwoordTekst, gebruikersStatus, valid) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				$queryInsert = $dbh->prepare($sqlInsert);
 
-				$queryInsert->execute(array($username, $name, $lastname, $address, $zipcode, $city, $country, $kvknr, $birthDate, $_SESSION['email'], $hashedWW, $securityQ, $hashedSecurityA, 1, 1));
+				$queryInsert->execute(array($username, $name, $lastname, $address, $zipcode, $city, $country, $kvknr, $birthDate, $_SESSION['email'], $hashedWW, $securityQ, $hashedSecurityA, 2, 1));
 
 				$sqlInsertTellnr = "INSERT INTO Gebruikerstelefoon(gebruikersnaam, Telefoon) VALUES(?,?)";
 				$queryInsertTellnr = $dbh->prepare($sqlInsertTellnr);
@@ -246,7 +246,7 @@ if(isset($_POST['signUp'])){
 						<div class="row form-group">
 							<label for="lastname" class="col-lg-4 alignRight control-label">Achternaam *</label>
 							<div class="col-lg-8">
-								<input type="text" id="lastname" class="form-control" name="lastname" pattern="[A-Za-z]{1,50}" title="Uw achternaam" value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : '' ?>" placeholder="Harris" required>
+								<input type="text" id="lastname" class="form-control" name="lastname" pattern="[A-Za-z ]{1,50}" title="Uw achternaam" value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : '' ?>" placeholder="Harris" required>
 							</div>
 						</div>
 						<!-- BirthDate -->

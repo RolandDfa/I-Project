@@ -1,10 +1,14 @@
 <?php
-if(isset($_POST['searchText'])){
-  $searchText = cleanInput($_POST['searchText']);
+if(isset($_GET['searchedText'])){
+  $searchText = cleanInput($_GET['searchedText']);
 }else{
-  $searchText = "";
-}
+  if(isset($_POST['searchText'])){
+    $searchText = cleanInput($_POST['searchText']);
 
+  }else{
+    $searchText = "";
+  }
+}
 ?>
 
 <div class="pageWrapper">
@@ -25,7 +29,7 @@ if(isset($_POST['searchText'])){
       foreach( $results as $result ) {
         $voorwerpnummer = $result['voorwerpnummer'];
         echo '<div class="cardItem">
-        <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">
+        <a href="index.php?page=veiling&searchedText='.$searchText.'&id='.$result['voorwerpnummer'].'">
         <div class="card shadow-sm">
         <div class="cardImage">';
 
@@ -33,9 +37,20 @@ if(isset($_POST['searchText'])){
         $imagesStmt = $dbh->prepare($imagesquery);
         $imagesStmt->execute(array($voorwerpnummer));
         if($imagesStmt->rowCount()!=0){
+          $foundImage = false;
           $images = $imagesStmt->fetchAll();
           foreach ($images as $image) {
-            echo '<img class="rounded-top" src="uploaded_content/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+            $imagesFromUpload = scandir("./upload");
+            foreach ($imagesFromUpload as $uploadImage) {
+              if($image['bestandsnaam'] == $uploadImage){
+                $foundImage = true;
+              }
+            }
+            if($foundImage){
+              echo '<img class="rounded-top" src="./upload/'.$uploadImage.'" width="100%" height="220" alt="'.$result['titel'].'">';
+            }else{
+              echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+            }
           }
         }else{
           echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
@@ -47,7 +62,7 @@ if(isset($_POST['searchText'])){
         </div>
         <div class="cardPrice">';
 
-        $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag ASC";
+        $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
         $priceStmt = $dbh->prepare($pricequery);
         $priceStmt->execute(array($voorwerpnummer));
         if($priceStmt->rowCount()!=0){
