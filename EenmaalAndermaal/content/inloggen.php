@@ -23,6 +23,9 @@
       <div class="form-group">
         <a href="index.php?page=wachtwoordVergeten" class="btnForgetPwd">Wachtwoord vergeten?</a>
       </div>
+      <div class="form-group">
+        <a href="index.php?page=accountRecovery" class="btnForgetPwd">Accountgegevens herstellen?</a>
+      </div>
     </div>
     <div class="col-md-6 registerenContainer">
       <div class="loginLogo">
