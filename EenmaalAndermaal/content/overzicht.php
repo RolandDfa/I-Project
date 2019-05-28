@@ -1,10 +1,14 @@
 <?php
-if(isset($_POST['searchText'])){
-  $searchText = cleanInput($_POST['searchText']);
+if(isset($_GET['searchedText'])){
+  $searchText = cleanInput($_GET['searchedText']);
 }else{
-  $searchText = "";
-}
+  if(isset($_POST['searchText'])){
+    $searchText = cleanInput($_POST['searchText']);
 
+  }else{
+    $searchText = "";
+  }
+}
 ?>
 
 <div class="pageWrapper">
@@ -25,7 +29,7 @@ if(isset($_POST['searchText'])){
       foreach( $results as $result ) {
         $voorwerpnummer = $result['voorwerpnummer'];
         echo '<div class="cardItem">
-        <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">
+        <a href="index.php?page=veiling&searchedText='.$searchText.'&id='.$result['voorwerpnummer'].'">
         <div class="card shadow-sm">
         <div class="cardImage">';
 
