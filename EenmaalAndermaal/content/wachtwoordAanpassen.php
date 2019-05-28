@@ -1,4 +1,5 @@
-<?php if (isset($_SESSION['username'])){
+<?php
+if (isset($_SESSION['username'])){
   $hashedcurrentPass = "";
   ?>
   <form class="registerForm" method="post" action="">
@@ -78,7 +79,7 @@ if (isset($_POST['newPassButton'])) {
       else {
         $queryInsert->execute(array($hashedWW,$_SESSION['username']));
         session_destroy();
-        echo "string";
+        echo '<p>Wachtwoord succesvol aangepast, klik <a href="index.php?page=inloggen">Hier</a> om opnieuw in te loggen</a>.</p>';
       }
     } catch (PDOException $e) {
       echo "Fout met de database: {$e->getMessage()} ";
@@ -86,5 +87,7 @@ if (isset($_POST['newPassButton'])) {
   }
 }else {
 }
+} else {
+  echo '<p> Klik <a href="index.php?page=inloggen">Hier</a> om in te loggen</a>.</p>';
 }
 ?>

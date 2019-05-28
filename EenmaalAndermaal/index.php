@@ -108,13 +108,21 @@ if (!empty($_GET['page'])) {
 					require('content/privacybeleid.php');
 					break;
 					case 'mijnaccount':
-					require('content/mijnaccount.php');
+					if (!isset($_SESSION["username"])) {
+						require('content/inloggen.php');
+					} else {
+						require('content/mijnaccount.php');
+					}
 					break;
 					case 'wachtwoordVergeten':
 					require('content/wachtwoordVergeten.php');
 					break;
 					case 'wachtwoordAanpassen':
-					require('content/wachtwoordAanpassen.php');
+					if (!isset($_SESSION["username"])) {
+						require('content/inloggen.php');
+					} else {
+						require('content/wachtwoordAanpassen.php');
+					}
 					break;
 					default:
 					require('content/home.php');
