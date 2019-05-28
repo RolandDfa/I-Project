@@ -15,7 +15,7 @@ if(isset($_GET['searchedText'])){
 
   <?php
   try{
-    $overzichtquery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and (titel like ? or beschrijving like ?)";
+    $overzichtquery = "SELECT top 5 titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and (titel like ? or beschrijving like ?)";
     $stmt = $dbh->prepare($overzichtquery);
     $stmt->execute(array('%'.$searchText.'%', '%'.$searchText.'%'));
     if ($stmt->rowCount() != 0) {
@@ -37,9 +37,20 @@ if(isset($_GET['searchedText'])){
         $imagesStmt = $dbh->prepare($imagesquery);
         $imagesStmt->execute(array($voorwerpnummer));
         if($imagesStmt->rowCount()!=0){
+          $foundImage = false;
           $images = $imagesStmt->fetchAll();
           foreach ($images as $image) {
-            echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+            $imagesFromUpload = scandir("./upload");
+            foreach ($imagesFromUpload as $uploadImage) {
+              if($image['bestandsnaam'] == $uploadImage){
+                $foundImage = true;
+              }
+            }
+            if($foundImage){
+              echo '<img class="rounded-top" src="./upload/'.$uploadImage.'" width="100%" height="220" alt="'.$result['titel'].'">';
+            }else{
+              echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+            }
           }
         }else{
           echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
