@@ -91,7 +91,7 @@ try {
 	<div class="auction">
 		<?php
 		echo '<form action="index.php?page=overzicht&searchedText='.$searchText.'" method="post" class="backbutton">';
-		echo '<button name="terug" type="submit" class="btn btn-success btn-lg">&lt; Terug naar overzichtt</button>';
+		echo '<button name="terug" type="submit" class="btn btn-success btn-lg">&lt; Terug naar overzicht</button>';
 		echo '</form>';
 		?>
 		<div class="row">
