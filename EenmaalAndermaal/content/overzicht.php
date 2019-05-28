@@ -15,7 +15,7 @@ if(isset($_GET['searchedText'])){
 
   <?php
   try{
-    $overzichtquery = "SELECT top 5 titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and (titel like ? or beschrijving like ?)";
+    $overzichtquery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0 and (titel like ? or beschrijving like ?)";
     $stmt = $dbh->prepare($overzichtquery);
     $stmt->execute(array('%'.$searchText.'%', '%'.$searchText.'%'));
     if ($stmt->rowCount() != 0) {
