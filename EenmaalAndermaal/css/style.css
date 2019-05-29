@@ -479,7 +479,10 @@ ul.social-network li {
 .opacityHover:hover {
   opacity: 1;
 }
-
+/*ACC RECOVERY */
+.marginThirty {
+  margin-left: 33%;
+}
 /* LOGIN page */
 .loginContainer {
   margin-top: 5%;

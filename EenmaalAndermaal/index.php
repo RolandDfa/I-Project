@@ -124,6 +124,9 @@ if (!empty($_GET['page'])) {
 						require('content/wachtwoordAanpassen.php');
 					}
 					break;
+					case 'accountRecovery':
+					require('content/accountRecovery.php');
+					break;
 					default:
 					require('content/home.php');
 				}

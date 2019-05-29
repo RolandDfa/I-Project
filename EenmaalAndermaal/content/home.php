@@ -133,10 +133,10 @@
     <?php
     //Haal data uit database voor dropdown menu van rubrieken
     try{
-      $data = $dbh->query("SELECT TOP 8 rubrieknaam FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
+      $data = $dbh->query("SELECT TOP 8 rubrieknaam, rubrieknummer FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
       while($row = $data->fetch()){
         echo '  <div class="popularCategoryItem">
-        <a class="opacityHover" href="">
+        <a class="opacityHover" href=index.php?page=overzicht&category='.$row['rubrieknummer'].'">
         <div class="popularCategoryBackground"><img src="images/Category/'.$row['rubrieknaam'].'.jpg" width="100%" height="100%" alt="Topic"></div>
         <div class="popularCategoryText">'.$row['rubrieknaam'].'</div>
         </a>
