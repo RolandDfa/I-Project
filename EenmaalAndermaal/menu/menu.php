@@ -7,9 +7,9 @@
       <?php
       // Get the headings from the database
       try {
-        $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
+        $data = $dbh->query("SELECT rubrieknaam, rubrieknummer FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
         while ($row = $data->fetch()) {
-          echo '<a class="dropdown-item" href="">'.$row['rubrieknaam'].'</a>';
+          echo '<a class="dropdown-item" href="index.php?page=overzicht&category='.$row['rubrieknummer'].'">'.$row['rubrieknaam'].'</a>';
         }
       } catch (PDOException $e) {
         echo "Kan rubrieken niet laden".$e->getMessage();
