@@ -35,7 +35,25 @@ if(isset($_GET['category'])){
           echo '<h4><b>Gevonden resultaten voor: "'.$searchText.'"</b></h4><br><div class="row contentWrapper">';
         }
         else{
-          echo '<h4><b>Alle veilingen</b></h4><br><div class="row contentWrapper">';
+          if(isset($categoryNumber)){
+            try{
+              $categoryquery = "SELECT rubrieknaam from Rubriek where rubrieknummer = ?";
+              $categorystmt = $dbh->prepare($categoryquery);
+              $categorystmt->execute(array($categoryNumber));
+              if($categorystmt->rowCount()!=0){
+                $categorys = $categorystmt->fetchAll();
+                foreach ($categorys as $searchedcategory) {
+                  echo '<h4><b>Alle veilingen in de rubriek: "'.$searchedcategory['rubrieknaam'].'"</b></h4><br><div class="row contentWrapper">';
+                }
+              }else{
+                echo '<h4><b>Deze gekozen rubriek: "'.$searchedcategory['rubrieknaam'].'" bestaat niet</b></h4>';
+              }
+            }catch (PDOException $e){
+              echo "Er gaat iets fout met het ophalen van categorieën";
+            }
+          }else{
+            echo '<h4><b>Alle veilingen</b></h4><br><div class="row contentWrapper">';
+          }
         }
         $results = $stmt->fetchAll();
         foreach( $results as $result ) {
@@ -45,6 +63,7 @@ if(isset($_GET['category'])){
           <div class="card shadow-sm">
           <div class="cardImage">';
 
+          try{
           $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = ?";
           $imagesStmt = $dbh->prepare($imagesquery);
           $imagesStmt->execute(array($voorwerpnummer));
@@ -67,6 +86,10 @@ if(isset($_GET['category'])){
           }else{
             echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
           }
+        }catch (PDOException $e){
+          echo "Er gaat iets fout met het ophalen van de plaatjes";
+        }
+
           echo '</div>
           <div class="cardTitle">
           <div class="cardHeader">'.
@@ -74,6 +97,7 @@ if(isset($_GET['category'])){
           </div>
           <div class="cardPrice">';
 
+          try{
           $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
           $priceStmt = $dbh->prepare($pricequery);
           $priceStmt->execute(array($voorwerpnummer));
@@ -86,6 +110,12 @@ if(isset($_GET['category'])){
           else{
             echo 'Nog geen bod';
           }
+        }
+        catch (PDOException $e){
+          echo "Er gaat iets fout met het ophalen van het hoogste bod";
+        }
+
+
           echo '</div>
           <div class="cardFooter">
           Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).' uur
@@ -108,7 +138,7 @@ if(isset($_GET['category'])){
           if($categorystmt->rowCount()!=0){
             $categorys = $categorystmt->fetchAll();
             foreach ($categorys as $searchedcategory) {
-              echo '<h4><b>Geen resultaten voor de rubriek: '.$searchedcategory['rubrieknaam'].'</b></h4>';
+              echo '<h4><b>Geen resultaten voor de rubriek: "'.$searchedcategory['rubrieknaam'].'"</b></h4>';
             }
           }else{
             echo '<h4><b>Deze rubriek bestaat niet</b></h4>';
