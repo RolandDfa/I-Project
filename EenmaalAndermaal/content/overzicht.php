@@ -64,31 +64,31 @@ if(isset($_GET['category'])){
           <div class="cardImage">';
 
           try{
-          $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = ?";
-          $imagesStmt = $dbh->prepare($imagesquery);
-          $imagesStmt->execute(array($voorwerpnummer));
-          if($imagesStmt->rowCount()!=0){
-            $foundImage = false;
-            $images = $imagesStmt->fetchAll();
-            foreach ($images as $image) {
-              $imagesFromUpload = scandir("./upload");
-              foreach ($imagesFromUpload as $uploadImage) {
-                if($image['bestandsnaam'] == $uploadImage){
-                  $foundImage = true;
+            $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = ?";
+            $imagesStmt = $dbh->prepare($imagesquery);
+            $imagesStmt->execute(array($voorwerpnummer));
+            if($imagesStmt->rowCount()!=0){
+              $foundImage = false;
+              $images = $imagesStmt->fetchAll();
+              foreach ($images as $image) {
+                $imagesFromUpload = scandir("./upload");
+                foreach ($imagesFromUpload as $uploadImage) {
+                  if($image['bestandsnaam'] == $uploadImage){
+                    $foundImage = true;
+                  }
+                }
+                if($foundImage){
+                  echo '<img class="rounded-top" src="./upload/'.$uploadImage.'" width="100%" height="220" alt="'.$result['titel'].'">';
+                }else{
+                  echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
                 }
               }
-              if($foundImage){
-                echo '<img class="rounded-top" src="./upload/'.$uploadImage.'" width="100%" height="220" alt="'.$result['titel'].'">';
-              }else{
-                echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
-              }
+            }else{
+              echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
             }
-          }else{
-            echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
+          }catch (PDOException $e){
+            echo "Er gaat iets fout met het ophalen van de plaatjes";
           }
-        }catch (PDOException $e){
-          echo "Er gaat iets fout met het ophalen van de plaatjes";
-        }
 
           echo '</div>
           <div class="cardTitle">
@@ -98,22 +98,22 @@ if(isset($_GET['category'])){
           <div class="cardPrice">';
 
           try{
-          $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
-          $priceStmt = $dbh->prepare($pricequery);
-          $priceStmt->execute(array($voorwerpnummer));
-          if($priceStmt->rowCount()!=0){
-            $prices = $priceStmt->fetchAll();
-            foreach ($prices as $price) {
-              echo 'Hoogste bod: &euro; '.str_replace('.', ',', $price['bodbedrag']);
+            $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
+            $priceStmt = $dbh->prepare($pricequery);
+            $priceStmt->execute(array($voorwerpnummer));
+            if($priceStmt->rowCount()!=0){
+              $prices = $priceStmt->fetchAll();
+              foreach ($prices as $price) {
+                echo 'Hoogste bod: &euro; '.str_replace('.', ',', $price['bodbedrag']);
+              }
+            }
+            else{
+              echo 'Nog geen bod';
             }
           }
-          else{
-            echo 'Nog geen bod';
+          catch (PDOException $e){
+            echo "Er gaat iets fout met het ophalen van het hoogste bod";
           }
-        }
-        catch (PDOException $e){
-          echo "Er gaat iets fout met het ophalen van het hoogste bod";
-        }
 
 
           echo '</div>
