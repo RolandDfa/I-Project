@@ -114,6 +114,27 @@ h5 {
   font-size: 1.2em;
 }
 
+#toTopButton {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: rgb(136, 176, 75);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  height: 50px;
+  width: 50px;
+}
+
+#toTopButton:hover {
+  background-color: #99a2a8;
+}
+
 /* MENU main */
 #mainNav {
   display: flex;
@@ -829,6 +850,31 @@ ul.social-network li {
 #auctionImage .carousel-indicators li img {
   width: 100px;
   height: 70px;
+}
+
+/* MIJN ACOUNT page */
+.leftMenu {
+  position: fixed;
+  z-index: 99;
+  min-width: 19%;
+  max-width: 19%;
+  min-height: 25%;
+  background-color: rgb(136, 176, 75);
+  padding: 15px;
+}
+
+.rightContent {
+  background-color: #f6f6f6;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+#mijnaccount h2 {
+  font-weight: 550;
+  color: #000000;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  letter-spacing: 1px;
 }
 
 /* If screen < 1050px (Tablets) */

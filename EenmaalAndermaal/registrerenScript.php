@@ -406,7 +406,7 @@ if(isset($_POST['signUp'])){
 					<div class="col-lg-4">
 						<h5>Veilingen</h5>
 						<ul>
-							<li><a class="linkFooter" href="index.php?page=home">Alle veilingen</a></li>
+							<li><a class="linkFooter" href="index.php?page=overzicht">Alle veilingen</a></li>
 							<li><a class="linkFooter" href="index.php?page=home">Populair</a></li>
 							<li><a class="linkFooter" href="index.php?page=home">Zoeken</a></li>
 						</ul>
@@ -428,7 +428,8 @@ if(isset($_POST['signUp'])){
 								echo '<li><a class="linkFooter" href="index.php?page=inloggen">Inloggen</a></li>
 								<li><a class="linkFooter" href="index.php?page=registreren">Gratis registreren</a></li>';
 							} else {
-								echo '<li><a class="linkFooter" href="logout.php">Uitloggen</a></li>';
+								echo '<li><a class="linkFooter" href="index.php?page=mijnaccount">Mijn account</a></li>
+								<li><a class="linkFooter" href="logout.php">Uitloggen</a></li>';
 							}
 							?>
 						</ul>
@@ -442,6 +443,14 @@ if(isset($_POST['signUp'])){
 			<a class="linkFooter" href="index.php?page=gebruikersvoorwaarden">Gebruikersvoorwaarden</a> <span class="footerBreak">|</span> <a  class="linkFooter" href="index.php?page=privacybeleid">Privacybeleid</a> <span class="footerBreak">|</span> &copy; 2019 iConcepts
 		</div>
 	</footer>
+
+	<!-- Back to top -->
+	<button onclick="topFunction()" id="toTopButton" title="Go to top"><i class="fas fa-chevron-up"></i></button>
+
+	<?php
+	// Javascript functions
+	require('functions/javascriptFunctions.php');
+	?>
 
 </body>
 </html>

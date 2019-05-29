@@ -91,7 +91,7 @@ if (!empty($_GET['page'])) {
 					if (!isset($_SESSION["username"])) {
 						require('content/inloggen.php');
 					} else {
-						if ($_SESSION["userstate"] == 3) {
+						if ($_SESSION["userstate"] > 2) {
 							require('content/plaatsVeiling.php');
 						} else {
 							require('content/registrerenVerkoper.php');
@@ -180,6 +180,9 @@ if (!empty($_GET['page'])) {
 			<a class="linkFooter" href="index.php?page=gebruikersvoorwaarden">Gebruikersvoorwaarden</a> <span class="footerBreak">|</span> <a  class="linkFooter" href="index.php?page=privacybeleid">Privacybeleid</a> <span class="footerBreak">|</span> &copy; 2019 iConcepts
 		</div>
 	</footer>
+
+	<!-- Back to top -->
+	<button onclick="topFunction()" id="toTopButton" title="Go to top"><i class="fas fa-chevron-up"></i></button>
 
 	<?php
 	// Javascript functions
