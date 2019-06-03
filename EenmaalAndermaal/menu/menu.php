@@ -4,6 +4,7 @@
   <div class="btn-group">
     <a class="menuItem dropdown-toggle" href="" data-toggle="dropdown"><b>Alle categorieën</b></a>
     <div class="dropdown-menu greeneryBorder">
+      <a class="dropdown-item" href="index.php?page=rubrieken">Alle rubrieken</a>
       <?php
       // Get the headings from the database
       try {
