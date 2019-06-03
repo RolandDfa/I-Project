@@ -68,6 +68,7 @@
   <div class="overlay-content">
     <a href="index.php?page=home">Home</a>
     <a href="index.php?page=overzicht">Alle veilingen</a>
+    <a href="index.php?page=rubrieken">Alle rubrieken</a>
     <a href="index.php?page=plaatsVeiling">Plaats advertentie</a>
     <?php
     if (!isset($_SESSION["username"])) {
