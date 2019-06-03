@@ -10,6 +10,15 @@ if(isset($_GET['searchedText'])){
   }
 }
 
+// if(isset($_GET['chosenCategory'])){
+//   $categoryNumber = (int)cleanInput($_GET['category']);
+//   $andQuery = "and RubriekOpLaagsteNiveau in (
+//     select r1.rubrieknummer
+//     from Rubriek r1 left join Rubriek r2 on r1.parent = r2.rubrieknummer left join Rubriek r3 on r2.parent = r3.rubrieknummer left join Rubriek r4 on r3.parent = r4.rubrieknummer
+//     where r1.rubrieknummer = ".$categoryNumber." or r1.parent = ".$categoryNumber." or r2.rubrieknummer = ".$categoryNumber." or r2.parent = ".$categoryNumber." or r3.rubrieknummer = ".$categoryNumber." or r3.parent = ".$categoryNumber." or r4.rubrieknummer = ".$categoryNumber." or r4.parent  = ".$categoryNumber."
+//     )";
+// }
+
 if(isset($_GET['category'])){
   $categoryNumber = (int)cleanInput($_GET['category']);
   $andQuery = "and RubriekOpLaagsteNiveau in (
@@ -58,9 +67,19 @@ if(isset($_GET['category'])){
         $results = $stmt->fetchAll();
         foreach( $results as $result ) {
           $voorwerpnummer = $result['voorwerpnummer'];
-          echo '<div class="cardItem">
-          <a href="index.php?page=veiling&searchedText='.$searchText.'&id='.$result['voorwerpnummer'].'">
-          <div class="card shadow-sm">
+          echo '<div class="cardItem">';
+
+          if(isset($_GET['searchedText'])){
+            $searchText = cleanInput($_GET['searchedText']);
+            echo '  <a href="index.php?page=veiling&searchedText='.$searchText.'&id='.$result['voorwerpnummer'].'">';
+          }else if(isset($_GET['category'])){
+            $chosenCategory = cleanInput($_GET['category']);
+            echo '  <a href="index.php?page=veiling&category='.$categoryNumber.'&id='.$result['voorwerpnummer'].'">';
+          }else{
+            echo '  <a href="index.php?page=veiling&id='.$result['voorwerpnummer'].'">';
+          }
+          //<a href="index.php?page=veiling&searchedText='.$searchText.'&id='.$result['voorwerpnummer'].'&category='.$categoryNumber.'">
+          echo '<div class="card shadow-sm">
           <div class="cardImage">';
 
           try{

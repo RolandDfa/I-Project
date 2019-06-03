@@ -1,12 +1,5 @@
 <?php
 
-if(isset($_GET['searchedText'])){
-  $searchText = cleanInput($_GET['searchedText']);
-
-}else{
-  $searchText = "";
-
-}
 
 
 // Get Artikelnummer
@@ -92,7 +85,15 @@ try {
   <?php if(!$auctionExists){echo'Kan veiling niet vinden. Klik <a href="index.php?page=overzicht">hier</a> om naar het veilingenoverzicht te gaan. Of klik <a href="index.php?page=home">hier</a> om naar de homepagina te gaan.';} ?>
   <div class="auction">
     <?php
-    echo '<form action="index.php?page=overzicht&searchedText='.$searchText.'" method="post" class="backbutton">';
+    if(isset($_GET['searchedText'])){
+      $searchText = cleanInput($_GET['searchedText']);
+      echo '<form action="index.php?page=overzicht&searchedText='.$searchText.'" method="post" class="backbutton">';
+    }else if(isset($_GET['category'])){
+      $chosenCategory = cleanInput($_GET['category']);
+      echo '<form action="index.php?page=overzicht&category='.$chosenCategory.'" method="post" class="backbutton">';
+    }else{
+      echo '<form action="index.php?page=overzicht" method="post" class="backbutton">';
+    }
     echo '<button name="terug" type="submit" class="btn btn-success btn-lg">&lt; Terug naar overzicht</button>';
     echo '</form>';
     ?>
