@@ -277,14 +277,6 @@ if($_SESSION['userstate'] != 3){
       }
       ?>
       </div>
-    </div>
-
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-12">
-    <div class="rightContent marginRight">
 
       <div id="veilingen">
         <?php
@@ -293,7 +285,7 @@ if($_SESSION['userstate'] != 3){
           $userAdressStmt = $dbh->prepare($userAdressQuery);
           $userAdressStmt->execute(array($_SESSION['username']));
           if($userAdressStmt->rowCount()!=0){
-            echo '<br>
+            echo '<div class="registerLine"><!-- Line --></div><br>
             <h2>Mijn veilingen</h2><div class="row">';
             $users = $userAdressStmt->fetchAll();
             foreach ($users as $result) {
@@ -367,7 +359,7 @@ if($_SESSION['userstate'] != 3){
           $userAdressStmt = $dbh->prepare($userAdressQuery);
           $userAdressStmt->execute(array($_SESSION['username']));
           if($userAdressStmt->rowCount()!=0){
-            echo '<br>
+            echo '<div class="registerLine"><!-- Line --></div><br>
             <h2 class="textCenter">Mijn Biedingen</h2><div class="row">';
             $users = $userAdressStmt->fetchAll();
             foreach ($users as $result) {
@@ -455,7 +447,7 @@ if($_SESSION['userstate'] != 3){
           $userAdressStmt = $dbh->prepare($userAdressQuery);
           $userAdressStmt->execute(array($_SESSION['username']));
           if($userAdressStmt->rowCount()!=0){
-            echo '<br>
+            echo '<div class="registerLine"><!-- Line --></div><br>
             <h2 class="textCenter>Mijn gewonnen veilingen</h2><div class="row">';
             $users = $userAdressStmt->fetchAll();
             foreach ($users as $result) {
@@ -524,6 +516,7 @@ if($_SESSION['userstate'] != 3){
       </div>
 
     </div>
+
   </div>
 </div>
 
