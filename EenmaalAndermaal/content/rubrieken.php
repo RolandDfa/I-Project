@@ -8,7 +8,7 @@
 
       foreach ($categorys as $category) {
         echo '<div class="topicContainer">';
-        echo '<a href=index.php?page=overzicht&category='.$category['rubrieknummer'].'"><h1>'.$category['rubrieknaam'].'</h1></a>';
+        echo '<a href=index.php?page=overzicht&category='.$category['rubrieknummer'].'"><h1 class="greeneryText">'.$category['rubrieknaam'].'</h1></a>';
         echo '<div class="subtopicContainer d-flex flex-row flex-wrap">';
         try{
           $subcategoryquery = "SELECT * from Rubriek where parent = ? order by rubrieknaam asc";
