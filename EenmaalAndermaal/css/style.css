@@ -164,6 +164,25 @@ h5 {
 }
 
 
+
+
+.bidButtons button{
+  background-color:  rgb(136, 176, 75); /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  margin-right: 5px;
+}
+
+.bidButtons button:hover{
+  color: rgb(0,0,0);
+}
+
+
 /* MENU main */
 #mainNav {
   display: flex;
