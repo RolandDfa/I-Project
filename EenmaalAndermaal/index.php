@@ -127,6 +127,9 @@ if (!empty($_GET['page'])) {
 					case 'accountRecovery':
 					require('content/accountRecovery.php');
 					break;
+					case 'rubrieken':
+					require('content/rubrieken.php');
+					break;
 					default:
 					require('content/home.php');
 				}

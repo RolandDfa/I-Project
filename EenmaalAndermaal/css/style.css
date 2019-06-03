@@ -135,6 +135,20 @@ h5 {
   background-color: #99a2a8;
 }
 
+
+.topicContainer{
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+}
+
+.topicContainer h2 {
+  font-size: 1.5em;
+}
+
+.subtopicContainer a{
+  width: 350px;
+  margin-left: 50px;
+}
 /* MENU main */
 #mainNav {
   display: flex;
