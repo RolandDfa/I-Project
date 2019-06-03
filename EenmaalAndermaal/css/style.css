@@ -141,14 +141,29 @@ h5 {
   padding: 10px;
 }
 
+
 .topicContainer h2 {
   font-size: 1.5em;
 }
 
-.subtopicContainer a{
+.subtopicContainer h2{
   width: 350px;
   margin-left: 50px;
+  color: rgb(0,0,0);
+  border-bottom: 1px solid rgba(192, 192, 192, 0);
+  -webkit-transition: border 300ms ease;
+  -moz-transition: border 300ms ease;
+  -ms-transition: border 300ms ease;
+  -o-transition: border 300ms ease;
+  transition: border 300ms ease;
 }
+
+.topicContainer h2:hover{
+  color: rgb(136, 176, 75);
+  border-bottom: 1px solid rgba(135, 176, 75, 1);
+}
+
+
 /* MENU main */
 #mainNav {
   display: flex;
