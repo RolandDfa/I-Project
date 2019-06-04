@@ -182,6 +182,14 @@ h5 {
   color: rgb(0,0,0);
 }
 
+.manualBidButton {
+  background-color: rgb(136, 176, 75);
+}
+
+.manualBidButton:hover{
+  background-color: rgb(136, 176, 75);
+  color: rgb(0,0,0);
+}
 
 /* MENU main */
 #mainNav {

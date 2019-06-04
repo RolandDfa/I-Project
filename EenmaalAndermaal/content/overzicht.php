@@ -68,8 +68,9 @@ if(isset($_GET['category'])){
         foreach( $results as $result ) {
           $voorwerpnummer = $result['voorwerpnummer'];
           echo '<div class="cardItem">';
-
-          if(isset($_GET['searchedText'])){
+          if(isset($_POST['searchText'])){
+            echo '  <a href="index.php?page=veiling&searchedText='.$searchText.'&id='.$result['voorwerpnummer'].'">';
+          }else if(isset($_GET['searchedText'])){
             $searchText = cleanInput($_GET['searchedText']);
             echo '  <a href="index.php?page=veiling&searchedText='.$searchText.'&id='.$result['voorwerpnummer'].'">';
           }else if(isset($_GET['category'])){
