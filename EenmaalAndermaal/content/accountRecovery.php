@@ -1,11 +1,11 @@
 <?php
-if ($_SESSION['accountRecovery']) {
+
 ?>
 <div class="container loginContainer">
   <div class="row marginThirty">
     <div class="col-md-6 loginForm">
       <h3>Gebruikersnaam</h3>
-      <form action="content/accountRecoveryScript.php" method="post">
+      <form action="accountRecoveryScript.php" method="post">
         <div class="form-group">
           <input type="text" class="form-control" name="usernameAccRecovery" placeholder="Gebruikersnaam *" required />
         </div>
@@ -24,5 +24,5 @@ if ($_SESSION['accountRecovery']) {
   </div>
 </div>
 <?php
-}
+
 ?>

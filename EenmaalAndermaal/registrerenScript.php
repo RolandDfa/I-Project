@@ -163,7 +163,7 @@ if(isset($_POST['signUp'])){
 				header("Location: index.php?page=registrerenSucces");
 
 			} catch (PDOException $e) {
-				echo "Fout met de database: {$e->getMessage()} ";
+				echo "Er is iets fout gegaan met de database.";// {$e->getMessage()} ";
 			}
 		}
 
