@@ -89,16 +89,18 @@ if(isset($_GET['category'])){
             $imagesStmt->execute(array($voorwerpnummer));
             if($imagesStmt->rowCount()!=0){
               $foundImage = false;
+              $imageToShow = '';
               $images = $imagesStmt->fetchAll();
               foreach ($images as $image) {
                 $imagesFromUpload = scandir("./upload");
                 foreach ($imagesFromUpload as $uploadImage) {
                   if($image['bestandsnaam'] == $uploadImage){
                     $foundImage = true;
+                    $imageToShow = $uploadImage;
                   }
                 }
                 if($foundImage){
-                  echo '<img class="rounded-top" src="./upload/'.$uploadImage.'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  echo '<img class="rounded-top" src="./upload/'.$imageToShow.'" width="100%" height="220" alt="'.$result['titel'].'">';
                 }else{
                   echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
                 }
