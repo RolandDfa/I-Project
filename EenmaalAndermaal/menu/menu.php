@@ -39,8 +39,13 @@
     echo '<div class="btn-group">
     <a class="menuItem marginLeft marginRight dropdown-toggle" href="" data-toggle="dropdown">'.$_SESSION["username"].'</a>
     <div class="dropdown-menu greeneryBorder dropdown-menu-right">
-    <a class="dropdown-item" href="index.php?page=mijnaccount">Mijn account</a>
-    <a class="dropdown-item" href="logout.php">Uitloggen</a>
+    <a class="dropdown-item" href="index.php?page=mijnaccount">Mijn account</a>';
+
+    if ($_SESSION["userstate"] > 3) {
+      echo '<a class="dropdown-item" href="index.php?page=beheren">Beheren</a>';
+    }
+
+    echo '<a class="dropdown-item" href="logout.php">Uitloggen</a>
     </div>
     </div>';
   }

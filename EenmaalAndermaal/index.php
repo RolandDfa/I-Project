@@ -33,6 +33,9 @@ if (!empty($_GET['page'])) {
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
+	<!-- Google Charts -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
 	<!-- Icon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
@@ -129,6 +132,9 @@ if (!empty($_GET['page'])) {
 					break;
 					case 'rubrieken':
 					require('content/rubrieken.php');
+					break;
+					case 'beheren':
+					require('content/dashboard.php');
 					break;
 					default:
 					require('content/home.php');
