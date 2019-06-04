@@ -296,13 +296,27 @@ if($_SESSION['userstate'] != 3){
               <div class="cardImage">';
 
 
-              $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = ?";
+              $imagesquery = "SELECT TOP 1 bestandsnaam FROM Bestand WHERE Voorwerp = :voorwerpnummer";
               $imagesStmt = $dbh->prepare($imagesquery);
-              $imagesStmt->execute(array($voorwerpnummer));
+              $imagesStmt->bindParam(':voorwerpnummer', $voorwerpnummer);
+              $imagesStmt->execute();
               if($imagesStmt->rowCount()!=0){
+                $foundImage = false;
                 $images = $imagesStmt->fetchAll();
+                $imageToShow = '';
                 foreach ($images as $image) {
-                  echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  $imagesFromUpload = scandir("./upload");
+                  foreach ($imagesFromUpload as $uploadImage) {
+                    if($image['bestandsnaam'] == $uploadImage){
+                      $foundImage = true;
+                      $imageToShow = $uploadImage;
+                    }
+                  }
+                  if($foundImage){
+                    echo '<img class="rounded-top" src="./upload/'.$imageToShow.'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  }else{
+                    echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  }
                 }
               }else{
                 echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
