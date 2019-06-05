@@ -13,27 +13,17 @@ if(isset($_POST['delete'])){
 <div class="pageWrapper">
 
   <h2 class="textCenter mb-4"><b>Veilingen beheren</b></h2>
-  <div class="table-responsive">
-    <table id="beheerVeilingTabel" class="table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th>Voorwerpnummer</th>
-          <th>Titel</th>
-          <th>Verkoper</th>
-          <th>Einddatum</th>
-          <th>Acties</th>
-        </tr>
-      </thead>
-      <tbody>
+
         <?php
         try {
           $sqlAuctions = "SELECT voorwerpnummer, titel, verkopernaam, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0";
           $querySelect = $dbh->prepare($sqlAuctions);
           $querySelect->execute();
           if ($querySelect->rowCount() != 0) {
+            $auctionRows = '';
             $results = $querySelect->fetchAll();
             foreach( $results as $result ) {
-              echo '
+              $auctionRows.= '
               <tr>
                 <td>'.$result['voorwerpnummer'].'</td>
                 <td style="max-width: 400px;">'.$result['titel'].'</td>
@@ -81,11 +71,27 @@ if(isset($_POST['delete'])){
               </div>
               <?php
             }
+          }else{
+            $auctionRows = '';
           }
         } catch (PDOException $e) {
           echo "Er gaat iets fout met het sluiten van veilingen".$e->getMessage();
         }
         ?>
+
+        <div class="table-responsive">
+          <table id="beheerVeilingTabel" class="table table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>Voorwerpnummer</th>
+                <th>Titel</th>
+                <th>Verkoper</th>
+                <th>Einddatum</th>
+                <th>Acties</th>
+              </tr>
+              <?=$auctionRows?>
+            </thead>
+            <tbody>
       </tbody>
     </table>
   </div>
