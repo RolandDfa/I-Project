@@ -42,7 +42,9 @@
     <a class="dropdown-item" href="index.php?page=mijnaccount">Mijn account</a>';
 
     if ($_SESSION["userstate"] > 3) {
-      echo '<a class="dropdown-item" href="index.php?page=beheren">Beheren</a>';
+      echo '<a class="dropdown-item" href="index.php?page=beheren">Beheerdersdashboard</a>';
+      echo '<a class="dropdown-item" href="index.php?page=beheerRubriekenboom">Rubrieken beheren</a>';
+      echo '<a class="dropdown-item" href="index.php?page=beheerVeilingen">Veilingen beheren</a>';
     }
 
     echo '<a class="dropdown-item" href="logout.php">Uitloggen</a>
