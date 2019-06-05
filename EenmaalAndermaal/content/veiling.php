@@ -290,6 +290,7 @@ try {
           <?php
           if((isset($_SESSION['username'])&& $einddatum>date('m-d-Y H:i:s')&&$_SESSION['username']!=$verkoper) && $closed==0){
             ?>
+            <div id="bieden">
             <b>Snel bieden</b>
             <p>Klik op een bedrag om uw bod te plaatsen:</p>
             <?php
@@ -428,8 +429,9 @@ try {
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
               </div>
-
+</div>
               <?php
+
             }
             ?>
 
@@ -478,6 +480,7 @@ var x = setInterval(function() {
   if (distance < 0) {
     clearInterval(x);
     document.getElementById("time").innerHTML = "VEILING GESLOTEN";
+    document.getElementById("bieden").style.display = "none";
   }
 }, 100);
 </script>

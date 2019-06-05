@@ -245,7 +245,7 @@ if(isset($_GET['category'])){
           <div class="cardFooter">';
           echo 'Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).' uur <br>';
           $sluitdatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
-          if(date('m-d-Y H:i:s')<=$sluitdatum){echo 'Veiling is nog niet gesloten';}else{echo 'Veiling is gesloten';};
+          if(date('m-d-Y H:i:s')<$sluitdatum){echo 'Veiling is nog niet gesloten';}else{echo 'Veiling is gesloten';};
           echo '</div>';
           echo '
           </div>
