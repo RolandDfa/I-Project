@@ -134,10 +134,14 @@ if (!empty($_GET['page'])) {
 						require('content/rubrieken.php');
 						break;
 					case 'beheren':
-						if ($_SESSION["userstate"] > 3) {
-							require('content/dashboard.php');
+						if (!isset($_SESSION["username"])) {
+							require('content/inloggen.php');
 						} else {
-							require('content/home.php');
+							if ($_SESSION["userstate"] > 3) {
+								require('content/dashboard.php');
+							} else {
+								require('content/home.php');
+							}
 						}
 						break;
 					default:
