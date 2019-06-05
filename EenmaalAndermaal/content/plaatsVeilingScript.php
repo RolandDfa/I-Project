@@ -30,7 +30,7 @@ if (isset($_POST['auctionSubmit'])) {
   $_SESSION['sendinstruction'] = $sendinstruction;
 
   $validTitle = preg_match("/^[a-zA-Z0-9\s]+$/",$title);
-  $validLocation = preg_match("/^[a-zA-Z]+$/",$location);
+  $validLocation = preg_match("/^[a-zA-Z\s]+$/",$location);
   if ($payinstruction != '') {
     $validPayinstruction = preg_match("/^[a-zA-Z0-9\s]+$/",$payinstruction);
   } else {

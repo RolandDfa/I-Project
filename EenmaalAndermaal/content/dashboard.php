@@ -88,69 +88,93 @@ try {
 
   <!-- Accounts -->
   <div class="col-xl-3 col-md-6 mt-4 mb-4">
-    <div class="card borderLeftGreenery shadow-sm">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="font-weight-bold greeneryText text-uppercase mb-1">Accounts</div>
-            <div class="h5 font-weight-bold textGrayDark"><?=$aantalGebruikers?></div>
-          </div>
-          <div class="col-auto">
-            <i class="fas fa-user-tie fa-2x textGrayLight"></i>
+    <div class="beheerCard">
+
+      <a href="index.php?page=beheerAccounts">
+      <div class="card borderLeftGreenery shadow-sm">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="font-weight-bold greeneryText text-uppercase mb-1">Accounts</div>
+              <div class="h5 font-weight-bold textGrayDark"><?=$aantalGebruikers?></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-user-tie fa-2x textGrayLight"></i>
+            </div>
           </div>
         </div>
       </div>
+      </a>
+
     </div>
   </div>
 
   <!-- Verkopers -->
   <div class="col-xl-3 col-md-6 mt-4 mb-4">
-    <div class="card borderLeftGreenery shadow-sm">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="font-weight-bold greeneryText text-uppercase mb-1">Verkopers</div>
-            <div class="h5 font-weight-bold textGrayDark"><?=$aantalVerkopers?></div>
-          </div>
-          <div class="col-auto">
-            <i class="fas fa-user-tag fa-2x textGrayLight"></i>
+    <div class="beheerCard">
+
+      <a href="index.php?page=beheerAccounts">
+      <div class="card borderLeftGreenery shadow-sm">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="font-weight-bold greeneryText text-uppercase mb-1">Verkopers</div>
+              <div class="h5 font-weight-bold textGrayDark"><?=$aantalVerkopers?></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-user-tag fa-2x textGrayLight"></i>
+            </div>
           </div>
         </div>
       </div>
+      </a>
+
     </div>
   </div>
 
   <!-- Actieve veilingen -->
   <div class="col-xl-3 col-md-6 mt-4 mb-4">
-    <div class="card borderLeftGreenery shadow-sm">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="font-weight-bold greeneryText text-uppercase mb-1">Veilingen (actief)</div>
-            <div class="h5 font-weight-bold textGrayDark"><?=$aantalVeilingen?></div>
-          </div>
-          <div class="col-auto">
-            <i class="fas fa-gavel fa-2x textGrayLight"></i>
+    <div class="beheerCard">
+
+      <a href="index.php?page=beheerVeilingen">
+      <div class="card borderLeftGreenery shadow-sm">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="font-weight-bold greeneryText text-uppercase mb-1">Veilingen (actief)</div>
+              <div class="h5 font-weight-bold textGrayDark"><?=$aantalVeilingen?></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-gavel fa-2x textGrayLight"></i>
+            </div>
           </div>
         </div>
       </div>
+      </a>
+
     </div>
   </div>
 
   <!-- Rubrieken -->
   <div class="col-xl-3 col-md-6 mt-4 mb-4">
-    <div class="card borderLeftGreenery shadow-sm">
-      <div class="card-body">
-        <div class="row no-gutters align-items-center">
-          <div class="col mr-2">
-            <div class="font-weight-bold greeneryText text-uppercase mb-1">Rubrieken</div>
-            <div class="h5 font-weight-bold textGrayDark"><?=$aantalRubrieken?></div>
-          </div>
-          <div class="col-auto">
-            <i class="fas fa-align-left fa-2x textGrayLight"></i>
+    <div class="beheerCard">
+
+      <a href="index.php?page=beheerRubriekenboom">
+      <div class="card borderLeftGreenery shadow-sm">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="font-weight-bold greeneryText text-uppercase mb-1">Rubrieken</div>
+              <div class="h5 font-weight-bold textGrayDark"><?=$aantalRubrieken?></div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-align-left fa-2x textGrayLight"></i>
+            </div>
           </div>
         </div>
       </div>
+      </a>
+      
     </div>
   </div>
 
