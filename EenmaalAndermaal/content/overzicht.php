@@ -1,4 +1,12 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+
 set_time_limit(60);
 if(isset($_GET['searchedText'])){
   $searchText = cleanInput($_GET['searchedText']);
@@ -12,7 +20,7 @@ if(isset($_GET['searchedText'])){
 }
 
 try {
-  $auctionsQuery = "SELECT voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0";
+  $auctionsQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip, verkopernaam, kopernaam FROM Voorwerp WHERE veilingGesloten = 0";
   $auctionsstmt = $dbh->prepare($auctionsQuery);
   $auctionsstmt->execute();
   if ($auctionsstmt->rowCount() != 0) {
@@ -20,7 +28,90 @@ try {
     foreach( $results as $result ) {
       $sluitdatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
       $nummer = $result['voorwerpnummer'];
+      $sellerName = $result['verkopernaam'];
+      $buyerName = $result['kopernaam'];
+      $aucTitle = $result['titel'];
       if(date('m-d-Y H:i:s')>=$sluitdatum){
+        try{
+          //send mail toy winning buyer
+          if (!empty($buyerName)) {
+            $sql = "SELECT mailbox FROM Gebruiker WHERE gebruikersnaam = :id";
+            $query = $dbh->prepare($sql);
+            if(!$query) {
+              echo "oops error";
+              exit();
+            }
+            else {
+              $query->execute(array(':id' => $buyerName));
+              $data = $query->fetchAll(PDO::FETCH_BOTH);
+            }
+            $temp = $data['0'];
+            $emailBuyer = $temp['mailbox'];
+            $mail = new PHPMailer(true);
+            try {
+              //Mail settings
+              $mail->isSMTP();                                               // Set mailer to use SMTP
+              $mail->Host       = 'smtp.gmail.com';                          // Specify main and backup SMTP servers
+              $mail->SMTPAuth   = true;                                      // Enable SMTP authentication
+              $mail->Username   = 'info.EenmaalAndermaal41@gmail.com';       // SMTP username
+              $mail->Password   = 'IprojectGroep41';                         // SMTP password
+              $mail->SMTPSecure = 'tls';                                     // Enable TLS encryption, `ssl` also accepted
+              $mail->Port       = 587;                                       // TCP port to connect to
+
+              $mail->setFrom('info.EenmaalAndermaal41@gmail.com');
+              $mail ->addAddress($emailBuyer);
+
+              $mail->isHTML(true);
+              $mail->addAttachment('images/EenmaalAndermaalLogo.png');
+              $mail->Subject = '[EenmaalAndermaal] Gewonnen veiling!.';
+              $mail->Body    =
+              "<b>Gefeliciteerd u heefd de veiling [".$aucTitle."] gewonnen.</b>";
+
+              $mail->send();
+            } catch (Exception $e) {
+              echo "Er gaat iets fout met het sturen van de sluitingsmelding naar de winnaar.".$e->getMessage();
+            }
+          }
+          //send mail seller
+          $sql = "SELECT mailbox FROM Gebruiker WHERE gebruikersnaam = :id";
+          $query = $dbh->prepare($sql);
+          if(!$query) {
+            echo "oops error";
+            exit();
+          }
+          else {
+            $query->execute(array(':id' => $sellerName));
+            $data = $query->fetchAll(PDO::FETCH_BOTH);
+          }
+          $temp = $data['0'];
+          $emailSeller = $temp['mailbox'];
+          $mail = new PHPMailer(true);
+          try {
+            //Mail settings
+            $mail->isSMTP();                                               // Set mailer to use SMTP
+            $mail->Host       = 'smtp.gmail.com';                          // Specify main and backup SMTP servers
+            $mail->SMTPAuth   = true;                                      // Enable SMTP authentication
+            $mail->Username   = 'info.EenmaalAndermaal41@gmail.com';       // SMTP username
+            $mail->Password   = 'IprojectGroep41';                         // SMTP password
+            $mail->SMTPSecure = 'tls';                                     // Enable TLS encryption, `ssl` also accepted
+            $mail->Port       = 587;                                       // TCP port to connect to
+
+            $mail->setFrom('info.EenmaalAndermaal41@gmail.com');
+            $mail ->addAddress($emailSeller);
+
+            $mail->isHTML(true);
+            $mail->addAttachment('images/EenmaalAndermaalLogo.png');
+            $mail->Subject = '[EenmaalAndermaal] Uw veilig is gesloten.';
+            $mail->Body    =
+            "<b>Uw veiling [".$aucTitle."] </b><p> is automatisch gesloten omdat de veiling de maximale tijd heeft bereikt.</p>";
+
+            $mail->send();
+          } catch (Exception $e) {
+            echo "Er gaat iets fout met het sturen van de sluitingsmelding naar de verkoper.".$e->getMessage();
+          }
+        } catch (PDOException $e) {
+          echo "Er gaat iets fout met het sturen van de sluitingsmelding tijdens het ophalen van de contact gegevens.".$e->getMessage();
+        }
           $auctionCloseQuery = "UPDATE Voorwerp SET veilingGesloten = 1 WHERE voorwerpnummer = ?";
           $auctionCloseStmt = $dbh->prepare($auctionCloseQuery);
           $auctionCloseStmt->execute(array($nummer));
