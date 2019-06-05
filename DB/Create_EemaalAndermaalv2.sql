@@ -158,7 +158,7 @@ CREATE TABLE [dbo].[Bod] (
     CONSTRAINT [FK_Bod_gebruiker_gebruikersnaam] FOREIGN KEY ([gebruiker]) REFERENCES [dbo].[Gebruiker] ([gebruikersnaam]) ON UPDATE CASCADE
 );
 
-
+-- Minimaal_verhoging_bod trigger 
 GO
 CREATE TRIGGER Minimaal_verhoging_bod ON Bod
 FOR INSERT, UPDATE
@@ -250,12 +250,13 @@ CREATE TABLE [dbo].[verificatiecode] (
     CONSTRAINT [PK_verificatiecode] PRIMARY KEY CLUSTERED ([volgnr] ASC)
 );
 
+-- [BestandLimiet] functie
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER FUNCTION [dbo].[BestandLimiet](@voorwerp BIGINT)
+CREATE FUNCTION [dbo].[BestandLimiet](@voorwerp BIGINT)
 RETURNS BIT
 AS
 	BEGIN
