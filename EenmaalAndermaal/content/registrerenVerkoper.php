@@ -70,7 +70,8 @@ if(isset($_POST['submitSellerPost'])){
 
     $seller = "INSERT INTO Email_validatie VALUES (?,?,?)";
     $queryInsert = $dbh->prepare($seller);
-    $queryInsert->execute(array($_SESSION['username'], generateRandomString(8), date('Y-m-d', strtotime("+7 day"))));
+    $time = time() + 604800;
+    $queryInsert->execute(array($_SESSION['username'], generateRandomString(8), $time));
     $registrerenVerkoperSucces = true;
     $melding = 'Registreren gelukt. Vul uw code in op de mijn account pagina Klik <a href="index.php?page=mijnaccount">hier</a> om naar de mijn account pagina te gaan.';
   }
