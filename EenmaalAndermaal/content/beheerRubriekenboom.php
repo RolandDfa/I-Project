@@ -86,7 +86,7 @@ try {
   if($subTopicStmt->rowCount()!=0){
     $subTopics = $subTopicStmt->fetchAll();
     foreach ($subTopics as $subTopic) {
-      $subTopicContent .= '<tr><td>'.$subTopic['naam'].'</td><td>'.$subTopic['nummer'].'</td><td>'.$subTopic['parentnaam'].'</td><td><button type="button" class="btn btn-warning btn-circle greeneryBackground" data-toggle="modal" data-target="#wijzigenModal'.$subTopic['nummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
+      $subTopicContent .= '<tr><td>'.$subTopic['nummer'].'</td><td>'.$subTopic['naam'].'</td><td>'.$subTopic['parentnaam'].'</td><td><button type="button" class="btn btn-warning btn-circle greeneryBackground" data-toggle="modal" data-target="#wijzigenModal'.$subTopic['nummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
       ?>
       <div class="modal fade" id="wijzigenModal<?=$subTopic['nummer']?>" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -184,8 +184,18 @@ $(document).ready(function() {
       "zeroRecords": "Geen resultaten gevonden",
       "info": "Toon resultaten van pagina _PAGE_ van _PAGES_",
       "infoEmpty": "Geen pagina's gevonden",
-      "infoFiltered": "(gefilterd van _MAX_ totale resultaten)"
-    }
+      "infoFiltered": "(gefilterd van _MAX_ totale resultaten)",
+      "sSearch": "Zoeken: ",
+      "oPaginate": {
+      "sFirst": "Eerste pagina", // This is the link to the first page
+      "sPrevious": "Vorige", // This is the link to the previous page
+      "sNext": "Volgende", // This is the link to the next page
+      "sLast": "Laatste pagina" // This is the link to the last page
+      }
+    },
+    "columnDefs": [
+      { "orderable": false, "targets": 2 }
+    ]
   } );
 } );
 $(document).ready(function() {
@@ -195,8 +205,18 @@ $(document).ready(function() {
       "zeroRecords": "Geen resultaten gevonden",
       "info": "Toon resultaten van pagina _PAGE_ van _PAGES_",
       "infoEmpty": "Geen pagina's gevonden",
-      "infoFiltered": "(gefilterd van _MAX_ totale resultaten)"
-    }
+      "infoFiltered": "(gefilterd van _MAX_ totale resultaten)",
+      "sSearch": "Zoeken: ",
+      "oPaginate": {
+      "sFirst": "Eerste pagina", // This is the link to the first page
+      "sPrevious": "Vorige", // This is the link to the previous page
+      "sNext": "Volgende", // This is the link to the next page
+      "sLast": "Laatste pagina" // This is the link to the last page
+      }
+    },
+    "columnDefs": [
+      { "orderable": false, "targets": 3 }
+    ]
   } );
 } );
 </script>
