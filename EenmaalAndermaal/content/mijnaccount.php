@@ -92,9 +92,9 @@ if ($countTell) {
   $tel2Volgnr = $tel2['volgnr'];
 }
 else {
-  // $tel1 = $data2[0];
-  // $telnr = $tel1['Telefoon'];
-  // $tel1Volgnr = $tel1['volgnr'];
+  $tel1 = $data2[0];
+  $telnr = $tel1['Telefoon'];
+  $tel1Volgnr = $tel1['volgnr'];
 }
 if($_SESSION['userstate'] != 3){
   try{
@@ -159,7 +159,7 @@ if($_SESSION['userstate'] != 3){
         <?php
         if(isset($_POST['verifieren'])){
           if($validateCode == $_POST['code']){
-            if($einddatumValid >= date('Y-m-d')){
+            if($einddatumValid >= time()){
 
               $codeGoedOfFout = 'Code komt overeen. U bent nu een verkoper.';
               $_SESSION['userstate'] = 3;
@@ -180,6 +180,13 @@ if($_SESSION['userstate'] != 3){
               }
 
             }else{
+              $userQuery2 = "DELETE FROM Email_validatie WHERE gebruikersnaam = :id";
+              $userStmt2 = $dbh->prepare($userQuery2);
+              $userStmt2->execute(array(':id' => $_SESSION['username']));
+              $userQuery = "DELETE FROM Verkoper WHERE gebruiker = :id";
+              $userStmt = $dbh->prepare($userQuery);
+              $userStmt->execute(array(':id' => $_SESSION['username']));
+
               $codeGoedOfFout = 'Code is verlopen, vraag een nieuwe aan.';
             }
           }else{
