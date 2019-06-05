@@ -59,7 +59,7 @@ h5 {
   border: 1px solid rgb(136, 176, 75);
 }
 
-.borderLeftGray {
+.borderLeftGreenery {
   border-left: .25rem solid rgb(136, 176, 75);
 }
 
@@ -954,6 +954,11 @@ ul.social-network li {
   color: #ffffff;
 }
 
+.chartDiv {
+  width: 550px;
+  height: 400px;
+}
+
 /* If screen < 1050px (Tablets) */
 @media only screen and (max-width: 1050px) {
 
@@ -1064,5 +1069,11 @@ ul.social-network li {
   #auctionImage .carousel-indicators li img {
     width: 70px;
   }
+
+  /* Beheerdersdashboard */
+  /* .chartDiv {
+    width: 200px;
+    height: 200px;
+  } */
 
 }

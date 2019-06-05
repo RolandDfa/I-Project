@@ -31,9 +31,9 @@ try {
 
 // Get veiling amount
 try {
-  $sqlVeilingen = "SELECT COUNT(voorwerpnummer) FROM Voorwerp WHERE veilingGesloten = 0";
+  $sqlVeilingen = "SELECT COUNT(voorwerpnummer) FROM Voorwerp WHERE veilingGesloten = ?";
   $querySelect = $dbh->prepare($sqlVeilingen);
-  $querySelect->execute();
+  $querySelect->execute(array(0));
   if ($querySelect->rowCount() != 0) {
     $results = $querySelect->fetchAll();
     foreach( $results as $result ) {
@@ -58,11 +58,37 @@ try {
 } catch (PDOException $e) {
   echo "Fout met de database: {$e->getMessage()} ";
 }
+
+
+// Get veilingen per jaar
+try {
+  $sqlRubrieken = "SELECT DATEPART(yyyy, looptijdbeginDag), COUNT(voorwerpnummer) FROM Voorwerp GROUP BY DATEPART(yyyy, looptijdbeginDag) ORDER BY DATEPART(yyyy, looptijdbeginDag) ASC";
+  $querySelect = $dbh->prepare($sqlRubrieken);
+  $querySelect->execute();
+  if ($querySelect->rowCount() != 0) {
+    $dataVeilingen = $querySelect->fetchAll();
+  }
+} catch (PDOException $e) {
+  echo "Fout met de database: {$e->getMessage()} ";
+}
+
+// Get rubrieken
+try {
+  $sqlBiedingen = "SELECT DATEPART(yyyy, bodDag), COUNT(voorwerp) FROM Bod GROUP BY DATEPART(yyyy, bodDag) ORDER BY DATEPART(yyyy, bodDag) ASC";
+  $querySelect = $dbh->prepare($sqlBiedingen);
+  $querySelect->execute();
+  if ($querySelect->rowCount() != 0) {
+    $dataBiedingen = $querySelect->fetchAll();
+  }
+} catch (PDOException $e) {
+  echo "Fout met de database: {$e->getMessage()} ";
+}
 ?>
 <div class="row">
 
+  <!-- Accounts -->
   <div class="col-xl-3 col-md-6 mt-4 mb-4">
-    <div class="card borderLeftGray">
+    <div class="card borderLeftGreenery shadow-sm">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
@@ -77,8 +103,9 @@ try {
     </div>
   </div>
 
+  <!-- Verkopers -->
   <div class="col-xl-3 col-md-6 mt-4 mb-4">
-    <div class="card borderLeftGray">
+    <div class="card borderLeftGreenery shadow-sm">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
@@ -93,12 +120,13 @@ try {
     </div>
   </div>
 
+  <!-- Actieve veilingen -->
   <div class="col-xl-3 col-md-6 mt-4 mb-4">
-    <div class="card borderLeftGray">
+    <div class="card borderLeftGreenery shadow-sm">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
-            <div class="font-weight-bold greeneryText text-uppercase mb-1">Veilingen</div>
+            <div class="font-weight-bold greeneryText text-uppercase mb-1">Veilingen (actief)</div>
             <div class="h5 font-weight-bold textGrayDark"><?=$aantalVeilingen?></div>
           </div>
           <div class="col-auto">
@@ -109,8 +137,9 @@ try {
     </div>
   </div>
 
+  <!-- Rubrieken -->
   <div class="col-xl-3 col-md-6 mt-4 mb-4">
-    <div class="card borderLeftGray">
+    <div class="card borderLeftGreenery shadow-sm">
       <div class="card-body">
         <div class="row no-gutters align-items-center">
           <div class="col mr-2">
@@ -128,14 +157,26 @@ try {
 </div>
 <div class="row">
 
-  <!-- Bar Chart -->
+  <!-- Veilingen per jaar -->
   <div class="col-xl-6 col-md-12 mb-4">
-    <div class="card">
+    <div class="card shadow-sm">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold">Aantal veilingen</h6>
+        <h6 class="m-0 font-weight-bold">Aantal veilingen per jaar</h6>
       </div>
       <div class="card-body">
-        <div id="chart_div"></div>
+        <div id="veilingen_div" class="chartDiv"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Veilingen per jaar -->
+  <div class="col-xl-6 col-md-12 mb-4">
+    <div class="card shadow-sm">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold">Aantal veilingen per hoofdrubriek</h6>
+      </div>
+      <div class="card-body">
+        <div id="piechart_3d" class="chartDiv"></div>
       </div>
     </div>
   </div>
@@ -144,24 +185,42 @@ try {
 
 <script type="text/javascript">
 google.charts.load('current', {packages: ['corechart']});
-google.charts.setOnLoadCallback(drawBasic);
+google.charts.setOnLoadCallback(drawLineChart);
+google.charts.setOnLoadCallback(drawPieChart);
 
-function drawBasic() {
+function drawLineChart() {
   var data = google.visualization.arrayToDataTable([
-    ["Year", "Accounts"],
-    ["2018", 10],
-    ["2019", 20],
-    ["2020", 15]
+    ["Year", "Veilingen"],
+    <?php
+    foreach($dataVeilingen as $result) {
+      echo '["'.$result[0].'", '.$result[1].'],';
+    }
+    ?>
   ]);
 
   var options = {
-    width: 550,
-    height: 400,
-    legend: { position: 'top'},
-    colors: ['rgb(136, 176, 75)', 'Accounts']
+    colors: ['rgb(136, 176, 75)', 'Veilingen']
   };
 
-  var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+  var chart = new google.visualization.AreaChart(document.getElementById('veilingen_div'));
+  chart.draw(data, options);
+}
+
+function drawPieChart() {
+  var data = google.visualization.arrayToDataTable([
+    ['Rubrieken', 'Veilingen'],
+    <?php
+    foreach($dataBiedingen as $result) {
+      echo '["'.$result[0].'", '.$result[1].'],';
+    }
+    ?>
+  ]);
+
+  var options = {
+    colors: ['rgb(136, 176, 75)', 'Veilingen']
+  };
+
+  var chart = new google.visualization.ColumnChart(document.getElementById('piechart_3d'));
   chart.draw(data, options);
 }
 </script>
