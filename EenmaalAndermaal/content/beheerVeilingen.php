@@ -15,7 +15,7 @@
       <tbody>
         <?php
         try {
-          $sqlAuctions = "SELECT TOP 100 voorwerpnummer, titel, verkopernaam, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0";
+          $sqlAuctions = "SELECT voorwerpnummer, titel, verkopernaam, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0";
           $querySelect = $dbh->prepare($sqlAuctions);
           $querySelect->execute();
           $count = 0;
