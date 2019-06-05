@@ -156,7 +156,7 @@
   </div>
   <div class="tab">
     <h2><b>Foto's uploaden</b></h2>
-    <p>Het grootte vak is verplicht.</p>
+    <p>Het grote vak is verplicht.</p>
     <div class="redText">
       <?php
       if (!empty($_GET['error'])) {
