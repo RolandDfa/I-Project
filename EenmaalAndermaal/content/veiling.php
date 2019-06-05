@@ -17,6 +17,10 @@ if(isset($_POST['bod'])){
     $bidUploadQuery = "INSERT INTO Bod values(?,?,?,?,?)";
     $bidUploadStmt = $dbh->prepare($bidUploadQuery);
     $bidUploadStmt->execute(array($id, str_replace(',', '.', $_POST['bod']), $_SESSION['username'], date('Y-m-d'), date('H:i:s')));
+
+    $addBuyerQuery = "UPDATE Voorwerp SET kopernaam=? WHERE voorwerpnummer=?";
+    $addBuyerStmt = $dbh->prepare($addBuyerQuery);
+    $addBuyerStmt->execute(array($_SESSION['username'],$id));
   }
   catch (PDOException $e) {
     echo "Bod kan niet geplaatst worden. Iemand heeft het door u geboden bedrag al geboden.";
@@ -39,6 +43,7 @@ try {
       $einddatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
       $startprijs = str_replace(",",".",$result['startprijs']);
       $beschrijving = $result['beschrijving'];
+      $closed = $result['veilingGesloten'];
 
 
 
@@ -283,7 +288,7 @@ try {
           </div>
 
           <?php
-          if(isset($_SESSION['username'])&& $einddatum>date('m-d-Y H:i:s')&&$_SESSION['username']!=$verkoper){
+          if((isset($_SESSION['username'])&& $einddatum>date('m-d-Y H:i:s')&&$_SESSION['username']!=$verkoper)||$closed==0){
             ?>
             <b>Snel bieden</b>
             <p>Klik op een bedrag om uw bod te plaatsen:</p>
