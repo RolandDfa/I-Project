@@ -156,7 +156,6 @@ if(isset($_GET['category'])){
           $sluitdatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
           if(date('m-d-Y H:i:s')<=$sluitdatum){echo 'Veiling is nog niet gesloten';}else{echo 'Veiling is gesloten';};
           echo '</div>';
-
           echo '
           </div>
           </div>
