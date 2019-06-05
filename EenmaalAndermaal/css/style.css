@@ -59,6 +59,18 @@ h5 {
   border: 1px solid rgb(136, 176, 75);
 }
 
+.borderLeftGreenery {
+  border-left: .25rem solid rgb(136, 176, 75);
+}
+
+.textGrayLight {
+  color: #dddfeb;
+}
+
+.textGrayDark {
+  color: #5a5c69;
+}
+
 .marginLeft {
   margin-left: 15px !important;
 }
@@ -934,6 +946,17 @@ ul.social-network li {
   margin-top: 1%;
   margin-bottom: 1%;
   letter-spacing: 1px;
+}
+
+/* Beheerdersdashboard */
+.card-header {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+.chartBlock {
+  width: 100%;
+  min-height: 400px;
 }
 
 /* If screen < 1050px (Tablets) */

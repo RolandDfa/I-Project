@@ -1,4 +1,5 @@
 <?php
+set_time_limit(60);
 if(isset($_GET['searchedText'])){
   $searchText = cleanInput($_GET['searchedText']);
 }else{
@@ -10,14 +11,25 @@ if(isset($_GET['searchedText'])){
   }
 }
 
-// if(isset($_GET['chosenCategory'])){
-//   $categoryNumber = (int)cleanInput($_GET['category']);
-//   $andQuery = "and RubriekOpLaagsteNiveau in (
-//     select r1.rubrieknummer
-//     from Rubriek r1 left join Rubriek r2 on r1.parent = r2.rubrieknummer left join Rubriek r3 on r2.parent = r3.rubrieknummer left join Rubriek r4 on r3.parent = r4.rubrieknummer
-//     where r1.rubrieknummer = ".$categoryNumber." or r1.parent = ".$categoryNumber." or r2.rubrieknummer = ".$categoryNumber." or r2.parent = ".$categoryNumber." or r3.rubrieknummer = ".$categoryNumber." or r3.parent = ".$categoryNumber." or r4.rubrieknummer = ".$categoryNumber." or r4.parent  = ".$categoryNumber."
-//     )";
-// }
+try {
+  $auctionsQuery = "SELECT voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE veilingGesloten = 0";
+  $auctionsstmt = $dbh->prepare($auctionsQuery);
+  $auctionsstmt->execute();
+  if ($auctionsstmt->rowCount() != 0) {
+    $results = $auctionsstmt->fetchAll();
+    foreach( $results as $result ) {
+      $sluitdatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
+      $nummer = $result['voorwerpnummer'];
+      if(date('m-d-Y H:i:s')>=$sluitdatum){
+          $auctionCloseQuery = "UPDATE Voorwerp SET veilingGesloten = 1 WHERE voorwerpnummer = ?";
+          $auctionCloseStmt = $dbh->prepare($auctionCloseQuery);
+          $auctionCloseStmt->execute(array($nummer));
+      }
+    }
+  }
+} catch (PDOException $e) {
+  echo "Er gaat iets fout met het sluiten van veilingen".$e->getMessage();
+}
 
 if(isset($_GET['category'])){
   $categoryNumber = (int)cleanInput($_GET['category']);
@@ -139,10 +151,11 @@ if(isset($_GET['category'])){
 
 
           echo '</div>
-          <div class="cardFooter">
-          Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).' uur
-          </div>';
-
+          <div class="cardFooter">';
+          echo 'Sluit '.date_format(date_create($result['looptijdeindeDag']), "d-m-Y").' om '.date('H:i.s',strtotime($result['looptijdeindeTijdstip'])).' uur <br>';
+          $sluitdatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
+          if(date('m-d-Y H:i:s')<=$sluitdatum){echo 'Veiling is nog niet gesloten';}else{echo 'Veiling is gesloten';};
+          echo '</div>';
           echo '
           </div>
           </div>
