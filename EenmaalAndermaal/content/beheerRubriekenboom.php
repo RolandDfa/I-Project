@@ -88,7 +88,7 @@ try {
     foreach ($subTopics as $subTopic) {
       $subTopicContent .= '<tr><td>'.$subTopic['naam'].'</td><td>'.$subTopic['nummer'].'</td><td>'.$subTopic['parentnaam'].'</td><td><button type="button" class="btn btn-warning btn-circle greeneryBackground" data-toggle="modal" data-target="#wijzigenModal'.$subTopic['nummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
       ?>
-      <div class="modal fade" id="wijzigenModal<?=$subTopic['rubrieknummer']?>" tabindex="-1" role="dialog">
+      <div class="modal fade" id="wijzigenModal<?=$subTopic['nummer']?>" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <form method="post">
             <div class="modal-content">
@@ -109,8 +109,8 @@ try {
                         <label>Rubrieknaam</label>
                       </div>
                       <div class="form-group col-lg-12">
-                        <input type="text" class="form-control" name="rubrieknaamEdit" value="<?=$subTopic['rubrieknaam']?>" placeholder="Rubrieknaam" required>
-                        <input type="hidden" name="voorwerpId" value="<?=$subTopic['rubrieknummer']?>">
+                        <input type="text" class="form-control" name="rubrieknaamEdit" value="<?=$subTopic['naam']?>" placeholder="Rubrieknaam" required>
+                        <input type="hidden" name="voorwerpId" value="<?=$subTopic['nummer']?>">
                       </div>
                     </div>
                   </div>
