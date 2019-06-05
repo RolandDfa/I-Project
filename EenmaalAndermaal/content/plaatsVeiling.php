@@ -109,15 +109,15 @@
             ?>
           </div>
         </div>
-        <!-- Start prijs -->
+        <!-- Startprijs -->
         <div class="form-group">
-          <label for="price"><h4><b>Start prijs</b></h4></label>
+          <label for="price"><h4><b>Startprijs</b></h4></label>
           <p><input type="number" id="price" class="form-control greeneryBorder col-lg-10" step="0.01" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="price" placeholder="€" <?php if(!empty($_SESSION['price'])){echo'value="'.$_SESSION['price'].'"';}?> required></p>
           <div class="redText">
             <?php
             if (!empty($_GET['error'])) {
               if ($_GET['error'] == 'prijs') {
-                echo 'Start prijs mag alleen maar uit cijfers betaan';
+                echo 'Startprijs mag alleen maar uit cijfers betaan';
               }
             }
             ?>
