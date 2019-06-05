@@ -5,6 +5,7 @@ session_start();
 require('connectie.php');
 require('functions/functions.php');
 
+$validCodeTime = 14400;
 // Init variables
 $errorMes = "";
 $returntekst = "";
@@ -13,15 +14,53 @@ $errorPassword = "";
 $errorUsername = "";
 
 // Check code
-if(isset($_POST['verifyCode'])){
-	$codeInput = $_POST['code'];
-	if ($codeInput != $_SESSION['code']) {
-		header("Location: index.php?page=registreren&error=code");
-	} elseif ($codeInput == $_SESSION['code']) {
-		$_SESSION['verifySucces'] = true;
-	}
-}
+try{
+	echo "aaaaaaaaaaaaaaaaaaaaaaaa";
+	$sql = "SELECT codetijd FROM verificatiecode WHERE email=?";
+	$queryGetCode = $dbh->prepare($sql);
+	if(!$queryGetCode) {
+		echo "oops error";
+		exit();
+	}	else {
+		echo "bbbbbbbbbbbbbbbbbbbbbb";
+		$queryGetCode->execute(array($_SESSION['email']));
+		$data = $queryGetCode->fetchAll(PDO::FETCH_BOTH);
+		$temp = $data['0'];
+		$codeTime = $temp['codetijd'];
 
+		$time = time();
+		$expired = $time - $codeTime;
+		echo "codetime $codeTime, time $time, expired $expired, valid $validCodeTime";
+		if($expired > $validCodeTime){
+			header("Location: index.php?page=registreren&error=codetijd");
+			$sql = "DELETE FROM verificatiecode WHERE email=?";
+			$queryDelete = $dbh->prepare($sql);
+			$queryDelete->execute(array($_SESSION['email']));
+			echo "ccccccccccccccccccc";
+		} else {
+			echo "ddddddddddddddddddddddd";
+			if(isset($_POST['verifyCode'])){
+				echo "eeeeeeeeeeeeeeeeeeeeeeee";
+				$codeInput = $_POST['code'];
+				if ($codeInput != $_SESSION['code']) {
+					echo "fffffffffffffffffffffffffff";
+					header("Location: index.php?page=registreren&error=code");
+					$sql = "DELETE FROM verificatiecode WHERE email=?";
+					$queryDelete = $dbh->prepare($sql);
+					$queryDelete->execute(array($_SESSION['email']));
+				} elseif ($codeInput == $_SESSION['code']) {
+					echo "gggggggggggggggggggggg";
+					$sql = "DELETE FROM verificatiecode WHERE email=?";
+					$queryDelete = $dbh->prepare($sql);
+					$queryDelete->execute(array($_SESSION['email']));
+					$_SESSION['verifySucces'] = true;
+				}
+			}
+		}
+	}
+} catch (Exception $e) {
+	echo "error met db code ophalen {$e->getMessage()}";
+}
 // Register
 if(isset($_POST['signUp'])){
 
