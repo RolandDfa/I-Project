@@ -159,24 +159,24 @@ try {
 
   <!-- Veilingen per jaar -->
   <div class="col-xl-6 col-md-12 mb-4">
-    <div class="card shadow-sm">
+    <div class="card shadow-sm chartBlock">
       <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold">Aantal veilingen per jaar</h6>
       </div>
-      <div class="card-body">
-        <div id="veilingen_div" class="chartDiv"></div>
+      <div class="card-body chartBlock">
+        <div id="veilingen_div" class="chartBlock"></div>
       </div>
     </div>
   </div>
 
-  <!-- Veilingen per jaar -->
+  <!-- Biedingen per jaar -->
   <div class="col-xl-6 col-md-12 mb-4">
-    <div class="card shadow-sm">
+    <div class="card shadow-sm chartBlock">
       <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold">Aantal veilingen per hoofdrubriek</h6>
+        <h6 class="m-0 font-weight-bold">Aantal biedingen per jaar</h6>
       </div>
-      <div class="card-body">
-        <div id="piechart_3d" class="chartDiv"></div>
+      <div class="card-body chartBlock">
+        <div id="piechart_3d" class="chartBlock"></div>
       </div>
     </div>
   </div>
@@ -208,7 +208,7 @@ function drawLineChart() {
 
 function drawPieChart() {
   var data = google.visualization.arrayToDataTable([
-    ['Rubrieken', 'Veilingen'],
+    ['Rubrieken', 'Biedingen'],
     <?php
     foreach($dataBiedingen as $result) {
       echo '["'.$result[0].'", '.$result[1].'],';
@@ -217,10 +217,15 @@ function drawPieChart() {
   ]);
 
   var options = {
-    colors: ['rgb(136, 176, 75)', 'Veilingen']
+    colors: ['rgb(136, 176, 75)', 'Biedingen']
   };
 
   var chart = new google.visualization.ColumnChart(document.getElementById('piechart_3d'));
   chart.draw(data, options);
 }
+
+$(window).resize(function(){
+  drawLineChart();
+  drawPieChart();
+});
 </script>
