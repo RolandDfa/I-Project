@@ -462,7 +462,7 @@ if($_SESSION['userstate'] != 3){
           $userAdressStmt->execute(array($_SESSION['username']));
           if($userAdressStmt->rowCount()!=0){
             echo '<div class="registerLine"><!-- Line --></div><br>
-            <h2 class="textCenter>Mijn gewonnen veilingen</h2><div class="row">';
+            <h2 class="textCenter">Mijn gewonnen veilingen</h2><div class="row">';
             $users = $userAdressStmt->fetchAll();
             foreach ($users as $result) {
               $voorwerpnummer = $result['voorwerpnummer'];
