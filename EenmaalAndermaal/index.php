@@ -144,6 +144,17 @@ if (!empty($_GET['page'])) {
 							}
 						}
 						break;
+						case 'beheerRubriekenboom':
+							if (!isset($_SESSION["username"])) {
+								require('content/inloggen.php');
+							} else {
+								if ($_SESSION["userstate"] > 3) {
+									require('content/beheerRubriekenboom.php');
+								} else {
+									require('content/home.php');
+								}
+							}
+							break;
 					default:
 						require('content/home.php');
 				}
