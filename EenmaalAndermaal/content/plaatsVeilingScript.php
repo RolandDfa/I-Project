@@ -13,10 +13,22 @@ if (isset($_POST['auctionSubmit'])) {
   $location = cleanInput($_POST['location']);
   $days = $_POST['days'];
   $paymethod = $_POST['paymethod'];
-  $payinstruction = cleanInput($_POST['payinstruction']);
-  $price = cleanInput($_POST['price']);
-  $sendcost = cleanInput($_POST['sendcost']);
-  $sendinstruction = cleanInput($_POST['sendinstruction']);
+  if (isset($_POST['payinstruction'])) {
+    $payinstruction = cleanInput($_POST['payinstruction']);
+  } else {
+    $payinstruction = "";
+  }
+  $price = cleanInput($_POST['sendcost']);
+  if (isset($_POST['payinstruction'])) {
+    $sendcost = cleanInput($_POST['sendcost']);
+  } else {
+    $sendcost = "";
+  }
+  if (isset($_POST['sendcost'])) {
+    $sendcost = cleanInput($_POST['sendcost']);
+  } else {
+    $sendcost = "";
+  }
 
   $_SESSION['category'] = $category;
   $_SESSION['title'] = $title;
