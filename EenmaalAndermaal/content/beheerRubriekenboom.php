@@ -76,9 +76,10 @@ catch (PDOException $e) {
 
 <div class="pageWrapper">
   <div class="rubriekenTableContainer">
-    <h2>Hoofdrubrieken</h2>
+    <h2 class="textCenter mb-4"><b>Rubrieken beheren beheren</b></h2>
+    <h3 class="textCenter mb-4"><b>Hoofdrubrieken</b></h3>
     <table id="hoofdrubriekenTable" class="table table-hover">
-      <thead>
+      <thead class="thead-dark">
         <tr>
           <th>Rubrieknummer</th>
           <th>Rubrieknaam</th>
