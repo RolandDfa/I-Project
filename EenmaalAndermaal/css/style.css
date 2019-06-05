@@ -878,7 +878,6 @@ ul.social-network li {
 }
 
 /* AUCTION page */
-
 .titleMarginBottom {
   margin-bottom: 8px;
 }
@@ -976,6 +975,11 @@ ul.social-network li {
 }
 
 /* Beheerdersdashboard */
+.beheerCard:hover {
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1), 0 5px 5px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+}
+
 .card-header {
   background-color: #222222;
   color: #ffffff;
