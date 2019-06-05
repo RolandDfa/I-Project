@@ -23,7 +23,20 @@ if (isset($_POST['sendCode'])) {
   } else {
 
     $_SESSION['email'] = $email;
+    $sql = "DELETE FROM verificatiecode WHERE email=?";
+    $queryDelete = $dbh->prepare($sql);
+    $queryDelete->execute(array($_SESSION['email']));
     $_SESSION['code'] = generateRandomString(8);
+    try{
+    $sqlInsertCode = "INSERT INTO verificatiecode (registratiecode, email, codetijd) VALUES(?,?,?)";
+    $queryInsertCode = $dbh->prepare($sqlInsertCode);
+    if(!$queryInsertCode) {
+      echo "oops error";
+      exit();
+    }
+    else {
+    $time = time();
+    $queryInsertCode->execute(array($_SESSION['code'], $_SESSION['email'], $time));
 
     $mail = new PHPMailer(true);
     try {
@@ -50,6 +63,10 @@ if (isset($_POST['sendCode'])) {
     } catch (Exception $e) {
       $errorPHPmailer = true;
     }
+  }
+  } catch (Exception $e) {
+    echo "error met db code opslaan";
+  }
   }
 } else {
   $errorEmail = false;
@@ -96,9 +113,13 @@ if (isset($_POST['sendCode'])) {
         <input type="text" class="form-control" name="code" placeholder="E1X3A5M2P7L1E" required <?php if(!$emailSucces){echo'readonly';}?>>
         <div class="redText">
           <?php
-          if (!empty($_GET['error'])) {
+          if(isset($_GET['error'])){
+          if ($_GET['error'] == 'code') {
             echo 'De code komt niet overeen';
+          } elseif ($_GET['error'] == 'codetijd') {
+            echo 'De code is niet meer geldig verstuur de email opnieuw.';
           }
+        }
           ?>
         </div>
       </div>
