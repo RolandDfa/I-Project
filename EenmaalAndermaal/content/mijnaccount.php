@@ -139,7 +139,15 @@ if($_SESSION['userstate'] != 3){
       <div id="gegevens">
         <h2 class="textCenter">Mijn gegevens</h2>
         <p>Persoonsgegevens</p>
-        <p>Voornaam: <?php echo $firstname; ?></p>
+        
+        <div class="row form-group">
+            <label for="voornaam" class="col-lg-4 control-label">Voornaam :</label>
+               <div class="col-lg-8">
+                    <input type="text" class="form-control" name="voornaam" value="<?php echo $firstname ?>" readonly>
+               </div>
+        </div>
+        
+       <!-- <p>Voornaam: <?php //echo $firstname; ?></p> -->
         <p>Achternaam: <?php echo $lastname; ?></p>
         <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
         <p>Adres: <?php echo $address; ?></p>
