@@ -171,6 +171,17 @@ if (!empty($_GET['page'])) {
 							}
 						}
 						break;
+					case 'beheerAccounts':
+						if (!isset($_SESSION["username"])) {
+							require('content/inloggen.php');
+						} else {
+							if ($_SESSION["userstate"] > 3) {
+								require('content/beheerAccounts.php');
+							} else {
+								require('content/home.php');
+							}
+						}
+						break;
 					default:
 						require('content/home.php');
 				}
