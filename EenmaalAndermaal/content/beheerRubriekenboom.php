@@ -142,36 +142,40 @@ catch (PDOException $e) {
 ?>
 
 <div class="pageWrapper">
+
   <div class="rubriekenTableContainer">
     <h2 class="textCenter mb-4"><b>Rubrieken beheren beheren</b></h2>
     <h3 class="textCenter mb-4"><b>Hoofdrubrieken</b></h3>
-    <table id="hoofdrubriekenTable" class="table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th>Rubrieknummer</th>
-          <th>Rubrieknaam</th>
-          <th>Naam wijzigen</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?=$headTopicContent ?>
-      </tbody>
-    </table>
-
+    <div class="table-responsive">
+      <table id="hoofdrubriekenTable" class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Rubrieknummer</th>
+            <th>Rubrieknaam</th>
+            <th>Naam wijzigen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?=$headTopicContent ?>
+        </tbody>
+      </table>
+    </div>
     <h3 class="textCenter mb-4"><b>Subrubrieken</b></h3>
-    <table id="subrubriekenTable" class="table table-hover">
-      <thead class="thead-dark">
-        <tr>
-          <th>Rubrieknummer</th>
-          <th>Rubrieknaam</th>
-          <th>Rubriek erboven</th>
-          <th>Naam wijzigen</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?=$subTopicContent ?>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table id="subrubriekenTable" class="table table-hover">
+        <thead class="thead-dark">
+          <tr>
+            <th>Rubrieknummer</th>
+            <th>Rubrieknaam</th>
+            <th>Rubriek erboven</th>
+            <th>Naam wijzigen</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?=$subTopicContent ?>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -187,10 +191,10 @@ $(document).ready(function() {
       "infoFiltered": "(gefilterd van _MAX_ totale resultaten)",
       "sSearch": "Zoeken: ",
       "oPaginate": {
-      "sFirst": "Eerste pagina", // This is the link to the first page
-      "sPrevious": "Vorige", // This is the link to the previous page
-      "sNext": "Volgende", // This is the link to the next page
-      "sLast": "Laatste pagina" // This is the link to the last page
+        "sFirst": "Eerste pagina", // This is the link to the first page
+        "sPrevious": "Vorige", // This is the link to the previous page
+        "sNext": "Volgende", // This is the link to the next page
+        "sLast": "Laatste pagina" // This is the link to the last page
       }
     },
     "columnDefs": [
@@ -208,10 +212,10 @@ $(document).ready(function() {
       "infoFiltered": "(gefilterd van _MAX_ totale resultaten)",
       "sSearch": "Zoeken: ",
       "oPaginate": {
-      "sFirst": "Eerste pagina", // This is the link to the first page
-      "sPrevious": "Vorige", // This is the link to the previous page
-      "sNext": "Volgende", // This is the link to the next page
-      "sLast": "Laatste pagina" // This is the link to the last page
+        "sFirst": "Eerste pagina", // This is the link to the first page
+        "sPrevious": "Vorige", // This is the link to the previous page
+        "sNext": "Volgende", // This is the link to the next page
+        "sLast": "Laatste pagina" // This is the link to the last page
       }
     },
     "columnDefs": [
