@@ -4,12 +4,13 @@
   <div class="btn-group">
     <a class="menuItem dropdown-toggle" href="" data-toggle="dropdown"><b>Alle categorieën</b></a>
     <div class="dropdown-menu greeneryBorder">
+      <a class="dropdown-item" href="index.php?page=rubrieken">Alle rubrieken</a>
       <?php
       // Get the headings from the database
       try {
-        $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
+        $data = $dbh->query("SELECT rubrieknaam, rubrieknummer FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
         while ($row = $data->fetch()) {
-          echo '<a class="dropdown-item" href="">'.$row['rubrieknaam'].'</a>';
+          echo '<a class="dropdown-item" href="index.php?page=overzicht&category='.$row['rubrieknummer'].'">'.$row['rubrieknaam'].'</a>';
         }
       } catch (PDOException $e) {
         echo "Kan rubrieken niet laden".$e->getMessage();
@@ -21,7 +22,7 @@
 <div id="menuSearchbar" class="col-lg-2 col-sm-4">
   <form class="form-inline" action="index.php?page=overzicht" method="post">
     <div class="input-group">
-      <input class="form-control greeneryBorder" type="text" placeholder="Zoeken" required minlength="2" name="searchText">
+      <input class="form-control greeneryBorder" type="text" placeholder="Zoeken" required minlength="2" maxlength="20" name="searchText">
       <div class="input-group-append">
         <button type="submit" class="input-group-text greeneryBackground greeneryBorder"><i class="fa fa-search"></i></button>
       </div>
@@ -38,8 +39,15 @@
     echo '<div class="btn-group">
     <a class="menuItem marginLeft marginRight dropdown-toggle" href="" data-toggle="dropdown">'.$_SESSION["username"].'</a>
     <div class="dropdown-menu greeneryBorder dropdown-menu-right">
-    <a class="dropdown-item" href="index.php?page=mijnaccount">Mijn account</a>
-    <a class="dropdown-item" href="logout.php">Uitloggen</a>
+    <a class="dropdown-item" href="index.php?page=mijnaccount">Mijn account</a>';
+
+    if ($_SESSION["userstate"] > 3) {
+      echo '<a class="dropdown-item" href="index.php?page=beheren">Beheerdersdashboard</a>';
+      echo '<a class="dropdown-item" href="index.php?page=beheerRubriekenboom">Rubrieken beheren</a>';
+      echo '<a class="dropdown-item" href="index.php?page=beheerVeilingen">Veilingen beheren</a>';
+    }
+
+    echo '<a class="dropdown-item" href="logout.php">Uitloggen</a>
     </div>
     </div>';
   }
@@ -67,6 +75,7 @@
   <div class="overlay-content">
     <a href="index.php?page=home">Home</a>
     <a href="index.php?page=overzicht">Alle veilingen</a>
+    <a href="index.php?page=rubrieken">Alle rubrieken</a>
     <a href="index.php?page=plaatsVeiling">Plaats advertentie</a>
     <?php
     if (!isset($_SESSION["username"])) {

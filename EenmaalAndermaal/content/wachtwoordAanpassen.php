@@ -1,6 +1,7 @@
 <?php
 if (isset($_SESSION['username'])){
   $hashedcurrentPass = "";
+    if (!isset($_POST['changePass'])) {
   ?>
   <form class="registerForm" method="post" action="">
     <div class="row form-group"></div>
@@ -13,6 +14,7 @@ if (isset($_SESSION['username'])){
     <button type="submit" name="changePass" class="btn btnGreenery btn-block" >Verstuur</button>
   </form>
   <?php
+}
   if (isset($_POST['changePass'])) {
     try{
       $sql = "SELECT wachtwoord FROM Gebruiker WHERE gebruikersnaam = :id";
@@ -78,6 +80,9 @@ if (isset($_POST['newPassButton'])) {
       }
       else {
         $queryInsert->execute(array($hashedWW,$_SESSION['username']));
+        // Unset session var
+        $_SESSION = array();
+        // Destroy session
         session_destroy();
         echo '<p>Wachtwoord succesvol aangepast, klik <a href="index.php?page=inloggen">Hier</a> om opnieuw in te loggen</a>.</p>';
       }

@@ -1,12 +1,5 @@
 <?php
 
-if(isset($_GET['searchedText'])){
-  $searchText = cleanInput($_GET['searchedText']);
-
-}else{
-  $searchText = "";
-
-}
 
 
 // Get Artikelnummer
@@ -24,6 +17,10 @@ if(isset($_POST['bod'])){
     $bidUploadQuery = "INSERT INTO Bod values(?,?,?,?,?)";
     $bidUploadStmt = $dbh->prepare($bidUploadQuery);
     $bidUploadStmt->execute(array($id, str_replace(',', '.', $_POST['bod']), $_SESSION['username'], date('Y-m-d'), date('H:i:s')));
+
+    $addBuyerQuery = "UPDATE Voorwerp SET kopernaam=? WHERE voorwerpnummer=?";
+    $addBuyerStmt = $dbh->prepare($addBuyerQuery);
+    $addBuyerStmt->execute(array($_SESSION['username'],$id));
   }
   catch (PDOException $e) {
     echo "Bod kan niet geplaatst worden. Iemand heeft het door u geboden bedrag al geboden.";
@@ -46,7 +43,16 @@ try {
       $einddatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
       $startprijs = str_replace(",",".",$result['startprijs']);
       $beschrijving = $result['beschrijving'];
+      $closed = $result['veilingGesloten'];
 
+      $sellerQuery = "SELECT mailbox FROM Gebruiker WHERE gebruikersnaam=?";
+      $selletStmt =   $dbh->prepare($sellerQuery);
+      $selletStmt->execute(array($verkoper));
+      if ($selletStmt->rowCount() != 0) {
+        $resultsSellerMail = $selletStmt->fetchAll();
+        $temp = $resultsSellerMail['0'];
+        $sellerMail = $temp['mailbox'];
+      }
 
 
       $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
@@ -92,7 +98,15 @@ try {
   <?php if(!$auctionExists){echo'Kan veiling niet vinden. Klik <a href="index.php?page=overzicht">hier</a> om naar het veilingenoverzicht te gaan. Of klik <a href="index.php?page=home">hier</a> om naar de homepagina te gaan.';} ?>
   <div class="auction">
     <?php
-    echo '<form action="index.php?page=overzicht&searchedText='.$searchText.'" method="post" class="backbutton">';
+    if(isset($_GET['searchedText'])){
+      $searchText = cleanInput($_GET['searchedText']);
+      echo '<form action="index.php?page=overzicht&searchedText='.$searchText.'" method="post" class="backbutton">';
+    }else if(isset($_GET['category'])){
+      $chosenCategory = cleanInput($_GET['category']);
+      echo '<form action="index.php?page=overzicht&category='.$chosenCategory.'" method="post" class="backbutton">';
+    }else{
+      echo '<form action="index.php?page=overzicht" method="post" class="backbutton">';
+    }
     echo '<button name="terug" type="submit" class="btn btn-success btn-lg">&lt; Terug naar overzicht</button>';
     echo '</form>';
     ?>
@@ -111,6 +125,9 @@ try {
         </div>
         <div>
           <?=$plaatsnaam?>
+        </div>
+        <div>
+          <A HREF="mailto:<?=$sellerMail?>?SUBJECT=Contact"><?=$sellerMail?></A>
         </div>
         <div class="bottomline"><!-- Line --></div>
         <div class="titleMarginBottom">
@@ -282,8 +299,9 @@ try {
           </div>
 
           <?php
-          if(isset($_SESSION['username'])&& $einddatum>date('m-d-Y H:i:s')&&$_SESSION['username']!=$verkoper){
+          if((isset($_SESSION['username'])&& $einddatum>date('m-d-Y H:i:s')&&$_SESSION['username']!=$verkoper) && $closed==0){
             ?>
+            <div id="bieden">
             <b>Snel bieden</b>
             <p>Klik op een bedrag om uw bod te plaatsen:</p>
             <?php
@@ -322,7 +340,7 @@ try {
             ?>
             <br><br>
             <!-- Trigger the modal with a button -->
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Handmatig bieden</button>
+            <button type="button" class="btn btn-info btn-lg manualBidButton" data-toggle="modal" data-target="#myModal">Handmatig bieden</button>
 
             <!-- Modal -->
             <div id="myModal" class="modal fade" role="dialog">
@@ -422,8 +440,9 @@ try {
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
               </div>
-
+</div>
               <?php
+
             }
             ?>
 
@@ -472,6 +491,7 @@ var x = setInterval(function() {
   if (distance < 0) {
     clearInterval(x);
     document.getElementById("time").innerHTML = "VEILING GESLOTEN";
+    document.getElementById("bieden").style.display = "none";
   }
 }, 100);
 </script>

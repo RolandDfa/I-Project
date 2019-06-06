@@ -1,3 +1,19 @@
+<?php
+// If first time on page
+if (empty($_GET['error'])) {
+  $_SESSION['category'] = '';
+  $_SESSION['title'] = '';
+  $_SESSION['description'] = '';
+  $_SESSION['location'] = '';
+  $_SESSION['days'] = '';
+  $_SESSION['paymethod'] = '';
+  $_SESSION['payinstruction'] = '';
+  $_SESSION['price'] = '';
+  $_SESSION['sendcost'] = '';
+  $_SESSION['sendinstruction'] = '';
+}
+?>
+
 <!-- progressbar -->
 <ul id="progressbar">
   <li class="active"><div class="before progressbarFinish"><i class="fas fa-list-alt"></i></div><p class="progressbarText textFinish">Categorie kiezen</p><div class="after progressbarFinish"></div></li>
@@ -8,7 +24,7 @@
 </ul>
 
 <!-- MultiStep Form -->
-<form id="regForm" action="">
+<form id="auctionForm" method="post" action="content/plaatsVeilingScript.php" enctype="multipart/form-data">
   <div class="tab">
     <h2><b>Categorie kiezen</b></h2>
     <div class="row">
@@ -16,14 +32,14 @@
         <!-- Categorie -->
         <div class="form-group">
           <label for="categorie"><h4><b>Categorie</b></h4></label>
-          <p><select id="categorie" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="categorie" required>
+          <p><select id="categorie" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="categorie" <?php if(!empty($_SESSION['category'])){echo'value="'.$_SESSION['category'].'"';}?> required>
             <option value="">- - -</option>
             <?php
             // Get the headings from the database
             try {
-              $data = $dbh->query("SELECT rubrieknaam FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
+              $data = $dbh->query("SELECT rubrieknummer, rubrieknaam FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
               while ($row = $data->fetch()) {
-                echo '<option value="'.$row['rubrieknaam'].'">'.$row['rubrieknaam'].'</option>';
+                echo '<option value="'.$row['rubrieknummer'].'">'.$row['rubrieknaam'].'</option>';
               }
             } catch (PDOException $e) {
               echo "Kan rubrieken niet laden".$e->getMessage();
@@ -42,23 +58,45 @@
         <!-- Titel -->
         <div class="form-group">
           <label for="title"><h4><b>Titel</b></h4></label>
-          <p><input type="text" id="title" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="title" placeholder="Titel van de veiling" required></p>
+          <p><input type="text" id="title" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="title" placeholder="Titel van de veiling" <?php if(!empty($_SESSION['title'])){echo'value="'.$_SESSION['title'].'"';}?> required></p>
+          <div class="redText">
+            <?php
+            if (!empty($_GET['error'])) {
+              if ($_GET['error'] == 'titel') {
+                echo 'Titel mag alleen maar uit letters en cijfers bestaan';
+              }
+            }
+            ?>
+          </div>
         </div>
         <!-- Beschrijving -->
         <div class="form-group">
-          <label for="discription"><h4><b>Beschrijving</b></h4></label>
-          <p><textarea id="discription" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="discription" rows="8" cols="80" placeholder="Beschrijving van het product"></textarea></p>
+          <label for="description"><h4><b>Beschrijving</b></h4></label>
+          <p><textarea id="description" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="description" rows="8" cols="80" placeholder="Beschrijving van het artikel"><?php if(!empty($_SESSION['description'])){echo $_SESSION['description'];}?></textarea></p>
+        </div>
+        <!-- Locatie -->
+        <div class="form-group">
+          <label for="location"><h4><b>Plaatsnaam</b></h4></label>
+          <p><input type="text" id="location" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z]{3,25}" maxlength="25" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="location" placeholder="Locatie van het artikel" <?php if(!empty($_SESSION['location'])){echo'value="'.$_SESSION['location'].'"';}?> required></p>
+          <div class="redText">
+            <?php
+            if (!empty($_GET['error'])) {
+              if ($_GET['error'] == 'plaats') {
+                echo 'Plaatsnaam mag alleen maar uit letters bestaan';
+              }
+            }
+            ?>
+          </div>
         </div>
         <!-- Looptijd -->
         <div class="form-group">
           <label for="days"><h4><b>Looptijd</b></h4></label>
-          <p><select id="days" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="days" required>
-            <option value="">- - -</option>
-            <option value="1">1</option>
-            <option value="3">3</option>
-            <option value="5">5</option>
-            <option value="7">7</option>
-            <option value="10">10</option>
+          <p><select id="days" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="days" <?php if(!empty($_SESSION['days'])){echo'value="'.$_SESSION['days'].'"';}?> required>
+            <option value="1">1 dag</option>
+            <option value="3">3 dagen</option>
+            <option value="5">5 dagen</option>
+            <option value="7" selected>7 dagen</option>
+            <option value="10">10 dagen</option>
           </select></p>
         </div>
       </div>
@@ -66,56 +104,145 @@
         <!-- Betalingswijze -->
         <div class="form-group">
           <label for="paymethod"><h4><b>Betalingswijze</b></h4></label>
-          <p><select id="paymethod" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="paymethod" required>
+          <p><select id="paymethod" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="paymethod" <?php if(!empty($_SESSION['paymethod'])){echo'value="'.$_SESSION['paymethod'].'"';}?> required>
             <option value="">- - -</option>
-            <option value="Back/Giro">Back/Giro</option>
+            <option value="Bank/Giro">Bank/Giro</option>
             <option value="Contant">Contant</option>
             <option value="Anders">Anders</option>
           </select></p>
         </div>
-        <!-- Betalingsinstructie -->
-        <div id="anders" class="form-group">
-          <label for="payinstruction"><h4><b>Betalingsinstructie</b></h4></label>
-          <p><input type="text" id="payinstruction" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="payinstruction" placeholder=""></p>
-        </div>
-        <!-- Start prijs -->
+        <!-- Betalingsinstructies -->
         <div class="form-group">
-          <label for="price"><h4><b>Start prijs</b></h4></label>
-          <p><input type="number" id="price" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="price" placeholder="€" required></p>
+          <label for="payinstruction"><h4><b>Betalingsinstructies</b></h4></label>
+          <p><input type="text" id="payinstruction" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z0-9., ]{3,30}" maxlength="30" name="payinstruction" <?php if(!empty($_SESSION['payinstruction'])){echo'value="'.$_SESSION['payinstruction'].'"';}?> placeholder="Bijv. Ophalen bij verkoper"></p>
+          <div class="redText">
+            <?php
+            if (!empty($_GET['error'])) {
+              if ($_GET['error'] == 'betaalInstructie') {
+                echo 'Betalingsinstructies mag alleen maar uit letter en cijfers betaan';
+              }
+            }
+            ?>
+          </div>
+        </div>
+        <!-- Startprijs -->
+        <div class="form-group">
+          <label for="price"><h4><b>Startprijs</b></h4></label>
+          <p><input type="number" id="price" class="form-control greeneryBorder col-lg-10" step="0.01" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="price" placeholder="€" <?php if(!empty($_SESSION['price'])){echo'value="'.$_SESSION['price'].'"';}?> required></p>
+          <div class="redText">
+            <?php
+            if (!empty($_GET['error'])) {
+              if ($_GET['error'] == 'prijs') {
+                echo 'Startprijs mag alleen maar uit cijfers betaan';
+              }
+            }
+            ?>
+          </div>
         </div>
         <!-- Verzendkosten -->
         <div class="form-group">
           <label for="sendcost"><h4><b>Verzendkosten</b></h4></label>
-          <p><input type="number" id="sendcost" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="sendcost" placeholder="€" required></p>
+          <p><input type="number" id="sendcost" class="form-control greeneryBorder col-lg-10" step="0.01" name="sendcost" <?php if(!empty($_SESSION['sendcost'])){echo'value="'.$_SESSION['sendcost'].'"';}?> placeholder="€"></p>
+          <div class="redText">
+            <?php
+            if (!empty($_GET['error'])) {
+              if ($_GET['error'] == 'verzendkosten') {
+                echo 'Verzendkosten mag alleen maar uit cijfers betaan';
+              }
+            }
+            ?>
+          </div>
+        </div>
+        <!-- Verzendinstructies -->
+        <div class="form-group">
+          <label for="sendinstruction"><h4><b>Verzendinstructies</b></h4></label>
+          <p><input type="text" id="sendinstruction" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z ]{3,30}" maxlength="30" name="sendinstruction" <?php if(!empty($_SESSION['sendinstruction'])){echo'value="'.$_SESSION['sendinstruction'].'"';}?> placeholder="Bijv. Alleen ophalen bij verkoper"></p>
+          <div class="redText">
+            <?php
+            if (!empty($_GET['error'])) {
+              if ($_GET['error'] == 'verzendinstructie') {
+                echo 'Verzendinstructies mag alleen maar uit letter en cijfers betaan';
+              }
+            }
+            ?>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="tab">
     <h2><b>Foto's uploaden</b></h2>
-    <div class="avatar-upload">
+    <p>Het grote vak is verplicht.</p>
+    <div class="redText">
+      <?php
+      if (!empty($_GET['error'])) {
+        if ($_GET['error'] == 'exists') {
+          echo 'Het bestand bestaat al';
+        } else if ($_GET['error'] == 'extention') {
+          echo 'Het bestand is geen png, jpg of jpeg';
+        } else if ($_GET['error'] == 'size') {
+          echo 'Het bestand is groter dan 2MB';
+        }
+      }
+      ?>
+    </div>
+    <div class="row">
+
+      <div class="avatar-upload-first">
         <div class="avatar-edit">
-            <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-            <label for="imageUpload"></label>
+          <input type='file' id="imageUpload1" name="imageUpload1" accept=".png, .jpg, .jpeg" required />
+          <label for="imageUpload1"><i class="fas fa-upload"></i></label>
+        </div>
+        <div class="avatar-preview-first">
+          <div id="imagePreview1">
+          </div>
+        </div>
+      </div>
+      <div class="avatar-upload">
+        <div class="avatar-edit">
+          <input type='file' id="imageUpload2" name="imageUpload2" accept=".png, .jpg, .jpeg" />
+          <label for="imageUpload2"><i class="fas fa-upload"></i></label>
         </div>
         <div class="avatar-preview">
-            <div id="imagePreview">
-            </div>
+          <div id="imagePreview2">
+          </div>
         </div>
+      </div>
+      <div class="avatar-upload">
+        <div class="avatar-edit">
+          <input type='file' id="imageUpload3" name="imageUpload3" accept=".png, .jpg, .jpeg" />
+          <label for="imageUpload3"><i class="fas fa-upload"></i></label>
+        </div>
+        <div class="avatar-preview">
+          <div id="imagePreview3">
+          </div>
+        </div>
+      </div>
+      <div class="avatar-upload">
+        <div class="avatar-edit">
+          <input type='file' id="imageUpload4" name="imageUpload4" accept=".png, .jpg, .jpeg" />
+          <label for="imageUpload4"><i class="fas fa-upload"></i></label>
+        </div>
+        <div class="avatar-preview">
+          <div id="imagePreview4">
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
   <div class="tab">
     <h2><b>Controleren</b></h2>
-    <p><input placeholder="Username..." oninput="this.className = ''" name="uname"></p>
-    <p><input placeholder="Password..." oninput="this.className = ''" name="pword" type="password"></p>
+    Weet u zeker dat alle de gegevens goed ingevuld zijn? Klik dan op plaatsen.
   </div>
-  <div style="overflow:auto;">
-    <div style="float:right;">
+  <div id="buttonListDiv">
+    <div id="buttonList">
       <button type="button" id="prevBtn" onclick="nextPrev(-1)">Vorige</button>
       <button type="button" id="nextBtn" onclick="nextPrev(1)">Volgende</button>
+      <input type="submit" id="auctionSubmit" name="auctionSubmit" style="display: none;">
     </div>
   </div>
-  <div style="text-align:center;margin-top:40px;">
+  <div id="bulletList">
     <span class="step"></span>
     <span class="step"></span>
     <span class="step"></span>
@@ -148,85 +275,6 @@ function showTab(n) {
   fixStepIndicator(n)
 }
 
-function nextPrev(n) {
-  // This function will figure out which tab to display
-  var x = document.getElementsByClassName("tab");
-  var b = document.getElementsByClassName("before");
-  var t = document.getElementsByClassName("progressbarText");
-  var a = document.getElementsByClassName("after");
-  // Exit the function if any field in the current tab is invalid:
-  if (n == 1 && !validateForm()) {
-    return false;
-  }
-  // Hide the current tab:
-  x[currentTab].style.display = "none";
-  // Clear progress
-  if (n == '-1') {
-    b[currentTab].classList.remove('progressbarFinish');
-    t[currentTab].classList.remove('textFinish');
-    a[currentTab].classList.remove('progressbarFinish');
-  }
-  // Increase or decrease the current tab by 1:
-  currentTab = currentTab + n;
-  // if you have reached the end of the form...
-  if (currentTab >= x.length) {
-    // ... the form gets submitted:
-    document.getElementById("regForm").submit();
-    return false;
-  }
-  // Otherwise, display the correct tab:
-  showTab(currentTab);
-}
-
-function validateForm() {
-  // This function deals with validation of the form fields
-  var x, y, t, i, valid = true;
-  x = document.getElementsByClassName("tab");
-  y = x[currentTab].getElementsByTagName("input");
-  t = x[currentTab].getElementsByTagName("textarea");
-  s = x[currentTab].getElementsByTagName("select");
-  // A loop that checks every input field in the current tab:
-  for (i = 0; i < y.length; i++) {
-    if (y[i].required == true) {
-      // If a field is empty...
-      if (y[i].value == "") {
-        // add an "invalid" class to the field:
-        y[i].className += " invalid";
-        // and set the current valid status to false
-        valid = false;
-      }
-    }
-  }
-  // A loop that checks every textarea field in the current tab:
-  for (i = 0; i < t.length; i++) {
-    // If a field is empty...
-    if (t[i].value == "") {
-      // add an "invalid" class to the field:
-      t[i].className += " invalid";
-      // and set the current valid status to false
-      valid = false;
-    }
-  }
-  // A loop that checks every select field in the current tab:
-  for (i = 0; i < s.length; i++) {
-    // If a field is empty...
-    if (s[i].value == "") {
-      // add an "invalid" class to the field:
-      s[i].className += " invalid";
-      // and set the current valid status to false
-      valid = false;
-    }
-  }
-  // If the valid status is true, mark the step as finished and valid:
-  if (valid) {
-    document.getElementsByClassName("step")[currentTab].className += " finish";
-    document.getElementsByClassName("before")[currentTab + 1].className += " progressbarFinish";
-    document.getElementsByClassName("progressbarText")[currentTab + 1].className += " textFinish";
-    document.getElementsByClassName("after")[currentTab + 1].className += " progressbarFinish";
-  }
-  return valid; // return the valid status
-}
-
 function fixStepIndicator(n) {
   // This function removes the "active" class of all steps...
   var i, x = document.getElementsByClassName("step");
@@ -237,29 +285,16 @@ function fixStepIndicator(n) {
   x[n].className += " active";
 }
 
-$('#paymethod').on('change', function() {
-  if(this.value == "Anders") {
-    $('#anders').show();
-    $("#payinstruction").prop('required',true);
-  } else {
-    $('#anders').hide();
-    $("#payinstruction").prop('required',false);
-  }
+$("#imageUpload1").change(function() {
+  readURL(this, "#imagePreview1");
 });
-
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-            $('#imagePreview').hide();
-            $('#imagePreview').fadeIn(650);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#imageUpload").change(function() {
-    readURL(this);
+$("#imageUpload2").change(function() {
+  readURL(this, "#imagePreview2");
+});
+$("#imageUpload3").change(function() {
+  readURL(this, "#imagePreview3");
+});
+$("#imageUpload4").change(function() {
+  readURL(this, "#imagePreview4");
 });
 </script>

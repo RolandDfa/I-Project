@@ -24,6 +24,11 @@ if (!empty($_GET['page'])) {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+	<!-- Datatables -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+
+
 	<!-- Icons -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
@@ -32,6 +37,9 @@ if (!empty($_GET['page'])) {
 
 	<!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Google Charts -->
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 	<!-- Icon -->
 	<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
@@ -73,59 +81,98 @@ if (!empty($_GET['page'])) {
 				<?php
 				switch($page) {
 					case 'home':
-					require('content/home.php');
-					break;
+						require('content/home.php');
+						break;
 					case 'inloggen':
-					require('content/inloggen.php');
-					break;
+						require('content/inloggen.php');
+						break;
 					case 'registreren':
-					require('content/registreren.php');
-					break;
+						require('content/registreren.php');
+						break;
 					case 'registrerenSucces':
-					require('content/registrerenSucces.php');
-					break;
+						require('content/registrerenSucces.php');
+						break;
 					case 'overzicht':
-					require('content/overzicht.php');
-					break;
+						require('content/overzicht.php');
+						break;
 					case 'plaatsVeiling':
-					if (!isset($_SESSION["username"])) {
-						require('content/inloggen.php');
-					} else {
-						if ($_SESSION["userstate"] == 3) {
-							require('content/plaatsVeiling.php');
+						if (!isset($_SESSION["username"])) {
+							require('content/inloggen.php');
 						} else {
-							require('content/registrerenVerkoper.php');
+							if ($_SESSION["userstate"] > 2) {
+								require('content/plaatsVeiling.php');
+							} else {
+								require('content/registrerenVerkoper.php');
+							}
 						}
-					}
-					break;
+						break;
 					case 'veiling':
-					require('content/veiling.php');
-					break;
+						require('content/veiling.php');
+						break;
 					case 'gebruikersvoorwaarden':
-					require('content/gebruikersvoorwaarden.php');
-					break;
+						require('content/gebruikersvoorwaarden.php');
+						break;
 					case 'privacybeleid':
-					require('content/privacybeleid.php');
-					break;
+						require('content/privacybeleid.php');
+						break;
 					case 'mijnaccount':
-					if (!isset($_SESSION["username"])) {
-						require('content/inloggen.php');
-					} else {
-						require('content/mijnaccount.php');
-					}
-					break;
+						if (!isset($_SESSION["username"])) {
+							require('content/inloggen.php');
+						} else {
+							require('content/mijnaccount.php');
+						}
+						break;
 					case 'wachtwoordVergeten':
-					require('content/wachtwoordVergeten.php');
-					break;
+						require('content/wachtwoordVergeten.php');
+						break;
 					case 'wachtwoordAanpassen':
-					if (!isset($_SESSION["username"])) {
-						require('content/inloggen.php');
-					} else {
-						require('content/wachtwoordAanpassen.php');
-					}
-					break;
+						if (!isset($_SESSION["username"])) {
+							require('content/inloggen.php');
+						} else {
+							require('content/wachtwoordAanpassen.php');
+						}
+						break;
+					case 'accountRecovery':
+						require('content/accountRecovery.php');
+						break;
+					case 'rubrieken':
+						require('content/rubrieken.php');
+						break;
+					case 'beheren':
+						if (!isset($_SESSION["username"])) {
+							require('content/inloggen.php');
+						} else {
+							if ($_SESSION["userstate"] > 3) {
+								require('content/dashboard.php');
+							} else {
+								require('content/home.php');
+							}
+						}
+						break;
+					case 'beheerRubriekenboom':
+						if (!isset($_SESSION["username"])) {
+							require('content/inloggen.php');
+						} else {
+							if ($_SESSION["userstate"] > 3) {
+								require('content/beheerRubriekenboom.php');
+							} else {
+								require('content/home.php');
+							}
+						}
+						break;
+					case 'beheerVeilingen':
+						if (!isset($_SESSION["username"])) {
+							require('content/inloggen.php');
+						} else {
+							if ($_SESSION["userstate"] > 3) {
+								require('content/beheerVeilingen.php');
+							} else {
+								require('content/home.php');
+							}
+						}
+						break;
 					default:
-					require('content/home.php');
+						require('content/home.php');
 				}
 				?>
 			</div>
@@ -180,6 +227,14 @@ if (!empty($_GET['page'])) {
 			<a class="linkFooter" href="index.php?page=gebruikersvoorwaarden">Gebruikersvoorwaarden</a> <span class="footerBreak">|</span> <a  class="linkFooter" href="index.php?page=privacybeleid">Privacybeleid</a> <span class="footerBreak">|</span> &copy; 2019 iConcepts
 		</div>
 	</footer>
+
+	<!-- Back to top -->
+	<button onclick="topFunction()" id="toTopButton" title="Go to top"><i class="fas fa-chevron-up"></i></button>
+
+	<?php
+	// Javascript functions
+	require('functions/javascriptFunctions.php');
+	?>
 
 </body>
 </html>
