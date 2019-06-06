@@ -1,7 +1,7 @@
 <?php
 // Get gebruiker activ
 try {
-  $sqlGebruikersA = "SELECT COUNT(gebruikersnaam) FROM Gebruiker WHERE valid = 1";
+  $sqlGebruikersA = "SELECT COUNT(gebruikersnaam) FROM Gebruiker WHERE valid = 1 AND gebruikersStatus < 4";
   $querySelect = $dbh->prepare($sqlGebruikersA);
   $querySelect->execute();
   if ($querySelect->rowCount() != 0) {

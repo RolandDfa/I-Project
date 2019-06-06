@@ -1,11 +1,10 @@
 <?php
-if(isset($_POST['delete'])){
-  try{
+if(isset($_POST['delete'])) {
+  try {
     $changeAuctionValid = "UPDATE Voorwerp SET veilingGesloten = ? where voorwerpnummer = ?";
     $changeAuctionStmt = $dbh->prepare($changeAuctionValid);
     $changeAuctionStmt->execute(array(1, cleanInput($_POST['codeDelete'])));
-  }
-  catch (PDOException $e) {
+  } catch (PDOException $e) {
     echo "Fout met de database: {$e->getMessage()} ";
   }
 }
