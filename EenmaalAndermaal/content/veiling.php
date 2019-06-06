@@ -45,6 +45,14 @@ try {
       $beschrijving = $result['beschrijving'];
       $closed = $result['veilingGesloten'];
 
+      $sellerQuery = "SELECT mailbox FROM Gebruiker WHERE gebruikersnaam=?";
+      $selletStmt =   $dbh->prepare($sellerQuery);
+      $selletStmt->execute(array($verkoper));
+      if ($selletStmt->rowCount() != 0) {
+        $resultsSellerMail = $selletStmt->fetchAll();
+        $temp = $resultsSellerMail['0'];
+        $sellerMail = $temp['mailbox'];
+      }
 
 
       $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
@@ -117,6 +125,9 @@ try {
         </div>
         <div>
           <?=$plaatsnaam?>
+        </div>
+        <div>
+          <A HREF="mailto:<?=$sellerMail?>?SUBJECT=Contact"><?=$sellerMail?></A>
         </div>
         <div class="bottomline"><!-- Line --></div>
         <div class="titleMarginBottom">
