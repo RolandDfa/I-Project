@@ -54,7 +54,7 @@ if(isset($_POST['submitSellerCreditcard'])){
     $queryInsert->execute(array($_SESSION['username']));
     $_SESSION["userstate"] = 3;
     $registrerenVerkoperSucces = true;
-    $melding = 'Registreren gelukt! Klik <a href="index.php?page=mijnaccount">hier</a> om naar de mijn account pagina te gaan.';
+    $melding = 'Registreren als verkoper gelukt! Klik <a href="index.php?page=mijnaccount">hier</a> om naar de mijn account pagina te gaan.';
   }
   catch (PDOException $e) {
     echo "Fout met de database: {$e->getMessage()} ";
