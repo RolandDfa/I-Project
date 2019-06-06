@@ -138,7 +138,7 @@ if($_SESSION['userstate'] != 3){
     <div class="rightContent marginRight">
       <div id="gegevens">
         <h2 class="textCenter">Mijn gegevens</h2>
-        <p>Persoons gegevens</p>
+        <p>Persoonsgegevens</p>
         <p>Voornaam: <?php echo $firstname; ?></p>
         <p>Achternaam: <?php echo $lastname; ?></p>
         <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
