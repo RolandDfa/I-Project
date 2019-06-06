@@ -91,7 +91,7 @@ catch (PDOException $e) {
 
 $subTopicContent = '';
 try {
-  $subTopicQuery = "SELECT r1.rubrieknaam naam, r1.rubrieknummer nummer, r2.rubrieknaam parentnaam FROM Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer WHERE r1.parent in (SELECT rubrieknummer FROM Rubriek where parent = -1) ORDER BY r1.rubrieknaam asc";
+  $subTopicQuery = "SELECT r1.rubrieknaam naam, r1.rubrieknummer nummer, r2.rubrieknaam parentnaam FROM Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer WHERE r1.parent != -1 ORDER BY r1.rubrieknaam asc";
   $subTopicStmt = $dbh->prepare($subTopicQuery);
   $subTopicStmt->execute();
   if($subTopicStmt->rowCount()!=0){
