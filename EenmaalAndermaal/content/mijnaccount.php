@@ -240,7 +240,7 @@ if($_SESSION['userstate'] != 3){
           <div class="row form-group">
             <label for="address" class="col-lg-4 alignRight control-label">Adres *</label>
             <div class="col-lg-8">
-              <input type="text" id="address" class="form-control" name="address" pattern="[a-zA-Z0-9 ]{1,255}" title="Uw adres" value="<?php echo $address; ?>" required>
+              <input type="text" id="address" class="form-control" name="address" pattern="[a-zA-Z0-9 ]{3,255}" title="Uw adres" value="<?php echo $address; ?>" required>
             </div>
           </div>
           <!-- Postcode -->
@@ -254,28 +254,28 @@ if($_SESSION['userstate'] != 3){
           <div class="row form-group">
             <label for="city" class="col-lg-4 alignRight control-label">Plaatsnaam *</label>
             <div class="col-lg-8">
-              <input type="text" id="city" class="form-control" name="city" pattern="[a-zA-Z]{1,25}" title="Plaatsnaam" value="<?php echo $city; ?>" required>
+              <input type="text" id="city" class="form-control" name="city" pattern="[a-zA-Z]{3,25}" title="Plaatsnaam" value="<?php echo $city; ?>" required>
             </div>
           </div>
           <!-- Country -->
           <div class="row form-group">
             <label for="country" class="col-lg-4 alignRight control-label">Land *</label>
             <div class="col-lg-8">
-              <input type="text" id="country" class="form-control" name="country" pattern="[a-zA-Z]{1,50}" title="Land" value="<?php echo $country; ?>" required>
+              <input type="text" id="country" class="form-control" name="country" pattern="[a-zA-Z]{3,50}" title="Land" value="<?php echo $country; ?>" required>
             </div>
           </div>
           <!-- Phonenumber -->
           <div class="row form-group">
             <label for="telnr" class="col-lg-4 alignRight control-label">Telefoonnummer *</label>
             <div class="col-lg-8">
-              <input type="text" id="telnr" class="form-control" name="telnr" pattern="[0-9]{1,15}" title="Telefoonnummer" value="<?php echo $telnr; ?>" required>
+              <input type="text" id="telnr" class="form-control" name="telnr" pattern="[0-9]{10,15}" title="Telefoonnummer" value="<?php echo $telnr; ?>" required>
             </div>
           </div>
           <!-- Phonenumber 2 -->
           <div class="row form-group">
             <label for="telnr2" class="col-lg-4 alignRight control-label">Telefoonnummer 2</label>
             <div class="col-lg-8">
-              <input type="text" id="telnr2" class="form-control" name="telnr2" pattern="[0-9]{1,15}" title="2e Telefoonnummer" value="<?php echo $telnr2;  ?>">
+              <input type="text" id="telnr2" class="form-control" name="telnr2" pattern="[0-9]{10,15}" title="2e Telefoonnummer" value="<?php echo $telnr2;  ?>">
             </div>
           </div>
           <button type="submit" name="submitInfo" class="btn btnGreenery btn-block">Gegevens aanpassen/Updaten</button>

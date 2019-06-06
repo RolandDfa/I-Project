@@ -22,7 +22,7 @@
 <div id="menuSearchbar" class="col-lg-2 col-sm-4">
   <form class="form-inline" action="index.php?page=overzicht" method="post">
     <div class="input-group">
-      <input class="form-control greeneryBorder" type="text" placeholder="Zoeken" required minlength="2" name="searchText">
+      <input class="form-control greeneryBorder" type="text" placeholder="Zoeken" required minlength="2" maxlength="20" name="searchText">
       <div class="input-group-append">
         <button type="submit" class="input-group-text greeneryBackground greeneryBorder"><i class="fa fa-search"></i></button>
       </div>

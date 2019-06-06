@@ -65,7 +65,7 @@ try {
               $mail->addAttachment('images/EenmaalAndermaalLogo.png');
               $mail->Subject = '[EenmaalAndermaal] Gewonnen veiling!.';
               $mail->Body    =
-              "<b>Gefeliciteerd u heefd de veiling [".$aucTitle."] gewonnen.</b>";
+              "<b>Gefeliciteerd u heeft de veiling [".$aucTitle."] gewonnen.</b>";
 
               $mail->send();
             } catch (Exception $e) {

@@ -1,3 +1,19 @@
+<?php
+// If first time on page
+if (empty($_GET['error'])) {
+  $_SESSION['category'] = '';
+  $_SESSION['title'] = '';
+  $_SESSION['description'] = '';
+  $_SESSION['location'] = '';
+  $_SESSION['days'] = '';
+  $_SESSION['paymethod'] = '';
+  $_SESSION['payinstruction'] = '';
+  $_SESSION['price'] = '';
+  $_SESSION['sendcost'] = '';
+  $_SESSION['sendinstruction'] = '';
+}
+?>
+
 <!-- progressbar -->
 <ul id="progressbar">
   <li class="active"><div class="before progressbarFinish"><i class="fas fa-list-alt"></i></div><p class="progressbarText textFinish">Categorie kiezen</p><div class="after progressbarFinish"></div></li>
@@ -61,7 +77,7 @@
         <!-- Locatie -->
         <div class="form-group">
           <label for="location"><h4><b>Plaatsnaam</b></h4></label>
-          <p><input type="text" id="location" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="location" placeholder="Locatie van het artikel" <?php if(!empty($_SESSION['location'])){echo'value="'.$_SESSION['location'].'"';}?> required></p>
+          <p><input type="text" id="location" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z]{3,25}" maxlength="25" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="location" placeholder="Locatie van het artikel" <?php if(!empty($_SESSION['location'])){echo'value="'.$_SESSION['location'].'"';}?> required></p>
           <div class="redText">
             <?php
             if (!empty($_GET['error'])) {
@@ -98,7 +114,7 @@
         <!-- Betalingsinstructies -->
         <div class="form-group">
           <label for="payinstruction"><h4><b>Betalingsinstructies</b></h4></label>
-          <p><input type="text" id="payinstruction" class="form-control greeneryBorder col-lg-10" name="payinstruction" <?php if(!empty($_SESSION['payinstruction'])){echo'value="'.$_SESSION['payinstruction'].'"';}?> placeholder="Bijv. Ophalen bij verkoper"></p>
+          <p><input type="text" id="payinstruction" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z0-9., ]{3,30}" maxlength="30" name="payinstruction" <?php if(!empty($_SESSION['payinstruction'])){echo'value="'.$_SESSION['payinstruction'].'"';}?> placeholder="Bijv. Ophalen bij verkoper"></p>
           <div class="redText">
             <?php
             if (!empty($_GET['error'])) {
@@ -140,7 +156,7 @@
         <!-- Verzendinstructies -->
         <div class="form-group">
           <label for="sendinstruction"><h4><b>Verzendinstructies</b></h4></label>
-          <p><input type="text" id="sendinstruction" class="form-control greeneryBorder col-lg-10" name="sendinstruction" <?php if(!empty($_SESSION['sendinstruction'])){echo'value="'.$_SESSION['sendinstruction'].'"';}?> placeholder="Bijv. Alleen ophalen bij verkoper"></p>
+          <p><input type="text" id="sendinstruction" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z ]{3,30}" maxlength="30" name="sendinstruction" <?php if(!empty($_SESSION['sendinstruction'])){echo'value="'.$_SESSION['sendinstruction'].'"';}?> placeholder="Bijv. Alleen ophalen bij verkoper"></p>
           <div class="redText">
             <?php
             if (!empty($_GET['error'])) {
