@@ -12,7 +12,7 @@ if(isset($_POST['login'])) {
 
   // Username and password check
   try {
-    $loginquery = "SELECT * FROM Gebruiker WHERE gebruikersnaam = ? AND valid = 1 COLLATE SQL_Latin1_General_CP1_CS_AS";
+    $loginquery = "SELECT * FROM Gebruiker WHERE gebruikersnaam = ? COLLATE SQL_Latin1_General_CP1_CS_AS AND valid = 1";
     $loginStmt = $dbh->prepare($loginquery);
     $loginStmt->execute(array($username));
     if($loginStmt->rowCount()!=0){
