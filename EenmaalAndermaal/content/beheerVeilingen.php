@@ -1,11 +1,10 @@
 <?php
-if(isset($_POST['delete'])){
-  try{
+if(isset($_POST['delete'])) {
+  try {
     $changeAuctionValid = "UPDATE Voorwerp SET veilingGesloten = ? where voorwerpnummer = ?";
     $changeAuctionStmt = $dbh->prepare($changeAuctionValid);
     $changeAuctionStmt->execute(array(1, cleanInput($_POST['codeDelete'])));
-  }
-  catch (PDOException $e) {
+  } catch (PDOException $e) {
     echo "Fout met de database: {$e->getMessage()} ";
   }
 }
@@ -29,7 +28,7 @@ if(isset($_POST['delete'])){
         <td style="max-width: 400px;">'.$result['titel'].'</td>
         <td>'.$result['verkopernaam'].'</td>
         <td>'.date('d-m-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:m:s',strtotime($result['looptijdeindeTijdstip'])).'</td>
-        <td><button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#deleteModal'.$result['voorwerpnummer'].'"><i class="fas fa-times"></i></button></td>
+        <td><button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#deleteModal'.$result['voorwerpnummer'].'"><i class="fas fa-trash-alt"></i></button></td>
         </tr>
         ';
         ?>

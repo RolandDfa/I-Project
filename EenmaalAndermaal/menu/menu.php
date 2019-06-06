@@ -43,8 +43,9 @@
 
     if ($_SESSION["userstate"] > 3) {
       echo '<a class="dropdown-item" href="index.php?page=beheren">Beheerdersdashboard</a>';
-      echo '<a class="dropdown-item" href="index.php?page=beheerRubriekenboom">Rubrieken beheren</a>';
+      echo '<a class="dropdown-item" href="index.php?page=beheerAccounts">Accounts beheren</a>';
       echo '<a class="dropdown-item" href="index.php?page=beheerVeilingen">Veilingen beheren</a>';
+      echo '<a class="dropdown-item" href="index.php?page=beheerRubriekenboom">Rubrieken beheren</a>';
     }
 
     echo '<a class="dropdown-item" href="logout.php">Uitloggen</a>
@@ -78,6 +79,13 @@
     <a href="index.php?page=rubrieken">Alle rubrieken</a>
     <a href="index.php?page=plaatsVeiling">Plaats advertentie</a>
     <?php
+    if ($_SESSION["userstate"] > 3) {
+      echo '<a href="index.php?page=beheren">Beheerdersdashboard</a>';
+      echo '<a href="index.php?page=beheerAccounts">Accounts beheren</a>';
+      echo '<a href="index.php?page=beheerVeilingen">Veilingen beheren</a>';
+      echo '<a href="index.php?page=beheerRubriekenboom">Rubrieken beheren</a>';
+    }
+
     if (!isset($_SESSION["username"])) {
       echo '<a href="index.php?page=inloggen">Inloggen</a>';
     } else {

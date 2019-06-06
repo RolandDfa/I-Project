@@ -11,10 +11,15 @@ if(isset($_POST['wijzigen'])){
 }
 
 if(isset($_POST['toevoegen'])){
+  if($_POST['parentRubriek'] != ""){
+    $parentRubriek = cleanInput($_POST['parentRubriek']);
+  }else{
+    $parentRubriek = "-1";
+  }
   try{
     $changeTopicNameQuery = "EXEC toevoegen_rubriek ?, ?";
     $changeTopicNameStmt = $dbh->prepare($changeTopicNameQuery);
-    $changeTopicNameStmt->execute(array(cleanInput($_POST['parentRubriek']), cleanInput($_POST['rubrieknaam'])));
+    $changeTopicNameStmt->execute(array($parentRubriek, cleanInput($_POST['rubrieknaam'])));
   }
   catch (PDOException $e) {
     echo "De rubriek bestaat al";
@@ -30,7 +35,7 @@ try {
   if($headTopicStmt->rowCount()!=0){
     $headTopics = $headTopicStmt->fetchAll();
     foreach ($headTopics as $headTopic) {
-      $headTopicContent .= '<tr><td>'.$headTopic['rubrieknummer'].'</td><td>'.$headTopic['rubrieknaam'].'</td><td><button type="button" class="btn btn-warning btn-circle greeneryBackground" data-toggle="modal" data-target="#wijzigenModal'.$headTopic['rubrieknummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
+      $headTopicContent .= '<tr><td>'.$headTopic['rubrieknummer'].'</td><td>'.$headTopic['rubrieknaam'].'</td><td><button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#wijzigenModal'.$headTopic['rubrieknummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
       ?>
       <div class="modal fade" id="wijzigenModal<?=$headTopic['rubrieknummer']?>" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -91,13 +96,13 @@ catch (PDOException $e) {
 
 $subTopicContent = '';
 try {
-  $subTopicQuery = "SELECT r1.rubrieknaam naam, r1.rubrieknummer nummer, r2.rubrieknaam parentnaam FROM Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer WHERE r1.parent in (SELECT rubrieknummer FROM Rubriek where parent = -1) ORDER BY r1.rubrieknaam asc";
+  $subTopicQuery = "SELECT r1.rubrieknaam naam, r1.rubrieknummer nummer, r2.rubrieknaam parentnaam FROM Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer WHERE r1.parent != -1 ORDER BY r1.rubrieknaam asc";
   $subTopicStmt = $dbh->prepare($subTopicQuery);
   $subTopicStmt->execute();
   if($subTopicStmt->rowCount()!=0){
     $subTopics = $subTopicStmt->fetchAll();
     foreach ($subTopics as $subTopic) {
-      $subTopicContent .= '<tr><td>'.$subTopic['nummer'].'</td><td>'.$subTopic['naam'].'</td><td>'.$subTopic['parentnaam'].'</td><td><button type="button" class="btn btn-warning btn-circle greeneryBackground" data-toggle="modal" data-target="#wijzigenModal'.$subTopic['nummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
+      $subTopicContent .= '<tr><td>'.$subTopic['nummer'].'</td><td>'.$subTopic['naam'].'</td><td>'.$subTopic['parentnaam'].'</td><td><button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#wijzigenModal'.$subTopic['nummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
       ?>
       <div class="modal fade" id="wijzigenModal<?=$subTopic['nummer']?>" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -180,10 +185,10 @@ catch (PDOException $e) {
                   </div>
 
                   <div class="col-lg-12">
-                    <label for="parentRubriek">Nummer van rubriek erboven</label>
+                    <label for="parentRubriek">Nummer van rubriek erboven (leeglaten voor hoofdrubriek)</label>
                   </div>
                   <div class="form-group col-lg-12">
-                    <input type="text" class="form-control" name="parentRubriek" id="parentRubriek" placeholder="Nummer" required>
+                    <input type="text" class="form-control" name="parentRubriek" id="parentRubriek" placeholder="Nummer">
                   </div>
                 </div>
               </div>

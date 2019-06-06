@@ -1,28 +1,28 @@
 <?php
-// Get gebruiker amount
+// Get gebruiker activ
 try {
-  $sqlGebruikers = "SELECT COUNT(gebruikersnaam) FROM Gebruiker";
-  $querySelect = $dbh->prepare($sqlGebruikers);
+  $sqlGebruikersA = "SELECT COUNT(gebruikersnaam) FROM Gebruiker WHERE valid = 1 AND gebruikersStatus < 4";
+  $querySelect = $dbh->prepare($sqlGebruikersA);
   $querySelect->execute();
   if ($querySelect->rowCount() != 0) {
     $results = $querySelect->fetchAll();
     foreach( $results as $result ) {
-      $aantalGebruikers = $result[0];
+      $aantalGebruikersA = $result[0];
     }
   }
 } catch (PDOException $e) {
   echo "Fout met de database: {$e->getMessage()} ";
 }
 
-// Get verkoper amount
+// Get gebruiker inactiv
 try {
-  $sqlVerkopers = "SELECT COUNT(gebruiker) FROM Verkoper";
-  $querySelect = $dbh->prepare($sqlVerkopers);
+  $sqlGebruikersI = "SELECT COUNT(gebruikersnaam) FROM Gebruiker WHERE valid = 0";
+  $querySelect = $dbh->prepare($sqlGebruikersI);
   $querySelect->execute();
   if ($querySelect->rowCount() != 0) {
     $results = $querySelect->fetchAll();
     foreach( $results as $result ) {
-      $aantalVerkopers = $result[0];
+      $aantalGebruikersI = $result[0];
     }
   }
 } catch (PDOException $e) {
@@ -95,8 +95,8 @@ try {
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="font-weight-bold greeneryText text-uppercase mb-1">Accounts</div>
-              <div class="h5 font-weight-bold textGrayDark"><?=$aantalGebruikers?></div>
+              <div class="font-weight-bold greeneryText text-uppercase mb-1">Accounts (actief)</div>
+              <div class="h5 font-weight-bold textGrayDark"><?=$aantalGebruikersA?></div>
             </div>
             <div class="col-auto">
               <i class="fas fa-user-tie fa-2x textGrayLight"></i>
@@ -118,8 +118,8 @@ try {
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="font-weight-bold greeneryText text-uppercase mb-1">Verkopers</div>
-              <div class="h5 font-weight-bold textGrayDark"><?=$aantalVerkopers?></div>
+              <div class="font-weight-bold greeneryText text-uppercase mb-1">Accounts (inactief)</div>
+              <div class="h5 font-weight-bold textGrayDark"><?=$aantalGebruikersI?></div>
             </div>
             <div class="col-auto">
               <i class="fas fa-user-tag fa-2x textGrayLight"></i>
@@ -174,7 +174,7 @@ try {
         </div>
       </div>
       </a>
-      
+
     </div>
   </div>
 
