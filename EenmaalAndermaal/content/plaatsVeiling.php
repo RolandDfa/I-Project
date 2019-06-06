@@ -1,3 +1,19 @@
+<?php
+// If first time on page
+if (empty($_GET['error'])) {
+  $_SESSION['category'] = '';
+  $_SESSION['title'] = '';
+  $_SESSION['description'] = '';
+  $_SESSION['location'] = '';
+  $_SESSION['days'] = '';
+  $_SESSION['paymethod'] = '';
+  $_SESSION['payinstruction'] = '';
+  $_SESSION['price'] = '';
+  $_SESSION['sendcost'] = '';
+  $_SESSION['sendinstruction'] = '';
+}
+?>
+
 <!-- progressbar -->
 <ul id="progressbar">
   <li class="active"><div class="before progressbarFinish"><i class="fas fa-list-alt"></i></div><p class="progressbarText textFinish">Categorie kiezen</p><div class="after progressbarFinish"></div></li>
