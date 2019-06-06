@@ -10,6 +10,17 @@ if(isset($_POST['wijzigen'])){
   }
 }
 
+if(isset($_POST['toevoegen'])){
+  try{
+    $changeTopicNameQuery = "EXEC toevoegen_rubriek ?, ?";
+    $changeTopicNameStmt = $dbh->prepare($changeTopicNameQuery);
+    $changeTopicNameStmt->execute(array(cleanInput($_POST['parentRubriek']), cleanInput($_POST['rubrieknaam'])));
+  }
+  catch (PDOException $e) {
+    echo "De rubriek bestaat al";
+  }
+}
+
 
 $headTopicContent = '';
 try {
@@ -142,6 +153,54 @@ catch (PDOException $e) {
 ?>
 
 <div class="pageWrapper">
+  <button type="button" class="btn btn-warning btn-circle greeneryBackground" data-toggle="modal" data-target="#toevoegenModal" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i> Rubriek toevoegen</button>
+
+  <div class="modal fade" id="toevoegenModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <form method="post">
+        <div class="modal-content">
+          <div class="modal-header modal-header-warning">
+            <h5 class="modal-title">Rubriek toevoegen</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-12">
+                <input type="hidden" class="form-control" name="codeEdit" value="">
+
+                <div class="row">
+
+                  <div class="col-lg-12">
+                    <label for="rubrieknaam">Rubrieknaam</label>
+                  </div>
+                  <div class="form-group col-lg-12">
+                    <input type="text" class="form-control" name="rubrieknaam" id="rubrieknaam" placeholder="Rubrieknaam" required>
+                  </div>
+
+                  <div class="col-lg-12">
+                    <label for="parentRubriek">Nummer van rubriek erboven</label>
+                  </div>
+                  <div class="form-group col-lg-12">
+                    <input type="text" class="form-control" name="parentRubriek" id="parentRubriek" placeholder="Nummer" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <div class="text-left col-lg-6">
+              <button type="button" class="btn btn-default width" data-dismiss="modal">Annuleren</button>
+            </div>
+            <div class="text-right col-lg-6">
+              <button type="submit" name="toevoegen" class="btn btn-warning width">Toevoegen</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <div class="rubriekenTableContainer">
     <h2 class="textCenter mb-4"><b>Rubrieken beheren beheren</b></h2>
