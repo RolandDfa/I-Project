@@ -138,30 +138,100 @@ if($_SESSION['userstate'] != 3){
     <div class="rightContent marginRight">
       <div id="gegevens">
         <h2 class="textCenter">Mijn gegevens</h2>
-        <p>Persoonsgegevens</p>
+        <p>Persoonsgegevens</p><br>
         
         <div class="row form-group">
-            <label for="voornaam" class="col-lg-4 control-label">Voornaam :</label>
+            <label for="Voornaam" class="col-lg-4 control-label">Voornaam :</label>
                <div class="col-lg-8">
-                    <input type="text" class="form-control" name="voornaam" value="<?php echo $firstname ?>" readonly>
+                    <input type="text" class="form-control" name="Voornaam" value="<?php echo $firstname ?>" readonly>
                </div>
         </div>
-        
-       <!-- <p>Voornaam: <?php //echo $firstname; ?></p> -->
-        <p>Achternaam: <?php echo $lastname; ?></p>
-        <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
-        <p>Adres: <?php echo $address; ?></p>
-        <p>Postcode: <?php echo $zipcode; ?></p>
-        <p>Plaatsnaam: <?php echo $city; ?></p>
-        <p>Land: <?php echo $country; ?></p><br>
+        <div class="row form-group">
+           <label for="Achternaam" class="col-lg-4 control-label">Achternaam :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Achternaam" value="<?php echo $lastname ?>" readonly>
+             </div>
+        <div class="row form-group">
+           <label for="Geboortedatum" class="col-lg-4 control-label">Geboortedatum :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Geboortedatum" value="<?php echo date("d-m-Y", strtotime($birthDate)) ?>" readonly>
+             </div>
+        </div>
+        <div class="row form-group">
+           <label for="Adres" class="col-lg-4 control-label">Adres :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Adres" value="<?php echo $address ?>" readonly>
+             </div>
+        </div>
+        <div class="row form-group">
+           <label for="Postcode" class="col-lg-4 control-label">Postcode :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Postcode" value="<?php echo $zipcode ?>" readonly>
+             </div>
+        </div>
+        <div class="row form-group">
+           <label for="Plaatsnaam" class="col-lg-4 control-label">Plaatsnaam :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Plaatsnaam" value="<?php echo $city ?>" readonly>
+             </div>
+        </div>  
+        <div class="row form-group">
+           <label for="Land" class="col-lg-4 control-label">Land :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Land" value="<?php echo $country ?>" readonly>
+             </div>
+        </div>  
+        <p>Overige gegevens</p><br>
+        <div class="row form-group">
+           <label for="Gebruikersnaam" class="col-lg-4 control-label">Gebruikersnaam :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Gebruikersnaam" value="<?php echo $username ?>" readonly>
+             </div>
+        </div>   
+        <div class="row form-group">
+           <label for="Email" class="col-lg-4 control-label">Email :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Email" value="<?php echo $email ?>" readonly>
+             </div>
+        </div>  
+        <div class="row form-group">
+           <label for="Telefoonnummer" class="col-lg-4 control-label">Telefoonnummer :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Telefoonnummer" value="<?php echo $telnr ?>" readonly>
+             </div>
+        </div> 
+        <div class="row form-group">
+           <label for="Telnr2" class="col-lg-4 control-label">2e Telefoonnummer :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Telnr2" value="<?php echo $telnr2 ?>" readonly>
+             </div>
+        </div>  
+        <div class="row form-group">
+           <label for="KVKnummer" class="col-lg-4 control-label">KVKnummer :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="KVKnummer" value="<?php echo $kvknr ?>" readonly>
+             </div>
+        </div>  
+        <div class="row form-group">
+           <label for="Status" class="col-lg-4 control-label">Gebruikersstatus :</label>
+             <div class="col-lg-8">
+                <input type="text" class="form-control" name="Status" value="<?php echo $status ?>" readonly>
+             </div>
+        </div>  
+<!--         <p>Achternaam: <?php //echo $lastname; ?></p>
+        <p>Geboortedatum: <?php //echo date("d-m-Y", strtotime($birthDate)); ?></p>
+        <p>Adres: <?php //echo $address; ?></p>
+        <p>Postcode: <?php //echo $zipcode; ?></p>
+        <p>Plaatsnaam: <?php //echo $city; ?></p>
+        <p>Land: <?php //echo $country; ?></p><br>
         <p>Overige gegevens</p>
-        <p>Gebruikersnaam: <?php echo $username ?></p>
-        <p>Email: <?php echo $email; ?></p>
-        <p>Telefoonnummer: <?php echo $telnr ?></p>
-        <p>2e Telefoonnummer: <?php echo $telnr2 ?></p>
-        <p>Kvknummer: <?php echo $kvknr; ?></p>
+        <p>Gebruikersnaam: <?php //echo $username ?></p>
+        <p>Email: <?php //echo $email; ?></p>
+        <p>Telefoonnummer: <?php //echo $telnr ?></p>
+        <p>2e Telefoonnummer: <?php //echo $telnr2 ?></p>
+        <p>Kvknummer: <?php //echo $kvknr; ?></p>
         <br>
-        <p>Gebruikersstatus: <?=$status ?></p>
+        <p>Gebruikersstatus: <?=//$status ?></p> -->
         <div class="registerLine"><!-- Line --></div>
 
         <?php
