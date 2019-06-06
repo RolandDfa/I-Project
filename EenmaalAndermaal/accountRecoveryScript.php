@@ -121,14 +121,14 @@ if(isset($_POST['accountRecoveryButton1'])){
                     <div class="row form-group">
                       <label for="nameRecovery" class="col-lg-4 alignRight control-label">Voornaam *</label>
                       <div class="col-lg-8">
-                        <input type="text" id="nameRecovery" class="form-control" name="nameRecovery" pattern="[A-Za-z]{1,50}" title="Uw voornaam" value="<?php echo isset($_POST['nameRecovery']) ? $_POST['nameRecovery'] : '' ?>" placeholder="Jan" required>
+                        <input type="text" id="nameRecovery" class="form-control" name="nameRecovery" pattern="[A-Za-z]{3,50}" title="Uw voornaam" value="<?php echo isset($_POST['nameRecovery']) ? $_POST['nameRecovery'] : '' ?>" placeholder="Jan" required>
                       </div>
                     </div>
                     <!-- Lastname -->
                     <div class="row form-group">
                       <label for="lastnameRecovery" class="col-lg-4 alignRight control-label">Achternaam *</label>
                       <div class="col-lg-8">
-                        <input type="text" id="lastnameRecovery" class="form-control" name="lastnameRecovery" pattern="[A-Za-z ]{1,50}" title="Uw achternaam" value="<?php echo isset($_POST['lastnameRecovery']) ? $_POST['lastnameRecovery'] : '' ?>" placeholder="Harris" required>
+                        <input type="text" id="lastnameRecovery" class="form-control" name="lastnameRecovery" pattern="[A-Za-z ]{3,50}" title="Uw achternaam" value="<?php echo isset($_POST['lastnameRecovery']) ? $_POST['lastnameRecovery'] : '' ?>" placeholder="Harris" required>
                       </div>
                     </div>
                     <!-- BirthDate -->
@@ -142,7 +142,7 @@ if(isset($_POST['accountRecoveryButton1'])){
                     <div class="row form-group">
                       <label for="addressRecovery" class="col-lg-4 alignRight control-label">Adres *</label>
                       <div class="col-lg-8">
-                        <input type="text" id="addressRecovery" class="form-control" name="addressRecovery" pattern="[a-zA-Z0-9 ]{1,255}" title="Uw adres" value="<?php echo isset($_POST['addressRecovery']) ? $_POST['addressRecovery'] : '' ?>" placeholder="willemStraat 45" required>
+                        <input type="text" id="addressRecovery" class="form-control" name="addressRecovery" pattern="[a-zA-Z0-9 ]{3,255}" title="Uw adres" value="<?php echo isset($_POST['addressRecovery']) ? $_POST['addressRecovery'] : '' ?>" placeholder="willemStraat 45" required>
                       </div>
                     </div>
                     <!-- Postcode -->
@@ -156,35 +156,35 @@ if(isset($_POST['accountRecoveryButton1'])){
                     <div class="row form-group">
                       <label for="cityRecovery" class="col-lg-4 alignRight control-label">Plaatsnaam *</label>
                       <div class="col-lg-8">
-                        <input type="text" id="cityRecovery" class="form-control" name="cityRecovery" pattern="[a-zA-Z]{1,25}" title="Plaatsnaam" value="<?php echo isset($_POST['cityRecovery']) ? $_POST['cityRecovery'] : '' ?>" placeholder="Doesburg" required>
+                        <input type="text" id="cityRecovery" class="form-control" name="cityRecovery" pattern="[a-zA-Z]{3,25}" title="Plaatsnaam" value="<?php echo isset($_POST['cityRecovery']) ? $_POST['cityRecovery'] : '' ?>" placeholder="Doesburg" required>
                       </div>
                     </div>
                     <!-- Country -->
                     <div class="row form-group">
                       <label for="countryRecovery" class="col-lg-4 alignRight control-label">Land *</label>
                       <div class="col-lg-8">
-                        <input type="text" id="countryRecovery" class="form-control" name="countryRecovery" pattern="[a-zA-Z]{1,50}" title="Land" value="<?php echo isset($_POST['countryRecovery']) ? $_POST['countryRecovery'] : '' ?>" placeholder="Nederland" required>
+                        <input type="text" id="countryRecovery" class="form-control" name="countryRecovery" pattern="[a-zA-Z]{3,50}" title="Land" value="<?php echo isset($_POST['countryRecovery']) ? $_POST['countryRecovery'] : '' ?>" placeholder="Nederland" required>
                       </div>
                     </div>
                     <!-- Phonenumber -->
                     <div class="row form-group">
                       <label for="telnrRecovery" class="col-lg-4 alignRight control-label">Telefoonnummer *</label>
                       <div class="col-lg-8">
-                        <input type="text" id="telnrRecovery" class="form-control" name="telnrRecovery" pattern="[0-9]{1,15}" title="Telefoonnummer" value="<?php echo isset($_POST['telnrRecovery']) ? $_POST['telnrRecovery'] : '' ?>" placeholder="0612344455" required>
+                        <input type="text" id="telnrRecovery" class="form-control" name="telnrRecovery" pattern="[0-9]{10,15}" title="Telefoonnummer" value="<?php echo isset($_POST['telnrRecovery']) ? $_POST['telnrRecovery'] : '' ?>" placeholder="0612344455" required>
                       </div>
                     </div>
                     <!-- Phonenumber 2 -->
                     <div class="row form-group">
                       <label for="telnr2Recovery" class="col-lg-4 alignRight control-label">Telefoonnummer 2</label>
                       <div class="col-lg-8">
-                        <input type="text" id="telnr2Recovery" class="form-control" name="telnr2Recovery" pattern="[0-9]{1,15}" title="2e Telefoonnummer" value="<?php echo isset($_POST['telnr2Recovery']) ? $_POST['telnr2Recovery'] : '' ?>" placeholder="0314364999">
+                        <input type="text" id="telnr2Recovery" class="form-control" name="telnr2Recovery" pattern="[0-9]{10,15}" title="2e Telefoonnummer" value="<?php echo isset($_POST['telnr2Recovery']) ? $_POST['telnr2Recovery'] : '' ?>" placeholder="0314364999">
                       </div>
                     </div>
                     <!-- KVK number -->
                     <div class="row form-group">
                       <label for="kvkNummerRecovery" class="col-lg-4 alignRight control-label">KVK nummer *</label>
                       <div class="col-lg-8">
-                        <input type="text" id="kvkNummerRecovery" class="form-control" name="kvkNummerRecovery" pattern="[0-9]{1,8}" title="kvkNummer" value="<?php echo isset($_POST['kvkNummerRecovery']) ? $_POST['kvkNummerRecovery'] : '' ?>" placeholder="12345678" required>
+                        <input type="text" id="kvkNummerRecovery" class="form-control" name="kvkNummerRecovery" pattern="[0-9]{8}" title="kvkNummer" value="<?php echo isset($_POST['kvkNummerRecovery']) ? $_POST['kvkNummerRecovery'] : '' ?>" placeholder="12345678" required>
                         <div class="redText">
                           <?php
                           if ($errorData) {
@@ -206,7 +206,7 @@ if(isset($_POST['accountRecoveryButton1'])){
                     <div class="row form-group">
                       <label for="username" class="col-lg-4 control-label">Gebruikersnaam :</label>
                       <div class="col-lg-8">
-                        <input type="text" class="form-control" name="usernameRecovery" value="<?php echo $username ?>" readonly>
+                        <input type="text" class="form-control" name="usernameRecovery" pattern="[a-zA-Z0-9]{3,50}" maxlength="50" value="<?php echo $username ?>" readonly>
                       </div>
                     </div>
                     <!-- Email -->
