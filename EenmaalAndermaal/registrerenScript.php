@@ -278,14 +278,14 @@ if(isset($_POST['signUp'])){
 						<div class="row form-group">
 							<label for="name" class="col-lg-4 alignRight control-label">Voornaam *</label>
 							<div class="col-lg-8">
-								<input type="text" id="name" class="form-control" name="name" pattern="[A-Za-z]{1,50}" title="Uw voornaam" value="<?php echo isset($_POST['name']) ? $_POST['name'] : '' ?>" placeholder="Jan" required>
+								<input type="text" id="name" class="form-control" name="name" pattern="[A-Za-z]{3,50}" maxlength="50" title="Uw voornaam" value="<?php echo isset($_POST['name']) ? $_POST['name'] : '' ?>" placeholder="Jan" required>
 							</div>
 						</div>
 						<!-- Lastname -->
 						<div class="row form-group">
 							<label for="lastname" class="col-lg-4 alignRight control-label">Achternaam *</label>
 							<div class="col-lg-8">
-								<input type="text" id="lastname" class="form-control" name="lastname" pattern="[A-Za-z ]{1,50}" title="Uw achternaam" value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : '' ?>" placeholder="Harris" required>
+								<input type="text" id="lastname" class="form-control" name="lastname" pattern="[A-Za-z ]{3,50}" maxlength="50" title="Uw achternaam" value="<?php echo isset($_POST['lastname']) ? $_POST['lastname'] : '' ?>" placeholder="Harris" required>
 							</div>
 						</div>
 						<!-- BirthDate -->
@@ -299,7 +299,7 @@ if(isset($_POST['signUp'])){
 						<div class="row form-group">
 							<label for="address" class="col-lg-4 alignRight control-label">Adres *</label>
 							<div class="col-lg-8">
-								<input type="text" id="address" class="form-control" name="address" pattern="[a-zA-Z0-9 ]{1,255}" title="Uw adres" value="<?php echo isset($_POST['address']) ? $_POST['address'] : '' ?>" placeholder="willemStraat 45" required>
+								<input type="text" id="address" class="form-control" name="address" pattern="[a-zA-Z0-9 ]{3,255}" maxlength="255" title="Uw adres" value="<?php echo isset($_POST['address']) ? $_POST['address'] : '' ?>" placeholder="willemStraat 45" required>
 							</div>
 						</div>
 						<!-- Postcode -->
@@ -313,35 +313,35 @@ if(isset($_POST['signUp'])){
 						<div class="row form-group">
 							<label for="city" class="col-lg-4 alignRight control-label">Plaatsnaam *</label>
 							<div class="col-lg-8">
-								<input type="text" id="city" class="form-control" name="city" pattern="[a-zA-Z]{1,25}" title="Plaatsnaam" value="<?php echo isset($_POST['city']) ? $_POST['city'] : '' ?>" placeholder="Doesburg" required>
+								<input type="text" id="city" class="form-control" name="city" pattern="[a-zA-Z]{3,25}" maxlength="25" title="Plaatsnaam" value="<?php echo isset($_POST['city']) ? $_POST['city'] : '' ?>" placeholder="Doesburg" required>
 							</div>
 						</div>
 						<!-- Country -->
 						<div class="row form-group">
 							<label for="country" class="col-lg-4 alignRight control-label">Land *</label>
 							<div class="col-lg-8">
-								<input type="text" id="country" class="form-control" name="country" pattern="[a-zA-Z]{1,50}" title="Land" value="<?php echo isset($_POST['country']) ? $_POST['country'] : '' ?>" placeholder="Nederland" required>
+								<input type="text" id="country" class="form-control" name="country" pattern="[a-zA-Z]{3,50}" maxlength="50" title="Land" value="<?php echo isset($_POST['country']) ? $_POST['country'] : '' ?>" placeholder="Nederland" required>
 							</div>
 						</div>
 						<!-- Phonenumber -->
 						<div class="row form-group">
 							<label for="telnr" class="col-lg-4 alignRight control-label">Telefoonnummer *</label>
 							<div class="col-lg-8">
-								<input type="text" id="telnr" class="form-control" name="telnr" pattern="[0-9]{1,15}" title="Telefoonnummer" value="<?php echo isset($_POST['telnr']) ? $_POST['telnr'] : '' ?>" placeholder="0612344455" required>
+								<input type="text" id="telnr" class="form-control" name="telnr" pattern="[0-9]{10,15}" maxlength="15" title="Telefoonnummer" value="<?php echo isset($_POST['telnr']) ? $_POST['telnr'] : '' ?>" placeholder="0612344455" required>
 							</div>
 						</div>
 						<!-- Phonenumber 2 -->
 						<div class="row form-group">
 							<label for="telnr2" class="col-lg-4 alignRight control-label">Telefoonnummer 2</label>
 							<div class="col-lg-8">
-								<input type="text" id="telnr2" class="form-control" name="telnr2" pattern="[0-9]{1,15}" title="2e Telefoonnummer" value="<?php echo isset($_POST['telnr2']) ? $_POST['telnr2'] : '' ?>" placeholder="0314364999">
+								<input type="text" id="telnr2" class="form-control" name="telnr2" pattern="[0-9]{10,15}" maxlength="15" title="2e Telefoonnummer" value="<?php echo isset($_POST['telnr2']) ? $_POST['telnr2'] : '' ?>" placeholder="0314364999">
 							</div>
 						</div>
 						<!-- KVK number -->
 						<div class="row form-group">
 							<label for="kvkNummer" class="col-lg-4 alignRight control-label">KVK nummer *</label>
 							<div class="col-lg-8">
-								<input type="text" id="kvkNummer" class="form-control" name="kvkNummer" pattern="[0-9]{1,8}" title="kvkNummer" value="<?php echo isset($_POST['kvkNummer']) ? $_POST['kvkNummer'] : '' ?>" placeholder="12345678" required>
+								<input type="text" id="kvkNummer" class="form-control" name="kvkNummer" pattern="[0-9]{8}" maxlength="8" title="kvkNummer" value="<?php echo isset($_POST['kvkNummer']) ? $_POST['kvkNummer'] : '' ?>" placeholder="12345678" required>
 								<div class="redText">
 									<?php
 									if ($errorData) {
@@ -363,21 +363,21 @@ if(isset($_POST['signUp'])){
 						<div class="row form-group">
 							<label for="username" class="col-lg-4 alignRight control-label">Gebruikersnaam *</label>
 							<div class="col-lg-8">
-								<input type="text" id="username" class="form-control" name="username" pattern="[a-zA-Z0-9]{1,50}" title="Kies een gebruikersnaam" required>
+								<input type="text" id="username" class="form-control" name="username" pattern="[a-zA-Z0-9]{3,50}" maxlength="50" title="Kies een gebruikersnaam" required>
 							</div>
 						</div>
 						<!-- Password -->
 						<div class="row form-group">
 							<label for="password" class="col-lg-4 alignRight control-label">Wachtwoord *</label>
 							<div class="col-lg-8">
-								<input type="password" id="password" class="form-control" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}" title="vul minimaal een kleine letter, een cijfer en een hoofd letter in. het wachtwoord moet tussen 8 en 15 lang zijn."  required>
+								<input type="password" id="password" class="form-control" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}" maxlength="15" title="vul minimaal een kleine letter, een cijfer en een hoofd letter in. het wachtwoord moet tussen 8 en 15 lang zijn."  required>
 							</div>
 						</div>
 						<!-- Repeat password -->
 						<div class="row form-group">
 							<label for="passwordRepeat" class="col-lg-4 alignRight control-label">Herhaal wachtwoord *</label>
 							<div class="col-lg-8">
-								<input type="password" id="passwordRepeat" class="form-control" name="passwordRepeat" required>
+								<input type="password" id="passwordRepeat" class="form-control" name="passwordRepeat" maxlength="15" required>
 								<div class="redText">
 									<?php
 									if ($errorPassword) {
@@ -422,7 +422,7 @@ if(isset($_POST['signUp'])){
 						<div class="row form-group">
 							<label for="securityA" class="col-lg-4 alignRight control-label">Antwoord *</label>
 							<div class="col-lg-8">
-								<input type="text" id="securityA" class="form-control" name="securityA" pattern="[a-zA-Z0-9]{1,255}" required>
+								<input type="text" id="securityA" class="form-control" name="securityA" pattern="[a-zA-Z0-9]{1,255}" maxlength="255" required>
 							</div>
 						</div>
 

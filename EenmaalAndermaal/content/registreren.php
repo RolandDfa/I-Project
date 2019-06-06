@@ -82,7 +82,7 @@ if (isset($_POST['sendCode'])) {
     <div class="row form-group">
       <label for="email" class="col-lg-4 control-label">Emailadres *</label>
       <div class="col-lg-8">
-        <input type="email" class="form-control" name="email" placeholder="example@student.han.nl" required <?php if($emailSucces){echo'value="'.$email.'" readonly';}?>>
+        <input type="email" class="form-control" name="email" pattern="{6,40}" maxlength="40" placeholder="example@student.han.nl" required <?php if($emailSucces){echo'value="'.$email.'" readonly';}?>>
         <div class="redText">
           <?php
           if ($errorEmail) {

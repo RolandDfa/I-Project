@@ -8,26 +8,44 @@ require('../functions/functions.php');
 // Post auctionForm
 if (isset($_POST['auctionSubmit'])) {
   $category = $_POST['categorie'];
+
   $title = cleanInput($_POST['title']);
+  $validTitle = preg_match("/^[a-zA-Z0-9\s]+$/",$title);
+
   $description = cleanInput($_POST['description']);
+
   $location = cleanInput($_POST['location']);
+  $validLocation = preg_match("/^[a-zA-Z\s]+$/",$location);
+
   $days = $_POST['days'];
+
   $paymethod = $_POST['paymethod'];
-  if (isset($_POST['payinstruction'])) {
+
+  if ($_POST['payinstruction'] != "") {
     $payinstruction = cleanInput($_POST['payinstruction']);
+    $validPayinstruction = preg_match("/^[a-zA-Z0-9\s]+$/",$payinstruction);
   } else {
     $payinstruction = "";
+    $validPayinstruction = true;
   }
-  $price = cleanInput($_POST['sendcost']);
-  if (isset($_POST['payinstruction'])) {
+
+  $price = cleanInput($_POST['price']);
+  $validPrice = preg_match("/^[0-9]+$/",$price);
+
+  if ($_POST['sendcost'] != "") {
     $sendcost = cleanInput($_POST['sendcost']);
+    $validSendcost = preg_match("/^[0-9]+$/",$sendcost);
   } else {
-    $sendcost = "";
+    $sendcost = 0;
+    $validSendcost = true;
   }
-  if (isset($_POST['sendcost'])) {
-    $sendcost = cleanInput($_POST['sendcost']);
+
+  if ($_POST['sendinstruction'] != "") {
+    $sendinstruction = cleanInput($_POST['sendinstruction']);
+    $validSendinstruction = preg_match("/^[a-zA-Z0-9\s]+$/",$sendinstruction);
   } else {
-    $sendcost = "";
+    $sendinstruction = "";
+    $validSendinstruction = true;
   }
 
   $_SESSION['category'] = $category;
@@ -41,24 +59,6 @@ if (isset($_POST['auctionSubmit'])) {
   $_SESSION['sendcost'] = $sendcost;
   $_SESSION['sendinstruction'] = $sendinstruction;
 
-  $validTitle = preg_match("/^[a-zA-Z0-9\s]+$/",$title);
-  $validLocation = preg_match("/^[a-zA-Z\s]+$/",$location);
-  if ($payinstruction != '') {
-    $validPayinstruction = preg_match("/^[a-zA-Z0-9\s]+$/",$payinstruction);
-  } else {
-    $validPayinstruction = true;
-  }
-  $validPrice = preg_match("/^[0-9]+$/",$price);
-  if ($sendcost != '') {
-    $validSendcost = preg_match("/^[0-9]+$/",$sendcost);
-  } else {
-    $validSendcost = true;
-  }
-  if ($sendinstruction != '') {
-    $validSendinstruction = preg_match("/^[a-zA-Z0-9\s]+$/",$sendinstruction);
-  } else {
-    $validSendinstruction = true;
-  }
   $allValid = $validTitle && $validLocation && $validPayinstruction && $validPrice && $validSendcost && $validSendinstruction;
 
   if (!$allValid) {
@@ -114,9 +114,9 @@ if (isset($_POST['auctionSubmit'])) {
         $beginDag = date("Y-m-d");
         $beginTijdstip = date("h:i:s");
 
-        $sqlBestand = "INSERT INTO Voorwerp(titel, beschrijving, startprijs, betalingswijzenaam, Betalingsinstructie, plaatsnaam, landnaam, looptijd, looptijdbeginDag, looptijdbeginTijdstip, Verzendkosten, Verzendinstructies, verkopernaam, veilingGesloten) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        $queryInsert = $dbh->prepare($sqlBestand);
-        $queryInsert->execute(array($title, $description, $price, $paymethod, $payinstruction, $location, "Nederland", $days, $beginDag, $beginTijdstip, $sendcost, $sendinstruction, $_SESSION['username'], 0));
+        $sqlVoorwerp = "INSERT INTO Voorwerp(titel, beschrijving, startprijs, Valuta, betalingswijzenaam, Betalingsinstructie, plaatsnaam, landnaam, looptijd, looptijdbeginDag, looptijdbeginTijdstip, Verzendkosten, Verzendinstructies, verkopernaam, veilingGesloten) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        $queryInsert = $dbh->prepare($sqlVoorwerp);
+        $queryInsert->execute(array($title, $description, $price, "EUR", $paymethod, $payinstruction, $location, "Nederland", $days, $beginDag, $beginTijdstip, $sendcost, $sendinstruction, $_SESSION['username'], 0));
       } catch (PDOException $e) {
         echo "Fout met de database: {$e->getMessage()} ";
       }
