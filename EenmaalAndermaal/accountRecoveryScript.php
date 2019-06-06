@@ -269,7 +269,7 @@ if(isset($_POST['accountRecoveryButton1'])){
                     <div class="row form-group">
                       <label for="securityARecovery" class="col-lg-4 alignRight control-label">Antwoord *</label>
                       <div class="col-lg-8">
-                        <input type="text" id="securityARecovery" class="form-control" name="securityARecovery" pattern="[a-zA-Z0-9]{1,255}" required>
+                        <input type="text" id="securityARecovery" class="form-control" name="securityARecovery" pattern="[a-zA-Z0-9]{1,25}" required>
                       </div>
                     </div>
 

@@ -15,14 +15,12 @@ $errorUsername = "";
 
 // Check code
 try{
-	echo "aaaaaaaaaaaaaaaaaaaaaaaa";
 	$sql = "SELECT codetijd FROM verificatiecode WHERE email=?";
 	$queryGetCode = $dbh->prepare($sql);
 	if(!$queryGetCode) {
 		echo "oops error";
 		exit();
 	}	else {
-		echo "bbbbbbbbbbbbbbbbbbbbbb";
 		$queryGetCode->execute(array($_SESSION['email']));
 		$data = $queryGetCode->fetchAll(PDO::FETCH_BOTH);
 		$temp = $data['0'];
@@ -36,20 +34,15 @@ try{
 			$sql = "DELETE FROM verificatiecode WHERE email=?";
 			$queryDelete = $dbh->prepare($sql);
 			$queryDelete->execute(array($_SESSION['email']));
-			echo "ccccccccccccccccccc";
 		} else {
-			echo "ddddddddddddddddddddddd";
 			if(isset($_POST['verifyCode'])){
-				echo "eeeeeeeeeeeeeeeeeeeeeeee";
 				$codeInput = $_POST['code'];
 				if ($codeInput != $_SESSION['code']) {
-					echo "fffffffffffffffffffffffffff";
 					header("Location: index.php?page=registreren&error=code");
 					$sql = "DELETE FROM verificatiecode WHERE email=?";
 					$queryDelete = $dbh->prepare($sql);
 					$queryDelete->execute(array($_SESSION['email']));
 				} elseif ($codeInput == $_SESSION['code']) {
-					echo "gggggggggggggggggggggg";
 					$sql = "DELETE FROM verificatiecode WHERE email=?";
 					$queryDelete = $dbh->prepare($sql);
 					$queryDelete->execute(array($_SESSION['email']));
@@ -59,7 +52,7 @@ try{
 		}
 	}
 } catch (Exception $e) {
-	echo "error met db code ophalen {$e->getMessage()}";
+	echo "error met db code ophalen ";//{$e->getMessage()}";
 }
 // Register
 if(isset($_POST['signUp'])){
@@ -422,7 +415,7 @@ if(isset($_POST['signUp'])){
 						<div class="row form-group">
 							<label for="securityA" class="col-lg-4 alignRight control-label">Antwoord *</label>
 							<div class="col-lg-8">
-								<input type="text" id="securityA" class="form-control" name="securityA" pattern="[a-zA-Z0-9]{1,255}" maxlength="255" required>
+								<input type="text" id="securityA" class="form-control" name="securityA" pattern="[a-zA-Z0-9]{1,25}" maxlength="25" required>
 							</div>
 						</div>
 

@@ -30,7 +30,7 @@ try {
   if($headTopicStmt->rowCount()!=0){
     $headTopics = $headTopicStmt->fetchAll();
     foreach ($headTopics as $headTopic) {
-      $headTopicContent .= '<tr><td>'.$headTopic['rubrieknummer'].'</td><td>'.$headTopic['rubrieknaam'].'</td><td><button type="button" class="btn btn-warning btn-circle greeneryBackground" data-toggle="modal" data-target="#wijzigenModal'.$headTopic['rubrieknummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
+      $headTopicContent .= '<tr><td>'.$headTopic['rubrieknummer'].'</td><td>'.$headTopic['rubrieknaam'].'</td><td><button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#wijzigenModal'.$headTopic['rubrieknummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
       ?>
       <div class="modal fade" id="wijzigenModal<?=$headTopic['rubrieknummer']?>" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -97,7 +97,7 @@ try {
   if($subTopicStmt->rowCount()!=0){
     $subTopics = $subTopicStmt->fetchAll();
     foreach ($subTopics as $subTopic) {
-      $subTopicContent .= '<tr><td>'.$subTopic['nummer'].'</td><td>'.$subTopic['naam'].'</td><td>'.$subTopic['parentnaam'].'</td><td><button type="button" class="btn btn-warning btn-circle greeneryBackground" data-toggle="modal" data-target="#wijzigenModal'.$subTopic['nummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
+      $subTopicContent .= '<tr><td>'.$subTopic['nummer'].'</td><td>'.$subTopic['naam'].'</td><td>'.$subTopic['parentnaam'].'</td><td><button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#wijzigenModal'.$subTopic['nummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
       ?>
       <div class="modal fade" id="wijzigenModal<?=$subTopic['nummer']?>" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
