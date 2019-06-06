@@ -11,10 +11,15 @@ if(isset($_POST['wijzigen'])){
 }
 
 if(isset($_POST['toevoegen'])){
+  if($_POST['parentRubriek'] != ""){
+    $parentRubriek = cleanInput($_POST['parentRubriek']);
+  }else{
+    $parentRubriek = "-1";
+  }
   try{
     $changeTopicNameQuery = "EXEC toevoegen_rubriek ?, ?";
     $changeTopicNameStmt = $dbh->prepare($changeTopicNameQuery);
-    $changeTopicNameStmt->execute(array(cleanInput($_POST['parentRubriek']), cleanInput($_POST['rubrieknaam'])));
+    $changeTopicNameStmt->execute(array($parentRubriek, cleanInput($_POST['rubrieknaam'])));
   }
   catch (PDOException $e) {
     echo "De rubriek bestaat al";
@@ -180,10 +185,10 @@ catch (PDOException $e) {
                   </div>
 
                   <div class="col-lg-12">
-                    <label for="parentRubriek">Nummer van rubriek erboven</label>
+                    <label for="parentRubriek">Nummer van rubriek erboven (leeglaten voor hoofdrubriek)</label>
                   </div>
                   <div class="form-group col-lg-12">
-                    <input type="text" class="form-control" name="parentRubriek" id="parentRubriek" placeholder="Nummer" required>
+                    <input type="text" class="form-control" name="parentRubriek" id="parentRubriek" placeholder="Nummer">
                   </div>
                 </div>
               </div>
