@@ -1051,6 +1051,16 @@ ul.social-network li {
 /* If screen < 750px (Phones) */
 @media only screen and (max-width: 750px) {
 
+
+  #auctionForm {
+    min-width: 100% !important;
+  }
+
+  #progressbar {
+    font-size: 0.6em;
+    padding-left: 0px;
+  }
+
   /* MENU main */
   #ipadSearch {
     display: none;
