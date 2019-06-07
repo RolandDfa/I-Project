@@ -465,7 +465,7 @@ if($_SESSION['userstate'] != 3){
       <div id="gewonnen">
         <?php
         try{
-          $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE kopernaam = ?";
+          $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE kopernaam = ? and veilingGesloten = 1";
           $userAdressStmt = $dbh->prepare($userAdressQuery);
           $userAdressStmt->execute(array($_SESSION['username']));
           if($userAdressStmt->rowCount()!=0){
