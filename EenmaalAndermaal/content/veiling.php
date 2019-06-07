@@ -41,6 +41,8 @@ try {
       $plaatsnaam = $result['plaatsnaam'];
       $verzendkosten = $result['verzendkosten'];
       $einddatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
+      $valuta = $result['Valuta'];
+      // $valutaQuery = "SELECT ";
       $startprijs = str_replace(",",".",$result['startprijs']);
       $beschrijving = $result['beschrijving'];
       $closed = $result['veilingGesloten'];
@@ -107,7 +109,7 @@ try {
     }else{
       echo '<form action="index.php?page=overzicht" method="post" class="backbutton">';
     }
-    echo '<button name="terug" type="submit" class="btn btn-success btn-lg">&lt; Terug naar overzicht</button>';
+    echo '<button name="terug" type="submit" class="btn btn-success btn-lg mb-4">&lt; Terug naar overzicht</button>';
     echo '</form>';
     ?>
     <div class="row">

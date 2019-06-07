@@ -23,25 +23,27 @@ if(isset($_POST['verwijderen'])) {
       }
     }
 
+    $gebruiker = cleanInput($_POST['codeVerwijderen']);
+
+    // Update auction to invalid
+    $updateVeiling = "UPDATE Voorwerp SET veilingGesloten=? WHERE verkopernaam = ?";
+    $updateVeilingStmt = $dbh->prepare($updateVeiling);
+    $updateVeilingStmt->execute(array(0, "$gebruiker"));
+
     // Delete telefoon records
     $deleteTelefoon = "DELETE FROM Gebruikerstelefoon WHERE gebruikersnaam = ?";
     $deleteTelefoonStmt = $dbh->prepare($deleteTelefoon);
-    $deleteTelefoonStmt->execute(cleanInput($_POST['codeVerwijderen']));
+    $deleteTelefoonStmt->execute(array("$gebruiker"));
 
-    // Update seller account
-    $updateVerkoper = "UPDATE Verkoper SET gebruiker=?, bank=?, bankrekening=?, controleOptie=?, valid=? WHERE gebruiker = ?";
-    $updateVerkoperStmt = $dbh->prepare($updateVerkoper);
-    $updateVerkoperStmt->execute($usernameNew, $usernameNew, $usernameNew, "Post", 0, cleanInput($_POST['codeVerwijderen']));
-
-    // Update auction to invalid
-    $updateVeiling = "UPDATE Voorwerp SET veilingGesloten=? WHERE kopernaam = ?";
-    $updateVeilingStmt = $dbh->prepare($updateVeiling);
-    $updateVeilingStmt->execute(1, cleanInput($_POST['codeVerwijderen']));
-
-    // Update user info to NaN and valid to 0
+    // Update user info to Verwijderd and valid to 0
     $updateUser = "UPDATE Gebruiker SET gebruikersnaam=?, voornaam=?, achternaam=?, adresregel=?, postcode=?, plaatsnaam=?, land=?, kvkNummer=?, geboorteDag=?, mailbox=?, wachtwoord=?, vraag=?, antwoordTekst=?, gebruikersStatus=?, valid=? WHERE gebruikersnaam = ?";
     $updateUserStmt = $dbh->prepare($updateUser);
-    $updateUserStmt->execute(array($usernameNew, $usernameNew, $usernameNew, $usernameNew, "VERW00", $usernameNew, "VRW", 0, "1970-01-01", $usernameNew, $usernameNew, 1, $usernameNew, 2, 0, cleanInput($_POST['codeVerwijderen'])));
+    $updateUserStmt->execute(array("$usernameNew", "$usernameNew", "$usernameNew", "$usernameNew", "VERW00", "$usernameNew", "VRW", 0, "1970-01-01", "$usernameNew", "$usernameNew", 1, "$usernameNew", 2, 0, "$gebruiker"));
+
+    // Update seller account
+    $updateVerkoper = "UPDATE Verkoper SET gebruiker=?, bank=?, bankrekening=?, controleOptie=?, creditcard=?, Valid=? WHERE gebruiker = ?";
+    $updateVerkoperStmt = $dbh->prepare($updateVerkoper);
+    $updateVerkoperStmt->execute(array("$usernameNew", "$usernameNew", "$usernameNew", "Post", NULL, 0, "$gebruiker"));
 
   } catch (PDOException $e) {
     echo "Fout met de database: {$e->getMessage()} ";
@@ -174,7 +176,7 @@ if(isset($_POST['verwijderen'])) {
 $(document).ready(function() {
   $('#beheerAccountsTabel').DataTable({
     "language": {
-      "lengthMenu": "Toon _MENU_ rubrieken per pagina",
+      "lengthMenu": "Toon _MENU_ accounts per pagina",
       "zeroRecords": "Geen resultaten gevonden",
       "info": "Toon resultaten van pagina _PAGE_ van _PAGES_",
       "infoEmpty": "Geen pagina's gevonden",

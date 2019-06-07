@@ -122,7 +122,7 @@ if($_SESSION['userstate'] != 3){
 
 <div class="row">
   <div class="col-lg-4">
-    <div class="leftMenu marginLeft">
+    <div class="leftMenu">
       <ul>
         <li><a href="#gegevens">Gegevens</a></li>
         <li><a href="#veilingen">Veilingen</a></li>
@@ -139,86 +139,7 @@ if($_SESSION['userstate'] != 3){
       <div id="gegevens">
         <h2 class="textCenter">Mijn gegevens</h2>
         <p>Persoonsgegevens</p><br>
-        <!-- <form class="registerForm" method="post" action="">
-        <div class="row form-group">
-            <label for="Voornaam" class="col-lg-4 control-label">Voornaam :</label>
-               <div class="col-lg-8">
-                    <input type="text" class="form-control" name="Voornaam" value="<?php //echo $firstname ?>" readonly>
-               </div>
-        </div><br>
-        <div class="row form-group">
-           <label for="Achternaam" class="col-lg-4 control-label">Achternaam :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Achternaam" value="<?php// echo $lastname ?>" readonly>
-             </div><br>
-        <div class="row form-group">
-           <label for="Geboortedatum" class="col-lg-4 control-label">Geboortedatum :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Geboortedatum" value="<?php// echo date("d-m-Y", strtotime($birthDate)) ?>" readonly>
-             </div>
-        </div><br>
-        <div class="row form-group">
-           <label for="Adres" class="col-lg-4 control-label">Adres :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Adres" value="<?php //echo $address ?>" readonly>
-             </div>
-        </div><br>
-        <div class="row form-group">
-           <label for="Postcode" class="col-lg-4 control-label">Postcode :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Postcode" value="<?php //echo $zipcode ?>" readonly>
-             </div>
-        </div><br>
-        <div class="row form-group">
-           <label for="Plaatsnaam" class="col-lg-4 control-label">Plaatsnaam :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Plaatsnaam" value="<?php //echo $city ?>" readonly>
-             </div>
-        </div><br>
-        <div class="row form-group">
-           <label for="Land" class="col-lg-4 control-label">Land :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Land" value="<?php// echo $country ?>" readonly>
-             </div>
-        </div><br>
-        <br><p>Overige gegevens</p><br>
-        <div class="row form-group">
-           <label for="Gebruikersnaam" class="col-lg-4 control-label">Gebruikersnaam :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Gebruikersnaam" value="<?php// echo $username ?>" readonly>
-             </div>
-        </div><br>
-        <div class="row form-group">
-           <label for="Email" class="col-lg-4 control-label">Email :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Email" value="<?php //echo $email ?>" readonly>
-             </div>
-        </div><br>
-        <div class="row form-group">
-           <label for="Telefoonnummer" class="col-lg-4 control-label">Telefoonnummer :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Telefoonnummer" value="<?php// echo $telnr ?>" readonly>
-             </div>
-        </div>
-        <div class="row form-group">
-           <label for="Telnr2" class="col-lg-4 control-label">2e Telefoonnummer :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Telnr2" value="<?php //echo $telnr2 ?>" readonly>
-             </div>
-        </div><br>
-        <div class="row form-group">
-           <label for="KVKnummer" class="col-lg-4 control-label">KVKnummer :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="KVKnummer" value="<?php //echo $kvknr ?>" readonly>
-             </div>
-        </div><br>
-        <div class="row form-group">
-           <label for="Status" class="col-lg-4 control-label">Gebruikersstatus :</label>
-             <div class="col-lg-8">
-                <input type="text" class="form-control" name="Status" value="<?php //echo $status ?>" readonly>
-             </div>
-        </div>
-      </form> -->
+
         <p>Achternaam: <?php echo $firstname; ?></p>
    <p>Achternaam: <?php echo $lastname; ?></p>
         <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
@@ -456,7 +377,7 @@ if($_SESSION['userstate'] != 3){
       <div id="biedingen">
         <?php
         try{
-          $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer IN (SELECT distinct voorwerp from Bod where gebruiker = ?)";
+          $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE voorwerpnummer IN (SELECT distinct voorwerp from Bod where gebruiker = ?) and veilingGesloten = 0";
           $userAdressStmt = $dbh->prepare($userAdressQuery);
           $userAdressStmt->execute(array($_SESSION['username']));
           if($userAdressStmt->rowCount()!=0){
@@ -496,14 +417,26 @@ if($_SESSION['userstate'] != 3){
               $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
               $priceStmt = $dbh->prepare($pricequery);
               $priceStmt->execute(array($voorwerpnummer));
-              if($priceStmt->rowCount()!=0){
-                $prices = $priceStmt->fetchAll();
-                foreach ($prices as $price) {
-                  echo 'Hoogste bod: &euro; '.str_replace('.', ',', $price['bodbedrag']).'<br>';
+              if($imagesStmt->rowCount()!=0){
+                $foundImage = false;
+                $images = $imagesStmt->fetchAll();
+                $imageToShow = '';
+                foreach ($images as $image) {
+                  $imagesFromUpload = scandir("./upload");
+                  foreach ($imagesFromUpload as $uploadImage) {
+                    if($image['bestandsnaam'] == $uploadImage){
+                      $foundImage = true;
+                      $imageToShow = $uploadImage;
+                    }
+                  }
+                  if($foundImage){
+                    echo '<img class="rounded-top" src="./upload/'.$imageToShow.'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  }else{
+                    echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  }
                 }
-              }
-              else{
-                echo 'Nog geen bod';
+              }else{
+                echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
               }
 
 
@@ -544,7 +477,7 @@ if($_SESSION['userstate'] != 3){
       <div id="gewonnen">
         <?php
         try{
-          $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE kopernaam = ?";
+          $userAdressQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip FROM Voorwerp WHERE kopernaam = ? and veilingGesloten = 1";
           $userAdressStmt = $dbh->prepare($userAdressQuery);
           $userAdressStmt->execute(array($_SESSION['username']));
           if($userAdressStmt->rowCount()!=0){
@@ -563,9 +496,22 @@ if($_SESSION['userstate'] != 3){
               $imagesStmt = $dbh->prepare($imagesquery);
               $imagesStmt->execute(array($voorwerpnummer));
               if($imagesStmt->rowCount()!=0){
+                $foundImage = false;
                 $images = $imagesStmt->fetchAll();
+                $imageToShow = '';
                 foreach ($images as $image) {
-                  echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  $imagesFromUpload = scandir("./upload");
+                  foreach ($imagesFromUpload as $uploadImage) {
+                    if($image['bestandsnaam'] == $uploadImage){
+                      $foundImage = true;
+                      $imageToShow = $uploadImage;
+                    }
+                  }
+                  if($foundImage){
+                    echo '<img class="rounded-top" src="./upload/'.$imageToShow.'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  }else{
+                    echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  }
                 }
               }else{
                 echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';

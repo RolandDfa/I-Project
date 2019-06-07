@@ -26,16 +26,25 @@ if(isset($_POST['toevoegen'])){
   }
 }
 
+if(isset($_POST['delete'])){
+  echo "Verwijder rubriek met nummer ".$_POST['codeDelete']." met als parent ".$_POST['codeParentDelete'];
+}
+
 
 $headTopicContent = '';
 try {
-  $headTopicQuery = "SELECT rubrieknaam, rubrieknummer FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc";
+  $headTopicQuery = "SELECT rubrieknaam, rubrieknummer, parent FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc";
   $headTopicStmt = $dbh->prepare($headTopicQuery);
   $headTopicStmt->execute();
   if($headTopicStmt->rowCount()!=0){
     $headTopics = $headTopicStmt->fetchAll();
     foreach ($headTopics as $headTopic) {
-      $headTopicContent .= '<tr><td>'.$headTopic['rubrieknummer'].'</td><td>'.$headTopic['rubrieknaam'].'</td><td><button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#wijzigenModal'.$headTopic['rubrieknummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
+      $headTopicContent .= '<tr>
+      <td>'.$headTopic['rubrieknummer'].'</td>
+      <td>'.$headTopic['rubrieknaam'].'</td>
+      <td><button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#wijzigenModal'.$headTopic['rubrieknummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td>
+      <td><button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#deleteModal'.$headTopic['rubrieknummer'].'"><i class="fas fa-trash-alt"></i></button></td>
+      </tr>';
       ?>
       <div class="modal fade" id="wijzigenModal<?=$headTopic['rubrieknummer']?>" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -78,6 +87,43 @@ try {
         </div>
       </div>
 
+
+
+      <div class="modal fade" id="deleteModal<?=$headTopic['rubrieknummer']?>" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <form method="post">
+            <div class="modal-content">
+              <div class="modal-header modal-header-danger">
+                <h5 class="modal-title">Veiling sluiten</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-lg-12">
+
+                    <input type="hidden" class="form-control" name="codeDelete" value="<?=$headTopic['rubrieknummer']?>">
+                    Weet je zeker dat je de rubriek '<?=$headTopic['rubrieknaam']?>' met rubrieknummer '<?=$headTopic['rubrieknummer']?>' wil verwijderen?
+                    <input type="hidden" class="form-control" name="codeParentDelete" value="<?=$headTopic['parent']?>">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+
+                <div class="text-left col-lg-6">
+                  <button type="button" class="btn btn-default btn-width" data-dismiss="modal">Annuleren</button>
+                </div>
+                <div class="text-right col-lg-6">
+                  <button type="submit" name="delete" class="btn btn-danger btn-width">Verwijderen</button>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
       <?php
     }
   }
@@ -96,13 +142,19 @@ catch (PDOException $e) {
 
 $subTopicContent = '';
 try {
-  $subTopicQuery = "SELECT r1.rubrieknaam naam, r1.rubrieknummer nummer, r2.rubrieknaam parentnaam FROM Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer WHERE r1.parent != -1 ORDER BY r1.rubrieknaam asc";
+  $subTopicQuery = "SELECT r1.rubrieknaam naam, r1.rubrieknummer nummer, r1.parent, r2.rubrieknaam parentnaam FROM Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer WHERE r1.parent != -1 ORDER BY r1.rubrieknaam asc";
   $subTopicStmt = $dbh->prepare($subTopicQuery);
   $subTopicStmt->execute();
   if($subTopicStmt->rowCount()!=0){
     $subTopics = $subTopicStmt->fetchAll();
     foreach ($subTopics as $subTopic) {
-      $subTopicContent .= '<tr><td>'.$subTopic['nummer'].'</td><td>'.$subTopic['naam'].'</td><td>'.$subTopic['parentnaam'].'</td><td><button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#wijzigenModal'.$subTopic['nummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td></tr>';
+      $subTopicContent .= '<tr>
+      <td>'.$subTopic['nummer'].'</td>
+      <td>'.$subTopic['naam'].'</td>
+      <td>'.$subTopic['parentnaam'].'</td>
+      <td><button type="button" class="btn btn-warning btn-circle" data-toggle="modal" data-target="#wijzigenModal'.$subTopic['nummer'].'" style="margin-right:5px;"><i class="fas fa-pencil-alt"></i></button></td>
+      <td><button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#deleteModal'.$subTopic['nummer'].'"><i class="fas fa-trash-alt"></i></button></td>
+      </tr>';
       ?>
       <div class="modal fade" id="wijzigenModal<?=$subTopic['nummer']?>" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -144,6 +196,44 @@ try {
           </form>
         </div>
       </div>
+
+
+      <div class="modal fade" id="deleteModal<?=$subTopic['nummer']?>" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <form method="post">
+            <div class="modal-content">
+              <div class="modal-header modal-header-danger">
+                <h5 class="modal-title">Veiling sluiten</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-lg-12">
+
+                    <input type="hidden" class="form-control" name="codeDelete" value="<?=$subTopic['nummer']?>">
+                    <input type="hidden" class="form-control" name="codeParentDelete" value="<?=$subTopic['parent']?>">
+                    Weet je zeker dat je de rubriek '<?=$headTopic['rubrieknaam']?>' met rubrieknummer '<?=$subTopic['nummer']?>' wil verwijderen?
+
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+
+                <div class="text-left col-lg-6">
+                  <button type="button" class="btn btn-default btn-width" data-dismiss="modal">Annuleren</button>
+                </div>
+                <div class="text-right col-lg-6">
+                  <button type="submit" name="delete" class="btn btn-danger btn-width">Verwijderen</button>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
 
       <?php
     }
@@ -217,6 +307,7 @@ catch (PDOException $e) {
             <th>Rubrieknummer</th>
             <th>Rubrieknaam</th>
             <th>Naam wijzigen</th>
+            <th>Rubriek verwijderen</th>
           </tr>
         </thead>
         <tbody>
@@ -233,6 +324,7 @@ catch (PDOException $e) {
             <th>Rubrieknaam</th>
             <th>Rubriek erboven</th>
             <th>Naam wijzigen</th>
+            <th>Rubriek verwijderen</th>
           </tr>
         </thead>
         <tbody>
