@@ -112,7 +112,7 @@ if (isset($_POST['auctionSubmit'])) {
       // Upload voorwerp
       try {
         $beginDag = date("Y-m-d");
-        $beginTijdstip = date("h:i:s");
+        $beginTijdstip = date("H:i:s");
 
         $sqlVoorwerp = "INSERT INTO Voorwerp(titel, beschrijving, startprijs, Valuta, betalingswijzenaam, Betalingsinstructie, plaatsnaam, landnaam, looptijd, looptijdbeginDag, looptijdbeginTijdstip, Verzendkosten, Verzendinstructies, verkopernaam, veilingGesloten) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $queryInsert = $dbh->prepare($sqlVoorwerp);
