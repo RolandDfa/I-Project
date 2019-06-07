@@ -122,7 +122,7 @@ if($_SESSION['userstate'] != 3){
 
 <div class="row">
   <div class="col-lg-4">
-    <div class="leftMenu marginLeft">
+    <div class="leftMenu">
       <ul>
         <li><a href="#gegevens">Gegevens</a></li>
         <li><a href="#veilingen">Veilingen</a></li>

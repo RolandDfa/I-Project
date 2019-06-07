@@ -957,7 +957,24 @@ ul.social-network li {
   max-width: 19%;
   min-height: 25%;
   background-color: rgb(136, 176, 75);
-  padding: 15px;
+  color: rgb(255, 255, 255);
+}
+
+.leftMenu ul{
+  list-style-type: none;
+  padding: 10px;
+}
+
+.leftMenu li{
+  border-bottom: 1px solid black;
+}
+
+.leftMenu a{
+  color: rgb(255, 255, 255);
+}
+
+.leftMenu a:hover{
+  color: rgb(0, 0, 0);
 }
 
 .rightContent {
@@ -1051,6 +1068,15 @@ ul.social-network li {
 /* If screen < 750px (Phones) */
 @media only screen and (max-width: 750px) {
 
+  .leftMenu {
+    position: static;
+    max-width: 100%;
+  }
+
+  .leftMenu {
+    z-index: inherit;
+    max-width: 100%;
+  }
 
   #auctionForm {
     min-width: 100% !important;
