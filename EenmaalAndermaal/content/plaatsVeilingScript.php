@@ -30,11 +30,11 @@ if (isset($_POST['auctionSubmit'])) {
   }
 
   $price = cleanInput($_POST['price']);
-  $validPrice = preg_match("/^[0-9]+$/",$price);
+  $validPrice = preg_match("/^[0-9,]+$/",$price);
 
   if ($_POST['sendcost'] != "") {
     $sendcost = cleanInput($_POST['sendcost']);
-    $validSendcost = preg_match("/^[0-9]+$/",$sendcost);
+    $validSendcost = preg_match("/^[0-9,]+$/",$sendcost);
   } else {
     $sendcost = 0;
     $validSendcost = true;
