@@ -29,12 +29,12 @@ if (isset($_POST['auctionSubmit'])) {
     $validPayinstruction = true;
   }
 
-  $price = cleanInput($_POST['price']);
-  $validPrice = preg_match("/^[0-9,]+$/",$price);
+  $price = cleanInput(str_replace(',', '.',$_POST['price']));
+  $validPrice = preg_match("/^[0-9.]+$/",$price);
 
   if ($_POST['sendcost'] != "") {
-    $sendcost = cleanInput($_POST['sendcost']);
-    $validSendcost = preg_match("/^[0-9,]+$/",$sendcost);
+    $sendcost = cleanInput(str_replace(',', '.',$_POST['sendcost']));
+    $validSendcost = preg_match("/^[0-9.]+$/",$sendcost);
   } else {
     $sendcost = 0;
     $validSendcost = true;
