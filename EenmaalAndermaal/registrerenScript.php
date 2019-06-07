@@ -14,6 +14,7 @@ $errorPassword = "";
 $errorUsername = "";
 
 // Check code
+if(isset($_POST['verifyCode'])){
 try{
 	$sql = "SELECT codetijd FROM verificatiecode WHERE email=?";
 	$queryGetCode = $dbh->prepare($sql);
@@ -28,14 +29,13 @@ try{
 
 		$time = time();
 		$expired = $time - $codeTime;
-		echo "codetime $codeTime, time $time, expired $expired, valid $validCodeTime";
+		//echo "codetime $codeTime, time $time, expired $expired, valid $validCodeTime";
 		if($expired > $validCodeTime){
 			header("Location: index.php?page=registreren&error=codetijd");
 			$sql = "DELETE FROM verificatiecode WHERE email=?";
 			$queryDelete = $dbh->prepare($sql);
 			$queryDelete->execute(array($_SESSION['email']));
 		} else {
-			if(isset($_POST['verifyCode'])){
 				$codeInput = $_POST['code'];
 				if ($codeInput != $_SESSION['code']) {
 					header("Location: index.php?page=registreren&error=code");
@@ -48,11 +48,12 @@ try{
 					$queryDelete->execute(array($_SESSION['email']));
 					$_SESSION['verifySucces'] = true;
 				}
-			}
+
 		}
 	}
 } catch (Exception $e) {
 	echo "error met db code ophalen ";//{$e->getMessage()}";
+}
 }
 // Register
 if(isset($_POST['signUp'])){

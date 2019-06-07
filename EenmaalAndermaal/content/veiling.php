@@ -41,6 +41,8 @@ try {
       $plaatsnaam = $result['plaatsnaam'];
       $verzendkosten = $result['verzendkosten'];
       $einddatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
+      $valuta = $result['Valuta'];
+      // $valutaQuery = "SELECT ";
       $startprijs = str_replace(",",".",$result['startprijs']);
       $beschrijving = $result['beschrijving'];
       $closed = $result['veilingGesloten'];

@@ -113,6 +113,9 @@ if (isset($_POST['sendCode'])) {
         <input type="text" class="form-control" name="code" placeholder="E1X3A5M2P7L1E" required <?php if(!$emailSucces){echo'readonly';}?>>
         <div class="redText">
           <?php
+          // if (!empty($_GET['error'])) {
+          //   echo 'De code is niet meer geldig of u heeft het verkeerd ingevoerd, verstuur de email opnieuw.';
+          // }
           if(isset($_GET['error'])){
           if ($_GET['error'] == 'code') {
             echo 'De code komt niet overeen';
