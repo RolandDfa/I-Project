@@ -417,14 +417,26 @@ if($_SESSION['userstate'] != 3){
               $pricequery = "SELECT TOP 1 bodbedrag FROM Bod WHERE voorwerp = ? ORDER BY bodbedrag DESC";
               $priceStmt = $dbh->prepare($pricequery);
               $priceStmt->execute(array($voorwerpnummer));
-              if($priceStmt->rowCount()!=0){
-                $prices = $priceStmt->fetchAll();
-                foreach ($prices as $price) {
-                  echo 'Hoogste bod: &euro; '.str_replace('.', ',', $price['bodbedrag']).'<br>';
+              if($imagesStmt->rowCount()!=0){
+                $foundImage = false;
+                $images = $imagesStmt->fetchAll();
+                $imageToShow = '';
+                foreach ($images as $image) {
+                  $imagesFromUpload = scandir("./upload");
+                  foreach ($imagesFromUpload as $uploadImage) {
+                    if($image['bestandsnaam'] == $uploadImage){
+                      $foundImage = true;
+                      $imageToShow = $uploadImage;
+                    }
+                  }
+                  if($foundImage){
+                    echo '<img class="rounded-top" src="./upload/'.$imageToShow.'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  }else{
+                    echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  }
                 }
-              }
-              else{
-                echo 'Nog geen bod';
+              }else{
+                echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
               }
 
 
@@ -484,9 +496,22 @@ if($_SESSION['userstate'] != 3){
               $imagesStmt = $dbh->prepare($imagesquery);
               $imagesStmt->execute(array($voorwerpnummer));
               if($imagesStmt->rowCount()!=0){
+                $foundImage = false;
                 $images = $imagesStmt->fetchAll();
+                $imageToShow = '';
                 foreach ($images as $image) {
-                  echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  $imagesFromUpload = scandir("./upload");
+                  foreach ($imagesFromUpload as $uploadImage) {
+                    if($image['bestandsnaam'] == $uploadImage){
+                      $foundImage = true;
+                      $imageToShow = $uploadImage;
+                    }
+                  }
+                  if($foundImage){
+                    echo '<img class="rounded-top" src="./upload/'.$imageToShow.'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  }else{
+                    echo '<img class="rounded-top" src="../pics/'.$image['bestandsnaam'].'" width="100%" height="220" alt="'.$result['titel'].'">';
+                  }
                 }
               }else{
                 echo '<img class="rounded-top" src="images/image_placeholder.jpg" width="100%" height="220" alt="'.$result['titel'].'">';
