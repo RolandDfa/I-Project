@@ -41,9 +41,19 @@ try {
       $plaatsnaam = $result['plaatsnaam'];
       $verzendkosten = $result['verzendkosten'];
       $einddatum = date('m-d-Y',strtotime($result['looptijdeindeDag'])).' '.date('H:i:s',strtotime($result['looptijdeindeTijdstip']));
-      $valuta = $result['Valuta'];
-      // $valutaQuery = "SELECT ";
+      $valutaCode = $result['Valuta'];
+
+      $valutaQuery = "SELECT * FROM Valuta WHERE AlphabeticCode=?";
+      $valutaStmt = $dbh->prepare($valutaQuery);
+      $valutaStmt->execute(array($valutaCode));
+      if ($valutaStmt->rowCount() != 0) {
+        $resultsValuta = $valutaStmt->fetchAll();
+        $tempValuta = $resultsValuta['0'];
+        $valutaCalc = $tempValuta['currentExchangeToEU'];
+      }
       $startprijs = str_replace(",",".",$result['startprijs']);
+      $startprijs = number_format((float)($startprijs * $valutaCalc), 2, '.', '');
+
       $beschrijving = $result['beschrijving'];
       $closed = $result['veilingGesloten'];
 
@@ -129,7 +139,11 @@ try {
           <?=$plaatsnaam?>
         </div>
         <div>
+          <?php if($sellerMail!="NaN.NaN@NaN.com"){ ?>
           <A HREF="mailto:<?=$sellerMail?>?SUBJECT=Contact"><?=$sellerMail?></A>
+        <?php }else {
+          echo "Deze verkoper is niet te contacteren.";
+        };?>
         </div>
         <div class="bottomline"><!-- Line --></div>
         <div class="titleMarginBottom">
