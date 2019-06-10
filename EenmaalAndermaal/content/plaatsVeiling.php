@@ -37,9 +37,9 @@ if (empty($_GET['error'])) {
             <?php
             // Get the headings from the database
             try {
-              $data = $dbh->query("SELECT rubrieknummer, rubrieknaam FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc");
+              $data = $dbh->query("SELECT r2.rubrieknaam [hoofdrubriek], r1.rubrieknaam [subrubriek], r1.rubrieknummer [rubrieknummer] from Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer where r1.rubrieknummer not in (select parent from Rubriek where parent is not null) order by r1.rubrieknaam");
               while ($row = $data->fetch()) {
-                echo '<option value="'.$row['rubrieknummer'].'">'.$row['rubrieknaam'].'</option>';
+                echo '<option value="'.$row['rubrieknummer'].'">'.$row['subrubriek'].' - '.$row['hoofdrubriek'].'</option>';
               }
             } catch (PDOException $e) {
               echo "Kan rubrieken niet laden".$e->getMessage();
@@ -77,7 +77,7 @@ if (empty($_GET['error'])) {
         <!-- Locatie -->
         <div class="form-group">
           <label for="location"><h4><b>Plaatsnaam</b></h4></label>
-          <p><input type="text" id="location" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z]{3,25}" maxlength="25" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="location" placeholder="Locatie van het artikel" <?php if(!empty($_SESSION['location'])){echo'value="'.$_SESSION['location'].'"';}?> required></p>
+          <p><input type="text" id="location" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z ]{3,25}" maxlength="25" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="location" placeholder="Locatie van het artikel" <?php if(!empty($_SESSION['location'])){echo'value="'.$_SESSION['location'].'"';}?> required></p>
           <div class="redText">
             <?php
             if (!empty($_GET['error'])) {
@@ -172,7 +172,7 @@ if (empty($_GET['error'])) {
   </div>
   <div class="tab">
     <h2><b>Foto's uploaden</b></h2>
-    <p>Het grote vak is verplicht.</p>
+    <p>De eerste afbeelding is verplicht.</p>
     <div class="redText">
       <?php
       if (!empty($_GET['error'])) {

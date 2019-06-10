@@ -26,10 +26,14 @@ if(isset($_POST['toevoegen'])){
   }
 }
 
+if(isset($_POST['delete'])){
+  echo "Verwijder rubriek met nummer ".$_POST['codeDelete']." met als parent ".$_POST['codeParentDelete'];
+}
+
 
 $headTopicContent = '';
 try {
-  $headTopicQuery = "SELECT rubrieknaam, rubrieknummer FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc";
+  $headTopicQuery = "SELECT rubrieknaam, rubrieknummer, parent FROM Rubriek WHERE parent = -1 ORDER BY rubrieknaam asc";
   $headTopicStmt = $dbh->prepare($headTopicQuery);
   $headTopicStmt->execute();
   if($headTopicStmt->rowCount()!=0){
@@ -99,7 +103,7 @@ try {
                 <div class="row">
                   <div class="col-lg-12">
 
-                    <input type="hidden" class="form-control" name="codeDelete" value="<?=$result['voorwerpnummer']?>">
+                    <input type="hidden" class="form-control" name="codeDelete" value="<?=$headTopic['rubrieknummer']?>">
                     Weet je zeker dat je de rubriek '<?=$headTopic['rubrieknaam']?>' met rubrieknummer '<?=$headTopic['rubrieknummer']?>' wil verwijderen?
                     <input type="hidden" class="form-control" name="codeParentDelete" value="<?=$headTopic['parent']?>">
                   </div>
@@ -138,7 +142,7 @@ catch (PDOException $e) {
 
 $subTopicContent = '';
 try {
-  $subTopicQuery = "SELECT r1.rubrieknaam naam, r1.rubrieknummer nummer, r2.rubrieknaam parentnaam FROM Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer WHERE r1.parent != -1 ORDER BY r1.rubrieknaam asc";
+  $subTopicQuery = "SELECT r1.rubrieknaam naam, r1.rubrieknummer nummer, r1.parent, r2.rubrieknaam parentnaam FROM Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer WHERE r1.parent != -1 ORDER BY r1.rubrieknaam asc";
   $subTopicStmt = $dbh->prepare($subTopicQuery);
   $subTopicStmt->execute();
   if($subTopicStmt->rowCount()!=0){
@@ -209,7 +213,7 @@ try {
                   <div class="col-lg-12">
 
                     <input type="hidden" class="form-control" name="codeDelete" value="<?=$subTopic['nummer']?>">
-                    <input type="hidden" class="form-control" name="codeParentDelete" value="<?=$result['parent']?>">
+                    <input type="hidden" class="form-control" name="codeParentDelete" value="<?=$subTopic['parent']?>">
                     Weet je zeker dat je de rubriek '<?=$headTopic['rubrieknaam']?>' met rubrieknummer '<?=$subTopic['nummer']?>' wil verwijderen?
 
                   </div>
