@@ -31,15 +31,53 @@ if (empty($_GET['error'])) {
       <div class="col-lg-6">
         <!-- Categorie -->
         <div class="form-group">
+          <div class="redText">
+            <?php
+            if (!empty($_GET['error'])) {
+              if ($_GET['error'] == 'titel') {
+                echo 'Titel mag alleen maar uit letters en cijfers bestaan';
+              }
+              if ($_GET['error'] == 'plaats') {
+                echo 'Plaatsnaam mag alleen maar uit letters bestaan';
+              }
+              if ($_GET['error'] == 'betaalInstructie') {
+                echo 'Betalingsinstructies mag alleen maar uit letter en cijfers betaan';
+              }
+              if ($_GET['error'] == 'prijs') {
+                echo 'Startprijs mag alleen maar uit cijfers betaan en mag niet in de min zijn';
+              }
+              if ($_GET['error'] == 'verzendkosten') {
+                echo 'Verzendkosten mag alleen maar uit cijfers betaan en mag niet in de min zijn';
+              }
+              if ($_GET['error'] == 'verzendinstructie') {
+                echo 'Verzendinstructies mag alleen maar uit letter en cijfers betaan';
+              }
+              if ($_GET['error'] == 'exists') {
+                echo 'Het bestand bestaat al';
+              }
+              if ($_GET['error'] == 'extention') {
+                echo 'Het bestand is geen png, jpg of jpeg';
+              }
+              if ($_GET['error'] == 'size') {
+                echo 'Het bestand is groter dan 2MB';
+              }
+            }
+            ?>
+          </div>
           <label for="categorie"><h4><b>Categorie</b></h4></label>
-          <p><select id="categorie" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="categorie" <?php if(!empty($_SESSION['category'])){echo'value="'.$_SESSION['category'].'"';}?> required>
+          <p><select id="categorie" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="categorie" required>
             <option value="">- - -</option>
             <?php
-            // Get the headings from the database
+            // Get the categories from the database
             try {
-              $data = $dbh->query("SELECT r2.rubrieknaam [hoofdrubriek], r1.rubrieknaam [subrubriek], r1.rubrieknummer [rubrieknummer] from Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer where r1.rubrieknummer not in (select parent from Rubriek where parent is not null) order by r1.rubrieknaam");
+              $data = $dbh->query("SELECT r3.rubrieknaam[rubriek], r2.rubrieknaam [subrubriek], r1.rubrieknaam [subsubrubriek], r1.rubrieknummer [rubrieknummer] from Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer inner join Rubriek r3 on r2.parent = r3.rubrieknummer where r1.rubrieknummer not in (select parent from Rubriek where parent is not null)");
               while ($row = $data->fetch()) {
-                echo '<option value="'.$row['rubrieknummer'].'">'.$row['subrubriek'].' - '.$row['hoofdrubriek'].'</option>';
+                echo '<option value="'.$row['rubrieknummer'].'"';if(!empty($_SESSION['category'])){if($_SESSION['category'] == $row['rubrieknummer']){echo ' selected';}}echo'>
+                  "'.$row['subsubrubriek'].'" - "'.$row['subrubriek'].'"';
+                  if($row['rubriek'] != "Root"){
+                    echo ' - "'.$row['rubriek'].'"';
+                  }
+                echo '</option>';
               }
             } catch (PDOException $e) {
               echo "Kan rubrieken niet laden".$e->getMessage();
@@ -59,15 +97,6 @@ if (empty($_GET['error'])) {
         <div class="form-group">
           <label for="title"><h4><b>Titel</b></h4></label>
           <p><input type="text" id="title" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="title" placeholder="Titel van de veiling" <?php if(!empty($_SESSION['title'])){echo'value="'.$_SESSION['title'].'"';}?> required></p>
-          <div class="redText">
-            <?php
-            if (!empty($_GET['error'])) {
-              if ($_GET['error'] == 'titel') {
-                echo 'Titel mag alleen maar uit letters en cijfers bestaan';
-              }
-            }
-            ?>
-          </div>
         </div>
         <!-- Beschrijving -->
         <div class="form-group">
@@ -78,25 +107,16 @@ if (empty($_GET['error'])) {
         <div class="form-group">
           <label for="location"><h4><b>Plaatsnaam</b></h4></label>
           <p><input type="text" id="location" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z ]{3,25}" maxlength="25" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="location" placeholder="Locatie van het artikel" <?php if(!empty($_SESSION['location'])){echo'value="'.$_SESSION['location'].'"';}?> required></p>
-          <div class="redText">
-            <?php
-            if (!empty($_GET['error'])) {
-              if ($_GET['error'] == 'plaats') {
-                echo 'Plaatsnaam mag alleen maar uit letters bestaan';
-              }
-            }
-            ?>
-          </div>
         </div>
         <!-- Looptijd -->
         <div class="form-group">
           <label for="days"><h4><b>Looptijd</b></h4></label>
-          <p><select id="days" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="days" <?php if(!empty($_SESSION['days'])){echo'value="'.$_SESSION['days'].'"';}?> required>
-            <option value="1">1 dag</option>
-            <option value="3">3 dagen</option>
-            <option value="5">5 dagen</option>
-            <option value="7" selected>7 dagen</option>
-            <option value="10">10 dagen</option>
+          <p><select id="days" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="days" required>
+            <option value="1" <?php if(!empty($_SESSION['days'])){if($_SESSION['days'] == 1){echo 'selected';}} ?>>1 dag</option>
+            <option value="3" <?php if(!empty($_SESSION['days'])){if($_SESSION['days'] == 3){echo 'selected';}} ?>>3 dagen</option>
+            <option value="5" <?php if(!empty($_SESSION['days'])){if($_SESSION['days'] == 5){echo 'selected';}} ?>>5 dagen</option>
+            <option value="7" <?php if(!empty($_SESSION['days'])){if($_SESSION['days'] == 7){echo 'selected';}} else {echo 'selected';} ?>>7 dagen</option>
+            <option value="10" <?php if(!empty($_SESSION['days'])){if($_SESSION['days'] == 10){echo 'selected';}} ?>>10 dagen</option>
           </select></p>
         </div>
       </div>
@@ -106,66 +126,30 @@ if (empty($_GET['error'])) {
           <label for="paymethod"><h4><b>Betalingswijze</b></h4></label>
           <p><select id="paymethod" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="paymethod" <?php if(!empty($_SESSION['paymethod'])){echo'value="'.$_SESSION['paymethod'].'"';}?> required>
             <option value="">- - -</option>
-            <option value="Bank/Giro">Bank/Giro</option>
-            <option value="Contant">Contant</option>
-            <option value="Anders">Anders</option>
+            <option value="Bank/Giro" <?php if(!empty($_SESSION['paymethod'])){if($_SESSION['paymethod'] == "Bank/Giro"){echo 'selected';}} ?>>Bank/Giro</option>
+            <option value="Contant" <?php if(!empty($_SESSION['paymethod'])){if($_SESSION['paymethod'] == "Contant"){echo 'selected';}} ?>>Contant</option>
+            <option value="Anders" <?php if(!empty($_SESSION['paymethod'])){if($_SESSION['paymethod'] == "Anders"){echo 'selected';}} ?>>Anders</option>
           </select></p>
         </div>
         <!-- Betalingsinstructies -->
         <div class="form-group">
           <label for="payinstruction"><h4><b>Betalingsinstructies</b></h4></label>
           <p><input type="text" id="payinstruction" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z0-9., ]{3,30}" maxlength="30" name="payinstruction" <?php if(!empty($_SESSION['payinstruction'])){echo'value="'.$_SESSION['payinstruction'].'"';}?> placeholder="Bijv. Ophalen bij verkoper"></p>
-          <div class="redText">
-            <?php
-            if (!empty($_GET['error'])) {
-              if ($_GET['error'] == 'betaalInstructie') {
-                echo 'Betalingsinstructies mag alleen maar uit letter en cijfers betaan';
-              }
-            }
-            ?>
-          </div>
         </div>
         <!-- Startprijs -->
         <div class="form-group">
           <label for="price"><h4><b>Startprijs</b></h4></label>
           <p><input type="number" id="price" class="form-control greeneryBorder col-lg-10" step="0.01" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="price" placeholder="€" <?php if(!empty($_SESSION['price'])){echo'value="'.$_SESSION['price'].'"';}?> required></p>
-          <div class="redText">
-            <?php
-            if (!empty($_GET['error'])) {
-              if ($_GET['error'] == 'prijs') {
-                echo 'Startprijs mag alleen maar uit cijfers betaan';
-              }
-            }
-            ?>
-          </div>
         </div>
         <!-- Verzendkosten -->
         <div class="form-group">
           <label for="sendcost"><h4><b>Verzendkosten</b></h4></label>
           <p><input type="number" id="sendcost" class="form-control greeneryBorder col-lg-10" step="0.01" name="sendcost" <?php if(!empty($_SESSION['sendcost'])){echo'value="'.$_SESSION['sendcost'].'"';}?> placeholder="€"></p>
-          <div class="redText">
-            <?php
-            if (!empty($_GET['error'])) {
-              if ($_GET['error'] == 'verzendkosten') {
-                echo 'Verzendkosten mag alleen maar uit cijfers betaan';
-              }
-            }
-            ?>
-          </div>
         </div>
         <!-- Verzendinstructies -->
         <div class="form-group">
           <label for="sendinstruction"><h4><b>Verzendinstructies</b></h4></label>
           <p><input type="text" id="sendinstruction" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z ]{3,30}" maxlength="30" name="sendinstruction" <?php if(!empty($_SESSION['sendinstruction'])){echo'value="'.$_SESSION['sendinstruction'].'"';}?> placeholder="Bijv. Alleen ophalen bij verkoper"></p>
-          <div class="redText">
-            <?php
-            if (!empty($_GET['error'])) {
-              if ($_GET['error'] == 'verzendinstructie') {
-                echo 'Verzendinstructies mag alleen maar uit letter en cijfers betaan';
-              }
-            }
-            ?>
-          </div>
         </div>
       </div>
     </div>
@@ -173,19 +157,6 @@ if (empty($_GET['error'])) {
   <div class="tab">
     <h2><b>Foto's uploaden</b></h2>
     <p>De eerste afbeelding is verplicht.</p>
-    <div class="redText">
-      <?php
-      if (!empty($_GET['error'])) {
-        if ($_GET['error'] == 'exists') {
-          echo 'Het bestand bestaat al';
-        } else if ($_GET['error'] == 'extention') {
-          echo 'Het bestand is geen png, jpg of jpeg';
-        } else if ($_GET['error'] == 'size') {
-          echo 'Het bestand is groter dan 2MB';
-        }
-      }
-      ?>
-    </div>
     <div class="row">
 
       <div class="avatar-upload-first">
