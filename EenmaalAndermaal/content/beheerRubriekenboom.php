@@ -67,7 +67,7 @@ try {
                         <label>Rubrieknaam</label>
                       </div>
                       <div class="form-group col-lg-12">
-                        <input type="text" class="form-control" name="rubrieknaamEdit" value="<?=$headTopic['rubrieknaam']?>" placeholder="Rubrieknaam" pattern="[a-zA-Z ] min-length="3" max-length="50" required>
+                        <input type="text" class="form-control" name="rubrieknaamEdit" value="<?=$headTopic['rubrieknaam']?>" placeholder="Rubrieknaam" pattern="[a-zA-Z ]{3,50}" min-length="3" max-length="50" required>
                         <input type="hidden" name="voorwerpId" value="<?=$headTopic['rubrieknummer']?>">
                       </div>
                     </div>
@@ -177,7 +177,7 @@ try {
                         <label>Rubrieknaam</label>
                       </div>
                       <div class="form-group col-lg-12">
-                        <input type="text" class="form-control" name="rubrieknaamEdit" value="<?=$subTopic['naam']?>" placeholder="Rubrieknaam" pattern="[a-zA-Z ] min-length="3" max-length="50" required>
+                        <input type="text" class="form-control" name="rubrieknaamEdit" value="<?=$subTopic['naam']?>" placeholder="Rubrieknaam" pattern="[a-zA-Z ]{3,50}" min-length="3" max-length="50" required>
                         <input type="hidden" name="voorwerpId" value="<?=$subTopic['nummer']?>">
                       </div>
                     </div>
@@ -271,7 +271,7 @@ catch (PDOException $e) {
                     <label for="rubrieknaam">Rubrieknaam</label>
                   </div>
                   <div class="form-group col-lg-12">
-                    <input type="text" class="form-control" name="rubrieknaam" id="rubrieknaam" placeholder="Rubrieknaam" pattern="[a-zA-Z ] min-length="3" max-length="50" required>
+                    <input type="text" class="form-control" name="rubrieknaam" id="rubrieknaam" placeholder="Rubrieknaam" pattern="[a-zA-Z ]{3,50}" min-length="3" max-length="50" required>
                   </div>
 
                   <div class="col-lg-12">
