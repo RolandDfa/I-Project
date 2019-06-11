@@ -33,7 +33,6 @@ try {
       $aucTitle = $result['titel'];
       if(date('m-d-Y H:i:s')>=$sluitdatum){
         try{
-
           //get sellermail
           $sql = "SELECT mailbox FROM Gebruiker WHERE gebruikersnaam = :id";
           $query = $dbh->prepare($sql);
@@ -83,7 +82,7 @@ try {
               $mail->addAttachment('images/EenmaalAndermaalLogo.png');
               $mail->Subject = '[EenmaalAndermaal] Gewonnen veiling!.';
               $mail->Body    =
-              "<b>Gefeliciteerd u heeft de veiling [".$aucTitle."] gewonnen.</b><br><p>contacteer de verkoper doormiddel van deze mail: [".$emailSeller."]";
+              "<b>Gefeliciteerd u heeft de veiling [".$aucTitle."] gewonnen.</b><br><p>contacteer de verkoper doormiddel van deze mail: ".$emailSeller."</p>";
 
               $mail->send();
             } catch (Exception $e) {
@@ -110,7 +109,7 @@ try {
             $mail->addAttachment('images/EenmaalAndermaalLogo.png');
             $mail->Subject = '[EenmaalAndermaal] Uw veilig is gesloten.';
             $mail->Body    =
-            "<b>Uw veiling [".$aucTitle."] </b><p> is automatisch gesloten omdat de veiling de maximale tijd heeft bereikt.</p><br><p>contacteer de winnaar op deze email: [".$emailBuyer."]";
+            "<b>Uw veiling [".$aucTitle."] </b><p> is automatisch gesloten omdat de veiling de maximale tijd heeft bereikt.</p><br><p>contacteer de winnaar op deze email: ".$emailBuyer."</p>";
 
             $mail->send();
           } catch (Exception $e) {
