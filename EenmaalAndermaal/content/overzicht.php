@@ -20,9 +20,9 @@ if(isset($_GET['searchedText'])){
 }
 
 try {
-  $auctionsQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip, verkopernaam, kopernaam FROM Voorwerp WHERE veilingGesloten = 0";
+  $auctionsQuery = "SELECT titel, voorwerpnummer, looptijdeindeDag, looptijdeindeTijdstip, verkopernaam, kopernaam FROM Voorwerp WHERE veilingGesloten = 0 and looptijdeindeDag <= ?";
   $auctionsstmt = $dbh->prepare($auctionsQuery);
-  $auctionsstmt->execute();
+  $auctionsstmt->execute(array(date('Y-m-d')));
   if ($auctionsstmt->rowCount() != 0) {
     $results = $auctionsstmt->fetchAll();
     foreach( $results as $result ) {
