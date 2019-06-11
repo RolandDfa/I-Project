@@ -33,7 +33,22 @@ try {
       $aucTitle = $result['titel'];
       if(date('m-d-Y H:i:s')>=$sluitdatum){
         try{
-          //send mail toy winning buyer
+
+          //get sellermail
+          $sql = "SELECT mailbox FROM Gebruiker WHERE gebruikersnaam = :id";
+          $query = $dbh->prepare($sql);
+          if(!$query) {
+            echo "oops error";
+            exit();
+          }
+          else {
+            $query->execute(array(':id' => $sellerName));
+            $data = $query->fetchAll(PDO::FETCH_BOTH);
+          }
+          $temp = $data['0'];
+          $emailSeller = $temp['mailbox'];
+          if($sellerMail!="NaN.NaN@NaN.com"){
+          //get buyermail
           if (!empty($buyerName)) {
             $sql = "SELECT mailbox FROM Gebruiker WHERE gebruikersnaam = :id";
             $query = $dbh->prepare($sql);
@@ -47,6 +62,9 @@ try {
             }
             $temp = $data['0'];
             $emailBuyer = $temp['mailbox'];
+
+          //send mail toy winning buyer
+
             $mail = new PHPMailer(true);
             try {
               //Mail settings
@@ -65,7 +83,7 @@ try {
               $mail->addAttachment('images/EenmaalAndermaalLogo.png');
               $mail->Subject = '[EenmaalAndermaal] Gewonnen veiling!.';
               $mail->Body    =
-              "<b>Gefeliciteerd u heeft de veiling [".$aucTitle."] gewonnen.</b>";
+              "<b>Gefeliciteerd u heeft de veiling [".$aucTitle."] gewonnen.</b><br><p>contacteer de verkoper doormiddel van deze mail: [".$emailSeller."]";
 
               $mail->send();
             } catch (Exception $e) {
@@ -73,18 +91,7 @@ try {
             }
           }
           //send mail seller
-          $sql = "SELECT mailbox FROM Gebruiker WHERE gebruikersnaam = :id";
-          $query = $dbh->prepare($sql);
-          if(!$query) {
-            echo "oops error";
-            exit();
-          }
-          else {
-            $query->execute(array(':id' => $sellerName));
-            $data = $query->fetchAll(PDO::FETCH_BOTH);
-          }
-          $temp = $data['0'];
-          $emailSeller = $temp['mailbox'];
+
           $mail = new PHPMailer(true);
           try {
             //Mail settings
@@ -103,12 +110,15 @@ try {
             $mail->addAttachment('images/EenmaalAndermaalLogo.png');
             $mail->Subject = '[EenmaalAndermaal] Uw veilig is gesloten.';
             $mail->Body    =
-            "<b>Uw veiling [".$aucTitle."] </b><p> is automatisch gesloten omdat de veiling de maximale tijd heeft bereikt.</p>";
+            "<b>Uw veiling [".$aucTitle."] </b><p> is automatisch gesloten omdat de veiling de maximale tijd heeft bereikt.</p><br><p>contacteer de winnaar op deze email: [".$emailBuyer."]";
 
             $mail->send();
           } catch (Exception $e) {
             echo "Er gaat iets fout met het sturen van de sluitingsmelding naar de verkoper.".$e->getMessage();
           }
+        } else {
+          echo "koper is inactief dus veiling kan niet voltooid worden.";
+        }
         } catch (PDOException $e) {
           echo "Er gaat iets fout met het sturen van de sluitingsmelding tijdens het ophalen van de contact gegevens.".$e->getMessage();
         }
