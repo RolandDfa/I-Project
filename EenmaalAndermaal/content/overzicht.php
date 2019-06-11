@@ -116,7 +116,7 @@ try {
             echo "Er gaat iets fout met het sturen van de sluitingsmelding naar de verkoper.".$e->getMessage();
           }
         } else {
-          echo "koper is inactief dus veiling kan niet voltooid worden.";
+          
         }
         } catch (PDOException $e) {
           echo "Er gaat iets fout met het sturen van de sluitingsmelding tijdens het ophalen van de contact gegevens.".$e->getMessage();
