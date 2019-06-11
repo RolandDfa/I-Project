@@ -41,16 +41,16 @@ if (empty($_GET['error'])) {
                 echo 'Plaatsnaam mag alleen maar uit letters bestaan';
               }
               if ($_GET['error'] == 'betaalInstructie') {
-                echo 'Betalingsinstructies mag alleen maar uit letter en cijfers betaan';
+                echo 'Betalingsinstructies mag alleen maar uit letter en cijfers bestaan';
               }
               if ($_GET['error'] == 'prijs') {
-                echo 'Startprijs mag alleen maar uit cijfers betaan en mag niet in de min zijn';
+                echo 'Startprijs mag alleen maar uit cijfers bestaan en mag niet in de min zijn';
               }
               if ($_GET['error'] == 'verzendkosten') {
-                echo 'Verzendkosten mag alleen maar uit cijfers betaan en mag niet in de min zijn';
+                echo 'Verzendkosten mag alleen maar uit cijfers bestaan en mag niet in de min zijn';
               }
               if ($_GET['error'] == 'verzendinstructie') {
-                echo 'Verzendinstructies mag alleen maar uit letter en cijfers betaan';
+                echo 'Verzendinstructies mag alleen maar uit letter en cijfers bestaan';
               }
               if ($_GET['error'] == 'exists') {
                 echo 'Het bestand bestaat al';
