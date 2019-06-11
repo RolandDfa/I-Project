@@ -204,7 +204,7 @@ if (empty($_GET['error'])) {
   </div>
   <div class="tab">
     <h2><b>Controleren</b></h2>
-    Weet u zeker dat alle de gegevens goed ingevuld zijn? Klik dan op plaatsen.
+    Weet u zeker dat alle de gegevens goed zijn ingevuld? Klik dan op plaatsen.
   </div>
   <div id="buttonListDiv">
     <div id="buttonList">
