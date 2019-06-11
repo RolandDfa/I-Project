@@ -47,7 +47,7 @@ try {
           }
           $temp = $data['0'];
           $emailSeller = $temp['mailbox'];
-          if($sellerMail!="NaN.NaN@NaN.com"){
+          if($emailSeller!="NaN.NaN@NaN.com"){
           //get buyermail
           if (!empty($buyerName)) {
             $sql = "SELECT mailbox FROM Gebruiker WHERE gebruikersnaam = :id";
