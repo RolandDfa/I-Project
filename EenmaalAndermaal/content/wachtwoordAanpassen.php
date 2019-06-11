@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])){
   <form class="registerForm" method="post" action="">
     <div class="row form-group"></div>
     <div class="row form-group">
-      <label for="currentPass" class="col-lg-4 control-label">Vul u huidige wachtwoord in.</label>
+      <label for="currentPass" class="col-lg-4 control-label">Vul uw huidige wachtwoord in.</label>
       <div class="col-lg-8">
         <input type="password" class="form-control" name="currentPass" required >
       </div>
@@ -67,7 +67,7 @@ if (isset($_POST['newPassButton'])) {
   $passwordNew = cleanInput($_POST['newPass']);
   $passwordRepeat = cleanInput($_POST['newPassRepeat']);
   if ($passwordNew != $passwordRepeat) {
-    echo '<div class="redText"><p>de velden Wachtwoord en herhaal wachtwoord komen niet overeen.</p></div>';;
+    echo '<div class="redText"><p>De velden wachtwoord en herhaal wachtwoord komen niet overeen.</p></div>';;
   }
   else {
     $hashedWW = hash('sha256', $passwordNew);
