@@ -90,8 +90,7 @@ if ($countTell) {
   $tel2 = $data2[1];
   $telnr2 = $tel2['Telefoon'];
   $tel2Volgnr = $tel2['volgnr'];
-}
-else {
+} else {
   $tel1 = $data2[0];
   $telnr = $tel1['Telefoon'];
   $tel1Volgnr = $tel1['volgnr'];
@@ -141,7 +140,7 @@ if($_SESSION['userstate'] != 3){
         <p>Persoonsgegevens</p><br>
 
         <p>Achternaam: <?php echo $firstname; ?></p>
-   <p>Achternaam: <?php echo $lastname; ?></p>
+        <p>Achternaam: <?php echo $lastname; ?></p>
         <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
         <p>Adres: <?php echo $address; ?></p>
         <p>Postcode: <?php echo $zipcode; ?></p>
