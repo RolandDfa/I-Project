@@ -96,17 +96,17 @@ if (empty($_GET['error'])) {
         <!-- Titel -->
         <div class="form-group">
           <label for="title"><h4><b>Titel</b></h4></label>
-          <p><input type="text" id="title" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="title" placeholder="Titel van de veiling" <?php if(!empty($_SESSION['title'])){echo'value="'.$_SESSION['title'].'"';}?> required></p>
+          <p><input type="text" id="title" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="title" placeholder="Titel van de veiling" minlength="4" maxlength="50" <?php if(!empty($_SESSION['title'])){echo'value="'.$_SESSION['title'].'"';}?> required></p>
         </div>
         <!-- Beschrijving -->
         <div class="form-group">
           <label for="description"><h4><b>Beschrijving</b></h4></label>
-          <p><textarea id="description" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="description" rows="8" cols="80" placeholder="Beschrijving van het artikel"><?php if(!empty($_SESSION['description'])){echo $_SESSION['description'];}?></textarea></p>
+          <p><textarea id="description" class="form-control greeneryBorder col-lg-10" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="description" rows="8" cols="80" placeholder="Beschrijving van het artikel" minlength="10" maxlength="1000"><?php if(!empty($_SESSION['description'])){echo $_SESSION['description'];}?></textarea></p>
         </div>
         <!-- Locatie -->
         <div class="form-group">
           <label for="location"><h4><b>Plaatsnaam</b></h4></label>
-          <p><input type="text" id="location" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z ]{3,25}" maxlength="25" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="location" placeholder="Locatie van het artikel" <?php if(!empty($_SESSION['location'])){echo'value="'.$_SESSION['location'].'"';}?> required></p>
+          <p><input type="text" id="location" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z ]{3,25}" minlength="3" maxlength="25" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="location" placeholder="Locatie van het artikel" <?php if(!empty($_SESSION['location'])){echo'value="'.$_SESSION['location'].'"';}?> required></p>
         </div>
         <!-- Looptijd -->
         <div class="form-group">
@@ -134,22 +134,22 @@ if (empty($_GET['error'])) {
         <!-- Betalingsinstructies -->
         <div class="form-group">
           <label for="payinstruction"><h4><b>Betalingsinstructies</b></h4></label>
-          <p><input type="text" id="payinstruction" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z0-9., ]{3,30}" maxlength="30" name="payinstruction" <?php if(!empty($_SESSION['payinstruction'])){echo'value="'.$_SESSION['payinstruction'].'"';}?> placeholder="Bijv. Ophalen bij verkoper"></p>
+          <p><input type="text" id="payinstruction" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z0-9., ]{5,30}" minlength="5" maxlength="30" name="payinstruction" <?php if(!empty($_SESSION['payinstruction'])){echo'value="'.$_SESSION['payinstruction'].'"';}?> placeholder="Bijv. Ophalen bij verkoper"></p>
         </div>
         <!-- Startprijs -->
         <div class="form-group">
           <label for="price"><h4><b>Startprijs</b></h4></label>
-          <p><input type="number" id="price" class="form-control greeneryBorder col-lg-10" step="0.01" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="price" placeholder="€" <?php if(!empty($_SESSION['price'])){echo'value="'.$_SESSION['price'].'"';}?> required></p>
+          <p><input type="number" id="price" class="form-control greeneryBorder col-lg-10" step="0.01" min="0.00" max="99999.99" oninput="this.className = 'form-control greeneryBorder col-lg-10'" name="price" placeholder="€" <?php if(!empty($_SESSION['price'])){echo'value="'.$_SESSION['price'].'"';}?> required></p>
         </div>
         <!-- Verzendkosten -->
         <div class="form-group">
           <label for="sendcost"><h4><b>Verzendkosten</b></h4></label>
-          <p><input type="number" id="sendcost" class="form-control greeneryBorder col-lg-10" step="0.01" name="sendcost" <?php if(!empty($_SESSION['sendcost'])){echo'value="'.$_SESSION['sendcost'].'"';}?> placeholder="€"></p>
+          <p><input type="number" id="sendcost" class="form-control greeneryBorder col-lg-10" step="0.01" min="0.00" max="999.99" name="sendcost" <?php if(!empty($_SESSION['sendcost'])){echo'value="'.$_SESSION['sendcost'].'"';}?> placeholder="€"></p>
         </div>
         <!-- Verzendinstructies -->
         <div class="form-group">
           <label for="sendinstruction"><h4><b>Verzendinstructies</b></h4></label>
-          <p><input type="text" id="sendinstruction" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z ]{3,30}" maxlength="30" name="sendinstruction" <?php if(!empty($_SESSION['sendinstruction'])){echo'value="'.$_SESSION['sendinstruction'].'"';}?> placeholder="Bijv. Alleen ophalen bij verkoper"></p>
+          <p><input type="text" id="sendinstruction" class="form-control greeneryBorder col-lg-10" pattern="[a-zA-Z ]{5,30}" minlength="5" maxlength="30" name="sendinstruction" <?php if(!empty($_SESSION['sendinstruction'])){echo'value="'.$_SESSION['sendinstruction'].'"';}?> placeholder="Bijv. Alleen ophalen bij verkoper"></p>
         </div>
       </div>
     </div>
