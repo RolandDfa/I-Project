@@ -11,39 +11,29 @@ if(isset($_POST['blokkeren'])) {
 
 if(isset($_POST['verwijderen'])) {
   try {
-    $sqlUsername = "SELECT TOP 1 gebruikersnaam FROM Gebruiker WHERE gebruikersnaam like 'Verwijderd%' ORDER BY gebruikersnaam desc";
-    $querySelect = $dbh->prepare($sqlUsername);
-    $querySelect->execute();
-    if ($querySelect->rowCount() != 0) {
-      $results = $querySelect->fetchAll();
-      foreach( $results as $result ) {
-        $usernameNew = str_replace('Verwijderd', '', $result['gebruikersnaam']);
-        $usernameNew++;
-        $usernameNew = 'Verwijderd'.$usernameNew;
-      }
-    }
 
     $gebruiker = cleanInput($_POST['codeVerwijderen']);
+    $deleteText = "Verwijderd";
+
+    // Update seller account
+    $updateVerkoper = "UPDATE Verkoper SET bank=?, bankrekening=?, controleOptie=?, creditcard=?, Valid=? WHERE gebruiker = ?";
+    $updateVerkoperStmt = $dbh->prepare($updateVerkoper);
+    $updateVerkoperStmt->execute(array("$deleteText", "$deleteText", "Post", NULL, 0, "$gebruiker"));
+
+    // Update user info to Verwijderd and valid to 0
+    $updateUser = "UPDATE Gebruiker SET voornaam=?, achternaam=?, adresregel=?, postcode=?, plaatsnaam=?, land=?, kvkNummer=?, geboorteDag=?, mailbox=?, wachtwoord=?, vraag=?, antwoordTekst=?, gebruikersStatus=?, valid=? WHERE gebruikersnaam = ?";
+    $updateUserStmt = $dbh->prepare($updateUser);
+    $updateUserStmt->execute(array("$deleteText", "$deleteText", "$deleteText", "VERW00", "$deleteText", "VRW", 0, "1970-01-01", "$deleteText", "$deleteText", 1, "$deleteText", 2, 0, "$gebruiker"));
 
     // Update auction to invalid
     $updateVeiling = "UPDATE Voorwerp SET veilingGesloten=? WHERE verkopernaam = ?";
     $updateVeilingStmt = $dbh->prepare($updateVeiling);
-    $updateVeilingStmt->execute(array(0, "$gebruiker"));
+    $updateVeilingStmt->execute(array(1, "$gebruiker"));
 
     // Delete telefoon records
     $deleteTelefoon = "DELETE FROM Gebruikerstelefoon WHERE gebruikersnaam = ?";
     $deleteTelefoonStmt = $dbh->prepare($deleteTelefoon);
     $deleteTelefoonStmt->execute(array("$gebruiker"));
-
-    // Update user info to Verwijderd and valid to 0
-    $updateUser = "UPDATE Gebruiker SET gebruikersnaam=?, voornaam=?, achternaam=?, adresregel=?, postcode=?, plaatsnaam=?, land=?, kvkNummer=?, geboorteDag=?, mailbox=?, wachtwoord=?, vraag=?, antwoordTekst=?, gebruikersStatus=?, valid=? WHERE gebruikersnaam = ?";
-    $updateUserStmt = $dbh->prepare($updateUser);
-    $updateUserStmt->execute(array("$usernameNew", "$usernameNew", "$usernameNew", "$usernameNew", "VERW00", "$usernameNew", "VRW", 0, "1970-01-01", "$usernameNew", "$usernameNew", 1, "$usernameNew", 2, 0, "$gebruiker"));
-
-    // Update seller account
-    $updateVerkoper = "UPDATE Verkoper SET gebruiker=?, bank=?, bankrekening=?, controleOptie=?, creditcard=?, Valid=? WHERE gebruiker = ?";
-    $updateVerkoperStmt = $dbh->prepare($updateVerkoper);
-    $updateVerkoperStmt->execute(array("$usernameNew", "$usernameNew", "$usernameNew", "Post", NULL, 0, "$gebruiker"));
 
   } catch (PDOException $e) {
     echo "Fout met de database: {$e->getMessage()} ";
