@@ -13,7 +13,7 @@ $securitynr = "";
           <div class="redText">
           </div>
         </div>
-        <button type="submit" name="getSecurity" class="btn btnGreenery btn-block">Geheimenvraag ophalen</button>
+        <button type="submit" name="getSecurity" class="btn btnGreenery btn-block">Geheime vraag ophalen</button>
       </form>
       <?php
       if (isset($_POST['getSecurity'])) {
