@@ -67,7 +67,7 @@ if (isset($_POST['newPassButton'])) {
   $passwordNew = cleanInput($_POST['newPass']);
   $passwordRepeat = cleanInput($_POST['newPassRepeat']);
   if ($passwordNew != $passwordRepeat) {
-    echo '<div class="redText"><p>de velden Wachtwoord en herhaal wachtwoord komen niet overeen.</p></div>';;
+    echo '<div class="redText"><p>De velden wachtwoord en herhaal wachtwoord komen niet overeen.</p></div>';;
   }
   else {
     $hashedWW = hash('sha256', $passwordNew);
