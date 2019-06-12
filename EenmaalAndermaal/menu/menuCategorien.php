@@ -8,7 +8,7 @@
     }
   }
   catch (PDOException $e){
-    echo "Kan rubrieken niet laden".$e->getMessage();
+    echo "Kan rubrieken niet laden";
   }
   ?>
 </div>

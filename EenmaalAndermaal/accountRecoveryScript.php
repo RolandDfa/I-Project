@@ -53,7 +53,7 @@ if(isset($_POST['accountRecoveryButton1'])){
         }
       }
     } catch (PDOException $e) {
-      echo "Er is iets fout gegaan met de database."; //{$e->getMessage()} ";
+      echo "Er ging iets fout met het terughalen van uw account";
     }
       $isNaN = $firstnameRecovery == "NaN" &&  $lastnameRecovery == "NaN" && $addressRecovery == "NaN";
       if($isNaN){
@@ -259,7 +259,7 @@ if(isset($_POST['accountRecoveryButton1'])){
                             }
                           }
                           catch (PDOException $e){
-                            echo "Kan rubrieken niet laden";//.$e->getMessage();
+                            echo "Er ging iets fout met het terughalen van uw account";
                           }
                           ?>
                         </select>
@@ -487,7 +487,7 @@ if(isset($_POST['accountRecoveryButton1'])){
           header("Location: index.php?page=registrerenSucces&status=1");
 
         } catch (PDOException $e) {
-          echo "Er is iets fout gegaan met de database" ; //: {$e->getMessage()} ";
+          echo "Er ging iets fout met het terughalen van uw account" ;
         }
       }
 

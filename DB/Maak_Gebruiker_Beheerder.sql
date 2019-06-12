@@ -1,0 +1,1 @@
+UPDATE Gebruiker SET gebruikersStatus = 4 WHERE gebruikersnaam = 'GEBRUIKERSNAAM'

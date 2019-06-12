@@ -52,7 +52,7 @@ try{
 		}
 	}
 } catch (Exception $e) {
-	echo "error met db code ophalen ";//{$e->getMessage()}";
+	echo "Fout met code ophalen ";
 }
 }
 // Register
@@ -406,7 +406,7 @@ if(isset($_POST['signUp'])){
 										}
 									}
 									catch (PDOException $e){
-										echo "Kan rubrieken niet laden".$e->getMessage();
+										echo "Kan rubrieken niet laden";
 									}
 									?>
 								</select>

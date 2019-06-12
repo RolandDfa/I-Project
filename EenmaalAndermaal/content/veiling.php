@@ -87,7 +87,7 @@ try {
     $auctionExists = false;
   }
 } catch (PDOException $e) {
-  echo "Er gaat iets fout met het ophalen van het artikel: ".$e->getMessage();
+  echo "Er gaat iets fout met het ophalen van het artikel";
 }
 
 try {
@@ -102,7 +102,7 @@ try {
     }
   }
 } catch (PDOException $e) {
-  echo "Er gaat iets fout met het ophalen van de afbeeldingen: ".$e->getMessage();
+  echo "Er gaat iets fout met het ophalen van de afbeeldingen";
 }
 ?>
 

@@ -19,7 +19,7 @@ try{
   }
   //var_dump($data);
 } catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er gaat iets fout met het ophalen van de gebruikersgegevens";
 }
 
 for ($i = 0; $i < sizeof($data); $i++) {
@@ -79,7 +79,7 @@ try{
   }
   // var_dump($data2);
 } catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er ging iets fout met het ophalen van het telefoonnummer";
 }
 
 $countTell = count($data2) > 1;
@@ -111,7 +111,7 @@ if($_SESSION['userstate'] != 3){
       $hasToValidate = false;
     }
   }catch (PDOException $e) {
-    echo "Fout met de database: {$e->getMessage()} ";
+    echo "Er ging iets fout met het ophalen van validatiegegevens";
   }
 }
 ?>
@@ -175,7 +175,7 @@ if($_SESSION['userstate'] != 3){
                 $registrerenVerkoperSucces = true;
               }
               catch (PDOException $e) {
-                echo "Fout met de database: {$e->getMessage()} ";
+                echo "Er ging iets fout met verifieren";
                 $registrerenVerkoperSucces = false;
               }
 
@@ -368,7 +368,7 @@ if($_SESSION['userstate'] != 3){
             echo '</div>';
           }
         }catch (PDOException $e) {
-          echo "Fout met de database: {$e->getMessage()} ";
+          echo "Er ging iets fout met het ophalen van gegevens";
         }
         ?>
       </div>
@@ -455,7 +455,7 @@ if($_SESSION['userstate'] != 3){
             echo '</div>';
           }
         }catch (PDOException $e) {
-          echo "Fout met de database: {$e->getMessage()} ";
+          echo "Er ging iets fout met het ophalen van gegevens";
         }
         ?>
       </div>
@@ -542,7 +542,7 @@ if($_SESSION['userstate'] != 3){
             echo '</div>';
           }
         }catch (PDOException $e) {
-          echo "Fout met de database: {$e->getMessage()} ";
+          echo "Er ging iets fout met het ophalen van gegevens";
         }
 
         ?>
@@ -593,7 +593,7 @@ if (isset($_POST['submitInfo'])) {
         $queryInsertTellnr2->execute(array($telnr2));
       }
     } catch (PDOException $e) {
-      echo "Fout met de database: {$e->getMessage()} ";
+      echo "Er ging iets fout met het wijzigen van gegevens";
     }
   }
 } else {

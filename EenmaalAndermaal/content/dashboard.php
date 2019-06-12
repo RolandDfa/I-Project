@@ -11,7 +11,7 @@ try {
     }
   }
 } catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er ging iets fout met het tellen van de gebruikers";
 }
 
 // Get gebruiker inactiv
@@ -26,7 +26,7 @@ try {
     }
   }
 } catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er ging iets fout met het tellen van de gebruikers";
 }
 
 // Get veiling amount
@@ -41,7 +41,7 @@ try {
     }
   }
 } catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er ging iets fout met het tellen van voorwerpen";
 }
 
 // Get rubriek amount
@@ -56,7 +56,7 @@ try {
     }
   }
 } catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er ging iets fout met het tellen van rubrieken";
 }
 
 
@@ -69,7 +69,7 @@ try {
     $dataVeilingen = $querySelect->fetchAll();
   }
 } catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er ging iets fout met het ophalen van de veiligen per jaar";
 }
 
 // Get rubrieken
@@ -81,7 +81,7 @@ try {
     $dataBiedingen = $querySelect->fetchAll();
   }
 } catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er ging iets fout met het ophalen van de rubrieken";
 }
 ?>
 <div class="row">

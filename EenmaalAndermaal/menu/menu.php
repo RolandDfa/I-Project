@@ -13,7 +13,7 @@
           echo '<a class="dropdown-item" href="index.php?page=overzicht&category='.$row['rubrieknummer'].'">'.$row['rubrieknaam'].'</a>';
         }
       } catch (PDOException $e) {
-        echo "Kan rubrieken niet laden".$e->getMessage();
+        echo "Kan rubrieken niet laden";
       }
       ?>
     </div>
