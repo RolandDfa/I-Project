@@ -6,7 +6,7 @@ if (isset($_SESSION['username'])){
   <form class="registerForm" method="post" action="">
     <div class="row form-group"></div>
     <div class="row form-group">
-      <label for="currentPass" class="col-lg-4 control-label">Vul u huidige wachtwoord in.</label>
+      <label for="currentPass" class="col-lg-4 control-label">Vul uw huidige wachtwoord in.</label>
       <div class="col-lg-8">
         <input type="password" class="form-control" name="currentPass" required >
       </div>
