@@ -110,7 +110,7 @@ $securitynr = "";
       </div>
       <?php
     } else {
-      echo '<div class="redText"><p>Geheime vraag foutief beantwoord.</p></div>';
+      echo '<div class="redText"><p>Geheime vraag foutief beantwoord. Vul uw gebruikersnaam opnieuw in.</p></div>';
       }
   }
 
