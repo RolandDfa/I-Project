@@ -109,7 +109,9 @@ $securitynr = "";
         </form>
       </div>
       <?php
-    }
+    } else {
+      echo '<div class="redText"><p>Geheime vraag foutief beantwoord.</p></div>';
+      }
   }
 
 if (isset($_POST['newPassButton'])) {
