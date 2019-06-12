@@ -58,7 +58,7 @@ if (isset($_SESSION['username'])){
       }
     }
   } catch (PDOException $e) {
-    echo "Fout met de database 2: {$e->getMessage()} ";
+    echo "Er ging iets fout met het ophalen van gegevens";
   }
 }
 else {
@@ -87,7 +87,7 @@ if (isset($_POST['newPassButton'])) {
         echo '<p>Wachtwoord succesvol aangepast, klik <a href="index.php?page=inloggen">Hier</a> om opnieuw in te loggen</a>.</p>';
       }
     } catch (PDOException $e) {
-      echo "Fout met de database: {$e->getMessage()} ";
+      echo "Er ging iets fout met plaatsen van gegevens";
     }
   }
 }else {

@@ -21,7 +21,7 @@ try{
     }
   }
 }catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er ging iets fout met het ophalen van de gebruiker";
 }
 
 
@@ -38,7 +38,7 @@ try{
     }
   }
 }catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er ging iets fout met het ophalen van de controle optie";
 }
 }
 
@@ -57,7 +57,7 @@ if(isset($_POST['submitSellerCreditcard'])){
     $melding = 'Registreren als verkoper gelukt! Klik <a href="index.php?page=mijnaccount">hier</a> om naar de mijn account pagina te gaan.';
   }
   catch (PDOException $e) {
-    echo "Fout met de database: {$e->getMessage()} ";
+    echo "Er ging iets fout met het verifieren van de verkoper";
     $registrerenVerkoperSucces = false;
   }
 }
@@ -76,7 +76,7 @@ if(isset($_POST['submitSellerPost'])){
     $melding = 'Registreren gelukt. Vul uw code in op de mijn account pagina Klik <a href="index.php?page=mijnaccount">hier</a> om naar de mijn account pagina te gaan.';
   }
   catch (PDOException $e) {
-    echo "Fout met de database: {$e->getMessage()} ";
+    echo "Er ging iets fout met het verifieren van de verkoper";
     $registrerenVerkoperSucces = false;
   }
 }

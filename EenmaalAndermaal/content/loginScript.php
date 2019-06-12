@@ -37,7 +37,7 @@ if(isset($_POST['login'])) {
       header("Location: ../index.php?page=inloggen&error=onjuist");
     }
   } catch (PDOExeption $e) {
-    die ("Fout met de database: {$e->getMessage()} ");
+    die ("Fout met inloggen");
   }
 }
 ?>

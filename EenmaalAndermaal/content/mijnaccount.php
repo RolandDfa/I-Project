@@ -19,7 +19,7 @@ try{
   }
   //var_dump($data);
 } catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er gaat iets fout met het ophalen van de gebruikersgegevens";
 }
 
 for ($i = 0; $i < sizeof($data); $i++) {
@@ -79,7 +79,7 @@ try{
   }
   // var_dump($data2);
 } catch (PDOException $e) {
-  echo "Fout met de database: {$e->getMessage()} ";
+  echo "Er ging iets fout met het ophalen van het telefoonnummer";
 }
 
 $countTell = count($data2) > 1;
@@ -90,8 +90,7 @@ if ($countTell) {
   $tel2 = $data2[1];
   $telnr2 = $tel2['Telefoon'];
   $tel2Volgnr = $tel2['volgnr'];
-}
-else {
+} else {
   $tel1 = $data2[0];
   $telnr = $tel1['Telefoon'];
   $tel1Volgnr = $tel1['volgnr'];
@@ -112,7 +111,7 @@ if($_SESSION['userstate'] != 3){
       $hasToValidate = false;
     }
   }catch (PDOException $e) {
-    echo "Fout met de database: {$e->getMessage()} ";
+    echo "Er ging iets fout met het ophalen van validatiegegevens";
   }
 }
 ?>
@@ -141,7 +140,7 @@ if($_SESSION['userstate'] != 3){
         <p>Persoonsgegevens</p><br>
 
         <p>Achternaam: <?php echo $firstname; ?></p>
-   <p>Achternaam: <?php echo $lastname; ?></p>
+        <p>Achternaam: <?php echo $lastname; ?></p>
         <p>Geboortedatum: <?php echo date("d-m-Y", strtotime($birthDate)); ?></p>
         <p>Adres: <?php echo $address; ?></p>
         <p>Postcode: <?php echo $zipcode; ?></p>
@@ -176,7 +175,7 @@ if($_SESSION['userstate'] != 3){
                 $registrerenVerkoperSucces = true;
               }
               catch (PDOException $e) {
-                echo "Fout met de database: {$e->getMessage()} ";
+                echo "Er ging iets fout met verifieren";
                 $registrerenVerkoperSucces = false;
               }
 
@@ -369,7 +368,7 @@ if($_SESSION['userstate'] != 3){
             echo '</div>';
           }
         }catch (PDOException $e) {
-          echo "Fout met de database: {$e->getMessage()} ";
+          echo "Er ging iets fout met het ophalen van gegevens";
         }
         ?>
       </div>
@@ -456,7 +455,7 @@ if($_SESSION['userstate'] != 3){
             echo '</div>';
           }
         }catch (PDOException $e) {
-          echo "Fout met de database: {$e->getMessage()} ";
+          echo "Er ging iets fout met het ophalen van gegevens";
         }
         ?>
       </div>
@@ -543,7 +542,7 @@ if($_SESSION['userstate'] != 3){
             echo '</div>';
           }
         }catch (PDOException $e) {
-          echo "Fout met de database: {$e->getMessage()} ";
+          echo "Er ging iets fout met het ophalen van gegevens";
         }
 
         ?>
@@ -594,7 +593,7 @@ if (isset($_POST['submitInfo'])) {
         $queryInsertTellnr2->execute(array($telnr2));
       }
     } catch (PDOException $e) {
-      echo "Fout met de database: {$e->getMessage()} ";
+      echo "Er ging iets fout met het wijzigen van gegevens";
     }
   }
 } else {

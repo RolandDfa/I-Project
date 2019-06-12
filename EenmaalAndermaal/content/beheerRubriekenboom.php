@@ -6,7 +6,7 @@ if(isset($_POST['wijzigen'])){
     $changeTopicNameStmt->execute(array(cleanInput($_POST['rubrieknaamEdit']), cleanInput($_POST['voorwerpId'])));
   }
   catch (PDOException $e) {
-    echo "Fout met de database: {$e->getMessage()} ";
+    echo "Kan rubrieken niet ophalen";
   }
 }
 
@@ -67,7 +67,7 @@ try {
                         <label>Rubrieknaam</label>
                       </div>
                       <div class="form-group col-lg-12">
-                        <input type="text" class="form-control" name="rubrieknaamEdit" value="<?=$headTopic['rubrieknaam']?>" placeholder="Rubrieknaam" required>
+                        <input type="text" class="form-control" name="rubrieknaamEdit" value="<?=$headTopic['rubrieknaam']?>" placeholder="Rubrieknaam" pattern="[a-zA-Z ]{3,50}" minlength="3" maxlength="50" required>
                         <input type="hidden" name="voorwerpId" value="<?=$headTopic['rubrieknummer']?>">
                       </div>
                     </div>
@@ -132,7 +132,7 @@ try {
   }
 }
 catch (PDOException $e) {
-  echo "Kan rubrieken niet laden".$e->getMessage();
+  echo "Kan rubrieken niet laden";
 }
 
 
@@ -177,7 +177,7 @@ try {
                         <label>Rubrieknaam</label>
                       </div>
                       <div class="form-group col-lg-12">
-                        <input type="text" class="form-control" name="rubrieknaamEdit" value="<?=$subTopic['naam']?>" placeholder="Rubrieknaam" required>
+                        <input type="text" class="form-control" name="rubrieknaamEdit" value="<?=$subTopic['naam']?>" placeholder="Rubrieknaam" pattern="[a-zA-Z ]{3,50}" minlength="3" maxlength="50" required>
                         <input type="hidden" name="voorwerpId" value="<?=$subTopic['nummer']?>">
                       </div>
                     </div>
@@ -243,7 +243,7 @@ try {
   }
 }
 catch (PDOException $e) {
-  echo "Kan rubrieken niet laden".$e->getMessage();
+  echo "Kan rubrieken niet laden";
 }
 ?>
 
@@ -271,7 +271,7 @@ catch (PDOException $e) {
                     <label for="rubrieknaam">Rubrieknaam</label>
                   </div>
                   <div class="form-group col-lg-12">
-                    <input type="text" class="form-control" name="rubrieknaam" id="rubrieknaam" placeholder="Rubrieknaam" required>
+                    <input type="text" class="form-control" name="rubrieknaam" id="rubrieknaam" placeholder="Rubrieknaam" pattern="[a-zA-Z ]{3,50}" minlength="3" maxlength="50" required>
                   </div>
 
                   <div class="col-lg-12">

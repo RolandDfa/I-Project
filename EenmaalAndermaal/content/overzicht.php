@@ -82,11 +82,11 @@ try {
               $mail->addAttachment('images/EenmaalAndermaalLogo.png');
               $mail->Subject = '[EenmaalAndermaal] Gewonnen veiling!.';
               $mail->Body    =
-              "<b>Gefeliciteerd u heeft de veiling [".$aucTitle."] gewonnen.</b><br><p>contacteer de verkoper doormiddel van deze mail: ".$emailSeller."</p>";
+              "<b>Gefeliciteerd u heeft de veiling [".$aucTitle."] gewonnen.</b><br><p>Contacteer de verkoper doormiddel van deze mail: ".$emailSeller."</p>";
 
               $mail->send();
             } catch (Exception $e) {
-              echo "Er gaat iets fout met het sturen van de sluitingsmelding naar de winnaar.".$e->getMessage();
+              echo "Er gaat iets fout met het sturen van de sluitingsmelding naar de winnaar.";
             }
           }
           //send mail seller
@@ -109,26 +109,48 @@ try {
             $mail->addAttachment('images/EenmaalAndermaalLogo.png');
             $mail->Subject = '[EenmaalAndermaal] Uw veilig is gesloten.';
             $mail->Body    =
-            "<b>Uw veiling [".$aucTitle."] </b><p> is automatisch gesloten omdat de veiling de maximale tijd heeft bereikt.</p><br><p>contacteer de winnaar op deze email: ".$emailBuyer."</p>";
+            "<p><b>Uw veiling [".$aucTitle."] </b> is automatisch gesloten omdat de veiling de maximale tijd heeft bereikt.</p><br><p>Contacteer de winnaar op deze email: ".$emailBuyer."</p>";
 
             $mail->send();
           } catch (Exception $e) {
-            echo "Er gaat iets fout met het sturen van de sluitingsmelding naar de verkoper.".$e->getMessage();
+            echo "Er gaat iets fout met het sturen van de sluitingsmelding naar de verkoper.";
           }
         } else {
-          
+
         }
         } catch (PDOException $e) {
-          echo "Er gaat iets fout met het sturen van de sluitingsmelding tijdens het ophalen van de contact gegevens.".$e->getMessage();
+          echo "Er gaat iets fout met het sturen van de sluitingsmelding tijdens het ophalen van de contact gegevens.";
         }
+        try{
           $auctionCloseQuery = "UPDATE Voorwerp SET veilingGesloten = 1 WHERE voorwerpnummer = ?";
           $auctionCloseStmt = $dbh->prepare($auctionCloseQuery);
           $auctionCloseStmt->execute(array($nummer));
+
+          try{
+            $closingbidQuery = "SELECT TOP 1 bodbedrag from Bod where voorwerp = ? ORDER BY bodbedrag DESC";
+            $closingbidStmt = $dbh->prepare($closingbidQuery);
+            $closingbidStmt->execute(array($nummer));
+            if($closingbidStmt->rowCount()!=0){
+              $highestBids = $closingbidStmt->fetchAll();
+              foreach ($highestBids as $highestBid) {
+                $auctionClosePriceQuery = "UPDATE Voorwerp SET verkoopprijs = ? WHERE voorwerpnummer = ?";
+                $auctionClosePriceStmt = $dbh->prepare($auctionClosePriceQuery);
+                $auctionClosePriceStmt->execute(array($highestBid['bodbedrag'], $nummer));
+              }
+            }
+          }
+          catch (PDOException $e) {
+            echo "Er gaat iets fout met het sluiten van veilingen";
+          }
+        }
+        catch (PDOException $e) {
+          echo "Er gaat iets fout met het sluiten van veilingen";
+        }
       }
     }
   }
 } catch (PDOException $e) {
-  echo "Er gaat iets fout met het sluiten van veilingen".$e->getMessage();
+  echo "Er gaat iets fout met het sluiten van veilingen";
 }
 
 if(isset($_GET['category'])){
@@ -284,7 +306,7 @@ if(isset($_GET['category'])){
       }
     }
     catch (PDOException $e){
-      echo "Er gaat iets fout met het ophalen van de veilingen: ".$e->getMessage();
+      echo "Er gaat iets fout met het ophalen van de veilingen: ";
     }
     ?>
   </div>

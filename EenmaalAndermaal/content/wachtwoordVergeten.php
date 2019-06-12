@@ -13,7 +13,7 @@ $securitynr = "";
           <div class="redText">
           </div>
         </div>
-        <button type="submit" name="getSecurity" class="btn btnGreenery btn-block">Geheimenvraag ophalen</button>
+        <button type="submit" name="getSecurity" class="btn btnGreenery btn-block">Geheime vraag ophalen</button>
       </form>
       <?php
       if (isset($_POST['getSecurity'])) {
@@ -52,15 +52,15 @@ $securitynr = "";
                   }
                   else {
                     echo '<div class="redText">
-                    <p>Gebruikersnaam bestaat niet</p></div>';
+                    <p>Gebruikersnaam bestaat niet.</p></div>';
                   }
                 }
               } catch (PDOException $e) {
-                echo "Fout met de database 1: {$e->getMessage()} ";
+                echo "Er ging iets fout met het ophalen van de vraag.";
               }
             }
           } catch (PDOException $e) {
-            echo "Fout met de database 2: {$e->getMessage()} ";
+            echo "Er ging iets fout met het ophalen van de vraag.";
           }
         }
         else {
@@ -109,7 +109,9 @@ $securitynr = "";
         </form>
       </div>
       <?php
-    }
+    } else {
+      echo '<div class="redText"><p>Geheime vraag foutief beantwoord. Vul uw gebruikersnaam opnieuw in.</p></div>';
+      }
   }
 
 if (isset($_POST['newPassButton'])) {
@@ -129,9 +131,10 @@ if (isset($_POST['newPassButton'])) {
       }
       else {
         $queryInsert->execute(array($hashedWW,$_SESSION['securityLogin']));
+        echo "Uw wachtwoord is succesvol aangepast.";
       }
     } catch (PDOException $e) {
-      echo "Fout met de database: {$e->getMessage()} ";
+      echo "Er ging iets fout met het aanpassen van het wachtwoord";
     }
   }
 }

@@ -118,7 +118,7 @@ if (isset($_POST['auctionSubmit'])) {
         $queryInsert = $dbh->prepare($sqlVoorwerp);
         $queryInsert->execute(array($title, $description, $price, "EUR", $paymethod, $payinstruction, $location, "Nederland", $days, $beginDag, $beginTijdstip, $sendcost, $sendinstruction, $_SESSION['username'], 0));
       } catch (PDOException $e) {
-        echo "Fout met de database: {$e->getMessage()} ";
+        echo "Er ging iets fout met het plaatsen van de veiling";
       }
 
       // Get voorwerpnr.
@@ -133,7 +133,7 @@ if (isset($_POST['auctionSubmit'])) {
           }
         }
       } catch (PDOException $e) {
-        echo "Fout met de database: {$e->getMessage()} ";
+        echo "Er ging iets fout met het ophalen van het voorwerpnummer";
       }
 
       // Upload voorwerp in rubriek
@@ -142,7 +142,7 @@ if (isset($_POST['auctionSubmit'])) {
         $queryInsertRubriek = $dbh->prepare($sqlRubriek);
         $queryInsertRubriek->execute(array($voorwerpnummer, $category));
       } catch (PDOException $e) {
-        echo "Fout met de database: {$e->getMessage()} ";
+        echo "Er ging iets fout met het plaatsen van het voorwerp in de rubriek";
       }
 
       // Uplaod foto's
@@ -157,7 +157,7 @@ if (isset($_POST['auctionSubmit'])) {
               $queryInsert = $dbh->prepare($sqlBestand);
               $queryInsert->execute(array($_FILES[$input]["name"], $voorwerpnummer));
             } catch (PDOException $e) {
-              echo "Fout met de database: {$e->getMessage()} ";
+              echo "Er ging iets fout met plaatsen van de afbeelding";
             }
           }
         }
