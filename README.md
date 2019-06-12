@@ -2,7 +2,7 @@
 
 *Casus EenmaalAndermaal, veilingwebsite*
 
-##Installeer instructies
+## Installeer instructies
 
 Download een ftp applicatie om toegang te krijgen tot de server, bijvoorbeeld FileZilla of cyberduck.
 -	FileZilla download pagina https://filezilla-project.org/
