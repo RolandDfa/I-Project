@@ -131,6 +131,7 @@ if (isset($_POST['newPassButton'])) {
       }
       else {
         $queryInsert->execute(array($hashedWW,$_SESSION['securityLogin']));
+        echo "Uw wachtwoord is succesvol aangepast.";
       }
     } catch (PDOException $e) {
       echo "Er ging iets fout met het aanpassen van het wachtwoord";
