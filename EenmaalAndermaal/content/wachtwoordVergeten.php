@@ -52,15 +52,15 @@ $securitynr = "";
                   }
                   else {
                     echo '<div class="redText">
-                    <p>Gebruikersnaam bestaat niet</p></div>';
+                    <p>Gebruikersnaam bestaat niet.</p></div>';
                   }
                 }
               } catch (PDOException $e) {
-                echo "Er ging iets fout met het ophalen van de vraag";
+                echo "Er ging iets fout met het ophalen van de vraag.";
               }
             }
           } catch (PDOException $e) {
-            echo "Er ging iets fout met het ophalen van de vraag";
+            echo "Er ging iets fout met het ophalen van de vraag.";
           }
         }
         else {
