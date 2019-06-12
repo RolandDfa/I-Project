@@ -1,6 +1,6 @@
-I-Project groep 41
+# I-Project groep 41
 
-Casus EenmaalAndermaal, veilingwebsite
+## Casus EenmaalAndermaal, veilingwebsite
 
 Installeer instructies
 
@@ -19,7 +19,7 @@ Nu is de site operationeel maar er moeten nog een of meerdere beheerders worden 
 
 
 
-Test accounts
+## Test accounts
 gebruiker	    wachtwoord	Antwoord vraag	Status						
 ProductOwner1	Wachtwoord1	leraar	        gebruiker						
 ProductOwner1	Wachtwoord2	leraar	        Verkoper						
