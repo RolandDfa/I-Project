@@ -10,7 +10,7 @@ Download een ftp applicatie om toegang te krijgen tot de server, bijvoorbeeld Fi
 Na de installatie van een ftp applicatie naar keuze, start de applicatie en log in met de juiste server gegevens.
 In Cyberduck krijg je dit overzicht van de inhoud van de betrekkelijke server te zien.
  
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/RolandDfa/I-Project/blob/master/Images/Cyberduck_Preview.png "Cyberduck server")
 
 Afbeelding 1: Cyberduck server
 
