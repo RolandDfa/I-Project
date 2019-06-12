@@ -25,6 +25,6 @@ Nu is de site operationeel maar er moeten nog een of meerdere beheerders worden 
 ## Test accounts					
 | Gebruiker         | Wachtwoord    | Gebruikersstatus |
 | :-----------------|:--------------| :----------------|
-| **ProductOwner1** | *Wachtwoord1* | 'gebruiker'      |
-| **ProductOwner2** | *Wachtwoord2* | 'Verkoper'       |
-| **ProductOwner3** | *Wachtwoord3* | 'Beheerder'      |
+| **ProductOwner1** | *Wachtwoord1* | `gebruiker`      |
+| **ProductOwner2** | *Wachtwoord2* | `Verkoper`       |
+| **ProductOwner3** | *Wachtwoord3* | `Beheerder`      |
