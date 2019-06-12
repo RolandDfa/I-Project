@@ -38,13 +38,17 @@ De beheerdersapplicatie is als volgt te gebruiken:
 ### Beheerdersdashboard
 Het beheerdersdashboard ziet er als volgt uit:
 ![alt text](https://github.com/RolandDfa/I-Project/blob/master/Images/Beheerdersdashboard.png "Beheerdersdashboard")
+Op het dashbord zijn de 4 beheer tabbladen te vinden deze kunnen de beheerders gebruiken.
 ### Accounts beheren
 Het accounts beheren ziet er als volgt uit:
 ![alt text](https://github.com/RolandDfa/I-Project/blob/master/Images/Accounts_beheren.png "Accounts beheren")
+In dit tabblad kan de beheerder accounts blokkeren en verwijderen.
 ### Veilingen beheren
 Het veilingen beheren ziet er als volgt uit:
 ![alt text](https://github.com/RolandDfa/I-Project/blob/master/Images/Veilingen_beheren.png "Veilingen beheren")
+In dit tabblad kan de beheerder veilingen verwijderen.
 ### Rubrieken beheren
 Het rubrieken beheren ziet er als volgt uit:
 ![alt text](https://github.com/RolandDfa/I-Project/blob/master/Images/Hoofdrubrieken_beheren.png "Hoofdrubrieken beheren")
 ![alt text](https://github.com/RolandDfa/I-Project/blob/master/Images/Subrubrieken_beheren.png "Subrubrieken beheren")
+In dit tabblad kan de beheerder rubrieken en subrubrieken hernoemen, verwijderen en is het mogelijk om nieuwe rubrieken aan te maken.
