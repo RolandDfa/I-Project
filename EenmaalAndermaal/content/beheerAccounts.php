@@ -5,7 +5,7 @@ if(isset($_POST['blokkeren'])) {
     $changeUserStmt = $dbh->prepare($changeUserValid);
     $changeUserStmt->execute(array(0, cleanInput($_POST['codeBokkeren'])));
   } catch (PDOException $e) {
-    echo "Fout met de database: {$e->getMessage()} ";
+    echo "Kan gebruiker niet ophalen";
   }
 }
 
@@ -46,7 +46,7 @@ if(isset($_POST['verwijderen'])) {
     $updateVerkoperStmt->execute(array("$usernameNew", "$usernameNew", "$usernameNew", "Post", NULL, 0, "$gebruiker"));
 
   } catch (PDOException $e) {
-    echo "Fout met de database: {$e->getMessage()} ";
+    echo "Kan code niet verwijderen";
   }
 }
 ?>
@@ -150,7 +150,7 @@ if(isset($_POST['verwijderen'])) {
       $auctionRows = '';
     }
   } catch (PDOException $e) {
-    echo "Er gaat iets fout met het sluiten van veilingen".$e->getMessage();
+    echo "Er gaat iets fout met het verwijderen van accounts";
   }
   ?>
 

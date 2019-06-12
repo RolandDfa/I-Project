@@ -5,7 +5,7 @@ if(isset($_POST['delete'])) {
     $changeAuctionStmt = $dbh->prepare($changeAuctionValid);
     $changeAuctionStmt->execute(array(1, cleanInput($_POST['codeDelete'])));
   } catch (PDOException $e) {
-    echo "Fout met de database: {$e->getMessage()} ";
+    echo "Er ging iets fout met het verwijderen van de veiling";
   }
 }
 ?>
@@ -74,7 +74,7 @@ if(isset($_POST['delete'])) {
       $auctionRows = '';
     }
   } catch (PDOException $e) {
-    echo "Er gaat iets fout met het sluiten van veilingen".$e->getMessage();
+    echo "Er gaat iets fout met het sluiten van veilingen";
   }
   ?>
 

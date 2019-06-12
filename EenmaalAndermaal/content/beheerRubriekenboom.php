@@ -6,7 +6,7 @@ if(isset($_POST['wijzigen'])){
     $changeTopicNameStmt->execute(array(cleanInput($_POST['rubrieknaamEdit']), cleanInput($_POST['voorwerpId'])));
   }
   catch (PDOException $e) {
-    echo "Fout met de database: {$e->getMessage()} ";
+    echo "Kan rubrieken niet ophalen";
   }
 }
 
@@ -132,7 +132,7 @@ try {
   }
 }
 catch (PDOException $e) {
-  echo "Kan rubrieken niet laden".$e->getMessage();
+  echo "Kan rubrieken niet laden";
 }
 
 
@@ -243,7 +243,7 @@ try {
   }
 }
 catch (PDOException $e) {
-  echo "Kan rubrieken niet laden".$e->getMessage();
+  echo "Kan rubrieken niet laden";
 }
 ?>
 

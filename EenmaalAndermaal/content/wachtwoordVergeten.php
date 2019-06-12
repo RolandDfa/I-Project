@@ -56,11 +56,11 @@ $securitynr = "";
                   }
                 }
               } catch (PDOException $e) {
-                echo "Fout met de database 1: {$e->getMessage()} ";
+                echo "Er ging iets fout met het ophalen van de vraag";
               }
             }
           } catch (PDOException $e) {
-            echo "Fout met de database 2: {$e->getMessage()} ";
+            echo "Er ging iets fout met het ophalen van de vraag";
           }
         }
         else {
@@ -131,7 +131,7 @@ if (isset($_POST['newPassButton'])) {
         $queryInsert->execute(array($hashedWW,$_SESSION['securityLogin']));
       }
     } catch (PDOException $e) {
-      echo "Fout met de database: {$e->getMessage()} ";
+      echo "Er ging iets fout met het aanpassen van het wachtwoord";
     }
   }
 }

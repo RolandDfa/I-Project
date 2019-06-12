@@ -121,7 +121,7 @@
       }
     }
     catch (PDOException $e){
-      echo "Er gaat iets fout met het ophalen van de artikelen: ".$e->getMessage();
+      echo "Er gaat iets fout met het ophalen van de artikelen";
     }
     ?>
   </div>
@@ -146,7 +146,7 @@
       }
     }
     catch (PDOException $e){
-      echo "Kan rubrieken niet laden".$e->getMessage();
+      echo "Kan rubrieken niet laden";
     }
     ?>
   </div>
