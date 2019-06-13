@@ -6,7 +6,7 @@ if(isset($_POST['wijzigen'])){
     $changeTopicNameStmt->execute(array(cleanInput($_POST['rubrieknaamEdit']), cleanInput($_POST['voorwerpId'])));
   }
   catch (PDOException $e) {
-    echo "Kan rubrieken niet ophalen";
+    echo "Kan rubrieknaam niet wijzigen";
   }
 }
 
@@ -22,7 +22,7 @@ if(isset($_POST['toevoegen'])){
     $changeTopicNameStmt->execute(array($parentRubriek, cleanInput($_POST['rubrieknaam'])));
   }
   catch (PDOException $e) {
-    echo "De rubriek bestaat al";
+    echo "Kan rubriek niet toevoegen";
   }
 }
 
