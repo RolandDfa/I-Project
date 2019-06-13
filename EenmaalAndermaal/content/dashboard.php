@@ -46,7 +46,7 @@ try {
 
 // Get rubriek amount
 try {
-  $sqlRubrieken = "SELECT COUNT(rubrieknummer) FROM Rubriek";
+  $sqlRubrieken = "SELECT COUNT(rubrieknummer) FROM Rubriek WHERE rubrieknummer != -1 AND rubrieknummer is not null";
   $querySelect = $dbh->prepare($sqlRubrieken);
   $querySelect->execute();
   if ($querySelect->rowCount() != 0) {
