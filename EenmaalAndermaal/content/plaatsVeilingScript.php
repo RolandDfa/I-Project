@@ -10,12 +10,12 @@ if (isset($_POST['auctionSubmit'])) {
   $category = $_POST['categorie'];
 
   $title = cleanInput($_POST['title']);
-  $validTitle = preg_match("/^[a-zA-Z0-9\s]+$/",$title);
+  $validTitle = preg_match("/^[a-zA-Z0-9 ]+$/",$title);
 
   $description = cleanInput($_POST['description']);
 
   $location = cleanInput($_POST['location']);
-  $validLocation = preg_match("/^[a-zA-Z\s]+$/",$location);
+  $validLocation = preg_match("/^[a-zA-Z ]+$/",$location);
 
   $days = $_POST['days'];
 
@@ -23,7 +23,7 @@ if (isset($_POST['auctionSubmit'])) {
 
   if ($_POST['payinstruction'] != "") {
     $payinstruction = cleanInput($_POST['payinstruction']);
-    $validPayinstruction = preg_match("/^[a-zA-Z0-9\s]+$/",$payinstruction);
+    $validPayinstruction = preg_match("/^[a-zA-Z0-9 ]+$/",$payinstruction);
   } else {
     $payinstruction = "";
     $validPayinstruction = true;
@@ -42,7 +42,7 @@ if (isset($_POST['auctionSubmit'])) {
 
   if ($_POST['sendinstruction'] != "") {
     $sendinstruction = cleanInput($_POST['sendinstruction']);
-    $validSendinstruction = preg_match("/^[a-zA-Z0-9\s]+$/",$sendinstruction);
+    $validSendinstruction = preg_match("/^[a-zA-Z0-9 ]+$/",$sendinstruction);
   } else {
     $sendinstruction = "";
     $validSendinstruction = true;
@@ -163,19 +163,8 @@ if (isset($_POST['auctionSubmit'])) {
         }
       }
 
-      $_SESSION['category'] = '';
-      $_SESSION['title'] = '';
-      $_SESSION['description'] = '';
-      $_SESSION['location'] = '';
-      $_SESSION['days'] = '';
-      $_SESSION['paymethod'] = '';
-      $_SESSION['payinstruction'] = '';
-      $_SESSION['price'] = '';
-      $_SESSION['sendcost'] = '';
-      $_SESSION['sendinstruction'] = '';
-
       // Header to auction page
-      header("Location: ../index.php?page=veiling&id=$voorwerpnummer");
+      header("Location: ../index.php?page=veiling&id=$voorwerpnummer&succes=true");
 
     }
 

@@ -156,7 +156,7 @@ if(isset($_POST['accountRecoveryButton1'])){
                     <div class="row form-group">
                       <label for="cityRecovery" class="col-lg-4 alignRight control-label">Plaatsnaam *</label>
                       <div class="col-lg-8">
-                        <input type="text" id="cityRecovery" class="form-control" name="cityRecovery" pattern="[a-zA-Z]{3,25}" title="Plaatsnaam" value="<?php echo isset($_POST['cityRecovery']) ? $_POST['cityRecovery'] : '' ?>" placeholder="Doesburg" required>
+                        <input type="text" id="cityRecovery" class="form-control" name="cityRecovery" pattern="[a-zA-Z ]{3,25}" title="Plaatsnaam" value="<?php echo isset($_POST['cityRecovery']) ? $_POST['cityRecovery'] : '' ?>" placeholder="Doesburg" required>
                       </div>
                     </div>
                     <!-- Country -->
