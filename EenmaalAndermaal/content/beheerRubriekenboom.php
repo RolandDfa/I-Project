@@ -298,7 +298,7 @@ catch (PDOException $e) {
   </div>
 
   <div class="rubriekenTableContainer">
-    <h2 class="textCenter mb-4"><b>Rubrieken beheren beheren</b></h2>
+    <h2 class="textCenter mb-4"><b>Rubrieken beheren</b></h2>
     <h3 class="textCenter mb-4"><b>Hoofdrubrieken</b></h3>
     <div class="table-responsive">
       <table id="hoofdrubriekenTable" class="table table-hover">

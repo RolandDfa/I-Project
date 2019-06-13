@@ -416,7 +416,7 @@ if(isset($_POST['signUp'])){
 						<div class="row form-group">
 							<label for="securityA" class="col-lg-4 alignRight control-label">Antwoord *</label>
 							<div class="col-lg-8">
-								<input type="text" id="securityA" class="form-control" name="securityA" pattern="[a-zA-Z0-9]{1,25}" maxlength="25" required>
+								<input type="text" id="securityA" class="form-control" name="securityA" pattern="[a-zA-Z0-9]{2,25}" minlength="2" maxlength="25" required>
 							</div>
 						</div>
 
