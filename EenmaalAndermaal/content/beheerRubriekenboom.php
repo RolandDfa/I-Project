@@ -27,7 +27,15 @@ if(isset($_POST['toevoegen'])){
 }
 
 if(isset($_POST['delete'])){
-  echo "Verwijder rubriek met nummer ".$_POST['codeDelete']." met als parent ".$_POST['codeParentDelete'];
+
+  try{
+    $deleteTopicQuery = "EXEC Verwijderen_rubriek ?,?";
+    $deleteTopicStmt = $dbh->prepare($deleteTopicQuery);
+    $deleteTopicStmt->execute(array($_POST['codeParentDelete'], cleanInput($_POST['codeDelete'])));
+  }
+  catch (PDOException $e) {
+    echo "De rubriek kan niet verwijderd worden";
+  }
 }
 
 
@@ -142,7 +150,7 @@ catch (PDOException $e) {
 
 $subTopicContent = '';
 try {
-  $subTopicQuery = "SELECT r1.rubrieknaam naam, r1.rubrieknummer nummer, r1.parent, r2.rubrieknaam parentnaam FROM Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer WHERE r1.parent != -1 ORDER BY r1.rubrieknaam asc";
+  $subTopicQuery = "SELECT r1.rubrieknaam naam, r1.rubrieknummer nummer, r1.parent, r2.rubrieknaam parentnaam FROM Rubriek r1 inner join Rubriek r2 on r1.parent = r2.rubrieknummer WHERE r1.parent != -1 or r2.parent != -1 ORDER BY r1.rubrieknaam asc";
   $subTopicStmt = $dbh->prepare($subTopicQuery);
   $subTopicStmt->execute();
   if($subTopicStmt->rowCount()!=0){
