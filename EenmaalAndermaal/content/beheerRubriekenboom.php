@@ -27,9 +27,9 @@ if(isset($_POST['toevoegen'])){
 }
 
 if(isset($_POST['delete'])){
-  echo "Rubriek met nummer ".$_POST['codeDelete']." met als parent ".$_POST['codeParentDelete']."is verwijderd";
+
   try{
-    $deleteTopicQuery = "EXEC Verwijderen_rubriek ? ?";
+    $deleteTopicQuery = "EXEC Verwijderen_rubriek ?,?";
     $deleteTopicStmt = $dbh->prepare($deleteTopicQuery);
     $deleteTopicStmt->execute(array($_POST['codeParentDelete'], cleanInput($_POST['codeDelete'])));
   }
