@@ -1,7 +1,5 @@
 <?php
 
-
-
 // Get Artikelnummer
 if (!empty($_GET['id'])) {
   $id = $_GET['id'];
@@ -107,9 +105,24 @@ try {
 ?>
 
 <div class="pageWrapper">
-  <?php if(!$auctionExists){echo'Kan veiling niet vinden. Klik <a href="index.php?page=overzicht">hier</a> om naar het veilingenoverzicht te gaan. Of klik <a href="index.php?page=home">hier</a> om naar de homepagina te gaan.';} ?>
+  <?php if(!$auctionExists){echo'Kan veiling niet vinden. Klik <a href="index.php?page=plaatsVeiling&error=database">hier</a> om terug te gaan naar veiling plaatsen. Klik <a href="index.php?page=overzicht">hier</a> om naar het veilingenoverzicht te gaan. Of klik <a href="index.php?page=home">hier</a> om naar de homepagina te gaan.';} else {
+    if (isset($_GET['succes'])) {
+      echo '<h2 class="textCenter">Veiling is succesvol aangemaakt!</h2>';
+      $_SESSION['category'] = '';
+      $_SESSION['title'] = '';
+      $_SESSION['description'] = '';
+      $_SESSION['location'] = '';
+      $_SESSION['days'] = '';
+      $_SESSION['paymethod'] = '';
+      $_SESSION['payinstruction'] = '';
+      $_SESSION['price'] = '';
+      $_SESSION['sendcost'] = '';
+      $_SESSION['sendinstruction'] = '';
+    }
+  } ?>
   <div class="auction">
     <?php
+
     if(isset($_GET['searchedText'])){
       $searchText = cleanInput($_GET['searchedText']);
       echo '<form action="index.php?page=overzicht&searchedText='.$searchText.'" method="post" class="backbutton">';
